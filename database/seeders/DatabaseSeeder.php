@@ -83,10 +83,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
+        // seed other things
         $this->load_job_cats('');
-
-
-        // Create some dummy users
+        $this->load_company_types();
         $users = User::factory()->count(3)->create();
     }
 
@@ -96,6 +95,8 @@ class DatabaseSeeder extends Seeder
         // Load the top level job categories
         $p_job_cats = [];
 
+        $p_job_cats[] = ["name" => "IT Management", "id" => 144];
+        $p_job_cats[] = ["name" => "Cybersecurity", "id" => 145];
         $p_job_cats[] = ["name" => "Data and Analytics", "id" => 147];
         $p_job_cats[] = ["name" => "Design and UX", "id" => 148];
         $p_job_cats[] = ["name" => "Software Engineering", "id" => 149];
@@ -107,6 +108,13 @@ class DatabaseSeeder extends Seeder
         $p_job_cats[] = ["name" => "Project Management", "id" => 156];
         $p_job_cats[] = ["name" => "Sales", "id" => 157];
 
+        // 124 = 147
+        // 125 = 148
+        // 126 = 149
+        // 127 = 150
+        // 128 = 153
+        // 130 = 154
+        // 123 = Finance 146
 
         foreach ($p_job_cats as $cat) {
 
@@ -118,5 +126,84 @@ class DatabaseSeeder extends Seeder
                     'updated_at' => now()
                 ]);
         }
+
+        // Load job subcategories
+        // TODO decide if there is any value is sub job categories.
+        //$job_cats_json = json_decode(file_get_contents("scraped_data/job_subcats.json"));
+
+
+    }
+
+    function load_company_types(){
+        $company_types = ['AdTech',
+                        'Agriculture Tech',
+                        'Aerospace',
+                        'Agency',
+                        'Investment',
+                        'Artificial Intelligence',
+                        'Automotive',
+                        'Beauty',
+                        'Big Data',
+                        'BioTech',
+                        'Cloud Computing',
+                        'Cryptocurrency',
+                        'Consulting',
+                        'Consumer Web',
+                        'Cybersecurity',
+                        'Ecommerce',
+                        'EdTech',
+                        'Energy',
+                        'Enterprise Web',
+                        'Events',
+                        'Fashion',
+                        'FinTech',
+                        'Fitness',
+                        'Food',
+                        'Gaming',
+                        'GreenTech',
+                        'Hardware',
+                        'HealthTech',
+                        'HR Tech',
+                        'Incubator',
+                        'Insurance',
+                        'IT Services',
+                        'Legal Tech',
+                        'Logistics',
+                        'Manufacturing Tech',
+                        'Marketing Tech',
+                        'Mobile',
+                        'Music',
+                        'News',
+                        'Other',
+                        'Payments',
+                        'Pet and Animals',
+                        'Productivity',
+                        'Professional Services',
+                        'Real Estate',
+                        'Retail',
+                        'Robotics',
+                        'Sales',
+                        'Security',
+                        'Sharing Economy',
+                        'Social Impact',
+                        'Social Media',
+                        'Software',
+                        'Sports',
+                        'Transportation',
+                        'Travel',
+                        'Tourism'
+        ];
+
+        foreach($company_types as $type){
+
+        DB::table('company_types')->insert([
+            'name' => $type,
+            'slug' => Str::slug($type, '-'),
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        }
+
     }
 }
