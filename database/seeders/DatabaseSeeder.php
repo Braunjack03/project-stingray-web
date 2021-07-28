@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Article;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Models\JobPost;
 use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
@@ -86,7 +88,9 @@ class DatabaseSeeder extends Seeder
         // seed other things
         $this->load_job_cats('');
         $this->load_company_types();
-        $users = User::factory()->count(3)->create();
+        $users = User::factory()->count(10)->create();
+        $job_posts = JobPost::factory()->count(10)->create();
+        $articles = Article::factory()->count(10)->create();
     }
 
     function load_job_cats($file)
@@ -145,6 +149,7 @@ class DatabaseSeeder extends Seeder
                         'Beauty',
                         'Big Data',
                         'BioTech',
+                        'Boating',
                         'Cloud Computing',
                         'Cryptocurrency',
                         'Consulting',
@@ -161,16 +166,19 @@ class DatabaseSeeder extends Seeder
                         'Food',
                         'Gaming',
                         'GreenTech',
+                        'Government',
                         'Hardware',
                         'HealthTech',
                         'HR Tech',
                         'Incubator',
                         'Insurance',
+                        'Intelligence',
                         'IT Services',
                         'Legal Tech',
                         'Logistics',
                         'Manufacturing Tech',
                         'Marketing Tech',
+                        'Machine Learning',
                         'Mobile',
                         'Music',
                         'News',
