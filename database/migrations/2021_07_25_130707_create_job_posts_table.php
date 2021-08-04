@@ -18,14 +18,19 @@ class CreateJobPostsTable extends Migration
             $table->timestamps();
             $table->text('name');
             $table->longText('content');
-            $table->string('apply_url', 2048)->nullable();
-            $table->integer('explevel')->default(1);
             $table->unsignedInteger('company_profile_id')->nullable();
-            //$table->enum('remote_type', ['Remote', 'Hybrid', 'In Office', 'Not Specified'])->default('Not Specified');
-            $table->integer('remotetype')->default(1);
-            $table->boolean('featured')->default(false);
+
+            // Link where job seeker goes to apply
+            $table->string('apply_url', 2048)->nullable();
+
+            // Experience level defined in the model
+            $table->integer('explevel_id')->default(1);
+
+            // remotetype defined in the model
+            $table->integer('remotetype_id')->default(1);
             $table->string('slug', 512)->nullable();
             $table->dateTime('posted_at')->nullable();
+            $table->boolean('featured')->default(false);
             $table->boolean('is_published')->default(false);
             //$table->technologies;
 

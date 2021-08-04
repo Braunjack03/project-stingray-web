@@ -10,9 +10,9 @@ class JobPost extends Model
     use HasFactory;
 
     public const EXPLEVELS =  [
-        'Entry Level' => 1,
-        'Mid Level' => 2,
-        'Senior Level' => 3,
+        1 => 'Entry Level',
+        2 => 'Mid Level',
+        3 => 'Senior Level'
     ];
 
     public static function getExplevelID($explevel)
@@ -35,12 +35,11 @@ class JobPost extends Model
 
     //$table->enum('remote_type', ['Remote', 'Hybrid', 'In Office', 'Not Specified'])->default('Not Specified');
 
-
     public const REMOTETYPES =  [
-        'Fully Remote' => 1,
-        'Partial Remote' => 2,
-        'No Remote' => 3,
-        'Not Specified' => 4
+        1 => 'Fully Remote',
+        2 => 'Partial Remote',
+        3 => 'No Remote',
+        4 => 'Not Specified'
     ];
 
     public static function getRemotetypeID($remotetype)

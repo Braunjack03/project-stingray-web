@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use App\Models\JobPost;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
+//use Illuminate\Support\Str;
 
 class JobPostFactory extends Factory
 {
@@ -27,6 +27,8 @@ class JobPostFactory extends Factory
             'content' => $this->faker->paragraph(7),
             'apply_url' => $this->faker->url,
             'slug' => $this->faker->slug,
+            'explevel_id' =>$this->faker->numberBetween(1,4),
+            'remotetype_id' => $this->faker->numberBetween(1,4)
         ];
     }
 }
