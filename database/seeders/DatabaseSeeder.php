@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\JobPost;
+use App\Models\CompanyProfile;
 use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
@@ -89,7 +90,8 @@ class DatabaseSeeder extends Seeder
         $this->load_job_cats('');
         $this->load_company_types();
         $users = User::factory()->count(10)->create();
-        $job_posts = JobPost::factory()->count(10)->create();
+        $company_profiles = CompanyProfile::factory()->count(10)->has(JobPost::factory()->count(5), 'job_posts')->create();
+        //$job_posts = JobPost::factory()->count(10)->create();
         $articles = Article::factory()->count(10)->create();
     }
 

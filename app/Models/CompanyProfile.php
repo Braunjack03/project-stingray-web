@@ -9,8 +9,8 @@ class CompanyProfile extends Model
 {
     use HasFactory;
 
-    public function location()
+    public function job_posts()
     {
-        return $this->belongsTo('Location');
+            return $this->hasMany(JobPost::class);
     }
 }
