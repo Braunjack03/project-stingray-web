@@ -15,6 +15,11 @@ class JobPost extends Model
         3 => 'Senior Level'
     ];
 
+    public function company_profile()
+    {
+        return $this->belongsTo(CompanyProfile::class);
+    }
+
     public static function getExplevelID($explevel)
     {
         return array_search($explevel, self::EXPLEVELS);

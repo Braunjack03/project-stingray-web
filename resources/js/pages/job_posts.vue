@@ -1,0 +1,25 @@
+<template>
+   <div>
+         <v-app app>
+            <v-container>
+               <v-row>
+                  <v-col v-for="data in $props.job_posts" :key="data.id">
+                     <CustomCard :data="data"/>
+                  </v-col>
+               </v-row>
+            </v-container>
+        </v-app>
+   </div>
+</template>
+
+<script>
+//import Card from '../components/Card.vue';
+import JobPost from '../components/JobPost.vue';
+
+export default {
+   components: {
+      'CustomCard': JobPost
+   },
+   props: ['job_posts']
+}
+</script>
