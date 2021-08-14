@@ -7,7 +7,7 @@
             </v-row>
 
             <div class="my-4 text-subtitle-1">
-            {{data.profile_title}}
+            Company Name: {{data.company_name}}
             </div>
 
             <div class="my-4 text-subtitle-1">

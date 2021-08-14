@@ -9039,7 +9039,11 @@ var render = function() {
           _c("v-row", { staticClass: "mx-0", attrs: { align: "center" } }),
           _vm._v(" "),
           _c("div", { staticClass: "my-4 text-subtitle-1" }, [
-            _vm._v("\n        " + _vm._s(_vm.data.profile_title) + "\n        ")
+            _vm._v(
+              "\n        Company Name: " +
+                _vm._s(_vm.data.company_name) +
+                "\n        "
+            )
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "my-4 text-subtitle-1" }, [
