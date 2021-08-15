@@ -1,62 +1,72 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+## Table of Contents
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+- [About](#about)
+- [High Level Requirements](./REQUIREMENTS.md)
+- [Getting Started](#getting_started)
+- [Development Process](#dev_process)
+- [Coding Standards](#coding_standards)
 
-## About Laravel
+## About <a name = "about"></a>
+This is the primary Larvel web application for "Project Stingray".  Stingray is a jobboard, company profile, and news website focusing on technology jobs and start-ups in the Florida area. 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+The application stack is built on:
+- Laravel 8
+- Intertia.js
+- Vue2
+- Vueity
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Getting Started <a name = "getting_started"></a>
+Currently nothing is running in Docker, but it should be easy to get running locally if you have PHP 7+, Composer and NodeJS installed. 
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+The preferred development database is MySQL.
 
-## Learning Laravel
+Note: All commands are ran from the root of the project.
+1. Clone Repo & Checkout this branch
+2. Make sure you have your .env setup
+    * ```cp .env.example .env && php artisan key:generate```
+3. Install packages
+    * ```composer install & npm install```
+4. Build vue side
+    * ```npm run dev```
+5. Serve Laravel Project
+    * ```php artisan serve```
+6. Load default seed data
+    * ```php artisan db:seed --class=JobCatSeeder --force```
+    * ```php artisan db:seed --class=LocationSeeder --force```
+    * ```php artisan db:seed --class=CompanyType --force```
+7. Load test seed data (Optional)
+    * ```php artisan db:seed```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Development Process <a name = "dev_process"></a>
+- All work will be managed out of Github issues and Github projects
+- Code should be checked-in at least once a day
+- We'll use trunk-based development.
+    - Developers will work out of short-lived feature branches
+    - After testing, developers will open a pull request to merge their branch into master
+- The master branch will be automatically deployed after merge
+- All features will have written requirements and/or wireframe diagrams
+- Non-functional requirements such as logging and good security must not be ignored
+- We're using Intertia.js so we don't have to spend time developing an API layer
+- We'll write functional tests for important site features
+- We want to build as quickly as possible without compromising quality
+## Coding Standards <a name = "coding_standards"></a>
+One reason for selecting Laravel is because there are well established best practices on how to build web applications.  We should strive to follow convention as much as possible and avoid re-inventing the wheel. PHP standards documented in [PSR-12](https://www.php-fig.org/psr/psr-12/) will help keep our code clean.  
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Logging
+All major actions should be logged to make troubleshooting and to improve security.  Some examples of what should be logged:
+    - Log in (successful and unsuccessful)
+    - User creation
+    - Profile updates
+### ID usage
+Database IDs of important entities should not be exposed.  UUIDs should be used instead.   
+This applies to the following:  
+ - User ID
+ - Company ID
+ - Job Post ID
+ - User or company assets such as resumes  
 
-## Laravel Sponsors
+Right:  
+```https://examples.com/show_user?id=bf6b67e5-5b68-47df-985e-973516f52498```  
+Wrong:  
+```https://examples.com/show_user?id=23```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
