@@ -4,7 +4,6 @@ The goal is to create a job board website containing company profiles, job seeke
 
 For our Phase 1 MVP we need the following:  
 - Two different authenticated user types
-<<<<<<< HEAD
     - Employer
     - Job Seeker (also called candidates)
     - Employers can
@@ -18,21 +17,6 @@ For our Phase 1 MVP we need the following:
     -  Free text search as well as the ability to filter based on certain criteria such as job type
 - Company news
     - For phase 1 we'll link to blog powered by Wordpress or Ghost.  In later phases we'll build article posting into the platform.
-=======
-    - Employer
-    - Job Seeker (also called candidates)
-    - Employers can
-        - Create a company profile.  This profile will including information about the company including name, location, description, and images.
-        - Post jobs.  Employers will have the ability to post 5 jobs for free.  In later project phases we will implement a subscription based model.
-    - Job Seekers can:
-        - Create a personal profile containing information about themselves.
-        - Upload a resume.  In later project phases we will parse the resume using a third party service to make the information searchable.
-- Job Board
-    -  List of jobs posted by employers 
-    -  Free text search as well as the ability to filter based on certain criteria such as job type
-- Company news
-    - For phase 1 we'll link to blog powered by Wordpress or Ghost.  In later phases we'll build article posting into the platform.
->>>>>>> 5db9d3dc32da2f19237e490ca1d5a3372a170fde
 
 ### Inspiration
 We'll draw inspiration from the following websites:  
