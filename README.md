@@ -7,7 +7,7 @@
 - [Coding Standards](#coding_standards)
 
 ## About <a name = "about"></a>
-This is the primary Larvel web application for "Project Stingray".  Stingray is a jobboard, company profile, and news website focusing on technology jobs and start-ups in the Florida area. 
+This is the primary Larvel web application for "Project Stingray".  Stingray is a jobboard, company profile, and news website focusing on technology jobs and start-ups in the Florida area. Addtional information about the project can be found in the [requirements](./REQUIREMENTS.md).
 
 The application stack is built on:
 - Laravel 8
@@ -37,13 +37,16 @@ Note: All commands are ran from the root of the project.
 7. Load test seed data (Optional)
     * ```php artisan db:seed```
 
+### Database Schema
+The rough database schema is [viewable here](https://www.evernote.com/shard/s5/sh/82405885-ecee-c8b4-76c4-363a8eda0ffe/93f4a0a2a60560dfc5a1e20d3de066d6).  The schema will evolve over time but there are large number of n:m (many to many) relationships so it's useful to have a base diagram.
+
 ## Development Process <a name = "dev_process"></a>
 - All work will be managed out of Github issues and Github projects
 - Code should be checked-in at least once a day
 - We'll use trunk-based development.
     - Developers will work out of short-lived feature branches
     - After testing, developers will open a pull request to merge their branch into master
-- The master branch will be automatically deployed after merge
+- The master branch will be automatically deployed to (http://dev.madeintampabay.org/) after each merge
 - All features will have written requirements and/or wireframe diagrams
 - Non-functional requirements such as logging and good security must not be ignored
 - We're using Intertia.js so we don't have to spend time developing an API layer
