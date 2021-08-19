@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\JobPost;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,11 @@ Route::get('/contact', function() {
     return Inertia::render('contact');
 });
 
+Route::get('/register', function() {
+    return Inertia::render('register');
+});
+
+Route::post('register', [AuthController::class, 'register']);
 
 Route::get('/', function() {
     //$job_posts = JobPost::with('company_profile')->all();
