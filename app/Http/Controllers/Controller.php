@@ -16,6 +16,8 @@ class Controller extends BaseController
     public $notFoundResponse = 200;
     public $successStatus = 1;
     public $errorStatus = 0;
+    public $employerRole = 1;
+    public $jobSeekerRole = 2;
     
 
     public function sendErrors($error){
@@ -23,7 +25,7 @@ class Controller extends BaseController
         if(!empty($error)){
             foreach($error as $key => $value){
                 $response = ['status' => $this->errorStatus,'message' => $value[0],'data'=>[],'responseCode'=> $this->errorResponse];
-                return response($response, $this->errorResponse);
+                return response()->json($response, $this->errorResponse);
                 break;
             }
         }

@@ -25,7 +25,18 @@ Route::get('/register', function() {
     return Inertia::render('register');
 });
 
+Route::get('/forgot-password', function() {
+    return Inertia::render('forgot_password');
+});
+
+Route::get('/login', function() {
+    return Inertia::render('login');
+});
+
+Route::get('thankyou', [AuthController::class, 'thankyou'])->name('thankyou');
+
 Route::post('register', [AuthController::class, 'register']);
+Route::post('login', [AuthController::class, 'login']);
 
 Route::get('/', function() {
     //$job_posts = JobPost::with('company_profile')->all();

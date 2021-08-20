@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
+use Inertia\Inertia;
 use Hash;
 use Auth;
 
@@ -15,8 +17,9 @@ class AuthController extends Controller
         Description: To register job seeker
     */
     public function register(Request $request){
-      
-        $validator = Validator::make($request->all()['data'], [
+        $data = $request->all()['data'];
+        $credentials = ["email"=>$data['email'],'password'=>$data['password']];
+        $validator = Validator::make($credentials, [
             'email' => 'required|email',
             'password' => 'required|min:8',
         ]);
@@ -35,15 +38,23 @@ class AuthController extends Controller
 
                 if ($check_exists > 0) {
                     $response = ['status' => $this->errorStatus,'message' => __('messages.user_already_registered'),'responseCode'=> $this->errorResponse];
-                    return response($response, $this->errorResponse);
+                    return Inertia::render('register',$response);
+
+                    return inertia('register', [
+                        'data' => $response,
+                    ]);
+                    //return response($response, $this->errorResponse);
                 }else{
                     try{
-                        if($data['user_type'] == 'job_seeker'){
                             $user = User::create([
                                 'email' => $data['email'],
+                                'role' => $data['user_type'],
                                 'password' => bcrypt($data['password']),
+                                'ip_address' => $request->ip(),
                             ]);
-                        }
+                            
+                            return Redirect::route('thankyou');
+                       // }
                     }catch (ModelNotFoundException $e){
                         $response = ['status' => $this->errorStatus,'message' => $e->getMessage(),'responseCode'=> $this->errorResponse];
                         return response($response, $this->errorResponse);
@@ -59,5 +70,27 @@ class AuthController extends Controller
                 return response($response, $this->errorResponse);
             }
         } 
+    }
+
+    public function login(Request $request)
+    {
+        $data = $request->all()['data'];
+        $credentials = ["email"=>$data['email'],'password'=>$data['password']];
+        $validator = Validator::make($credentials, [
+            'email' => 'required|email',
+            'password' => 'required|min:8',
+        ])->validate();
+        if(Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->intended('/');
+        }
+        return back()->withErrors([
+            'email' => 'Either your password or email is incorrect',
+        ]);
+    }
+
+    public function thankyou()
+    {
+        return Inertia::render('thankyou');
     }
 }

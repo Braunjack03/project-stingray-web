@@ -4,8 +4,6 @@
             <v-card class="mx-auto px-8 py-12" max-width="500" elevation="2">
 
             <h2>Create an Account (it's free)</h2>   
-            <v-alert v-if="success" type="success">{{success}}</v-alert>
-            <v-alert v-if="error" type="error">{{error}}</v-alert>
             <br/>
                 <v-form ref="form" v-model="valid" lazy-validations >
                     <label>Email address</label>
@@ -19,11 +17,11 @@
                         >
                     <v-radio
                         label="Job Seeker"
-                        value="job_seeker"
+                        value="2"
                     ></v-radio>
                     <v-radio
                         label="Employer"
-                        value="employer"
+                        value="1"
                     ></v-radio>
                     </v-radio-group>
                     <v-btn :disabled="!valid" color="success" class="mr-4" @click="submit()" >Create Acount</v-btn>
@@ -34,27 +32,29 @@
 </template>   
 <script>
   export default {
+    props: {
+          data: Object
+    },
     data: () => ({
         success: '',
-        error: '',
+        errors: '',
         message: '',
-      valid: true,
-      fields: {
-        email: '',
-        emailRules: [
-            v => !!v || 'E-mail is required',
-            v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-        ],
-        password: '',
-        passwordRules : [
-            v => !!v || 'Password is required',
-        ],
-        userTypeRules: '',
-        userTypeRules : [
-            v => !!v || 'Your role is required',
-        ]
+        valid: true,
+        fields: {
+            email: '',
+            emailRules: [
+                v => !!v || 'E-mail is required',
+                v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+            ],
+            password: '',
+            passwordRules : [
+                v => !!v || 'Password is required',
+            ],
+            user_type: '',
+            userTypeRules : [
+                v => !!v || 'Your role is required',
+            ]
         },
-       
     }),
     methods: {
       validate () {
@@ -68,9 +68,12 @@
         this.$refs.form.resetValidation()
       },
       submit() {
-        axios.post('register', {
-            data: this.fields
-        }).then((res)=> {
+            this.$inertia.post('/register', {
+                data: this.fields,
+            }
+        ) 
+        /*.then((res)=> {
+            console.log('here',res)
             this.success = res.data.message
             this.error.clear();
             this.$refs.form.reset()
@@ -79,8 +82,10 @@
                 this.error = error.response.data.message;
             }
             this.success.clear();
-        })
+        })*/
        },
     },
   }
+
+  console.log('asdfasf');
 </script>
