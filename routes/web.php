@@ -5,6 +5,7 @@ use Inertia\Inertia;
 use App\Models\JobPost;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,10 @@ Route::get('/forgot-password', function() {
     return Inertia::render('forgot_password');
 });
 
+/*Route::get('/reset-password/{token}', function($token) {
+    return Inertia::render('reset_password',['token'=>$token]);
+});*/
+
 Route::get('/login', function() {
     return Inertia::render('login');
 });
@@ -38,7 +43,14 @@ Route::get('thankyou', [AuthController::class, 'thankyou'])->name('thankyou');
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
+Route::get('account/verify/{token}', [AuthController::class, 'verifyAccount'])->name('user.verify'); 
+
+Route::post('forgot-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 
+Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
+Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
+ 
 Route::get('/', function() {
+
     //$job_posts = JobPost::with('company_profile')->all();
     #$job_posts = DB::table('job_posts')->join('company_profiles', 'company_profiles.id', '=', 'job_posts.company_profile_id')->get('content', 'job_posts.name', 'company_profiles.name');
     $job_posts = JobPost::join('company_profiles','job_posts.company_profile_id','company_profiles.id')

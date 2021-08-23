@@ -4,11 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\UserVerify;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Hash;
 use Auth;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Str;
+use Mail; 
+
+
 
 class AuthController extends Controller
 {
@@ -17,7 +23,8 @@ class AuthController extends Controller
         Description: To register job seeker
     */
     public function register(Request $request){
-        $data = $request->all()['data'];
+        
+        $data = $request->all();
         $credentials = ["email"=>$data['email'],'password'=>$data['password']];
         $validator = Validator::make($credentials, [
             'email' => 'required|email',
@@ -29,7 +36,7 @@ class AuthController extends Controller
         }else{
             try{
                 try{
-                    $data = $request->all()['data'];
+                    $data = $request->all();
                     $check_exists =  User::where('email', '=', $data['email'])->count();
                 }catch (ModelNotFoundException $e){
                     $response = ['status' => $this->errorStatus,'message' => $e->getMessage(),'responseCode'=> $this->errorResponse];
@@ -38,12 +45,9 @@ class AuthController extends Controller
 
                 if ($check_exists > 0) {
                     $response = ['status' => $this->errorStatus,'message' => __('messages.user_already_registered'),'responseCode'=> $this->errorResponse];
-                    return Inertia::render('register',$response);
-
                     return inertia('register', [
-                        'data' => $response,
+                        'errors' => $response,
                     ]);
-                    //return response($response, $this->errorResponse);
                 }else{
                     try{
                             $user = User::create([
@@ -53,8 +57,19 @@ class AuthController extends Controller
                                 'ip_address' => $request->ip(),
                             ]);
                             
+                            $token = Str::random(64);
+  
+                            UserVerify::create([
+                                  'user_id' => $user->id, 
+                                  'token' => $token
+                                ]);
+                      
+                            Mail::send('emails.emailVerificationEmail', ['token' => $token], function($message) use($user){
+                                  $message->to($user->email);
+                                  $message->subject('Email Verification Mail');
+                              });
+
                             return Redirect::route('thankyou');
-                       // }
                     }catch (ModelNotFoundException $e){
                         $response = ['status' => $this->errorStatus,'message' => $e->getMessage(),'responseCode'=> $this->errorResponse];
                         return response($response, $this->errorResponse);
@@ -74,7 +89,7 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $data = $request->all()['data'];
+        $data = $request->all();
         $credentials = ["email"=>$data['email'],'password'=>$data['password']];
         $validator = Validator::make($credentials, [
             'email' => 'required|email',
@@ -85,12 +100,35 @@ class AuthController extends Controller
             return redirect()->intended('/');
         }
         return back()->withErrors([
-            'email' => 'Either your password or email is incorrect',
+            'message' => 'Either your password or email is incorrect',
         ]);
     }
 
     public function thankyou()
     {
         return Inertia::render('thankyou');
+    }
+
+    public function verifyAccount($token)
+    {
+        $verifyUser = UserVerify::where('token', $token)->first();
+  
+        $message = 'Sorry your email cannot be identified.';
+  
+        if(!is_null($verifyUser) ){
+            $user = $verifyUser->user;
+              
+            if(!$user->is_email_verified) {
+                $verifyUser->user->is_email_verified = 1;
+                $verifyUser->user->save();
+                $message = "Your e-mail is verified. You can now login.";
+            } else {
+                $message = "Your e-mail is already verified. You can now login.";
+            }
+        }
+        
+        return inertia('login', [
+            'errors' => ['message' => $message],
+        ]);
     }
 }

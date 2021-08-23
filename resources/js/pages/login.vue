@@ -5,14 +5,19 @@
 
             <h2>Login</h2>   
             <br/>
-                <v-form @submit.prevent="submit" ref="form"  v-model="valid" lazy-validations >
+                <v-form ref="form" >
+                    <div v-if="errors.message" class="mt-2">{{ errors.message }}</div>
                     <label>Email address</label>
-                    <v-text-field label="Email" v-model="fields.email"  :rules="fields.emailRules" required></v-text-field>
+                    <v-text-field label="Email" v-model="form.email" required></v-text-field>
+                    <div v-if="errors.email" class="mt-2">{{ errors.email }}</div>
+
                     <label>Password</label>
-                    <v-text-field v-model="fields.password" type="password" :rules="fields.passwordRules" required></v-text-field>
-                     
+                    <v-text-field v-model="form.password" type="password" required></v-text-field>
+                    
+                    <div v-if="errors.password" class="mt-2">{{ errors.password }}</div>
+
                      <a href="/forgot-password" replace>Forgot Password?</a><br/><br/>
-                    <v-btn :disabled="!valid" color="success" class="mr-4" @click="submit()" >Login</v-btn>
+                    <v-btn :disabled="form.processing" color="success" class="mr-4"  @click="submit()">Login</v-btn>
                 </v-form>
             </v-card>           
         </v-container>
@@ -20,52 +25,21 @@
 </template>   
 <script>
   export default {
-    data: () => ({
-        success: '',
-        error: '',
-        message: '',
-        valid: true,
-        fields: {
-        email: '',
-        emailRules: [
-            v => !!v || 'E-mail is required',
-        ],
-        password: '',
-        passwordRules : [
-            v => !!v || 'Password is required',
-        ],
-        },
-       
-    }),
-    methods: {
-      validate () {
-        this.$refs.form.validate();
-        return true;
-      },
-      reset () {
-        this.$refs.form.reset()
-      },
-      resetValidation () {
-        this.$refs.form.resetValidation()
-      },
-      submit() {
-          alert('ok');
-        this.validate();
-        this.$inertia.post('login', {
-            data: this.fields
-        })
-        
-        /*.then((res)=> {
-            this.success = res.data.message
-            this.error.clear();
-            this.$refs.form.reset()
-        }).catch((error)=>{
-            if (error.response.status == 400){
-                this.error = error.response.data.message;
-            }
-            this.success.clear();
-        })*/
-       },
+     props: {
+        errors: Object,
     },
-  }
+  data() {
+    return {
+      form: this.$inertia.form({
+        email: null,
+        password: null,
+      }),
+    }
+  },
+  methods :{
+      submit() {
+        this.$inertia.post('/login', this.form )
+        }
+    }
+}
 </script>
