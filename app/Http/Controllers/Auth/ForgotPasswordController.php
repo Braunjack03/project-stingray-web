@@ -11,6 +11,8 @@ use Mail;
 use Hash;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
   
 class ForgotPasswordController extends Controller
 {
@@ -32,9 +34,9 @@ class ForgotPasswordController extends Controller
        */
       public function submitForgetPasswordForm(Request $request)
       {
-          $request->validate([
-              'email' => 'required|email|exists:users',
-          ]);
+          $validator = Validator::make($request->all(), [
+            'email' => 'required|email|exists:users',
+        ])->validate();
   
           $token = Str::random(64);
   
@@ -74,35 +76,33 @@ class ForgotPasswordController extends Controller
        *
        * @return response()
        */
-      public function submitResetPasswordForm(Request $request)
+      public function submitResetPasswordForm(Request $request,$token)
       {
-          echo 'test';
-          print_r($request->all());
-          die();
-          $request->validate([
-              'email' => 'required|email|exists:users',
-              'password' => 'required|string|min:6|confirmed',
-              'cpassword' => 'required'
-          ]);
+          $validator = Validator::make($request->all(), [
+            'password' => 'required|confirmed|min:8',
+            'password_confirmation' => 'required'
+        ])->validate();
   
           $updatePassword = DB::table('password_resets')
                               ->where([
-                                'email' => $request->email, 
-                                'token' => $request->token
+                                //'email' => $request->email, 
+                                'token' => $token
                               ])
                               ->first();
-  
+          //echo '<pre>';                
           if(!$updatePassword){
-              return back()->withInput()->with('error', 'Invalid token!');
+            return inertia('reset_password', [
+                'errors' => ['message'=>'Invalid token!'],
+            ]);
           }
-  
-          $user = User::where('email', $request->email)
+          //die($updatePassword);
+          $user = User::where('email', $updatePassword->email)
                       ->update(['password' => Hash::make($request->password)]);
- 
-          DB::table('password_resets')->where(['email'=> $request->email])->delete();
-          
-          return inertia('login', [
-            'errors' => ['message'=> 'Your password has been changed!'],
-        ]);
+            //die('user');
+          DB::table('password_resets')->where(['email'=> $updatePassword->email])->delete();
+          //die('--');
+         //$response = ['errors' => ['message'=> 'Your password has been changed!']];
+          //die('--');
+        return Redirect::route('login'); 
       }
 }

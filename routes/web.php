@@ -5,6 +5,7 @@ use Inertia\Inertia;
 use App\Models\JobPost;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 
 /*
@@ -26,28 +27,31 @@ Route::get('/register', function() {
     return Inertia::render('register');
 });
 
+Route::get('/dashboard', function() {
+    return Inertia::render('dashboard');
+});
+
 Route::get('/forgot-password', function() {
     return Inertia::render('forgot_password');
 });
 
-/*Route::get('/reset-password/{token}', function($token) {
-    return Inertia::render('reset_password',['token'=>$token]);
-});*/
-
-Route::get('/login', function() {
-    return Inertia::render('login');
-});
+Route::get('login', function() {
+    return Inertia::render('login'); 
+})->name('login');
 
 Route::get('thankyou', [AuthController::class, 'thankyou'])->name('thankyou');
 
+Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+
 Route::post('register', [AuthController::class, 'register']);
+
 Route::post('login', [AuthController::class, 'login']);
 
 Route::get('account/verify/{token}', [AuthController::class, 'verifyAccount'])->name('user.verify'); 
 
 Route::post('forgot-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 
 Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
-Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
+Route::post('reset-password/{token}', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
  
 Route::get('/', function() {
 
@@ -64,4 +68,11 @@ Route::get('/', function() {
 
 
     return Inertia::render('job_posts', ['job_posts' => $job_posts]);
+});
+
+
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
+
 });

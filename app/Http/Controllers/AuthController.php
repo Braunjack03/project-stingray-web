@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\ActivityLog;
 use App\Models\UserVerify;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
@@ -32,7 +33,7 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()){
-            return $this->sendErrors($validator->errors());
+            return $this->sendErrors('register',$validator->errors());
         }else{
             try{
                 try{
@@ -40,7 +41,7 @@ class AuthController extends Controller
                     $check_exists =  User::where('email', '=', $data['email'])->count();
                 }catch (ModelNotFoundException $e){
                     $response = ['status' => $this->errorStatus,'message' => $e->getMessage(),'responseCode'=> $this->errorResponse];
-                    return response($response, $this->errorResponse);
+                    return $this->sendErrors('register',$response);
                 }
 
                 if ($check_exists > 0) {
@@ -53,7 +54,7 @@ class AuthController extends Controller
                             $user = User::create([
                                 'email' => $data['email'],
                                 'role' => $data['user_type'],
-                                'password' => bcrypt($data['password']),
+                                'password' => Hash::make($data['password']),
                                 'ip_address' => $request->ip(),
                             ]);
                             
@@ -97,8 +98,18 @@ class AuthController extends Controller
         ])->validate();
         if(Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/');
+
+            ActivityLog::addToLog('User LoggedIn Successfully!');
+            /*return Inertia::render('dashboard', [
+                'user' => [
+                    'email' => $credentials['email'],
+                    'name' => 'Tech',
+                ],
+            ]);*/
+            
+            return redirect()->intended('/dashboard');
         }
+        ActivityLog::addToLog('User LoggedIn Unsuccessful!');
         return back()->withErrors([
             'message' => 'Either your password or email is incorrect',
         ]);
@@ -130,5 +141,12 @@ class AuthController extends Controller
         return inertia('login', [
             'errors' => ['message' => $message],
         ]);
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        return redirect('/login');
     }
 }
