@@ -17,54 +17,65 @@ use Illuminate\Support\Facades\Redirect;
 class ForgotPasswordController extends Controller
 {
       /**
-       * Write code on Method
+       * Forgot Password Form
        *
-       * @return response()
+       * @return \Illuminate\View\View
        */
-      public function showForgetPasswordForm()
+      public function showForgotPasswordForm()
       {
-         return Inertia::render('forgot_password');
-         
+         return Inertia::render('forgot-password');
       }
   
       /**
-       * Write code on Method
+       * Forgot Password Submission
        *
        * @return response()
        */
-      public function submitForgetPasswordForm(Request $request)
+      public function submitForgotPasswordForm(Request $request)
       {
-          $validator = Validator::make($request->all(), [
+          $redirect_page = $request->path();
+          $data = ['email'=>$request->all()['email']];
+          $validator = Validator::make($data, [
             'email' => 'required|email|exists:users',
-        ])->validate();
-  
-          $token = Str::random(64);
-  
-          DB::table('password_resets')->insert([
-              'email' => $request->email, 
-              'token' => $token, 
-              'created_at' => Carbon::now()
-            ]);
-  
-          Mail::send('emails.forgetPassword', ['token' => $token], function($message) use($request){
-              $message->to($request->email);
-              $message->subject('Reset Password');
-          });
-
-          $response = ['status' => $this->errorStatus,'message' => 'We have e-mailed your password reset link!','responseCode'=> $this->errorResponse];
-          return inertia('forgot_password', [
-              'errors' => $response,
           ]);
+
+        if ($validator->fails()){
+            return $this->sendValidationErrors($redirect_page,$validator->errors());
+        }else{
+            $token = Str::random(64);
+
+            try{
+              DB::table('password_resets')->insert([
+                  'email' => $request->email, 
+                  'token' => $token, 
+                  'created_at' => Carbon::now()
+                ]);
+            }catch (ModelNotFoundException $e){
+              return $this->sendErrorResponse($redirect_page,$e->getMessage());
+            }
+            
+            try{
+                Mail::send('emails.forgetPassword', ['token' => $token], function($message) use($request){
+                    $message->to($request->email);
+                    $message->subject(__('messages.reset_password_email'));
+                });
+
+                return $this->sendSuccessResponse($redirect_page,__('messages.password_reset_link'));
+
+            }catch (\Exception $e) {
+              return $this->sendErrorResponse($redirect_page,$e->getMessage());
+          }
+        }
   
       }
       /**
-       * Write code on Method
+       * Reset Password Form
        *
-       * @return response()
+       * @return \Illuminate\View\View
        */
       public function showResetPasswordForm(Request $request,$token) { 
          
-        return inertia('reset_password', [
+        return inertia('reset-password', [
             'user' => [
                 'token' => $request->token
             ],
@@ -72,37 +83,53 @@ class ForgotPasswordController extends Controller
       }
   
       /**
-       * Write code on Method
+       * Reset Password Form Submission
        *
        * @return response()
        */
       public function submitResetPasswordForm(Request $request,$token)
-      {
+      { 
+          $redirect_page = 'reset-password';
           $validator = Validator::make($request->all(), [
             'password' => 'required|confirmed|min:8',
             'password_confirmation' => 'required'
-        ])->validate();
-  
-          $updatePassword = DB::table('password_resets')
-                              ->where([
-                                //'email' => $request->email, 
-                                'token' => $token
-                              ])
-                              ->first();
-          //echo '<pre>';                
-          if(!$updatePassword){
-            return inertia('reset_password', [
-                'errors' => ['message'=>'Invalid token!'],
-            ]);
-          }
-          //die($updatePassword);
-          $user = User::where('email', $updatePassword->email)
-                      ->update(['password' => Hash::make($request->password)]);
-            //die('user');
-          DB::table('password_resets')->where(['email'=> $updatePassword->email])->delete();
-          //die('--');
-         //$response = ['errors' => ['message'=> 'Your password has been changed!']];
-          //die('--');
-        return Redirect::route('login'); 
+          ]);
+            
+          if ($validator->fails()){
+
+            $error = json_decode($validator->errors());
+            if(!empty($error)){
+                foreach($error as $key => $value){
+                    $response = ['status' => $this->errorStatus,'message' => $value[0],'data'=>[],'responseCode'=> $this->errorResponse];
+                    return inertia($redirect_page, [
+                        'errors' => $response,
+                          'user' => [
+                            'token' => $token
+                        ],
+                    ]);
+                    break;
+                }
+            }
+            
+        }else{
+            try{
+                $updatePassword = DB::table('password_resets')->where(['token' => $token])->first();
+              }catch (ModelNotFoundException $e){
+                return $this->sendErrorResponse($redirect_page,$e->getMessage());
+              }              
+              if(!$updatePassword){
+                return $this->sendErrorResponse($redirect_page,__('messages.invalid_token'));
+              }
+              
+              try{
+                $user = User::where('email', $updatePassword->email)->update(['password' => Hash::make($request->password)]);
+               
+                DB::table('password_resets')->where(['email'=> $updatePassword->email])->delete();
+              }catch (ModelNotFoundException $e){
+                return $this->sendErrorResponse($redirect_page,$e->getMessage());
+              }  
+
+            return Redirect::route('login'); 
+        }
       }
 }

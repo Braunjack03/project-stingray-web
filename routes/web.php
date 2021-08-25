@@ -4,8 +4,8 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\JobPost;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 
 /*
@@ -23,21 +23,13 @@ Route::get('/contact', function() {
     return Inertia::render('contact');
 });
 
-Route::get('/register', function() {
-    return Inertia::render('register');
-});
-
 Route::get('/dashboard', function() {
     return Inertia::render('dashboard');
 });
 
-Route::get('/forgot-password', function() {
-    return Inertia::render('forgot_password');
-});
+Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
 
-Route::get('login', function() {
-    return Inertia::render('login'); 
-})->name('login');
+Route::get('register', [AuthController::class, 'showRegistrationForm'])->name('register');
 
 Route::get('thankyou', [AuthController::class, 'thankyou'])->name('thankyou');
 
@@ -47,9 +39,11 @@ Route::post('register', [AuthController::class, 'register']);
 
 Route::post('login', [AuthController::class, 'login']);
 
+Route::get('forgot-password', [ForgotPasswordController::class, 'showForgotPasswordForm']);
+Route::post('forgot-password', [ForgotPasswordController::class, 'submitForgotPasswordForm'])->name('forgot.password.post'); 
+
 Route::get('account/verify/{token}', [AuthController::class, 'verifyAccount'])->name('user.verify'); 
 
-Route::post('forgot-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 
 Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
 Route::post('reset-password/{token}', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
  

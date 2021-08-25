@@ -14,22 +14,31 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
+
+    /**
+     * Dashboard
+     *
+     * @return \Illuminate\View\View
+     */
+
     public function index(){
         
         if(!Auth::check())
         {
-            $response = ['status' => $this->errorStatus,'message' => 'unauthorized','responseCode'=> $this->errorResponse];
-            return inertia('login', [
-                'errors' => $response,
-            ]);
+            return $this->sendErrorResponse('login',__('messages.unauthorized'));
         }
 
-        $user = Auth::user();
-        return Inertia::render('dashboard', [
-            'user' => [
-                'email' => $user->email,
-                'name' => $user->email,
-            ],
-        ]);
+        try{
+            $user = Auth::user();
+            return Inertia::render('dashboard', [
+                'user' => [
+                    'email' => $user->email,
+                    'name' => $user->email,
+                ],
+            ]);
+        }catch (\Exception $e) {
+            $message = $e->getMessage();
+            return $this->sendErrorResponse('login',$message);
+        }
     }
 }

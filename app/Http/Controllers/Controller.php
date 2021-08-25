@@ -7,6 +7,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Inertia;
+use Route;
 
 class Controller extends BaseController
 {
@@ -21,7 +22,7 @@ class Controller extends BaseController
     public $jobSeekerRole = 2;
     
 
-    public function sendErrors($route,$error){
+    public function sendValidationErrors($route,$error){
         $error = json_decode($error);
         if(!empty($error)){
             foreach($error as $key => $value){
@@ -34,6 +35,20 @@ class Controller extends BaseController
             }
         }
         
+    }
+
+    public function sendSuccessResponse($route,$message,$data = []){
+        $response = ['status' => $this->successStatus,'message' => $message,'data'=>$data,'responseCode'=> $this->successResponse];
+        return inertia($route, [
+            'success' => $response,
+        ]);
+    }
+
+    public function sendErrorResponse($route,$message){
+        $response = ['status' => $this->errorStatus,'message' => $message,'responseCode'=> $this->errorResponse];
+        return inertia($route, [
+            'errors' => $response,
+        ]);
     }
     
 }

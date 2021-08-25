@@ -5,8 +5,9 @@
 
             <h2>Enter Your Email</h2>   
             <br/>
-             <div v-if="errors.message" class="mt-2 error">{{ errors.message }}</div>
                 <v-form ref="form"  v-model="valid" lazy-validations >
+                <div v-if="errors.message" class="mt-2 error">{{ errors.message }}</div>
+                <div v-if="success" class="mt-2 success">{{ success.message }}</div>
                     <label>Email address</label>
                     <v-text-field v-model="form.email" required></v-text-field>
                     <div v-if="errors.email" class="mt-2 error">{{ errors.email }}</div>
@@ -38,12 +39,6 @@
       validate () {
         this.$refs.form.validate();
         return true;
-      },
-      reset () {
-        this.$refs.form.reset()
-      },
-      resetValidation () {
-        this.$refs.form.resetValidation()
       },
       submit() {
             this.$inertia.post('/forgot-password', this.form );
