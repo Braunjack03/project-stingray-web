@@ -9,7 +9,7 @@
                 <div v-if="errors.message" class="mt-2 error">{{ errors.message }}</div>
                 <div v-if="success" class="mt-2 success">{{ success.message }}</div>
                     <label>Email address</label>
-                    <v-text-field v-model="form.email" required></v-text-field>
+                    <v-text-field v-model="form.email" :rules="form.emailRules" required></v-text-field>
                     <div v-if="errors.email" class="mt-2 error">{{ errors.email }}</div>
 
                     <v-btn :disabled="!valid" color="success" class="mr-4" @click="submit()" >Send</v-btn>
@@ -43,6 +43,7 @@
       submit() {
             this.$inertia.post('/forgot-password', this.form );
             this.form.email = '';
+            this.$refs.form.resetValidation();
        },
     },
   }

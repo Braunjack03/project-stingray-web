@@ -63,14 +63,9 @@
         this.$refs.form.validate();
         return true;
       },
-      reset () {
-        this.$refs.form.reset()
-      },
-      resetValidation () {
-        this.$refs.form.resetValidation()
-      },
       submit() {
             this.$inertia.post('/register', this.form );
+            this.$refs.form.resetValidation();
        },
     },
   }

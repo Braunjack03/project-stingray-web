@@ -8,11 +8,11 @@
                 <v-form ref="form" >
                     <div v-if="errors.message" class="mt-2 error">{{ errors.message }}</div>
                     <label>Email address</label>
-                    <v-text-field v-model="form.email" required></v-text-field>
+                    <v-text-field v-model="form.email" :rules="form.emailRules" required></v-text-field>
                     <div v-if="errors.email" class="mt-2 error">{{ errors.email }}</div>
 
                     <label>Password</label>
-                    <v-text-field v-model="form.password" type="password" required></v-text-field>
+                    <v-text-field v-model="form.password" :rules="form.passwordRules" type="password" required></v-text-field>
                     
                     <div v-if="errors.password" class="mt-2 error">{{ errors.password }}</div>
 
@@ -33,12 +33,20 @@
       form: this.$inertia.form({
         email: null,
         password: null,
+          emailRules: [
+              v => !!v || 'E-mail is required',
+              v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+          ],
+          passwordRules : [
+              v => !!v || 'Password is required',
+           ],
       }),
     }
   },
   methods :{
       submit() {
-        this.$inertia.post('/login', this.form )
+          this.$inertia.post('/login', this.form );
+          this.$refs.form.resetValidation();
         }
     }
 }

@@ -35,21 +35,16 @@
         form: {
             password: '',
             confirm_password: '',
+            passwordRules : [
+                v => !!v || 'Password is required',
+            ],
+            cpasswordRules : [
+                v => !!v || 'Confirm Password is required',
+            ],
         },
     }),
     methods: {
-      validate () {
-        this.$refs.form.validate();
-        return true;
-      },
-      reset () {
-        this.$refs.form.reset()
-      },
-      resetValidation () {
-        this.$refs.form.resetValidation()
-      },
       submit() {
-        console.log('test',this.form.token);
             this.$inertia.post('/reset-password/'+this.user.token, this.form );
        },
     },

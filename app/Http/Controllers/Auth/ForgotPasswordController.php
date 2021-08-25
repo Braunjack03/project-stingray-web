@@ -74,6 +74,17 @@ class ForgotPasswordController extends Controller
        * @return \Illuminate\View\View
        */
       public function showResetPasswordForm(Request $request,$token) { 
+        $redirect_page = 'login';
+        try{
+          $updatePassword = DB::table('password_resets')->where(['token' => $token])->first();
+        }catch (ModelNotFoundException $e){
+          return $this->sendErrorResponse($redirect_page,$e->getMessage());
+        }              
+        if(!$updatePassword){
+          return $this->sendErrorResponse($redirect_page,__('messages.invalid_token'));
+          //return Redirect::route('login'); 
+          //return $this->sendErrorResponse($redirect_page,__('messages.invalid_token'));
+        }
          
         return inertia('reset-password', [
             'user' => [
@@ -112,7 +123,7 @@ class ForgotPasswordController extends Controller
             }
             
         }else{
-            try{
+              try{
                 $updatePassword = DB::table('password_resets')->where(['token' => $token])->first();
               }catch (ModelNotFoundException $e){
                 return $this->sendErrorResponse($redirect_page,$e->getMessage());
