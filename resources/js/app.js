@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import { createInertiaApp } from '@inertiajs/inertia-vue'
 import vuetify from './vuetify';
+import '../css/app.css';
 
 createInertiaApp({
   resolve: name => require(`./pages/${name}`),

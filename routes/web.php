@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\JobPost;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,8 +23,32 @@ Route::get('/contact', function() {
     return Inertia::render('contact');
 });
 
+Route::get('/dashboard', function() {
+    return Inertia::render('dashboard');
+});
 
+Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
+
+Route::get('register', [AuthController::class, 'showRegistrationForm'])->name('register');
+
+Route::get('thankyou', [AuthController::class, 'thankyou'])->name('thankyou');
+
+Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::post('register', [AuthController::class, 'register']);
+
+Route::post('login', [AuthController::class, 'login']);
+
+Route::get('forgot-password', [ForgotPasswordController::class, 'showForgotPasswordForm']);
+Route::post('forgot-password', [ForgotPasswordController::class, 'submitForgotPasswordForm'])->name('forgot.password.post'); 
+
+Route::get('account/verify/{token}', [AuthController::class, 'verifyAccount'])->name('user.verify'); 
+
+Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
+Route::post('reset-password/{token}', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
+ 
 Route::get('/', function() {
+
     //$job_posts = JobPost::with('company_profile')->all();
     #$job_posts = DB::table('job_posts')->join('company_profiles', 'company_profiles.id', '=', 'job_posts.company_profile_id')->get('content', 'job_posts.name', 'company_profiles.name');
     $job_posts = JobPost::join('company_profiles','job_posts.company_profile_id','company_profiles.id')
@@ -35,4 +62,11 @@ Route::get('/', function() {
 
 
     return Inertia::render('job_posts', ['job_posts' => $job_posts]);
+});
+
+
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
+
 });
