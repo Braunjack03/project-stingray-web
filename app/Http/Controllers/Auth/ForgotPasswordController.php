@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use DB; 
 use Carbon\Carbon; 
 use App\Models\User; 
+use App\Models\ActivityLog;
 use Mail; 
 use Hash;
 use Illuminate\Support\Str;
@@ -59,6 +60,8 @@ class ForgotPasswordController extends Controller
                     $message->to($request->email);
                     $message->subject(__('messages.reset_password_email'));
                 });
+                $user = User::where('email',$request->email)->first();
+                ActivityLog::addUnAuthorizeLogs(__('activitylogs.password_reset_link_sent'),$user->id,'mail sent');
 
                 return $this->sendSuccessResponse($redirect_page,__('messages.password_reset_link'));
 
@@ -82,8 +85,6 @@ class ForgotPasswordController extends Controller
         }              
         if(!$updatePassword){
           return $this->sendErrorResponse($redirect_page,__('messages.invalid_token'));
-          //return Redirect::route('login'); 
-          //return $this->sendErrorResponse($redirect_page,__('messages.invalid_token'));
         }
          
         return inertia('reset-password', [
@@ -133,9 +134,14 @@ class ForgotPasswordController extends Controller
               }
               
               try{
-                $user = User::where('email', $updatePassword->email)->update(['password' => Hash::make($request->password)]);
+                $user_query = User::where('email', $updatePassword->email);
+                $user = $user_query->update(['password' => Hash::make($request->password)]);
                
                 DB::table('password_resets')->where(['email'=> $updatePassword->email])->delete();
+                
+                $user = $user_query->first();
+                ActivityLog::addUnAuthorizeLogs(__('activitylogs.password_reset'),$user->id,'update');
+
               }catch (ModelNotFoundException $e){
                 return $this->sendErrorResponse($redirect_page,$e->getMessage());
               }  

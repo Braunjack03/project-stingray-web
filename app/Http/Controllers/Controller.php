@@ -50,5 +50,16 @@ class Controller extends BaseController
             'errors' => $response,
         ]);
     }
+
+    public function getRoleName($role_id)
+    {
+        if($role_id == 1)
+        {
+            $roleName = 'Employer';
+        }else{
+            $roleName = 'Job Seeker';
+        }
+        return $roleName;
+    }
     
 }

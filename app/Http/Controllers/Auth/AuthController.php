@@ -55,12 +55,12 @@ class AuthController extends Controller
                     if(Auth::attempt($credentials)) {
                         $request->session()->regenerate();
 
-                        ActivityLog::addToLog(__('activitylogs.loggedin_successfull'));
+                        ActivityLog::addToLog(__('activitylogs.loggedin_successfull'),'login');
                         
                         return redirect()->intended('/dashboard');
                     }
-
-                    ActivityLog::addToLog(__('activitylogs.loggedin_unsuccessfull'));
+                    $user = User::where('email',$credentials['email'])->first();
+                    ActivityLog::addUnAuthorizeLogs(__('activitylogs.loggedin_unsuccessfull'),$user->id,'login');
 
                     return back()->withErrors([
                         'message' => __('messages.incorrect_password'),
@@ -90,6 +90,7 @@ class AuthController extends Controller
      */
     public function register(Request $request){
         
+            
         $data = $request->all();
         $redirect_page = $request->path();
         $credentials = ["email"=>$data['email'],'password'=>$data['password']];
@@ -101,7 +102,6 @@ class AuthController extends Controller
         if ($validator->fails()){
             return $this->sendValidationErrors($redirect_page,$validator->errors());
         }else{
-            try{
                 try{
                     $data = $request->all();
                     $check_exists =  User::where('email', '=', $data['email'])->count();
@@ -114,38 +114,37 @@ class AuthController extends Controller
                     return $this->sendErrorResponse($redirect_page,$message);
                 }else{
                     try{
-                            $user = User::create([
-                                'email' => $data['email'],
-                                'role' => $data['user_type'],
-                                'password' => Hash::make($data['password']),
-                                'ip_address' => $request->ip(),
-                            ]);
-                            
-                            $token = Str::random(64);
-  
-                            UserVerify::create([
-                                  'user_id' => $user->id, 
-                                  'token' => $token
-                                ]);
-                      
-                            Mail::send('emails.emailVerificationEmail', ['token' => $token], function($message) use($user){
-                                  $message->to($user->email);
-                                  $message->subject(__('messages.verification_email'));
-                              });
+                        $user = User::create([
+                            'email' => $data['email'],
+                            'role' => $data['user_type'],
+                            'password' => Hash::make($data['password']),
+                            'ip_address' => $request->ip(),
+                        ]);
 
-                            return Redirect::route('thankyou');
-                    }catch (ModelNotFoundException $e){
-                        return $this->sendErrorResponse($redirect_page,$e->getMessage());
-                    }
-                    $data = [
-                        'email' => $data['email'],
-                    ];
-                    return $this->sendSuccessResponse($redirect_page,__('messages.user_registeration'),$data);
-                }        
-            }catch (\Exception $e) {
-                $message = $e->getMessage();
-                return $this->sendErrorResponse($redirect_page,$message);
-            }
+                        
+                        $token = Str::random(64);
+
+                        UserVerify::create([
+                                'user_id' => $user->id, 
+                                'token' => $token
+                            ]);
+                        $roleName = $this->getRoleName($data['user_type']);    
+                        ActivityLog::addUnAuthorizeLogs(__('activitylogs.record_created', ['name' => 'User','role'=>$roleName]),$user->id,'create');
+
+                        Mail::send('emails.emailVerificationEmail', ['token' => $token], function($message) use($user){
+                                $message->to($user->email);
+                                $message->subject(__('messages.verification_email'));
+                            });
+
+                        return Redirect::route('thankyou');
+                }catch (ModelNotFoundException $e){
+                    return $this->sendErrorResponse($redirect_page,$e->getMessage());
+                }
+                $data = [
+                    'email' => $data['email'],
+                ];
+                return $this->sendSuccessResponse($redirect_page,__('messages.user_registeration'),$data);
+            } 
         } 
     }
 
@@ -215,4 +214,5 @@ class AuthController extends Controller
         }
            
     }
+
 }

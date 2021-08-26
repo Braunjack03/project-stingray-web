@@ -20,12 +20,22 @@ class ActivityLog extends Model
         'user_id','comment', 'type', 'user_ip',
     ];
 
-    public static function addToLog($subject)
+    public static function addToLog($subject,$type)
     {
         $log = [];
         $log['comment'] = $subject;
         $log['user_id'] = auth()->check() ? auth()->user()->id : 1;
-        $log['type'] = str_replace("-"," ",Request::segment(2));
+        $log['type'] = $type;
+        $log['user_ip'] = Request::ip();
+        ActivityLog::create($log);
+    }
+
+    public static function addUnAuthorizeLogs($subject,$user_id,$type)
+    {
+        $log = [];
+        $log['comment'] = $subject;
+        $log['user_id'] = $user_id;
+        $log['type'] = $type;
         $log['user_ip'] = Request::ip();
         ActivityLog::create($log);
     }
