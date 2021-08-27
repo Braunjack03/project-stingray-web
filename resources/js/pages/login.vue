@@ -7,6 +7,7 @@
             <br/>
                 <v-form ref="form" >
                     <div v-if="errors.message" class="mt-2 error">{{ errors.message }}</div>
+                    <div v-if="success" class="mt-2 success">{{ success.message }}</div>
                     <label>Email address</label>
                     <v-text-field v-model="form.email" :rules="form.emailRules" required></v-text-field>
                     <div v-if="errors.email" class="mt-2 error">{{ errors.email }}</div>
@@ -27,6 +28,7 @@
   export default {
      props: {
         errors: Object,
+        success: Object,
     },
   data() {
     return {

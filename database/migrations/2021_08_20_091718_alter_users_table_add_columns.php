@@ -16,7 +16,6 @@ class AlterUsersTableAddColumns extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('name')->nullable()->change();
             $table->enum('role', ['1', '2'])->nullable()->comment('1=employer,2=job_seeker')->after('password');
-            $table->string('ip_address')->after('role');
         });
     }
 

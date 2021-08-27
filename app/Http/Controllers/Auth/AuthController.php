@@ -15,7 +15,7 @@ use Auth;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Str;
 use Mail; 
-
+use Carbon\Carbon;
 
 
 class AuthController extends Controller
@@ -53,6 +53,11 @@ class AuthController extends Controller
         }else{
             try{
                     if(Auth::attempt($credentials)) {
+
+                        if(Auth::user()->is_email_verified != 1){
+                            Auth::logout();
+                            return $this->sendErrorResponse($redirect_page,__('messages.not_verified'));
+                        }
                         $request->session()->regenerate();
 
                         ActivityLog::addToLog(__('activitylogs.loggedin_successfull'));
@@ -115,10 +120,10 @@ class AuthController extends Controller
                 }else{
                     try{
                             $user = User::create([
+                                'uuid'  => Str::uuid(),
                                 'email' => $data['email'],
                                 'role' => $data['user_type'],
                                 'password' => Hash::make($data['password']),
-                                'ip_address' => $request->ip(),
                             ]);
                             
                             $token = Str::random(64);
@@ -181,14 +186,15 @@ class AuthController extends Controller
                 $user = $verifyUser->user;
                 if(!$user->is_email_verified) {
                     $verifyUser->user->is_email_verified = 1;
+                    $verifyUser->user->email_verified_at = Carbon::now();
                     $verifyUser->user->save();
-                    $message = __('messages.not_identified');
+                    $message = __('messages.email_verified');
                 } else {
                     $message = __('messages.email_already_verified');
                 }
             }
 
-            return $this->sendErrorResponse($redirect_page,$message);
+            return $this->sendSuccessResponse($redirect_page,$message);
 
         }catch (\Exception $e) {
             $message = $e->getMessage();

@@ -13,7 +13,7 @@
                 <v-form ref="form" v-model="valid" lazy-validations >
 
                     <label>Profile Image</label>
-                    <v-file-input show-size counter outlined dense></v-file-input>
+                    <v-file-input v-model="user.profile_image" show-size counter outlined dense></v-file-input>
 
                     <div v-if="errors.email" class="mt-2 error">{{ errors.email }}</div>
                      <br/><br/>   
@@ -73,7 +73,8 @@
      data: () => ({
         message: '',
         valid: true,
-        user: {
+        form: {
+            profile_image: '',
             name: '',
             email: '',
             emailRules: [

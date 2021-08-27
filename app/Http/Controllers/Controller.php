@@ -33,8 +33,7 @@ class Controller extends BaseController
                 //return response()->json($response, $this->errorResponse);
                 break;
             }
-        }
-        
+        }    
     }
 
     public function sendSuccessResponse($route,$message,$data = []){
@@ -49,6 +48,5 @@ class Controller extends BaseController
         return inertia($route, [
             'errors' => $response,
         ]);
-    }
-    
+    }   
 }

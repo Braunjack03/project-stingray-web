@@ -13,8 +13,7 @@ class CreateJobseekerProfilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('jobseeker_profiles', function (Blueprint $table) {
-
+        Schema::create('job_seeker_profiles', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->String('profie_image')->nullable();
@@ -24,7 +23,6 @@ class CreateJobseekerProfilesTable extends Migration
             $table->String('github')->nullable();
             $table->String('twitter')->nullable();
             $table->String('current_resume')->nullable();
-            // Location info
             
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

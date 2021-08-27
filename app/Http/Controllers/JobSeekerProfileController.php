@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\JobSeekerProfile;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 use Auth;
 use Inertia\Inertia;
 
@@ -47,10 +48,10 @@ class JobSeekerProfileController extends Controller
                     'name' => $user->name,
                 ];
             }
+
+            $data = json_decode(json_encode($data), FALSE);
             return Inertia::render('profile', [
-                'user' => [
-                    $data
-                ],
+                'user' => $data,
             ]);
         }catch (\Exception $e) {
             $message = $e->getMessage();
@@ -63,8 +64,7 @@ class JobSeekerProfileController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function updateProfile(Request $request){
-        
+    public function updateProfile(Request $request){        
           
         if(!Auth::check())
         {
@@ -72,18 +72,18 @@ class JobSeekerProfileController extends Controller
         }
 
         $requested_data = $request->all();
-        echo '<pre>';
+        //echo '<pre>';
             //$user_id = Auth::id();
             //echo $user_id;
-            print_r($requested_data);die();
+            //print_r($requested_data);die();
         $redirect_page = $request->path();
         $data = [
                 "name"=>$requested_data['name'],
-                'current_job_title' => ($requested_data['current_job_title']) ? $requested_data['current_job_title'] : '',
-                'short_bio' => ($requested_data['short_bio']) ? $requested_data['short_bio'] : '',
-                'linkedin' => ($requested_data['linkedin']) ? $requested_data['linkedin'] : '',
-                'github' => ($requested_data['github']) ? $requested_data['github'] : '',
-                'twitter' => ($requested_data['twitter']) ? $requested_data['twitter'] : '',
+                'current_job_title' => isset($requested_data['current_job_title']) ? $requested_data['current_job_title'] : '',
+                'short_bio' => isset($requested_data['short_bio']) ? $requested_data['short_bio'] : '',
+                'linkedin' => isset($requested_data['linkedin']) ? $requested_data['linkedin'] : '',
+                'github' => isset($requested_data['github']) ? $requested_data['github'] : '',
+                'twitter' => isset($requested_data['twitter']) ? $requested_data['twitter'] : '',
             ];
         $validator = Validator::make($data, [
             'name' => 'required',
@@ -100,6 +100,13 @@ class JobSeekerProfileController extends Controller
                     ]);
 
                     if($user){
+                           
+                        $image = $request->file('profile_image');
+                        //echo '<pre>';
+                        //print_r($image); die();
+                        $user_uuid = Auth::user()->uuid;
+                        //return Storage::disk('s3')->response($user_uuid.'/'. $image->fileName);
+
                         $user_profile = JobSeekerProfile::where('user_id',$user_id);
                         if($user_profile->count() == 1)
                         {
@@ -121,8 +128,8 @@ class JobSeekerProfileController extends Controller
                                 'github' => $data['github'],
                                 'twitter' => $data['twitter'],
                             ]);
-                        }
-                        
+                        } 
+                     
                     }
                 
                 $user_profile_data =  JobSeekerProfile::where('user_id',$user_id)->first();    
@@ -148,5 +155,4 @@ class JobSeekerProfileController extends Controller
             }
         } 
     }
-
 }
