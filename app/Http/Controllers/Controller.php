@@ -49,4 +49,19 @@ class Controller extends BaseController
             'errors' => $response,
         ]);
     }   
+
+    public function sendValidationErrorsWithData($route,$error,$data){
+        $error = json_decode($error);
+        if(!empty($error)){
+            foreach($error as $key => $value){
+                $response = ['status' => $this->errorStatus,'message' => $value[0],'responseCode'=> $this->errorResponse];
+                return inertia($route, [
+                    'errors' => $response,
+                    'user' => $data,
+                ]);
+                //return response()->json($response, $this->errorResponse);
+                break;
+            }
+        }    
+    }
 }

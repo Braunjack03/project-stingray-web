@@ -16,7 +16,7 @@ class CreateJobseekerProfilesTable extends Migration
         Schema::create('job_seeker_profiles', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->String('profie_image')->nullable();
+            $table->String('profile_image')->nullable();
             $table->String('current_job_title')->nullable();
             $table->String('short_bio')->nullable();
             $table->String('linkedin')->nullable();

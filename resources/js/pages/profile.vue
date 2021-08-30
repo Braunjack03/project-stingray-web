@@ -12,9 +12,14 @@
                 <div v-if="success" class="mt-2 success">{{ success.message }}</div>
                 <v-form ref="form" v-model="valid" lazy-validations >
 
-                    <label>Profile Image</label>
+                    <label>Profile Image (500px x 500px) </label>
                     <v-file-input v-model="user.profile_image" show-size counter outlined dense></v-file-input>
-
+                    
+                    <v-img
+                      :src="user.profile_image_src"
+                      max-height="150"
+                      max-width="250"
+                    ></v-img>
                     <div v-if="errors.email" class="mt-2 error">{{ errors.email }}</div>
                      <br/><br/>   
                     <label>Name</label>
@@ -48,6 +53,11 @@
                     <v-file-input show-size counter outlined dense v-model="user.current_resume"></v-file-input>
                     <div v-if="errors.current_resume" class="mt-2 error">{{ errors.current_resume }}</div>
 
+
+                    <v-btn v-if="user.current_resume_src" :href="user.current_resume_src" target="_blank">
+                    {{user.current_resume_name}}
+                    </v-btn>
+                    <br/><br/><br/>
                     <v-btn  color="success" class="mr-4" @click="submit()" >Save Changes</v-btn>
                 </v-form>
             </v-card> 
@@ -59,6 +69,7 @@
 <script>
   import Layout from './Layout'
   import { Head } from '@inertiajs/inertia-vue'
+  import { mdiAccount } from "@mdi/js";
 
   export default {
     components: {
@@ -75,16 +86,8 @@
         valid: true,
         form: {
             profile_image: '',
+            current_job_title: '',
             name: '',
-            email: '',
-            emailRules: [
-                v => !!v || 'E-mail is required',
-                v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-            ],
-            password: '',
-            passwordRules : [
-                v => !!v || 'Password is required',
-            ],
             short_bio: '',
             github: '',
             twitter: '',
