@@ -49,6 +49,7 @@ class JobSeekerProfileController extends Controller
             }else{
                 $data = [
                     'name' => $user->name,
+                    'profile_image_src' => url('images/default-profile.png'),
                 ];
             }
 
@@ -93,15 +94,23 @@ class JobSeekerProfileController extends Controller
                 'twitter' => isset($requested_data['twitter']) ? $requested_data['twitter'] : '',
                 'profile_image' => isset($requested_data['profile_image']) ? $requested_data['profile_image'] : '',
                 'current_resume' => isset($requested_data['current_resume']) ? $requested_data['current_resume'] : '',
-                'profile_image_src' => $user_profile_data->profile_image,
-                'current_resume_src' => $user_profile_data->current_resume,
-                'current_resume_name' => $this->getNameFromUrl($user_profile_data->current_resume),
+                'profile_image_src' => isset($user_profile_data->profile_image) ? $user_profile_data->profile_image : '',
+                'current_resume_src' => isset($user_profile_data->current_resume) ? $user_profile_data->current_resume : '',
+                'current_resume_name' => isset($user_profile_data->current_resume) ? $this->getNameFromUrl($user_profile_data->current_resume) : '',
+                'profile_image_removed' => isset($requested_data['profile_image_removed']) ? $requested_data['profile_image_removed'] : '',
+                'current_resume_removed' => isset($requested_data['current_resume_removed']) ? $requested_data['current_resume_removed'] : '',
+
+
             ];
-         
+
+            $messages = [
+                'max' => 'The profile image must not be greater than 1 MB',
+            ]; 
+
         $validator = Validator::make($data, [
             'profile_image' => 'nullable|mimes:jpeg,png,jpg,gif|max:1000',
             'current_resume' => 'nullable|mimes:pdf,doc,txt',
-        ]);
+        ],$messages);
         
         if ($validator->fails()){
             return $this->sendValidationErrorsWithData($redirect_page,$validator->errors(),$data);
@@ -122,19 +131,23 @@ class JobSeekerProfileController extends Controller
 
                         $profileImage = '';
                         $current_resume = '';
-                        $destinationPath = 'uploads/public-candidate-assets/';
+                        //$destinationPath = 'uploads/public-candidate-assets/';
                         if ($image = $request->file('profile_image')) {
-                            $profileImage = date('YmdHis') . "." . $image->getClientOriginalName();
-                            $image->move($destinationPath, $profileImage);
+                            $new_name = time() . '_' . $image->getClientOriginalName();
+                             //$path = Storage::disk('s3')->put($user_uuid, $image, 'public-read');
+                             $profileImage = Storage::disk('s3')->putFileAs($user_uuid, $image,$new_name);
+                            //$image->move($destinationPath, $profileImage);
                         }
                        
                         if ($request->file('current_resume') != '') {
-                            $cv = $request->file('current_resume');
-                            $current_resume = date('YmdHis') . "-" . $cv->getClientOriginalName();
-                            $cv->move($destinationPath, $current_resume);
+                            $current_resume = $request->file('current_resume');
+
+                            $new_name = time() . '_' . $current_resume->getClientOriginalName();
+                             //$path = Storage::disk('s3')->put($user_uuid, $image, 'public-read');
+                             $current_resume = Storage::disk('s3')->putFileAs($user_uuid, $current_resume,$new_name);
+
+                            //$current_resume = Storage::disk('s3')->putFile($user_uuid, $current_resume);
                         }
-                        
-                        //return Storage::disk('s3')->response($user_uuid.'/'. $image->fileName);
 
                         $user_profile = JobSeekerProfile::where('user_id',$user_id);
                       
@@ -149,12 +162,12 @@ class JobSeekerProfileController extends Controller
                             'current_resume' => $current_resume,
                         ];
 
-                        if(!$request->file('profile_image'))
+                        if(!$request->file('profile_image') && (isset($data['profile_image_removed']) && $data['profile_image_removed'] == 0))
                         {
                             unset($profile_data['profile_image']);
                         }
 
-                        if (!$request->file('current_resume')) {
+                        if (!$request->file('current_resume') && (isset($data['current_resume_removed']) && $data['current_resume_removed'] == 0)) {
                             unset($profile_data['current_resume']);
                         }   
                         if($user_profile->count() == 1)

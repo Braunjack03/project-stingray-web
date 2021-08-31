@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\URL;
+use Auth;
 
 
 class JobSeekerProfile extends Model
@@ -17,11 +18,13 @@ class JobSeekerProfile extends Model
 
     public function getProfileImageAttribute($value)
     {
-        return url('uploads/public-candidate-assets/'.$value);
+        if($value)
+        return url('https://public-candidate-assets.s3.us-east-2.amazonaws.com/'.$value);
     }
 
     public function getCurrentResumeAttribute($value)
     {
-        return url('uploads/public-candidate-assets/'.$value);
+        if($value)
+        return url('https://public-candidate-assets.s3.us-east-2.amazonaws.com/'.$value);
     }
 }

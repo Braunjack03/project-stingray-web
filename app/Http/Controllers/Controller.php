@@ -54,7 +54,7 @@ class Controller extends BaseController
         $error = json_decode($error);
         if(!empty($error)){
             foreach($error as $key => $value){
-                $response = ['status' => $this->errorStatus,'message' => $value[0],'responseCode'=> $this->errorResponse];
+                $response = ['status' => $this->errorStatus,'message' => implode("\n",$value),'responseCode'=> $this->errorResponse];
                 return inertia($route, [
                     'errors' => $response,
                     'user' => $data,
