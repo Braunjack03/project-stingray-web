@@ -11,9 +11,9 @@
           color="grey darken-1"
           size="32"
         ></v-avatar>
-        <v-btn href="/dashboard" text > Dashboard </v-btn>
+        <v-btn href="/employer/dashboard" text > Dashboard</v-btn>
 
-        <v-btn href="/profile" text > Profile </v-btn>
+        <v-btn href="/employer/profile" text > Profile </v-btn>
 
         <v-btn href="/logout" text > Logout </v-btn>
         <v-spacer></v-spacer>

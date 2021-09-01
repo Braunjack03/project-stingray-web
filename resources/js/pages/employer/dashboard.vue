@@ -11,7 +11,7 @@
 </template>
 
 <script>
-  import Layout from './Layout'
+  import Layout from './Layout'  
   import { Head } from '@inertiajs/inertia-vue'
 
   export default {

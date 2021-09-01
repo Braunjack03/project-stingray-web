@@ -20,7 +20,6 @@ class Controller extends BaseController
     public $errorStatus = 0;
     public $employerRole = 1;
     public $jobSeekerRole = 2;
-    
 
     public function sendValidationErrors($route,$error){
         $error = json_decode($error);
@@ -63,5 +62,14 @@ class Controller extends BaseController
                 break;
             }
         }    
+    }
+
+    public function sendResponseWithUserData($route,$message,$data = []){
+
+        $response = ['status' => $this->successStatus,'message' => $message,'user'=>$data,'responseCode'=> $this->successResponse];
+        return inertia($route, [
+            'success' => $response,
+            'user' => $data,
+        ]);
     }
 }

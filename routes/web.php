@@ -5,7 +5,9 @@ use Inertia\Inertia;
 use App\Models\JobPost;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\JobSeekerProfileController;
+use App\Http\Controllers\EmployerProfileController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 
@@ -73,5 +75,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('profile', [JobSeekerProfileController::class, 'index'])->name('profile');
 
     Route::post('profile', [JobSeekerProfileController::class, 'updateProfile'])->name('profile.update');
+
+});
+
+Route::group(['prefix' => 'employer', 'middleware' => ['auth']], function() {
+
+    Route::get('dashboard', [EmployerController::class, 'index'])->name('dashboard');
+
+    Route::get('profile', [EmployerProfileController::class, 'index'])->name('employer.profile');
+
+    Route::post('profile', [EmployerProfileController::class, 'updateProfile'])->name('profile.update');
 
 });

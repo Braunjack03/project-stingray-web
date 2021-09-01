@@ -19,12 +19,12 @@ class JobSeekerProfile extends Model
     public function getProfileImageAttribute($value)
     {
         if($value)
-        return url('https://public-candidate-assets.s3.us-east-2.amazonaws.com/'.$value);
+        return url('https://'.env('AWS_BUCKET').'.s3.'.env('AWS_DEFAULT_REGION').'.amazonaws.com/'.Auth::user()->uuid.'/'.$value);
     }
 
     public function getCurrentResumeAttribute($value)
     {
         if($value)
-        return url('https://public-candidate-assets.s3.us-east-2.amazonaws.com/'.$value);
+        return url('https://'.env('AWS_BUCKET').'.s3.'.env('AWS_DEFAULT_REGION').'.amazonaws.com/'.Auth::user()->uuid.'/'.$value);
     }
 }
