@@ -72,4 +72,20 @@ class Controller extends BaseController
             'user' => $data,
         ]);
     }
+
+    public function getRoleName($role_id)
+    {
+        if($role_id == 1)
+        {
+            $roleName = 'Employer';
+        }else{
+            $roleName = 'Job Seeker';
+        }
+        return $roleName;
+    }
+
+    public function getNameFromUrl($cv){
+        $cv_name = pathinfo($cv);
+        return $cv_name['basename'];
+    }
 }

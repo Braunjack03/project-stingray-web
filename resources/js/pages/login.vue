@@ -20,6 +20,8 @@
                      <a href="/forgot-password" replace>Forgot Password?</a><br/><br/>
                     <v-btn :disabled="form.processing" color="success" class="mr-4"  @click="submit()">Login</v-btn>
                 </v-form>
+                 <br/>
+                 <v-btn href="/register" text >Don't Have an Account? Register Here </v-btn>
             </v-card>           
         </v-container>
     </v-app>

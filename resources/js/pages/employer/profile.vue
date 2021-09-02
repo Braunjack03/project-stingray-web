@@ -49,7 +49,7 @@
                 <br/><br/>
                  <h3>Your Companies</h3>  
 
-                    <v-btn  color="" class="mr-4" >Create New Company Profile</v-btn>
+                    <v-btn href="/employer/create-company" color="" class="mr-4" >Create New Company Profile</v-btn>
             </v-card> 
        
         </v-container>

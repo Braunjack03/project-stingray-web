@@ -29,6 +29,8 @@
                     </v-radio-group>
                     <v-btn :disabled="!valid" color="success" class="mr-4" @click="submit()" >Create Acount</v-btn>
                 </v-form>
+                <br/>
+                 <v-btn href="/login" text >Already Have Account? Login </v-btn>
             </v-card> 
        
         </v-container>

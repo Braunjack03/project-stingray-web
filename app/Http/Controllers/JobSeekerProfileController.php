@@ -54,7 +54,7 @@ class JobSeekerProfileController extends Controller
             }
             ActivityLog::addToLog(__('activitylogs.profile_fetched'),'profile fetch');
             $data = json_decode(json_encode($data), FALSE);
-            return $this->sendResponseWithUserData('profile',__('messages.user_profile_updated'),$data);
+            return $this->sendResponseWithUserData('profile','',$data);
 
         }catch (\Exception $e) {
             $message = $e->getMessage();

@@ -158,8 +158,5 @@ class EmployerProfileController extends Controller
         } 
     }
 
-    public function getNameFromUrl($cv){
-        $cv_name = pathinfo($cv);
-        return $cv_name['basename'];
-    }
+    
 }
