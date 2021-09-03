@@ -44,12 +44,17 @@
                     <v-text-field v-model="user.linkedin" required></v-text-field>
                     <div v-if="errors.linkedin" class="mt-2 error">{{ errors.linkedin }}</div>
                    
-                    <v-btn  color="success" class="mr-4" @click="submit()" >Save Changes</v-btn>
+                    <v-btn color="success" class="mr-4" @click="submit()" >Save Changes</v-btn>
                 </v-form>
                 <br/><br/>
                  <h3>Your Companies</h3>  
-
-                    <v-btn href="/employer/create-company" color="" class="mr-4" >Create New Company Profile</v-btn>
+                    <ul id="example-1">
+                    <li v-for="company in companies" :key="company.id">
+                      {{ company.name }} <v-btn :href="'/employer/edit-company?id='+company.uuid" color="text" class="mr-4" @click="edit()" >Edit</v-btn>
+                    </li>
+                  </ul>
+                  <br/>
+                  <v-btn href="/employer/create-company" color="" class="mr-4" >Create New Company Profile</v-btn>
             </v-card> 
        
         </v-container>
@@ -68,6 +73,7 @@
       errors : Object,  
       user: Object,
       success: Object,
+      companies : Array,
     },
      data: () => ({
         message: '',
@@ -106,4 +112,5 @@
         }
     },
   }
+
 </script>

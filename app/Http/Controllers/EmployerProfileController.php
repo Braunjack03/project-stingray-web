@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\EmployerProfile;
+use App\Models\CompanyProfile;
 use App\Models\ActivityLog;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
@@ -34,6 +35,7 @@ class EmployerProfileController extends Controller
         try{
             $user = Auth::user();
             $user_profile = EmployerProfile::where('user_id',$user->id)->first();
+            $company_profiles = CompanyProfile::where('user_id',$user->id)->get()->toArray();
             if($user_profile)
             {
                 $data = [
@@ -52,7 +54,13 @@ class EmployerProfileController extends Controller
             }
             ActivityLog::addToLog(__('activitylogs.profile_fetched'),'profile fetch');
             $data = json_decode(json_encode($data), FALSE);
-            return $this->sendResponseWithUserData('employer/profile','',$data);
+            $response = ['status' => $this->successStatus,'message' => '','responseCode'=> $this->successResponse];
+            $respones_array = [
+                'success' => $response,
+                'user' => $data,
+                'companies' => json_decode(json_encode($company_profiles), true),
+            ];
+            return $this->sendResponseWithData('employer/profile','',$respones_array);
 
         }catch (\Exception $e) {
             $message = $e->getMessage();

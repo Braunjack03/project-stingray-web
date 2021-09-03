@@ -96,10 +96,10 @@
                     <div v-if="errors.linkedin_user" class="mt-2 error">{{ errors.linkedin_user }}</div>
 
                      <label>Facebook</label>
-                    <v-text-field v-model="user.github_user" required></v-text-field>
-                    <div v-if="errors.github_user" class="mt-2 error">{{ errors.facebook_user }}</div>
+                    <v-text-field v-model="user.facebook_user" required></v-text-field>
+                    <div v-if="errors.facebook_user" class="mt-2 error">{{ errors.facebook_user }}</div>
 
-                     <label>Twitter</label>
+                    <label>Twitter</label>
                     <v-text-field v-model="user.twitter_user" required></v-text-field>
                     <div v-if="errors.twitter_user" class="mt-2 error">{{ errors.twitter_user }}</div>
 
@@ -107,7 +107,7 @@
                     <v-text-field v-model="user.instagram_user" required></v-text-field>
                     <div v-if="errors.instagram_user" class="mt-2 error">{{ errors.instagram_user }}</div>
                    
-                    <v-btn  color="success" class="mr-4" @click="submit()" >Save Changes</v-btn>
+                    <v-btn  color="success" class="mr-4" @click="submit()" >Update Changes</v-btn>
                 </v-form>
                 <br/><br/>
             </v-card> 
@@ -148,7 +148,7 @@
       },
       submit() {
             this.user.industry = this.industry;
-            this.$inertia.post('/employer/create-company', this.user );
+            this.$inertia.post('/employer/udpate-company', this.user );
        },
       removeImage(){
           this.user.profile_image_src = '';

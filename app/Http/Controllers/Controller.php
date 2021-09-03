@@ -88,4 +88,9 @@ class Controller extends BaseController
         $cv_name = pathinfo($cv);
         return $cv_name['basename'];
     }
+
+    public function sendResponseWithData($route,$message,$data = []){
+        //$response = ['status' => $this->successStatus,'message' => $message,'responseCode'=> $this->successResponse];
+        return inertia($route, $data);
+    }
 }

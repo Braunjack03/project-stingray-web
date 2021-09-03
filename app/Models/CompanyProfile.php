@@ -10,7 +10,7 @@ class CompanyProfile extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name','description','profile_title','local_employees','global_employees','mission','street_addr_1','street_addr_2','city','postcode','state_abbr', 'website', 'linkedin_user', 'facebook_user', 'twitter_user','lat','long',
+        'name','uuid','user_id','description','profile_title','logo_image_url','local_employees','global_employees','mission','industry_ids','street_addr_1','street_addr_2','city','postcode','state_abbr', 'website', 'linkedin_user', 'facebook_user', 'twitter_user', 'instagram_user','lat','long',
     ];
 
     public function job_posts()

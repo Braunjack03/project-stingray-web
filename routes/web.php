@@ -92,4 +92,8 @@ Route::group(['prefix' => 'employer', 'middleware' => ['auth','employer']], func
 
     Route::post('create-company',[CompanyProfileController::class,'store'])->name('company.store');
 
+    Route::get('edit-company',[CompanyProfileController::class,'edit'])->name('edit.company');
+
+    Route::post('udpate-company',[CompanyProfileController::class,'update'])->name('update.company');
+
 });

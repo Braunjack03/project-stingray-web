@@ -53,11 +53,17 @@ class AuthController extends Controller
         }else{
             try{
                     if(Auth::attempt($credentials)) {
+                        
+                        if(Auth::user()->is_email_verified == 0)
+                        {
+                            Auth::logout();
+                            return $this->sendErrorResponse($redirect_page,__('messages.not_verified'));
+                        }
                         $request->session()->regenerate();
 
                         ActivityLog::addToLog(__('activitylogs.loggedin_successfull'),'login');
                         
-                       
+                        
                         if(Auth::user()->role == 1)
                         {
                             
@@ -198,7 +204,7 @@ class AuthController extends Controller
                 if(!$user->is_email_verified) {
                     $verifyUser->user->is_email_verified = 1;
                     $verifyUser->user->save();
-                    $message = __('messages.not_identified');
+                    $message = __('messages.email_verified');
                 } else {
                     $message = __('messages.email_already_verified');
                 }
