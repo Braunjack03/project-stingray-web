@@ -24,6 +24,17 @@ class LocationSeeder extends Seeder
 
     function load_locations(){
 
+
+        $name = "Remote/Flexiable";
+        DB::table('locations')->insert([
+            'name' => $name,
+            'created_at' => now(),
+            'updated_at' => now(),
+            'slug' => Str::slug($name, '-'),
+            'id' => 99
+
+        ]);
+
         $name = "Tampa Bay";
         DB::table('locations')->insert([
             'name' => $name,
