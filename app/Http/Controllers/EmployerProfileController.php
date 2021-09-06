@@ -20,7 +20,7 @@ class EmployerProfileController extends Controller
     }
 
     /**
-     * Profile
+     * Get Profile
      *
      * @return \Illuminate\View\View
      */
@@ -46,6 +46,7 @@ class EmployerProfileController extends Controller
                     'github' => $user_profile->github,
                     'twitter' => $user_profile->twitter,
                     'profile_image_src' => $user_profile->profile_image,
+                    'company_profile_count' => count($company_profiles),
                 ];
             }else{
                 $data = [
@@ -69,7 +70,7 @@ class EmployerProfileController extends Controller
     }
 
     /**
-     * To register job seeker or employer
+     * To update employer profile
      *
      * @return \Illuminate\View\View
      */
@@ -148,17 +149,24 @@ class EmployerProfileController extends Controller
                     } 
                 }
                 
-                $user_profile_data =  EmployerProfile::where('user_id',$user_id)->first();    
+                $user_profile_data =  EmployerProfile::where('user_id',$user_id)->first(); 
+                $company_profiles = CompanyProfile::where('user_id',$user_id)->get()->toArray();   
                 $user_data = [
                         'name' => $data['name'],
                         'current_job_title' => $user_profile_data['current_job_title'],
                         'short_bio' => $user_profile_data['short_bio'],
                         'linkedin' => $user_profile_data['linkedin'],
                         'profile_image_src' => $user_profile_data['profile_image'],
+                        'company_profile_count' => count($company_profiles),
                 ];
-                ActivityLog::addToLog(__('activitylogs.profile_updated'),'profile update');
-                return $this->sendResponseWithUserData($redirect_page,__('messages.user_profile_updated'),$user_data);
-                 
+                ActivityLog::addToLog(__('activitylogs.profile_updated'),'company profile update');
+                $response = ['status' => $this->successStatus,'message' => __('messages.user_profile_updated'),'responseCode'=> $this->successResponse];
+                $respones_array = [
+                    'success' => $response,
+                    'user' => $user_data,
+                    'companies' => json_decode(json_encode($company_profiles), true),
+                ];
+                return $this->sendResponseWithData($redirect_page,__('messages.user_profile_updated'),$respones_array);                 
             }catch (\Exception $e) {
                 $message = $e->getMessage();
                 return $this->sendErrorResponse($redirect_page,$message);

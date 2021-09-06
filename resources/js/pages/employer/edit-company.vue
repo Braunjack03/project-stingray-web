@@ -43,15 +43,15 @@
                     <div v-if="errors.mission" class="mt-2 error">{{ errors.mission }}</div>
                     
                     <label>Company Industry (select up to 3) * </label>
-                    <ul>
-                      <li v-for="n in 9">
+                    <ul class="industries-list">
+                      <li v-for="(item, index) in industries" :key="index" >
                         <label>
                           <input
                             type="checkbox"
-                            v-model="industry"
-                            :value="n"
-                            :disabled="industry.length > 2 && industry.indexOf(n) === -1" 
-                            number> Option {{ n }} 
+                            v-model="user.industry_ids"
+                            :value="index"
+                            :disabled="user.industry_ids.length > 2 && user.industry_ids.indexOf(index) === -1" 
+                            number> {{ item }} 
                         </label>
                       </li>
                     </ul>
@@ -78,7 +78,7 @@
                         cols="12"
                       >
                         <v-select
-                          v-model='user.state'
+                          v-model="user.state_abbr"
                           :items="items"
                           label="State"
                         ></v-select>
@@ -128,9 +128,9 @@
       errors : Object,  
       user: Object,
       success: Object,
-      
+      industries: Object,
     },
-     data: () => ({
+     data: (user) => ({
         industry:[],
         items: ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming'],
         message: '',
@@ -139,6 +139,7 @@
             profile_image: '',
             name: '',
             profile_image_removed: 0,
+            state_abbr: '',
         },
     }),
      methods: {
@@ -147,21 +148,20 @@
         return true;
       },
       submit() {
-            this.user.industry = this.industry;
             this.$inertia.post('/employer/udpate-company', this.user );
        },
       removeImage(){
-          this.user.profile_image_src = '';
-          this.user.profile_image_removed = 1;
+          this.user.logo_image_src = '';
+          this.user.logo_image_removed = 1;
       }, 
       onFileChange(e) {
         const reader = new FileReader();
-         const files = this.user.profile_image
+         const files = this.user.logo_image_url
          console.log(files);
           if (files) {
             const reader = new FileReader
             reader.onload = e => {
-              this.user.profile_image_src = e.target.result
+              this.user.logo_image_src = e.target.result
             }
             reader.readAsDataURL(files)
           }

@@ -14,5 +14,6 @@ return [
     'password_reset_link' => 'We have e-mailed your password reset link!',
     'invalid_token' => 'Invalid token!',
     'unauthorized' => 'Unauthorized!',
-    'user_profile_updated' => 'Profile Updated Successfully!'
+    'user_profile_updated' => 'Profile Updated Successfully!',
+    'company_profile_created' => 'Company profile created successfully!'
  ];

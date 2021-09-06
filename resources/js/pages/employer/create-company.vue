@@ -15,6 +15,7 @@
                     <v-file-input v-model="user.logo_image_url"  ref="fileInput" @change="onFileChange" show-size counter outlined dense></v-file-input>
                     
                     <v-icon v-if="user.logo_image_src" color="gray darken-2" class="ml-auto" @click="removeImage()"> mdi-close-circle</v-icon>
+                    
                     <v-img
                       :src="user.logo_image_src"
                       max-height="150"
@@ -43,15 +44,15 @@
                     <div v-if="errors.mission" class="mt-2 error">{{ errors.mission }}</div>
                     
                     <label>Company Industry (select up to 3) * </label>
-                    <ul>
-                      <li v-for="n in 9">
+                    <ul class="industries-list">
+                      <li v-for="(item, index) in industries" :key="index">
                         <label>
                           <input
                             type="checkbox"
                             v-model="industry"
-                            :value="n"
-                            :disabled="industry.length > 2 && industry.indexOf(n) === -1" 
-                            number> Option {{ n }} 
+                            :value="index"
+                            :disabled="industry.length > 2 && industry.indexOf(index) === -1" 
+                            number> {{ item }} 
                         </label>
                       </li>
                     </ul>
@@ -128,7 +129,7 @@
       errors : Object,  
       user: Object,
       success: Object,
-      
+      industries: Object
     },
      data: () => ({
         industry:[],
@@ -138,7 +139,7 @@
         form: {
             profile_image: '',
             name: '',
-            profile_image_removed: 0,
+            logo_image_removed: 0,
         },
     }),
      methods: {
@@ -151,17 +152,17 @@
             this.$inertia.post('/employer/create-company', this.user );
        },
       removeImage(){
-          this.user.profile_image_src = '';
-          this.user.profile_image_removed = 1;
+          this.user.logo_image_src = '';
+          this.user.logo_image_url = '';
+          this.user.logo_image_removed = 1;
       }, 
       onFileChange(e) {
         const reader = new FileReader();
-         const files = this.user.profile_image
-         console.log(files);
+         const files = this.user.logo_image_url
           if (files) {
-            const reader = new FileReader
+            const reader = new FileReader;
             reader.onload = e => {
-              this.user.profile_image_src = e.target.result
+              this.user.logo_image_src = e.target.result
             }
             reader.readAsDataURL(files)
           }

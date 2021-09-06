@@ -17,4 +17,5 @@ class CompanyProfile extends Model
     {
             return $this->hasMany(JobPost::class);
     }
+
 }

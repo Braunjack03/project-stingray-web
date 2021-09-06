@@ -54,11 +54,6 @@ class AuthController extends Controller
             try{
                     if(Auth::attempt($credentials)) {
                         
-                        if(Auth::user()->is_email_verified == 0)
-                        {
-                            Auth::logout();
-                            return $this->sendErrorResponse($redirect_page,__('messages.not_verified'));
-                        }
                         $request->session()->regenerate();
 
                         ActivityLog::addToLog(__('activitylogs.loggedin_successfull'),'login');

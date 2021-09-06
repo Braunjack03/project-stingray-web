@@ -54,7 +54,8 @@
                     </li>
                   </ul>
                   <br/>
-                  <v-btn href="/employer/create-company" color="" class="mr-4" >Create New Company Profile</v-btn>
+
+                  <v-btn v-if="(user.company_profile_count < 3)"href="/employer/create-company" color="" class="mr-4" >Create New Company Profile</v-btn>
             </v-card> 
        
         </v-container>

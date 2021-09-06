@@ -31,6 +31,7 @@ class HomeController extends Controller
                 'user' => [
                     'email' => $user->email,
                     'name' => $user->email,
+                    'is_email_verified' => $user->is_email_verified
                 ],
             ]);
         }catch (\Exception $e) {
