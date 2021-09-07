@@ -32,6 +32,11 @@ class AppServiceProvider extends ServiceProvider
                     ? Session::get('errors')->getBag('default')->getMessages()
                     : (object) [];
             },
+            'success' => function () {
+                return Session::get('success')
+                    ? Session::get('success')->getBag('default')->getMessages()
+                    : (object) [];
+            },
             'user' => function () {
                 return Session::get('user')
                     ? Session::get('user')->getBag('default')->getMessages()

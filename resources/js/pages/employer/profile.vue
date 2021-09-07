@@ -8,12 +8,15 @@
             <h2>Your Settings  </h2>   
             <h3>Profile</h3>
             <br/>
-                <div v-if="errors.message" class="mt-2 error">{{ errors.message }}</div>
+                <div v-if="$page.props.flash.message" class="mt-2 success">
+                {{ $page.props.flash.message }}
+              </div>
+                <div v-if="errors" class="mt-2 error">{{ errors.message }}</div>
                 <div v-if="success" class="mt-2 success">{{ success.message }}</div>
                 <v-form ref="form" v-model="valid" lazy-validations >
     
                     <label>Profile Image (Recommended 500px x 500px) </label>
-                    <v-file-input v-model="user.profile_image"  ref="fileInput" @change="onFileChange" show-size counter outlined dense></v-file-input>
+                    <v-file-input accept="image/*" v-model="user.profile_image"  ref="fileInput" @change="onFileChange" show-size counter outlined dense></v-file-input>
                     
                     <v-icon v-if="user.profile_image_src" color="gray darken-2" class="ml-auto" @click="removeImage()"> mdi-close-circle</v-icon>
                     <v-img
@@ -26,11 +29,11 @@
                     
                     <div v-if="errors.email" class="mt-2 error">{{ errors.email }}</div>
                      <br/><br/>   
-                    <label>Name</label>
+                    <label>Name *</label>
                     <v-text-field v-model="user.name" required></v-text-field>
                     <div v-if="errors.name" class="mt-2 error">{{ errors.name }}</div>
 
-                    <label>Current Job Title</label>
+                    <label>Current Job Title *</label>
                     <v-text-field v-model="user.current_job_title" required></v-text-field>
                     <div v-if="errors.current_job_title" class="mt-2 error">{{ errors.current_job_title }}</div>
                     
@@ -50,12 +53,12 @@
                  <h3>Your Companies</h3>  
                     <ul id="example-1">
                     <li v-for="company in companies" :key="company.id">
-                      {{ company.name }} <v-btn :href="'/employer/edit-company?id='+company.uuid" color="text" class="mr-4" @click="edit()" >Edit</v-btn>
+                      {{ company.name }} <Link :href="'/employer/edit-company?id='+company.uuid" color="text" class="mr-4" @click="edit()" >Edit</Link>
                     </li>
                   </ul>
                   <br/>
 
-                  <v-btn v-if="(user.company_profile_count < 3)"href="/employer/create-company" color="" class="mr-4" >Create New Company Profile</v-btn>
+                  <Link v-if="(user.company_profile_count < 3)" href="/employer/create-company" color="text" class="mr-4" >Create New Company Profile</Link>
             </v-card> 
        
         </v-container>
@@ -64,11 +67,12 @@
 </template>
 <script>
   import Layout from './Layout'
-  import { Head } from '@inertiajs/inertia-vue'
+  import { Head,Link } from '@inertiajs/inertia-vue'
   export default {
     components: {
       Head,
       Layout,
+      Link
     },
     props: {
       errors : Object,  
@@ -100,16 +104,7 @@
           this.user.profile_image_removed = 1;
       }, 
       onFileChange(e) {
-        const reader = new FileReader();
-         const files = this.user.profile_image
-         console.log(files);
-          if (files) {
-            const reader = new FileReader
-            reader.onload = e => {
-              this.user.profile_image_src = e.target.result
-            }
-            reader.readAsDataURL(files)
-          }
+          this.user.profile_image_src = URL.createObjectURL(this.user.profile_image);
         }
     },
   }

@@ -21,13 +21,17 @@
                     <v-btn :disabled="form.processing" color="success" class="mr-4"  @click="submit()">Login</v-btn>
                 </v-form>
                  <br/>
-                 <v-btn href="/register" text >Don't Have an Account? Register Here </v-btn>
+                 <Link href="/register" text >Don't Have an Account? Register Here </Link>
             </v-card>           
         </v-container>
     </v-app>
 </template>   
 <script>
+import { Link } from '@inertiajs/inertia-vue'
   export default {
+    components: {
+      Link,
+    },
      props: {
         errors: Object,
         success: Object,

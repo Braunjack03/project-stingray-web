@@ -11,11 +11,11 @@
           color="grey darken-1"
           size="32"
         ></v-avatar>
-        <v-btn href="/dashboard" text > Dashboard </v-btn>
+        <Link href="/dashboard" text class="mr-10"> Dashboard </Link>
 
-        <v-btn href="/profile" text > Profile </v-btn>
+        <Link href="/profile" text class="mr-10"> Profile </Link>
 
-        <v-btn href="/logout" text > Logout </v-btn>
+        <Link href="/logout" text class="mr-10"> Logout </Link>
         <v-spacer></v-spacer>
        
       </v-container>
@@ -40,7 +40,12 @@
 </template>
 
 <script>
+import { Link } from '@inertiajs/inertia-vue'
+
   export default {
+    components: {
+      Link,
+    },
      props: { 
       user: Object,
     },

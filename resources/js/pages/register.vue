@@ -30,14 +30,18 @@
                     <v-btn :disabled="!valid" color="success" class="mr-4" @click="submit()" >Create Acount</v-btn>
                 </v-form>
                 <br/>
-                 <v-btn href="/login" text >Already Have Account? Login </v-btn>
+                 <Link href="/login" text >Already Have Account? Login </Link>
             </v-card> 
        
         </v-container>
     </v-app>
 </template>   
 <script>
+import { Link } from '@inertiajs/inertia-vue'
   export default {
+    components: {
+      Link,
+    },
     props: {
         errors: Object,
     },

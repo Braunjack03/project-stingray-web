@@ -11,11 +11,12 @@
           color="grey darken-1"
           size="32"
         ></v-avatar>
-        <v-btn href="/employer/dashboard" text > Dashboard</v-btn>
 
-        <v-btn href="/employer/profile" text > Profile </v-btn>
+        <Link href="/employer/dashboard" class="mr-10">Dashboard</Link>
 
-        <v-btn href="/logout" text > Logout </v-btn>
+        <Link href="/employer/profile" class="mr-10">Profile</Link>
+
+        <Link href="/logout" class="mr-10">Logout</Link>
         <v-spacer></v-spacer>
        
       </v-container>
@@ -29,6 +30,7 @@
               min-height="70vh"
               rounded="lg"
             >
+            
               <slot />
               <!--  -->
             </v-sheet>
@@ -40,7 +42,12 @@
 </template>
 
 <script>
+import { Link } from '@inertiajs/inertia-vue'
+
   export default {
+    components: {
+      Link,
+    },
      props: { 
       user: Object,
     },

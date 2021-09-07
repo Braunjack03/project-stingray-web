@@ -15,5 +15,6 @@ return [
     'invalid_token' => 'Invalid token!',
     'unauthorized' => 'Unauthorized!',
     'user_profile_updated' => 'Profile Updated Successfully!',
-    'company_profile_created' => 'Company profile created successfully!'
+    'company_profile_created' => 'Company profile created successfully!',
+    'company_profile_updated' => 'Company profile updated successfully!',
  ];

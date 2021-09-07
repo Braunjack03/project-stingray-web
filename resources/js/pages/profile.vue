@@ -13,7 +13,7 @@
                 <v-form ref="form" v-model="valid" lazy-validations >
     
                     <label>Profile Image (Recommended 500px x 500px) </label>
-                    <v-file-input v-model="user.profile_image"  ref="fileInput" @change="onFileChange" show-size counter outlined dense></v-file-input>
+                    <v-file-input v-model="user.profile_image" accept="image/*" ref="fileInput" @change="onFileChange" show-size counter outlined dense></v-file-input>
                     
                     <v-icon v-if="user.profile_image_src" color="gray darken-2" class="ml-auto" @click="removeImage()"> mdi-close-circle</v-icon>
                     <v-img
@@ -26,11 +26,11 @@
                     
                     <div v-if="errors.email" class="mt-2 error">{{ errors.email }}</div>
                      <br/><br/>   
-                    <label>Name</label>
+                    <label>Name *</label>
                     <v-text-field v-model="user.name" required></v-text-field>
                     <div v-if="errors.name" class="mt-2 error">{{ errors.name }}</div>
 
-                    <label>Current Job Title</label>
+                    <label>Current Job Title *</label>
                     <v-text-field v-model="user.current_job_title" required></v-text-field>
                     <div v-if="errors.current_job_title" class="mt-2 error">{{ errors.current_job_title }}</div>
                     
@@ -120,16 +120,7 @@
           this.user.current_resume_removed = 1;
       }, 
       onFileChange(e) {
-        const reader = new FileReader();
-         const files = this.user.profile_image
-         console.log(files);
-          if (files) {
-            const reader = new FileReader
-            reader.onload = e => {
-              this.user.profile_image_src = e.target.result
-            }
-            reader.readAsDataURL(files)
-          }
+        this.user.profile_image_src = URL.createObjectURL(this.user.profile_image);
         }
     },
   }

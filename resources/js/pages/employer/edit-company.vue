@@ -12,7 +12,7 @@
                 <v-form ref="form" v-model="valid" lazy-validations >
     
                     <label>Company Logo (Recommended 500px x 500px) </label>
-                    <v-file-input v-model="user.logo_image_url"  ref="fileInput" @change="onFileChange" show-size counter outlined dense></v-file-input>
+                    <v-file-input :rules="rules" v-model="user.logo_image_url" accept="image/*" @change="onFileChange" show-size counter outlined dense></v-file-input>
                     
                     <v-icon v-if="user.logo_image_src" color="gray darken-2" class="ml-auto" @click="removeImage()"> mdi-close-circle</v-icon>
                     <v-img
@@ -131,6 +131,9 @@
       industries: Object,
     },
      data: (user) => ({
+        rules: [
+          value => !value || value.size < 1000000 || 'Company logo size should be less than 1 MB!',
+        ],
         industry:[],
         items: ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming'],
         message: '',
@@ -149,22 +152,14 @@
       },
       submit() {
             this.$inertia.post('/employer/udpate-company', this.user );
+            this.$refs.user.resetValidation();
        },
       removeImage(){
           this.user.logo_image_src = '';
           this.user.logo_image_removed = 1;
       }, 
       onFileChange(e) {
-        const reader = new FileReader();
-         const files = this.user.logo_image_url
-         console.log(files);
-          if (files) {
-            const reader = new FileReader
-            reader.onload = e => {
-              this.user.logo_image_src = e.target.result
-            }
-            reader.readAsDataURL(files)
-          }
+          this.user.logo_image_src = URL.createObjectURL(this.user.logo_image_url);
         }
     },
   }

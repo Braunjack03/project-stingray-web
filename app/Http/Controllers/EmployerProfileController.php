@@ -51,6 +51,7 @@ class EmployerProfileController extends Controller
             }else{
                 $data = [
                     'name' => $user->name,
+                    'company_profile_count' => count($company_profiles),
                 ];
             }
             ActivityLog::addToLog(__('activitylogs.profile_fetched'),'profile fetch');
@@ -61,6 +62,7 @@ class EmployerProfileController extends Controller
                 'user' => $data,
                 'companies' => json_decode(json_encode($company_profiles), true),
             ];
+            
             return $this->sendResponseWithData('employer/profile','',$respones_array);
 
         }catch (\Exception $e) {
@@ -87,15 +89,17 @@ class EmployerProfileController extends Controller
         $redirect_page = $request->path();
         
         $user_profile_data =  EmployerProfile::where('user_id',$user_id)->first();  
-        
+        $company_profiles = CompanyProfile::where('user_id',$user_id)->get()->toArray();
+
         $data = [
-            "name"=>$requested_data['name'],
+            "name"=> isset($requested_data['name']) ? $requested_data['name'] : '',
             'current_job_title' => isset($requested_data['current_job_title']) ? $requested_data['current_job_title'] : '',
             'short_bio' => isset($requested_data['short_bio']) ? $requested_data['short_bio'] : '',
             'linkedin' => isset($requested_data['linkedin']) ? $requested_data['linkedin'] : '',
             'profile_image' => isset($requested_data['profile_image']) ? $requested_data['profile_image'] : '',
             'profile_image_src' => isset($user_profile_data->profile_image) ? $user_profile_data->profile_image : '',
             'profile_image_removed' => isset($requested_data['profile_image_removed']) ? $requested_data['profile_image_removed'] : '',
+            'company_profile_count' => count($company_profiles),    
         ];
 
         $messages = [
@@ -103,11 +107,14 @@ class EmployerProfileController extends Controller
         ]; 
 
         $validator = Validator::make($data, [
+            'name' => 'required',
+            'current_job_title' => 'required',
             'profile_image' => 'nullable|mimes:jpeg,png,jpg,gif|max:1000',
         ],$messages);
         
         if ($validator->fails()){
-            return $this->sendValidationErrorsWithData($redirect_page,$validator->errors(),$data);
+            $data = ['user'=>$data,'companies'=>$company_profiles];
+            return $this->sendCustomProfileValidationErrorsWithData($redirect_page,$validator->errors(),$data);
         }else{
             try{
 
@@ -159,7 +166,7 @@ class EmployerProfileController extends Controller
                         'profile_image_src' => $user_profile_data['profile_image'],
                         'company_profile_count' => count($company_profiles),
                 ];
-                ActivityLog::addToLog(__('activitylogs.profile_updated'),'company profile update');
+                ActivityLog::addToLog(__('activitylogs.employer_profile_updated'),'employer profile update');
                 $response = ['status' => $this->successStatus,'message' => __('messages.user_profile_updated'),'responseCode'=> $this->successResponse];
                 $respones_array = [
                     'success' => $response,

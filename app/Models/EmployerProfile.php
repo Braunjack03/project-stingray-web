@@ -13,7 +13,7 @@ class EmployerProfile extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id','profie_image','current_job_title', 'short_bio', 'linkedin',
+        'user_id','profile_image','current_job_title', 'short_bio', 'linkedin',
     ];
 
     public function getProfileImageAttribute($value)
