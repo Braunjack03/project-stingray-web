@@ -4,9 +4,14 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\JobPost;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\EmployerController;
+use App\Http\Controllers\JobSeekerProfileController;
+use App\Http\Controllers\EmployerProfileController;
+use App\Http\Controllers\CompanyProfileController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -65,8 +70,30 @@ Route::get('/', function() {
 });
 
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth','jobseeker'])->group(function () {
 
     Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
+
+    Route::get('profile', [JobSeekerProfileController::class, 'index'])->name('profile');
+
+    Route::post('profile', [JobSeekerProfileController::class, 'updateProfile'])->name('profile.update');
+
+});
+
+Route::group(['prefix' => 'employer', 'middleware' => ['auth','employer']], function() {
+
+    Route::get('dashboard', [EmployerController::class, 'index'])->name('dashboard');
+
+    Route::get('profile', [EmployerProfileController::class, 'index'])->name('employer.profile');
+
+    Route::post('profile', [EmployerProfileController::class, 'updateProfile'])->name('profile.update');
+
+    Route::get('create-company',[CompanyProfileController::class,'create'])->name('company.create');
+
+    Route::post('create-company',[CompanyProfileController::class,'store'])->name('company.store');
+
+    Route::get('edit-company',[CompanyProfileController::class,'edit'])->name('edit.company');
+
+    Route::post('udpate-company',[CompanyProfileController::class,'update'])->name('update.company');
 
 });

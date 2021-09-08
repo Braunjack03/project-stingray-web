@@ -42,29 +42,45 @@ class AuthController extends Controller
         $data = $request->all();
         $redirect_page = $request->path();
         $credentials = ["email"=>$data['email'],'password'=>$data['password']];
-
+       
         $validator = Validator::make($credentials, [
             'email' => 'required|email',
             'password' => 'required|min:8',
         ]);
-
+          
         if ($validator->fails()){
             return $this->sendValidationErrors($redirect_page,$validator->errors());
         }else{
             try{
                     if(Auth::attempt($credentials)) {
+                        
                         $request->session()->regenerate();
 
                         ActivityLog::addToLog(__('activitylogs.loggedin_successfull'),'login');
                         
-                        return redirect()->intended('/dashboard');
-                    }
-                    $user = User::where('email',$credentials['email'])->first();
-                    ActivityLog::addUnAuthorizeLogs(__('activitylogs.loggedin_unsuccessfull'),$user->id,'login');
+                        
+                        if(Auth::user()->role == 1)
+                        {
+                            
+                            return redirect()->intended('/employer/dashboard');
+                        }else{
+                            return redirect()->intended('/dashboard');
+                        }
+                    }else{
+                        $user = User::where('email',$credentials['email'])->first();
+                        if($user)
+                        {
+                            ActivityLog::addUnAuthorizeLogs(__('activitylogs.loggedin_unsuccessfull').'by Email id: '.$credentials['email'],$user->id,'login');
 
-                    return back()->withErrors([
-                        'message' => __('messages.incorrect_password'),
-                    ]);
+                        }else{
+                            ActivityLog::addUnAuthorizeLogs(__('activitylogs.loggedin_unsuccessfull').'by Email id: '.$credentials['email'],0,'login');
+
+                        }
+
+                        return back()->withErrors([
+                            'message' => __('messages.incorrect_password'),
+                        ]);
+                    }
 
             }catch (\Exception $e) {
                 $message = $e->getMessage();
@@ -115,10 +131,10 @@ class AuthController extends Controller
                 }else{
                     try{
                         $user = User::create([
+                            'uuid' => Str::uuid(),
                             'email' => $data['email'],
                             'role' => $data['user_type'],
                             'password' => Hash::make($data['password']),
-                            'ip_address' => $request->ip(),
                         ]);
 
                         
@@ -181,7 +197,7 @@ class AuthController extends Controller
                 if(!$user->is_email_verified) {
                     $verifyUser->user->is_email_verified = 1;
                     $verifyUser->user->save();
-                    $message = __('messages.not_identified');
+                    $message = __('messages.email_verified');
                 } else {
                     $message = __('messages.email_already_verified');
                 }

@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use Inertia\Inertia;
+use App\Models\ActivityLog;
 
-class HomeController extends Controller
+class EmployerController extends Controller
 {    
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','employer']);
     }
     /**
      * Dashboard
@@ -27,7 +28,7 @@ class HomeController extends Controller
 
         try{
             $user = Auth::user();
-            return Inertia::render('dashboard', [
+            return Inertia::render('employer/dashboard', [
                 'user' => [
                     'email' => $user->email,
                     'name' => $user->email,

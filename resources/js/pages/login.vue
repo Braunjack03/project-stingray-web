@@ -7,6 +7,7 @@
             <br/>
                 <v-form ref="form" >
                     <div v-if="errors.message" class="mt-2 error">{{ errors.message }}</div>
+                    <div v-if="success" class="mt-2 success">{{ success.message }}</div>
                     <label>Email address</label>
                     <v-text-field v-model="form.email" :rules="form.emailRules" required></v-text-field>
                     <div v-if="errors.email" class="mt-2 error">{{ errors.email }}</div>
@@ -19,14 +20,21 @@
                      <a href="/forgot-password" replace>Forgot Password?</a><br/><br/>
                     <v-btn :disabled="form.processing" color="success" class="mr-4"  @click="submit()">Login</v-btn>
                 </v-form>
+                 <br/>
+                 <Link href="/register" text >Don't Have an Account? Register Here </Link>
             </v-card>           
         </v-container>
     </v-app>
 </template>   
 <script>
+import { Link } from '@inertiajs/inertia-vue'
   export default {
+    components: {
+      Link,
+    },
      props: {
         errors: Object,
+        success: Object,
     },
   data() {
     return {

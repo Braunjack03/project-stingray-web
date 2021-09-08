@@ -11,11 +11,12 @@
           color="grey darken-1"
           size="32"
         ></v-avatar>
-        <Link href="/dashboard" text class="mr-10"> Dashboard </Link>
 
-        <Link href="/profile" text class="mr-10"> Profile </Link>
+        <Link href="/employer/dashboard" class="mr-10">Dashboard</Link>
 
-        <Link href="/logout" text class="mr-10"> Logout </Link>
+        <Link href="/employer/profile" class="mr-10">Profile</Link>
+
+        <Link href="/logout" class="mr-10">Logout</Link>
         <v-spacer></v-spacer>
        
       </v-container>
@@ -29,6 +30,7 @@
               min-height="70vh"
               rounded="lg"
             >
+            
               <slot />
               <!--  -->
             </v-sheet>
