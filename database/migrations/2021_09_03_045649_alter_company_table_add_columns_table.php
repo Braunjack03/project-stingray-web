@@ -17,7 +17,7 @@ class AlterCompanyTableAddColumnsTable extends Migration
             $table->unsignedBigInteger('user_id')->after('id');
             $table->uuid('uuid')->unique()->after('user_id');
             $table->String('industry_ids')->nullable()->after('mission');
-            $table->String('description')->nullable()->change();
+            $table->longText('description')->nullable()->change();
             $table->String('lat')->nullable()->change();
             $table->String('long')->nullable()->change();
             $table->String('profile_title')->nullable()->change();
