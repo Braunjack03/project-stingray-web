@@ -97,7 +97,7 @@ class CompanyProfileController extends Controller
                 $image_name = '';
                 if ($image = $request->file('logo_image_url')) {
                     $image_name = time() . '_' . $image->getClientOriginalName();
-                    $profile_image = Storage::disk('s3')->putFileAs('company/'.$user_uuid, $image,$image_name);
+                    $profile_image = Storage::disk('s3Company')->putFileAs('company/'.$user_uuid, $image,$image_name);
                 }
                 
                 $profile_data = [
@@ -151,7 +151,7 @@ class CompanyProfileController extends Controller
             if($user)
             {
                 $user->industry_ids = explode(",",$user->industry_ids);
-                $user->logo_image_src = ($user->logo_image_url) ? url('https://'.env('AWS_BUCKET').'.s3.'.env('AWS_DEFAULT_REGION').'.amazonaws.com/company/'.$request->all()['id'].'/'.$user->logo_image_url) : '';
+                $user->logo_image_src = ($user->logo_image_url) ? getBucketImageUrl($request->all()['id'],$user->logo_image_url,'company') : '';
 
             }
             $industries = CompanyType::pluck('name','id');
@@ -217,7 +217,7 @@ class CompanyProfileController extends Controller
                 $image_name = '';
                 if ($image = $request->file('logo_image_url')) {
                     $image_name = time() . '_' . $image->getClientOriginalName();
-                    $profile_image = Storage::disk('s3')->putFileAs('company/'.$user_uuid, $image,$image_name);
+                    $profile_image = Storage::disk('s3Company')->putFileAs('company/'.$user_uuid, $image,$image_name);
                 }
                 $profile_data = [
                     "name"=>$data['name'],

@@ -19,7 +19,7 @@ class EmployerProfile extends Model
     public function getProfileImageAttribute($value)
     {
         if($value)
-        return url('https://'.env('AWS_BUCKET').'.s3.'.env('AWS_DEFAULT_REGION').'.amazonaws.com/employer/'.Auth::user()->uuid.'/'.$value);
+        return getBucketImageUrl(Auth::user()->uuid,$value,'employer');
     }
 
 

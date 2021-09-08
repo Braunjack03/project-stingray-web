@@ -130,7 +130,7 @@ class EmployerProfileController extends Controller
                     $current_resume = '';
                     if ($image = $request->file('profile_image')) {
                         $image_name = time() . '_' . $image->getClientOriginalName();
-                            $profile_image = Storage::disk('s3')->putFileAs('employer/'.$user_uuid, $image,$image_name);
+                            $profile_image = Storage::disk('s3Company')->putFileAs('employer/'.$user_uuid, $image,$image_name);
                     }
 
                     $user_profile = EmployerProfile::where('user_id',$user_id);
