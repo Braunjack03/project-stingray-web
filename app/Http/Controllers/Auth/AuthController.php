@@ -81,8 +81,6 @@ class AuthController extends Controller
                             'message' => __('messages.incorrect_password'),
                         ]);
                     }
-                    
-                   
 
             }catch (\Exception $e) {
                 $message = $e->getMessage();
