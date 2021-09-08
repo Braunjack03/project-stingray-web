@@ -21,7 +21,7 @@ class AlterCompanyTableAddColumnsTable extends Migration
             $table->String('lat')->nullable()->change();
             $table->String('long')->nullable()->change();
             $table->String('profile_title')->nullable()->change();
-            $table->foreign('user_id')->references('id')->on('users');
+            #$table->foreign('user_id')->references('id')->on('users');
         });
     }
 
