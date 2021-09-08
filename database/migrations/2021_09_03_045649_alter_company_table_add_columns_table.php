@@ -14,7 +14,7 @@ class AlterCompanyTableAddColumnsTable extends Migration
     public function up()
     {
         Schema::table('company_profiles', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id')->after('id');
+            #$table->unsignedBigInteger('user_id')->after('id');
             $table->uuid('uuid')->unique()->after('user_id');
             $table->String('industry_ids')->nullable()->after('mission');
             $table->longText('description')->nullable()->change();
