@@ -16,6 +16,8 @@
 
         <Link href="/employer/profile" class="mr-10">Profile</Link>
 
+        <Link href="/employer/jobs" class="mr-10">Jobs</Link>
+
         <Link href="/logout" class="mr-10">Logout</Link>
         <v-spacer></v-spacer>
        
