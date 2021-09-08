@@ -30,11 +30,11 @@ Note: All commands are ran from the root of the project.
     * ```npm run dev```
 5. Serve Laravel Project
     * ```php artisan serve```
-6. Load default seed data
+6. Load default seed data for the various categories and types
     * ```php artisan db:seed --class=JobCatSeeder --force```
     * ```php artisan db:seed --class=LocationSeeder --force```
-    * ```php artisan db:seed --class=CompanyType --force```
-7. Load test seed data (Optional)
+    * ```php artisan db:seed --class=CompanyTypeSeeder --force```
+7. Load test data for job posts, companies, etc(Optional)
     * ```php artisan db:seed```
 
 ### Database Schema
