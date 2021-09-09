@@ -17,4 +17,5 @@ return [
     'user_profile_updated' => 'Profile Updated Successfully!',
     'company_profile_created' => 'Company profile created successfully!',
     'company_profile_updated' => 'Company profile updated successfully!',
+    'job_delete' => 'Job Deleted Successfully!'
  ];

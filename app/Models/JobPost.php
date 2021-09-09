@@ -9,6 +9,11 @@ class JobPost extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name','user_id','uuid','apply_url', 'content','job_cat_id','location_id',
+    ];
+
+
     public const EXPLEVELS =  [
         1 => 'Entry Level',
         2 => 'Mid Level',

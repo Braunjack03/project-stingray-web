@@ -1,11 +1,11 @@
 <template>
 <Layout>
-    <Head title="Create Job" />
+    <Head title="Edit Job" />
     <v-app app>
         <v-container>
             <v-card class="mx-auto px-12 py-8" elevation="2">
 
-            <h2>Post a new Job  </h2> 
+            <h2>Update Job  </h2> 
             <h3>Job Information</h3>
             <br/>
                 <div v-if="errors" class="mt-2 error">{{ errors.message }}</div>
@@ -19,9 +19,8 @@
                     <label>Location*</label>
                       <v-checkbox
                         v-model="user.remotetype_id"
-                        value="1"
                         label= "Remote"
-                      ></v-checkbox>
+                      ></v-checkbox> 
                      <v-row >
                       <v-col
                         class="d-flex"
@@ -89,8 +88,9 @@
       job_categories: Array,
       locations : Array,
     },
-     data: () => ({
+     data: (user) => ({
         // declare extensions you want to use
+        remotetype_id: (user.remotetype_id ? true : false),
         extensions: [
           History,
           Blockquote,
@@ -129,7 +129,7 @@
         return true;
       },
       submit() {
-            this.$inertia.post('/employer/create-job', this.user );
+            this.$inertia.post('/employer/update-job', this.user );
             this.$refs.form.resetValidation();
        },
     },

@@ -15,7 +15,7 @@
                   
                     <ul v-if="showCreate === false" id="example-1">
                     <li v-for="company in job_posts" :key="company.id">
-                      {{ company.name }}
+                      {{ company.name }} <Link :href="'/employer/edit-job?id='+company.uuid"class="mr-4" @click="edit()" >Edit</Link>  <Link :href="'/employer/delete-job?id='+company.uuid"class="mr-4" v-on:click="deletejob(company.uuid)" >Delete</Link>
                     </li>
                   </ul>
                   <br/>
@@ -60,9 +60,13 @@
         this.$refs.form.validate();
         return true;
       },
-      submit() {
-            this.$inertia.post('/employer/profile', this.user );
-       },
+      deletejob(){
+        //if(confirm("Do you really want to delete?")){
+              this.$inertia.get('/employer/delete-job');
+              //return true;
+            //}
+            //return false;
+      },
       removeImage(){
           this.user.profile_image_src = '';
           this.user.profile_image_removed = 1;

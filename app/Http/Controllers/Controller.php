@@ -97,6 +97,23 @@ class Controller extends BaseController
         }    
     }
 
+    public function sendJobValidationErrorsWithData($route,$error,$data){
+        $error = json_decode($error);
+        if(!empty($error)){
+            foreach($error as $key => $value){
+                $response = ['status' => $this->errorStatus,'message' => implode("\n",$value),'responseCode'=> $this->errorResponse];
+                return Inertia::render($route, [
+                    'errors' => $response,
+                    'user' => $data['user'],
+                    'job_categories' => $data['job_categories'],
+                    'locations' => $data['locations'],
+                ]);
+                //return response()->json($response, $this->errorResponse);
+                break;
+            }
+        }    
+    }
+
     public function sendResponseWithUserData($route,$message,$data = []){
 
         $response = ['status' => $this->successStatus,'message' => $message,'user'=>$data,'responseCode'=> $this->successResponse];

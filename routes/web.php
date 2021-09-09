@@ -100,4 +100,12 @@ Route::group(['prefix' => 'employer', 'middleware' => ['auth','employer']], func
 
     Route::get('create-job', [JobPostController::class, 'create'])->name('jobs.create');
 
+    Route::post('create-job', [JobPostController::class, 'store'])->name('jobs.submit');
+
+    Route::get('edit-job', [JobPostController::class, 'edit'])->name('jobs.edit');
+
+    Route::post('update-job', [JobPostController::class, 'update'])->name('jobs.update');
+
+    Route::get('delete-job', [JobPostController::class, 'destroy'])->name('jobs.delete');
+
 });
