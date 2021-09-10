@@ -5,12 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+\Carbon\Carbon::setToStringFormat('d-m-Y');
+
+
 class JobPost extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name','user_id','uuid','apply_url', 'content','job_cat_id','location_id',
+        'name','user_id','company_profile_id','uuid','apply_url', 'content','job_cat_id','location_id',
+    ];
+
+    protected $casts = [
+        'created_at' => 'datetime:d/m/Y'
     ];
 
 
@@ -68,5 +75,10 @@ class JobPost extends Model
         if ($remotetypeID) {
             $this->attributes['remotetype_id'] = $remotetypeID;
         }
+    }
+
+    public function getJobLocation($value)
+    {
+        return self::REMOTETYPES[$value];
     }
 }

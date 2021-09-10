@@ -19,7 +19,7 @@
                     <label>Location*</label>
                       <v-checkbox
                         v-model="user.remotetype_id"
-                        value="1"
+                        value="1" 
                         label= "Remote"
                       ></v-checkbox>
                      <v-row >
@@ -88,6 +88,7 @@
       success: Object,
       job_categories: Array,
       locations : Array,
+      company_uuid: String,
     },
      data: () => ({
         // declare extensions you want to use
@@ -129,7 +130,7 @@
         return true;
       },
       submit() {
-            this.$inertia.post('/employer/create-job', this.user );
+            this.$inertia.post('/employer/create-job?c_id='+this.company_uuid, this.user );
             this.$refs.form.resetValidation();
        },
     },

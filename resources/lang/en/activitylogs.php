@@ -12,4 +12,7 @@ return [
     'company_profile_created' => 'Company profile created',
     'company_profile_updated' => 'Company profile updated',
     'employer_profile_updated' => 'Employer profile updated',
+    'job_created' => 'Job Post created',
+    'job_updated' => 'Job Post Updated',
+    'job_deleted' => 'Job Post Deleted',
  ];

@@ -1,14 +1,16 @@
 <template>
 <Layout>
-    <Head title="Employer Profile" />
+    <Head title="Edit Employer Profile" />
     <v-app app>
         <v-container>
             <v-card class="mx-auto px-12 py-8" elevation="2">
 
-            <h2>Company Profile  </h2> 
+            <h2>Company Profile </h2>
+            
             <br/>
-                <div v-if="errors.message" class="mt-2 error">{{ errors.message }}</div>
+            <div v-if="errors" class="mt-2 error">{{ errors.message }}</div>
                 <div v-if="success" class="mt-2 success">{{ success.message }}</div>
+                
                 <v-form ref="form" v-model="valid" lazy-validations >
     
                     <label>Company Logo (Recommended 500px x 500px) </label>
@@ -22,23 +24,23 @@
                     ></v-img>
                     
                      <br/><br/>   
-                    <label>Company Name</label>
+                    <label>Company Name *</label>
                     <v-text-field v-model="user.name" required></v-text-field>
                     <div v-if="errors.name" class="mt-2 error">{{ errors.name }}</div>
 
-                    <label>Number of local employees</label>
+                    <label>Number of local employees *</label>
                     <v-text-field v-model="user.local_employees" required></v-text-field>
                     <div v-if="errors.local_employees" class="mt-2 error">{{ errors.local_employees }}</div>
                     
-                    <label>Number of global employees</label>
+                    <label>Number of global employees *</label>
                     <v-text-field v-model="user.global_employees" required></v-text-field>
                     <div v-if="errors.global_employees" class="mt-2 error">{{ errors.global_employees }}</div>
 
-                    <label>Company Website</label>
+                    <label>Company Website *</label>
                     <v-text-field v-model="user.website_url" required></v-text-field>
                     <div v-if="errors.website_url" class="mt-2 error">{{ errors.website_url }}</div>
 
-                    <label>Company Mission</label>
+                    <label>Company Mission *</label>
                     <v-text-field v-model="user.mission" required></v-text-field>
                     <div v-if="errors.mission" class="mt-2 error">{{ errors.mission }}</div>
                     
@@ -130,7 +132,7 @@
       success: Object,
       industries: Object,
     },
-     data: (user) => ({
+     data: () => ({
         rules: [
           value => !value || value.size < 1000000 || 'Company logo size should be less than 1 MB!',
         ],
@@ -146,13 +148,8 @@
         },
     }),
      methods: {
-      validate () {
-        this.$refs.form.validate();
-        return true;
-      },
       submit() {
             this.$inertia.post('/employer/udpate-company', this.user );
-            this.$refs.user.resetValidation();
        },
       removeImage(){
           this.user.logo_image_src = '';

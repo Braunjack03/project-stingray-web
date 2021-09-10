@@ -52,7 +52,7 @@ class CompanyProfileController extends Controller
         }
 
         $data = $request->except(['logo_image_src']);
-       
+        
         $user_id = Auth::id();
         $redirect_page = $request->path();
         $company_profile_count = CompanyProfile::where('user_id',$user_id)->count();
@@ -176,13 +176,13 @@ class CompanyProfileController extends Controller
         }
 
         $requested_data = $request->except(['logo_image_src']);
-        
+    
         $user = CompanyProfile::where('uuid',$request->all()['uuid'])->first();
         $user_uuid = $request->all()['uuid'];
         $redirect_page = $request->path();
         
         $data = [
-            "name"=>$requested_data['name'],
+            "name"=>isset($requested_data['name']) ? $requested_data['name'] : '',
             'user_id' => Auth::id(),
             'local_employees' => isset($requested_data['local_employees']) ? $requested_data['local_employees'] : '',
             'global_employees' => isset($requested_data['global_employees']) ? $requested_data['global_employees'] : '',
@@ -203,9 +203,25 @@ class CompanyProfileController extends Controller
 
         $messages = [
             'max' => 'The company logo must not be greater than 1 MB',
+            'name.required' => 'Company name is required',
+            'street_addr_1.required' => 'Address field is required',
+            'street_addr_2.required' => 'Address 2 field is required',
+            'state_abbr.required' => 'The state address field is required.',
+            'postcode' => 'The zipcode field is required.'
         ]; 
-
+       
         $validator = Validator::make($data, [
+            'name' => 'required',
+            'local_employees' => 'required|numeric',
+            'global_employees' => 'required|numeric',
+            'website_url' => 'required',
+            'mission' => 'required',
+            'industry' => 'required',
+            'street_addr_1' => 'required',
+            'street_addr_2' => 'required',
+            'city' => 'required',
+            'state_abbr' => 'required',
+            'postcode' => 'required',
             'logo_image_url' => 'nullable|mimes:jpeg,png,jpg,gif|max:1000',
         ],$messages);
         
@@ -213,6 +229,7 @@ class CompanyProfileController extends Controller
             return $this->sendValidationErrorsWithData($redirect_page,$validator->errors(),$data);
         }else{
             try{
+              
                 $profile_image = '';
                 $image_name = '';
                 if ($image = $request->file('logo_image_url')) {
@@ -238,11 +255,10 @@ class CompanyProfileController extends Controller
                     'instagram_user' => $data['instagram_user'],
                     'logo_image_url' => $image_name,
                 ];
+              
                 if(!$request->file('logo_image_url') && (isset($data['logo_image_removed']) && $data['logo_image_removed'] == 0))
                 {
                     unset($profile_data['logo_image_url']);
-                }else{
-                    
                 }
                 $user = CompanyProfile::where('id',$requested_data['id'])->update($profile_data);
                 ActivityLog::addToLog(__('activitylogs.company_profile_updated'),'company updated');
