@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Redirect;
 use App\Models\ActivityLog;
+use Session;
 
 
 class CompanyProfileController extends Controller
@@ -180,15 +181,16 @@ class CompanyProfileController extends Controller
         $user = CompanyProfile::where('uuid',$request->all()['uuid'])->first();
         $user_uuid = $request->all()['uuid'];
         $redirect_page = $request->path();
-        
+       
         $data = [
             "name"=>isset($requested_data['name']) ? $requested_data['name'] : '',
             'user_id' => Auth::id(),
+            'uuid' => $user_uuid,
             'local_employees' => isset($requested_data['local_employees']) ? $requested_data['local_employees'] : '',
             'global_employees' => isset($requested_data['global_employees']) ? $requested_data['global_employees'] : '',
             'website_url' => isset($requested_data['website_url']) ? $requested_data['website_url'] : '',
             'mission' => isset($requested_data['mission']) ? $requested_data['mission'] : '',
-            'industry' => isset($requested_data['industry_ids']) ? implode(',',$requested_data['industry_ids']) : '',
+            'industry_ids' => (isset($requested_data['industry_ids']) && is_array($requested_data['industry_ids'])) ? implode(',',$requested_data['industry_ids']) : $requested_data['industry_ids'],
             'street_addr_1' => isset($requested_data['street_addr_1']) ? $requested_data['street_addr_1'] : '',
             'street_addr_2' => isset($requested_data['street_addr_2']) ? $requested_data['street_addr_2'] : '',
             'city' => isset($requested_data['city']) ? $requested_data['city'] : '',
@@ -200,6 +202,7 @@ class CompanyProfileController extends Controller
             'instagram_user' => isset($requested_data['instagram_user']) ? $requested_data['instagram_user'] : '',
             'logo_image_removed' => isset($requested_data['logo_image_removed']) ? $requested_data['logo_image_removed'] : '',
         ];
+        //$data = $request->all();
 
         $messages = [
             'max' => 'The company logo must not be greater than 1 MB',
@@ -216,26 +219,29 @@ class CompanyProfileController extends Controller
             'global_employees' => 'required|numeric',
             'website_url' => 'required',
             'mission' => 'required',
-            'industry' => 'required',
+            'industry_ids' => 'required',
             'street_addr_1' => 'required',
             'street_addr_2' => 'required',
             'city' => 'required',
             'state_abbr' => 'required',
             'postcode' => 'required',
-            'logo_image_url' => 'nullable|mimes:jpeg,png,jpg,gif|max:1000',
+            'logo_image_url' => 'mimes:jpeg,png,jpg,gif|max:1000|nullable'
         ],$messages);
         
         if ($validator->fails()){
-            return $this->sendValidationErrorsWithData($redirect_page,$validator->errors(),$data);
+            $industries = CompanyType::pluck('name','id');
+            $data['industry_ids'] = explode(",",$data['industry_ids']);
+            $user_data = ['user'=>$data,'industries'=>$industries];
+            return $this->sendCustomValidationErrorsWithData($redirect_page,$validator->errors(),$user_data);
         }else{
             try{
-              
                 $profile_image = '';
                 $image_name = '';
                 if ($image = $request->file('logo_image_url')) {
                     $image_name = time() . '_' . $image->getClientOriginalName();
                     $profile_image = Storage::disk('s3Company')->putFileAs('company/'.$user_uuid, $image,$image_name);
                 }
+                
                 $profile_data = [
                     "name"=>$data['name'],
                     'user_id' => $data['user_id'],
@@ -243,7 +249,7 @@ class CompanyProfileController extends Controller
                     'global_employees' => $data['global_employees'],
                     'website_url' => $data['website_url'],
                     'mission' => $data['mission'],
-                    'industry_ids' =>  ltrim($data['industry'], ','),
+                    'industry_ids' =>  ltrim($data['industry_ids'], ','),
                     'street_addr_1' => $data['street_addr_1'],
                     'street_addr_2' => $data['street_addr_2'],
                     'city' => $data['city'],
@@ -255,7 +261,6 @@ class CompanyProfileController extends Controller
                     'instagram_user' => $data['instagram_user'],
                     'logo_image_url' => $image_name,
                 ];
-              
                 if(!$request->file('logo_image_url') && (isset($data['logo_image_removed']) && $data['logo_image_removed'] == 0))
                 {
                     unset($profile_data['logo_image_url']);

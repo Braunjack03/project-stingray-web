@@ -36,18 +36,22 @@ class JobPostController extends Controller
 
         try{
             $user = Auth::user();
-
-            $job_posts = JobPost::where('user_id',$user->id)->orderBy('id','DESC')->get()->toArray();
+            $companies = CompanyProfile::where('uuid',$request->all()['c_id']);
+            $job_posts = JobPost::where('company_profile_id',$companies->first()['id'])->orderBy('id','DESC')->get()->toArray();
+            $job_posts_count = JobPost::where('company_profile_id',$companies->first()['id'])->count();
             $job_post_model = new JobPost();
             foreach($job_posts as $key => $job)
             {
                 $job_posts[$key]['location_id'] = $job_post_model->getJobLocation($job['remotetype_id']);
             }
             $companies = CompanyProfile::where('uuid',$request->all()['c_id']);
+            $job_post_counts = JobPost::where('company_profile_id',$companies->first()['id'])->count();
+            
             $response = ['status' => $this->successStatus,'message' => '','responseCode'=> $this->successResponse];
             $respones_array = [
                 'success' => $response,
                 'companies_count' => $companies->count(),
+                'job_posts_count' => $job_posts_count,
                 'company_details' => $companies->first(),
                 'job_posts' => json_decode(json_encode($job_posts), true),
             ];
@@ -76,8 +80,9 @@ class JobPostController extends Controller
             $user = Auth::user();
             $job_categories = JobCat::get();
             $locations = Location::get();
-           
+            
             $uuid = $request->all()['c_id'];
+       
             return Inertia::render('employer/create-job',['job_categories'=>$job_categories,'locations'=>$locations,'company_uuid'=>$uuid]);
 
         }catch (\Exception $e) {
@@ -116,8 +121,12 @@ class JobPostController extends Controller
         }
         
         $redirect_page = 'employer/create-job';
+        
         $messages = [
-            'name.required' => 'Job name is required',
+            'name.required' => 'Job Title is required',
+            'job_cat_id.required' => 'The Job Category field is required.',
+            'apply_url.required' => 'The Job Application URL field is required.',
+            'content.required' => 'The Job Description field is required.',
         ]; 
       
         $validator = Validator::make($data, [
@@ -186,7 +195,9 @@ class JobPostController extends Controller
         {
             return $this->sendErrorResponse('login',__('messages.unauthorized'));
         }
+        
         $job_uuid = $request->all()['id'];
+        
 
         $data = $request->only(['name', 'content', 'apply_url', 'location_id', 'job_cat_id','remotetype_id']);
         if(isset($data['remotetype_id']) && $data['remotetype_id'] == 0)
@@ -194,11 +205,15 @@ class JobPostController extends Controller
             $data['remotetype_id'] = 3;
         }
         $redirect_page = 'employer/edit-job';
+
         $messages = [
-            'name.required' => 'Job name is required',
+            'name.required' => 'Job Title is required',
+            'job_cat_id.required' => 'The Job Category field is required.',
+            'apply_url.required' => 'The Job Application URL field is required.',
+            'content.required' => 'The Job Description field is required.',
         ]; 
       
-        $validator = Validator::make($data, [
+        $validator = Validator::make($request->all(), [
             'name' => 'required',
             'location_id' => 'required',
             'job_cat_id' => 'required',
@@ -209,13 +224,14 @@ class JobPostController extends Controller
         if ($validator->fails()){
             $job_categories = JobCat::get();
             $locations = Location::get();
-            $data = ['user'=>$data,'job_categories'=>$job_categories,'locations'=>$locations];
+            $data = ['user'=>$request->all(),'job_categories'=>$job_categories,'locations'=>$locations];
             return $this->sendJobValidationErrorsWithData($redirect_page,$validator->errors(),$data);
         }else{
             try{
                 $job = JobPost::where('id',$job_uuid);
                 $job->update($data);
-                $company_profile_id = CompanyProfile::where('id',$job->first()['company_profile_id'])->first()['uuid'];
+                $job_data = JobPost::where('id',$job_uuid)->first();
+                $company_profile_id = CompanyProfile::select('uuid')->where('id',$job_data->company_profile_id)->first()['uuid'];
                 ActivityLog::addToLog(__('activitylogs.job_updated'),'job updated');
                 return redirect('employer/jobs?c_id='.$company_profile_id)->with( ['message' => __('messages.job_updated')] );
                  

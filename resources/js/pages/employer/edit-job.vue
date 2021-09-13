@@ -129,7 +129,7 @@
         return true;
       },
       submit() {
-            this.$inertia.post('/employer/update-job', this.user );
+            this.$inertia.post('/employer/edit-job?id='+this.user.uuid, this.user );
             this.$refs.form.resetValidation();
        },
     },

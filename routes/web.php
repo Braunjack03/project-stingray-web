@@ -94,7 +94,7 @@ Route::group(['prefix' => 'employer', 'middleware' => ['auth','employer']], func
 
     Route::get('edit-company',[CompanyProfileController::class,'edit'])->name('edit.company');
 
-    Route::post('udpate-company',[CompanyProfileController::class,'update'])->name('update.company');
+    Route::post('edit-company',[CompanyProfileController::class,'update'])->name('update.company');
 
     Route::get('jobs', [JobPostController::class, 'index'])->name('employer.jobs');
 
@@ -104,7 +104,7 @@ Route::group(['prefix' => 'employer', 'middleware' => ['auth','employer']], func
 
     Route::get('edit-job', [JobPostController::class, 'edit'])->name('jobs.edit');
 
-    Route::post('update-job', [JobPostController::class, 'update'])->name('jobs.update');
+    Route::post('edit-job', [JobPostController::class, 'update'])->name('jobs.update');
 
     Route::get('delete-job', [JobPostController::class, 'destroy'])->name('jobs.delete');
 

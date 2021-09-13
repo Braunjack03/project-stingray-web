@@ -6,7 +6,7 @@
             <v-card class="mx-auto px-12 py-8" elevation="2">
             <h2>{{company_details.name}} Job Posts</h2>
             <br/>
-            <Link v-if="companies_count > 0" :href="'/employer/create-job?c_id='+company_details.uuid" color="text" class="mr-4" >Add New Job Post</Link>
+            <Link v-if="companies_count > 0 && job_posts_count < 3" :href="'/employer/create-job?c_id='+company_details.uuid" color="text" class="mr-4" >Add New Job Post</Link>
 
             <br/><br/><br/>
             <h3>Current Job Posts</h3>
@@ -58,6 +58,7 @@
       job_posts : Array,
       companies_count: Number,
       company_details: Object,
+      job_posts_count: Number,
     },
      data: () => ({
         message: '',
