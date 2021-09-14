@@ -52,8 +52,13 @@
                 <br/><br/>
                  <h3>Your Companies</h3>  
                     <ul id="example-1">
+                     
                     <li v-for="company in companies" :key="company.id">
-                      {{ company.name }} <Link :href="'/employer/edit-company?id='+company.uuid" color="text" class="mr-4" @click="edit()" >Edit</Link>
+                     
+                      {{ company.name }} <br/><Link :href="'/employer/edit-company?id='+company.uuid" color="text" class="mr-4" @click="edit()" >Manage Profile</Link>
+                      <br/>
+                      <Link :href="'/employer/jobs?c_id='+company.uuid" color="text" class="mr-4" >Manage Jobs</Link>
+                      <br/><br/>
                     </li>
                   </ul>
                   <br/>

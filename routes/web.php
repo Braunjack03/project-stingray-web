@@ -11,7 +11,7 @@ use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\JobSeekerProfileController;
 use App\Http\Controllers\EmployerProfileController;
 use App\Http\Controllers\CompanyProfileController;
-
+use App\Http\Controllers\JobPostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -94,6 +94,18 @@ Route::group(['prefix' => 'employer', 'middleware' => ['auth','employer']], func
 
     Route::get('edit-company',[CompanyProfileController::class,'edit'])->name('edit.company');
 
-    Route::post('udpate-company',[CompanyProfileController::class,'update'])->name('update.company');
+    Route::post('edit-company',[CompanyProfileController::class,'update'])->name('update.company');
+
+    Route::get('jobs', [JobPostController::class, 'index'])->name('employer.jobs');
+
+    Route::get('create-job', [JobPostController::class, 'create'])->name('jobs.create');
+
+    Route::post('create-job', [JobPostController::class, 'store'])->name('jobs.submit');
+
+    Route::get('edit-job', [JobPostController::class, 'edit'])->name('jobs.edit');
+
+    Route::post('edit-job', [JobPostController::class, 'update'])->name('jobs.update');
+
+    Route::get('delete-job', [JobPostController::class, 'destroy'])->name('jobs.delete');
 
 });
