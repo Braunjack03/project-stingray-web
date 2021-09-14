@@ -5,7 +5,7 @@
         <v-container>
             <v-card class="mx-auto px-12 py-8" elevation="2">
            
-            <h2>Company Profile {{ errors.message }}</h2>
+            <h2>Company Profile </h2>
             
             <br/>
             <div v-if="errors" class="mt-2 error">{{ errors.message }}</div>
@@ -28,23 +28,23 @@
                     <v-text-field v-model="user.name" required></v-text-field>
                     <div v-if="errors.name" class="mt-2 error">{{ errors.name }}</div>
 
-                    <label>Number of local employees *</label>
+                    <label>Number of local employees</label>
                     <v-text-field v-model="user.local_employees" required></v-text-field>
                     <div v-if="errors.local_employees" class="mt-2 error">{{ errors.local_employees }}</div>
                     
-                    <label>Number of global employees *</label>
+                    <label>Number of global employees </label>
                     <v-text-field v-model="user.global_employees" required></v-text-field>
                     <div v-if="errors.global_employees" class="mt-2 error">{{ errors.global_employees }}</div>
 
-                    <label>Company Website *</label>
+                    <label>Company Website</label>
                     <v-text-field v-model="user.website_url" required></v-text-field>
                     <div v-if="errors.website_url" class="mt-2 error">{{ errors.website_url }}</div>
 
-                    <label>Company Mission *</label>
+                    <label>Company Mission </label>
                     <v-text-field v-model="user.mission" required></v-text-field>
                     <div v-if="errors.mission" class="mt-2 error">{{ errors.mission }}</div>
                     
-                    <label>Company Industry (select up to 3) * </label>
+                    <label>Company Industry (select up to 3)  </label>
                     <ul class="industries-list">
                       <li v-for="(item, index) in industries" :key="index" >
                         <label>
@@ -65,15 +65,15 @@
                     <v-text-field v-model="user.street_addr_1" required></v-text-field>
                     <div v-if="errors.street_addr_1" class="mt-2 error">{{ errors.street_addr_1 }}</div>
 
-                    <label>Address 2*</label>
+                    <label>Address 2</label>
                     <v-text-field v-model="user.street_addr_2" required></v-text-field>
                     <div v-if="errors.street_addr_2" class="mt-2 error">{{ errors.street_addr_2 }}</div>
 
-                    <label>City *</label>
+                    <label>City </label>
                     <v-text-field v-model="user.city" required></v-text-field>
                     <div v-if="errors.city" class="mt-2 error">{{ errors.city }}</div>
 
-                    <label>State *</label>
+                    <label>State </label>
                       <v-row >
                       <v-col
                         class="d-flex"
@@ -87,7 +87,7 @@
                       </v-col>
                     <div v-if="errors.state" class="mt-2 error">{{ errors.state }}</div>
                     </v-row>
-                    <label>Zipcode *</label>
+                    <label>Zipcode </label>
                     <v-text-field v-model="user.postcode" required></v-text-field>
                     <div v-if="errors.postcode" class="mt-2 error">{{ errors.postcode }}</div>
 
@@ -146,7 +146,6 @@
      methods: {
       submit() {
             this.$inertia.post('/employer/edit-company?id='+this.user.uuid, this.user );
-            console.log("eeeee====",this.$page.props);
        },
       removeImage(){
           this.user.logo_image_src = '';

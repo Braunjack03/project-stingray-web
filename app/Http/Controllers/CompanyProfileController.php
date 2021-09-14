@@ -53,8 +53,10 @@ class CompanyProfileController extends Controller
         }
 
         $data = $request->except(['logo_image_src']);
-        
         $user_id = Auth::id();
+       
+        $data['user_id'] = $user_id;
+        
         $redirect_page = $request->path();
         $company_profile_count = CompanyProfile::where('user_id',$user_id)->count();
         if($company_profile_count >= 3)
@@ -65,29 +67,18 @@ class CompanyProfileController extends Controller
         $messages = [
             'max' => 'The company logo must not be greater than 1 MB',
             'name.required' => 'Company name is required',
-            'street_addr_1.required' => 'Address field is required',
-            'street_addr_2.required' => 'Address 2 field is required',
-            'state_abbr.required' => 'The state address field is required.',
-            'postcode' => 'The zipcode field is required.'
         ]; 
       
         $validator = Validator::make($data, [
             'name' => 'required',
-            'local_employees' => 'required|numeric',
-            'global_employees' => 'required|numeric',
-            'website_url' => 'required',
-            'mission' => 'required',
-            'industry' => 'required',
-            'street_addr_1' => 'required',
-            'street_addr_2' => 'required',
-            'city' => 'required',
-            'state_abbr' => 'required',
-            'postcode' => 'required',
+            'local_employees' => 'nullable|numeric',
+            'global_employees' => 'nullable|numeric',
             'logo_image_url' => 'nullable|mimes:jpeg,png,jpg,gif|max:1000',
         ],$messages);
         
         if ($validator->fails()){
             $industries = CompanyType::pluck('name','id');
+            //$data['industry'] = explode(",",$data['industry']);
             $data = ['user'=>$data,'industries'=>$industries];
             return $this->sendCustomValidationErrorsWithData($redirect_page,$validator->errors(),$data);
         }else{
@@ -100,35 +91,19 @@ class CompanyProfileController extends Controller
                     $image_name = time() . '_' . $image->getClientOriginalName();
                     $profile_image = Storage::disk('s3Company')->putFileAs('company/'.$user_uuid, $image,$image_name);
                 }
-                
-                $profile_data = [
-                    "name"=>$data['name'],
-                    'user_id' => $user_id,
-                    'uuid' => $user_uuid,
-                    'local_employees' => $data['local_employees'],
-                    'global_employees' => $data['global_employees'],
-                    'website_url' => $data['website_url'],
-                    'mission' => $data['mission'],
-                    'industry_ids' => isset($data['industry']) ? implode(',',$data['industry']) : $data['industry'],
-                    'street_addr_1' => $data['street_addr_1'],
-                    'street_addr_2' => $data['street_addr_2'],
-                    'city' => $data['city'],
-                    'postcode' => $data['postcode'],
-                    'state_abbr' => $data['state_abbr'],
-                    'linkedin_user' => isset($data['linkedin_user']) ? $data['linkedin_user'] : '',
-                    'facebook_user' => isset($data['facebook_user']) ? $data['facebook_user'] : '',
-                    'twitter_user' => isset($data['twitter_user']) ? $data['twitter_user'] : '',
-                    'instagram_user' => isset($data['instagram_user']) ? $data['instagram_user'] : '',
-                    'logo_image_url' => $image_name,
-                ];
-
+                if(isset($data['industry']))
+                {   
+                    $data['industry_ids'] = isset($data['industry']) ? implode(',',$data['industry']) : $data['industry'];
+                }
+                $data['uuid'] = $user_uuid;    
+                $data['logo_image_url'] = $image_name;
 
                 if(!$request->file('logo_image_url') && (isset($data['logo_image_removed']) && $data['logo_image_removed'] == 0))
                 {
-                    unset($profile_data['logo_image_removed']);
+                    unset($data['logo_image_removed']);
                 }
                 
-                CompanyProfile::create($profile_data);
+                CompanyProfile::create($data);
                
                 ActivityLog::addToLog(__('activitylogs.company_profile_created'),'company created');
                 return Redirect::route('employer.profile')->with( ['message' => __('messages.company_profile_created')] );
@@ -151,7 +126,14 @@ class CompanyProfileController extends Controller
             $user = CompanyProfile::where('uuid',$request->all()['id'])->first();
             if($user)
             {
-                $user->industry_ids = explode(",",$user->industry_ids);
+                if(!empty($user->industry_ids))
+                {
+                    $user->industry_ids = explode(",",$user->industry_ids);
+                }else{
+                    $user->industry_ids = [];
+
+                }
+                
                 $user->logo_image_src = ($user->logo_image_url) ? getBucketImageUrl($request->all()['id'],$user->logo_image_url,'company') : '';
 
             }
@@ -202,29 +184,16 @@ class CompanyProfileController extends Controller
             'instagram_user' => isset($requested_data['instagram_user']) ? $requested_data['instagram_user'] : '',
             'logo_image_removed' => isset($requested_data['logo_image_removed']) ? $requested_data['logo_image_removed'] : '',
         ];
-        //$data = $request->all();
 
         $messages = [
             'max' => 'The company logo must not be greater than 1 MB',
             'name.required' => 'Company name is required',
-            'street_addr_1.required' => 'Address field is required',
-            'street_addr_2.required' => 'Address 2 field is required',
-            'state_abbr.required' => 'The state address field is required.',
-            'postcode' => 'The zipcode field is required.'
         ]; 
        
         $validator = Validator::make($data, [
             'name' => 'required',
-            'local_employees' => 'required|numeric',
-            'global_employees' => 'required|numeric',
-            'website_url' => 'required',
-            'mission' => 'required',
-            'industry_ids' => 'required',
-            'street_addr_1' => 'required',
-            'street_addr_2' => 'required',
-            'city' => 'required',
-            'state_abbr' => 'required',
-            'postcode' => 'required',
+            'local_employees' => 'nullable|numeric',
+            'global_employees' => 'nullable|numeric',
             'logo_image_url' => 'mimes:jpeg,png,jpg,gif|max:1000|nullable'
         ],$messages);
         
