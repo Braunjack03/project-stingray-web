@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\Models\JobPost;
 use Inertia\Inertia;
 
 class HomeController extends Controller
 {    
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth',['except' => ['home']]);
     }
     /**
      * Dashboard
@@ -38,5 +39,20 @@ class HomeController extends Controller
             $message = $e->getMessage();
             return $this->sendErrorResponse('login',$message);
         }
+    }
+
+    public function home(){
+
+        $job_posts = JobPost::join('company_profiles','job_posts.company_profile_id','company_profiles.id')
+        ->select(
+                 'job_posts.name as name',
+                 'job_posts.content as content',
+                 'company_profiles.name as company_name',
+                 'job_posts.apply_url as apply_url',
+                 'company_profiles.slug as company_slug',
+                 'job_posts.slug as job_slug'
+         )
+        ->get();
+        return Inertia::render('job_posts', ['job_posts' => $job_posts]);
     }
 }

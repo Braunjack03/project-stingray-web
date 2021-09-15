@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Models\CompanyProfile;
 use App\Models\CompanyType;
+use App\Models\JobPost;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
@@ -102,7 +103,7 @@ class CompanyProfileController extends Controller
                 {
                     unset($data['logo_image_removed']);
                 }
-                
+                $data['slug'] = $this->createCompanySlug($data['name']);
                 CompanyProfile::create($data);
                
                 ActivityLog::addToLog(__('activitylogs.company_profile_created'),'company created');
@@ -229,6 +230,7 @@ class CompanyProfileController extends Controller
                     'twitter_user' => $data['twitter_user'],
                     'instagram_user' => $data['instagram_user'],
                     'logo_image_url' => $image_name,
+                    'slug' => $this->createCompanySlug($data['name']),
                 ];
                 if(!$request->file('logo_image_url') && (isset($data['logo_image_removed']) && $data['logo_image_removed'] == 0))
                 {
@@ -243,5 +245,59 @@ class CompanyProfileController extends Controller
                 return $this->sendErrorResponse($redirect_page,$message);
             }
         } 
+    }
+
+    public function createCompanySlug($title)
+    {
+        // Normalize the title
+        $slug = Str::slug($title);
+        // Get any that could possibly be related.
+        // This cuts the queries down by doing it once.
+        $allSlugs = $this->getRelatedSlugs($slug);
+        // If we haven't used it before then we are all good.
+        if (!$allSlugs->contains('slug', $slug)){
+            return $slug;
+        }
+    // Just append numbers like a savage until we find not used.
+        for ($i = 1; $i <= 10; $i++) {
+            $newSlug = $slug.'-'.$i;
+            if (! $allSlugs->contains('slug', $newSlug)) {
+                return $newSlug;
+            }
+        }
+    }
+
+    protected function getRelatedSlugs($slug)
+    {
+        return CompanyProfile::select('slug')->where('slug', 'like', $slug.'%')->get();
+    }
+
+    public function showCompany($slug = ''){
+        $company = CompanyProfile::with('job_posts')->join('locations','company_profiles.location_id','locations.id')
+        ->select(
+            'company_profiles.id',
+            'company_profiles.name',
+            'company_profiles.mission',
+            'company_profiles.name',
+            'locations.name as location',
+            'company_profiles.local_employees',
+            'company_profiles.global_employees',
+            'company_profiles.year_founded',
+            'company_profiles.website_url',
+            'company_profiles.created_at',
+            'company_profiles.industry_ids'
+        )
+        ->where('company_profiles.slug',$slug)->first();
+        $job_posts = JobPost::where('company_profile_id',$company['id'])->orderBy('id','DESC')->get()->toArray();
+        $job_post_model = new JobPost();
+        foreach($job_posts as $key => $job)
+        {
+            $job_posts[$key]['location_id'] = $job_post_model->getJobLocation($job['remotetype_id']);
+        }    
+        $industries = CompanyType::whereIn('id', [$company['industry_ids']])->pluck('name');
+        
+        $company->logo_image_url = ($company->logo_image_url) ? getBucketImageUrl($company->uuid,$company->logo_image_url,'company') : '';
+
+        return Inertia::render('single-company',['data'=>$company,'job_posts'=>$job_posts,'industries',$industries]);
     }
 }

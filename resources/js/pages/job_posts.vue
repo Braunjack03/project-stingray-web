@@ -3,8 +3,8 @@
          <v-app app>
             <v-container>
                 <h2>Project Stingray</h2>
-               <v-row>
-                  <v-col v-for="data in $props.job_posts" :key="data.id">
+               <v-row >
+                  <v-col cols="3" v-for="data in $props.job_posts" :key="data.id">
                      <CustomCard :data="data"/>
                   </v-col>
                </v-row>

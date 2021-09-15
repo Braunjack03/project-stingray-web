@@ -18,7 +18,7 @@ class JobPostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth',['except' => ['showJobPost']]);
     }
 
     /**
@@ -108,6 +108,7 @@ class JobPostController extends Controller
         $request->request->add(['user_id' => $user_id,'uuid'=>$job_uuid]);
 
         $data = $request->all();
+        
         if(!isset($data['remotetype_id']))
         {
             $data['remotetype_id'] = 3;
@@ -119,7 +120,7 @@ class JobPostController extends Controller
         if($company_profile){
             $data['company_profile_id'] = $company_profile['id'];
         }
-        
+      
         $redirect_page = 'employer/create-job';
         
         $messages = [
@@ -144,8 +145,8 @@ class JobPostController extends Controller
             return $this->sendJobValidationErrorsWithData($redirect_page,$validator->errors(),$data);
         }else{
             try{
-               
                 unset($data['c_id']);
+                $data['slug'] = $this->createJobPostSlug($data['name']);
                 JobPost::create($data);
                
                 ActivityLog::addToLog(__('activitylogs.job_created'),'job created');
@@ -229,6 +230,7 @@ class JobPostController extends Controller
         }else{
             try{
                 $job = JobPost::where('id',$job_uuid);
+                $data['slug'] = $this->createJobPostSlug($data['name']);
                 $job->update($data);
                 $job_data = JobPost::where('id',$job_uuid)->first();
                 $company_profile_id = CompanyProfile::select('uuid')->where('id',$job_data->company_profile_id)->first()['uuid'];
@@ -253,5 +255,45 @@ class JobPostController extends Controller
         ActivityLog::addToLog(__('activitylogs.job_deleted'),'job deleted');
         return redirect('employer/jobs?c_id='.$company_profile_id)->with( ['message' => __('messages.job_delete')] );
 
+    }
+
+    public function showJobPost($company = '',$slug = ''){
+        
+        $job_post = JobPost::join('company_profiles','job_posts.company_profile_id','company_profiles.id')
+        ->join('locations','job_posts.location_id','locations.id')
+        ->select(
+            'job_posts.name as name',
+            'job_posts.content as content',
+            'company_profiles.name as company_name',
+            'locations.name as location',
+            'job_posts.created_at'
+    )->where('job_posts.slug',$slug)->first();
+
+        return Inertia::render('single-job-post',['data'=>$job_post]);
+    }
+
+    public function createJobPostSlug($title)
+    {
+        // Normalize the title
+        $slug = Str::slug($title);
+        // Get any that could possibly be related.
+        // This cuts the queries down by doing it once.
+        $allSlugs = $this->getRelatedSlugs($slug);
+        // If we haven't used it before then we are all good.
+        if (!$allSlugs->contains('slug', $slug)){
+            return $slug;
+        }
+    // Just append numbers like a savage until we find not used.
+        for ($i = 1; $i <= 10; $i++) {
+            $newSlug = $slug.'-'.$i;
+            if (! $allSlugs->contains('slug', $newSlug)) {
+                return $newSlug;
+            }
+        }
+    }
+
+    protected function getRelatedSlugs($slug)
+    {
+        return JobPost::select('slug')->where('slug', 'like', $slug.'%')->get();
     }
 }

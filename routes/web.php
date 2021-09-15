@@ -52,22 +52,18 @@ Route::get('account/verify/{token}', [AuthController::class, 'verifyAccount'])->
 Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
 Route::post('reset-password/{token}', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
  
-Route::get('/', function() {
+/*Route::get('/', function() {
 
     //$job_posts = JobPost::with('company_profile')->all();
     #$job_posts = DB::table('job_posts')->join('company_profiles', 'company_profiles.id', '=', 'job_posts.company_profile_id')->get('content', 'job_posts.name', 'company_profiles.name');
-    $job_posts = JobPost::join('company_profiles','job_posts.company_profile_id','company_profiles.id')
-         ->select(
-                  'job_posts.name as name',
-                  'job_posts.content as content',
-                  'company_profiles.name as company_name',
-                  'job_posts.apply_url as apply_url'
-          )
-         ->get();
+  
+});*/
 
+Route::get('/', [HomeController::class, 'home'])->name('home');
 
-    return Inertia::render('job_posts', ['job_posts' => $job_posts]);
-});
+Route::get('/jobs/{company}/{slug}', [JobPostController::class, 'showJobPost'])->name('home');
+
+Route::get('/companies/{company}', [CompanyProfileController::class, 'showCompany'])->name('company');
 
 
 Route::middleware(['auth','jobseeker'])->group(function () {
