@@ -1,4 +1,5 @@
 <template>
+  <Home>
     <v-app app>
         <v-container>
             <v-card class="mx-auto px-12 py-8" elevation="2">
@@ -9,13 +10,23 @@
             Date Posted: {{data.created_at}}<br/>
 
             <div v-html="data.content"></div>
-          
+
+            <div class="my-4 text-subtitle-1">
+            <Link :href="data.apply_url" target="_blank">Apply on Company Website</Link>
+            </div>
             </v-card> 
         </v-container>
     </v-app>
+  </Home>  
 </template>
 <script>
+import {Link } from '@inertiajs/inertia-vue'
+  import Home from './Home'
   export default {
+     components: {
+        Link,
+        Home
+    },
     props: {
       errors : Object,  
       success: Object,

@@ -285,19 +285,30 @@ class CompanyProfileController extends Controller
             'company_profiles.year_founded',
             'company_profiles.website_url',
             'company_profiles.created_at',
-            'company_profiles.industry_ids'
+            'company_profiles.industry_ids',
+            'company_profiles.logo_image_url',
+            'company_profiles.uuid'
         )
         ->where('company_profiles.slug',$slug)->first();
+
+        $selected_industries = explode(',',$company['industry_ids']);
+        $industries = CompanyType::whereIn('id', $selected_industries)->pluck('name')->toArray();
+        $company['industry_types'] = implode(' | ',$industries);
+
+        $company['logo_image_url'] = ($company['logo_image_url']) ? getBucketImageUrl($company['uuid'],$company['logo_image_url'],'company') : '';
+
         $job_posts = JobPost::where('company_profile_id',$company['id'])->orderBy('id','DESC')->get()->toArray();
+        
         $job_post_model = new JobPost();
         foreach($job_posts as $key => $job)
         {
             $job_posts[$key]['location_id'] = $job_post_model->getJobLocation($job['remotetype_id']);
         }    
-        $industries = CompanyType::whereIn('id', [$company['industry_ids']])->pluck('name');
         
-        $company->logo_image_url = ($company->logo_image_url) ? getBucketImageUrl($company->uuid,$company->logo_image_url,'company') : '';
-
         return Inertia::render('single-company',['data'=>$company,'job_posts'=>$job_posts,'industries',$industries]);
+    }
+
+    public function claimProfile($id){  
+        dd($id);
     }
 }

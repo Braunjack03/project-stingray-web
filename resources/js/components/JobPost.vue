@@ -15,7 +15,7 @@
             <Link :href="data.apply_url">Apply Now</Link>
             </div>
 
-            <div v-html="data.content"></div>
+            <div>{{data.content.substring(0,200) | stripHTML}}</div>
             <div>{{data.created_at}}</div>
         </v-card-text>
 
