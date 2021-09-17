@@ -61,11 +61,9 @@
 </template>
 <script>
   import {Link } from '@inertiajs/inertia-vue'
-  import Home from './Home'
     export default {
          components: {
         Link,
-        Home
         },
     props: {
       errors : Object,  

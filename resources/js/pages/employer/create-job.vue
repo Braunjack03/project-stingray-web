@@ -55,7 +55,7 @@
                     </v-row>
 
                     <label>Job Application URL *</label>
-                    <v-text-field v-model="user.apply_url" required></v-text-field>
+                    <v-text-field v-model="user.apply_url" placeholder="https://example.com" required></v-text-field>
                     <div v-if="errors.apply_url" class="mt-2 error">{{ errors.apply_url }}</div>
 
                     <label>Job Description *</label>

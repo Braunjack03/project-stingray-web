@@ -24,7 +24,6 @@ import { Head,Link } from '@inertiajs/inertia-vue'
 export default {
    components: {
       Head,
-      Home,
       'CustomCard': JobPost
    },
    props: ['job_posts']

@@ -27,7 +27,6 @@ import {Link } from '@inertiajs/inertia-vue'
   export default {
      components: {
         Link,
-        Home
     },
     props: {
       errors : Object,  
