@@ -3,6 +3,9 @@
     <v-app app>
         <v-container>
             <v-card class="mx-auto px-12 py-8" elevation="2">
+              <div v-if="$page.props.flash.message" class="mt-2 success">
+            {{ $page.props.flash.message }}
+          </div> 
             <v-row >
               <v-col cols="3"> 
              <v-img
