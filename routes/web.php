@@ -65,6 +65,9 @@ Route::get('/jobs/{company}/{slug}', [JobPostController::class, 'showJobPost'])-
 
 Route::get('/companies/{company}', [CompanyProfileController::class, 'showCompany'])->name('company');
 
+Route::get('claim-profile/{id}', [CompanyProfileController::class, 'claimProfile'])->name('claim.profile')->middleware('employer');
+
+
 
 Route::middleware(['auth','jobseeker'])->group(function () {
 
@@ -92,7 +95,6 @@ Route::group(['prefix' => 'employer', 'middleware' => ['auth','employer']], func
 
     Route::post('edit-company',[CompanyProfileController::class,'update'])->name('update.company');
 
-    Route::get('claim-profile/{id}', [CompanyProfileController::class, 'claimProfile'])->name('claim.profile');
 
     Route::get('jobs', [JobPostController::class, 'index'])->name('employer.jobs');
 

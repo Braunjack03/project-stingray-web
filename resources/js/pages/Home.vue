@@ -19,6 +19,9 @@
 
     <v-main class="grey lighten-3">
       <v-container>
+        <div v-if="$page.props.flash.message" class="mt-2 success">
+            {{ $page.props.flash.message }}
+          </div>  
         <v-row>
           <v-col>
             <v-sheet

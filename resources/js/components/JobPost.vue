@@ -12,7 +12,9 @@
             </div>
 
             <div class="my-4 text-subtitle-1">
-            <Link :href="data.apply_url">Apply Now</Link>
+             <v-btn  :href="data.apply_url" target="_blank" text>
+                Apply Now
+              </v-btn>
             </div>
 
             <div>{{data.content.substring(0,200) | stripHTML}}</div>

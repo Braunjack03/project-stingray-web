@@ -11,8 +11,10 @@
 
             <div v-html="data.content"></div>
 
-            <div class="my-4 text-subtitle-1">
-            <Link :href="data.apply_url" target="_blank">Apply on Company Website</Link>
+            <div class="my-4 text-subtitle-1 ml-20">
+              <v-btn  :href="data.apply_url" target="_blank" text>
+                Apply on Company Website
+              </v-btn>
             </div>
             </v-card> 
         </v-container>

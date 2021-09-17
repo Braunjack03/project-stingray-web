@@ -12,7 +12,7 @@
                     ></v-img>
             </v-col>        
             <v-col class="mt-12" md="4" cols="8">        
-            <h2>{{data.name}} <Link href="#"  class="claim-profile">(Claim this Profile)</Link> </h2>
+            <h2>{{data.name}} <v-btn v-if="(data.unclaimed) == 1" v-on:click="claimProfile(data.uuid)" class="claim-profile">(Claim this Profile)</v-btn> </h2>
             <p>{{data.industry_types}}</p>
                </v-col>
             </v-row>
@@ -26,12 +26,15 @@
               </v-col>        
               <v-col cols="3"> 
               Year Founded: <strong>{{data.year_founded}}</strong><br/>
-              <Link :href="data.website_url">View website</Link><br/><br/>
+
+              <v-btn icon :href="data.website_url" target="_blank" text>
+                View website
+              </v-btn>
               </v-col>  
             </v-row>
 
             <v-row >
-              <v-col cols="8" md="4"> 
+              <v-col cols="8" md="8"> 
                 <h3>About {{data.name}}</h3>
                 <div v-html="data.mission"></div>
               </v-col>  
@@ -69,7 +72,6 @@
       success: Object,
       data : Object,
       job_posts:Array,
-      industries:String,
     },
      data: () => ({
         message: '',

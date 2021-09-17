@@ -15,10 +15,15 @@ use Inertia\Inertia;
 use Redirect;
 use App\Models\ActivityLog;
 use Session;
-
+use Mail; 
 
 class CompanyProfileController extends Controller
 {
+    
+    public function __construct()
+    {
+        $this->middleware(['auth','employer'],['except' => ['showCompany']]);
+    }
     
       /**
      * To view company profile form
@@ -274,8 +279,10 @@ class CompanyProfileController extends Controller
 
     public function showCompany($slug = ''){
         $company = CompanyProfile::with('job_posts')->join('locations','company_profiles.location_id','locations.id')
+        ->join('users','company_profiles.user_id','=','users.id')
         ->select(
             'company_profiles.id',
+            'company_profiles.user_id',
             'company_profiles.name',
             'company_profiles.mission',
             'company_profiles.name',
@@ -287,10 +294,16 @@ class CompanyProfileController extends Controller
             'company_profiles.created_at',
             'company_profiles.industry_ids',
             'company_profiles.logo_image_url',
-            'company_profiles.uuid'
+            'company_profiles.uuid',
+            'company_profiles.unclaimed',
+            'users.role',
         )
         ->where('company_profiles.slug',$slug)->first();
-
+        if($company->user_id == Auth::id())
+        {
+            $company->unclaimed = 0;
+        }    
+        //$company->unclaimed    
         $selected_industries = explode(',',$company['industry_ids']);
         $industries = CompanyType::whereIn('id', $selected_industries)->pluck('name')->toArray();
         $company['industry_types'] = implode(' | ',$industries);
@@ -308,7 +321,17 @@ class CompanyProfileController extends Controller
         return Inertia::render('single-company',['data'=>$company,'job_posts'=>$job_posts,'industries',$industries]);
     }
 
-    public function claimProfile($id){  
-        dd($id);
+    public function claimProfile($id = ''){   
+       //$status = CompanyProfile::where('uuid',$id)->update(['unclaimed'=>0]);
+       ActivityLog::addToLog(__('activitylogs.company_profile_updated'),'company claimed');
+       $user = CompanyProfile::join('users','company_profiles.user_id','=','users.id')
+       ->select('company_profiles.name as company_name','users.name','users.email')
+       ->where('company_profiles.uuid',$id)->first();  
+       Mail::send('emails.claimCompanyProfile',['user'=>$user], function($message){
+            $message->to(env('ADMIN_EMAIL'));
+            $message->subject(__('messages.profile_claimed'));
+        });
+        
+        return redirect()->back()->with(['message' => __('messages.company_claimed')]);
     }
 }

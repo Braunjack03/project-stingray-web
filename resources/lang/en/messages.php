@@ -20,4 +20,6 @@ return [
     'job_delete' => 'Job Deleted Successfully!',
     'job_created' => 'Job Post created Successfully!',
     'job_updated' => 'Job Post updated Successfully!',
+    'company_claimed' => 'Email sent to admin for claim verification.',
+    'profile_claimed' => 'Company profile claim',
  ];
