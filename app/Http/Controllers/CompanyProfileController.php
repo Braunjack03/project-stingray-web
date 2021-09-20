@@ -322,6 +322,7 @@ class CompanyProfileController extends Controller
     }
 
     public function claimProfile($id = ''){   
+       
        //$status = CompanyProfile::where('uuid',$id)->update(['unclaimed'=>0]);
        ActivityLog::addToLog(__('activitylogs.company_profile_updated'),'company claimed');
        $user = CompanyProfile::join('users','company_profiles.user_id','=','users.id')
@@ -331,7 +332,6 @@ class CompanyProfileController extends Controller
             $message->to(env('ADMIN_EMAIL'));
             $message->subject(__('messages.profile_claimed'));
         });
-        
         return redirect()->back()->with(['message' => __('messages.company_claimed')]);
     }
 }

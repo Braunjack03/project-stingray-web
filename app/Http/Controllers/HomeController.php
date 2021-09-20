@@ -32,6 +32,7 @@ class HomeController extends Controller
                 'user' => [
                     'email' => $user->email,
                     'name' => $user->email,
+                    'role' => $user->role,
                     'is_email_verified' => $user->is_email_verified
                 ],
             ]);
@@ -54,5 +55,12 @@ class HomeController extends Controller
          )
         ->get();
         return Inertia::render('job_posts', ['job_posts' => $job_posts]);
+    }
+
+    public function userProfileData(Request $request)
+    {
+        echo '<pre>';
+        print_r($request->all());
+        die();
     }
 }

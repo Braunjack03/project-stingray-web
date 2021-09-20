@@ -1,5 +1,5 @@
 <template>
-<Home>
+<Layout>
     <v-app app>
         <v-container>
             <v-card class="mx-auto px-12 py-8" elevation="2">
@@ -14,7 +14,7 @@
                       max-width="250"
                     ></v-img>
             </v-col>        
-            <v-col class="mt-12" md="4" cols="8">        
+            <v-col class="mt-12" md="6" cols="8">        
             <h2>{{data.name}} <v-btn v-if="(data.unclaimed) == 1" v-on:click="claimProfile(data.uuid)" class="claim-profile">(Claim this Profile)</v-btn> </h2>
             <p>{{data.industry_types}}</p>
                </v-col>
@@ -60,13 +60,15 @@
             </v-card> 
         </v-container>
     </v-app>
-    </Home>
+    </Layout>
 </template>
 <script>
   import {Link } from '@inertiajs/inertia-vue'
+import Layout from './Layout'
     export default {
          components: {
         Link,
+        Layout,
         },
     props: {
       errors : Object,  

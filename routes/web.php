@@ -67,8 +67,6 @@ Route::get('/companies/{company}', [CompanyProfileController::class, 'showCompan
 
 Route::get('claim-profile/{id}', [CompanyProfileController::class, 'claimProfile'])->name('claim.profile')->middleware('employer');
 
-
-
 Route::middleware(['auth','jobseeker'])->group(function () {
 
     Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');

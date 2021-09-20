@@ -71,7 +71,7 @@
 </Layout>
 </template>
 <script>
-  import Layout from './Layout'
+  import Layout from '../Layout'
   import { Head,Link } from '@inertiajs/inertia-vue'
   export default {
     components: {

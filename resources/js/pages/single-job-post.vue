@@ -1,5 +1,5 @@
 <template>
-  <Home>
+  <Layout>
     <v-app app>
         <v-container>
             <v-card class="mx-auto px-12 py-8" elevation="2">
@@ -19,14 +19,15 @@
             </v-card> 
         </v-container>
     </v-app>
-  </Home>  
+  </Layout>  
 </template>
 <script>
 import {Link } from '@inertiajs/inertia-vue'
-  import Home from './Home'
+  import Layout from './Layout'
   export default {
      components: {
         Link,
+        Layout,
     },
     props: {
       errors : Object,  

@@ -32,6 +32,7 @@ class EmployerController extends Controller
                 'user' => [
                     'email' => $user->email,
                     'name' => $user->email,
+                    'role' => $user->role,
                     'is_email_verified' => $user->is_email_verified
                 ],
             ]);

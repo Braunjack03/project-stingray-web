@@ -1,5 +1,5 @@
 <template>
-   <Home>
+   <Layout>
       <div>
             <v-app app>
                <v-container>
@@ -12,18 +12,19 @@
                </v-container>
          </v-app>
       </div>
-   </Home>   
+   </Layout>   
 </template>
 
 <script>
 //import Card from '../components/Card.vue';
 import JobPost from '../components/JobPost.vue';
-import Home from './Home'
+import Layout from './Layout'
 import { Head,Link } from '@inertiajs/inertia-vue'
 
 export default {
    components: {
       Head,
+      Layout,
       'CustomCard': JobPost
    },
    props: ['job_posts']
