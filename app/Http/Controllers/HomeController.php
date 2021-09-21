@@ -42,8 +42,8 @@ class HomeController extends Controller
         }
     }
 
-    public function home(){
-
+    public function home(Request $request){
+        
         $job_posts = JobPost::join('company_profiles','job_posts.company_profile_id','company_profiles.id')
         ->select(
                  'job_posts.name as name',
@@ -52,8 +52,10 @@ class HomeController extends Controller
                  'job_posts.apply_url as apply_url',
                  'company_profiles.slug as company_slug',
                  'job_posts.slug as job_slug'
-         )
-        ->get();
+         )->when($request->q, function($query, $term) {
+            $query->where('job_posts.name', 'LIKE', '%'.$term.'%');
+        })
+        ->paginate(10);
         return Inertia::render('job_posts', ['job_posts' => $job_posts]);
     }
 

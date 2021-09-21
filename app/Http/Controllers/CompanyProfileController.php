@@ -302,8 +302,7 @@ class CompanyProfileController extends Controller
         if($company->user_id == Auth::id())
         {
             $company->unclaimed = 0;
-        }    
-        //$company->unclaimed    
+        }       
         $selected_industries = explode(',',$company['industry_ids']);
         $industries = CompanyType::whereIn('id', $selected_industries)->pluck('name')->toArray();
         $company['industry_types'] = implode(' | ',$industries);
