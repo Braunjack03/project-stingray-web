@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\JobPost;
+use App\Models\Location;
 use Inertia\Inertia;
 
 class HomeController extends Controller
@@ -53,10 +54,13 @@ class HomeController extends Controller
                  'company_profiles.slug as company_slug',
                  'job_posts.slug as job_slug'
          )->when($request->q, function($query, $term) {
-            $query->where('job_posts.name', 'LIKE', '%'.$term.'%');
+                $query->where('job_posts.name', 'LIKE', '%'.$term.'%');
+        })->when($request->loc, function($query, $term) {
+            $query->where('job_posts.location_id', $term);
         })
         ->paginate(10);
-        return Inertia::render('job_posts', ['job_posts' => $job_posts]);
+        $locations = Location::get();
+        return Inertia::render('job_posts', ['job_posts' => $job_posts,'location_id'=>$request->loc,'term'=>$request->q,'locations'=>$locations]);
     }
 
     public function userProfileData(Request $request)
