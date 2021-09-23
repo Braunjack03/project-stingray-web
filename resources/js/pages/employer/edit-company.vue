@@ -37,7 +37,7 @@
                     <div v-if="errors.global_employees" class="mt-2 error">{{ errors.global_employees }}</div>
 
                     <label>Company Website</label>
-                    <v-text-field v-model="user.website_url" required></v-text-field>
+                    <v-text-field v-model="user.website_url" placeholder="https://example.com" required></v-text-field>
                     <div v-if="errors.website_url" class="mt-2 error">{{ errors.website_url }}</div>
 
                     <label>Company Mission </label>
@@ -119,7 +119,7 @@
 </Layout>
 </template>
 <script>
-  import Layout from './Layout'
+  import Layout from '../Layout'
   import { Head } from '@inertiajs/inertia-vue'
   export default {
     components: {

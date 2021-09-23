@@ -13,7 +13,7 @@ class JobPost extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name','user_id','company_profile_id','uuid','apply_url', 'content','job_cat_id','location_id',
+        'name','user_id','slug','company_profile_id','uuid','apply_url', 'content','job_cat_id','location_id',
     ];
 
     protected $casts = [
@@ -30,6 +30,11 @@ class JobPost extends Model
     public function company_profile()
     {
         return $this->belongsTo(CompanyProfile::class);
+    }
+
+    public function company_profiles()
+    {
+        return $this->belongsTo(CompanyProfile::class,'company_profile_id');
     }
 
     public static function getExplevelID($explevel)

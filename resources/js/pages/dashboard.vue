@@ -15,14 +15,28 @@
 <script>
   import Layout from './Layout'
   import { Head } from '@inertiajs/inertia-vue'
-
   export default {
     components: {
       Head,
       Layout,
     },
+    computed: {
+      
+    },
     props: {
       user: Object,
+      auth: Object, 
+    },
+    methods : {
+      isLoggedIn(user) {    
+        return window.localStorage.setItem("user",'ddd');      
+      }
+    },
+    mounted(){
+      console.log('heree') 
+      console.log('ddddd',auth.user);  
+
+        isLoggedIn(user)
     },
   }
 </script>

@@ -1,3 +1,4 @@
 .v-input--selection-controls__input input[role=radio] { opacity: 1 !important ;}
 .industries-list{float:left;width: 100%;list-style: none;}
 .industries-list li {float: left;padding: 13px;width: 25%;}
+.claim-profile {font-size: 15px;float: right;font-weight: 500;}

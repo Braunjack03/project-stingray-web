@@ -1,4 +1,5 @@
 <template>
+    <Layout>
     <v-app app>
         <v-container>
             <v-card class="mx-auto px-8 py-12" max-width="500" elevation="2">
@@ -35,12 +36,15 @@
        
         </v-container>
     </v-app>
+    </Layout>    
 </template>   
 <script>
 import { Link } from '@inertiajs/inertia-vue'
+import Layout from './Layout'
   export default {
     components: {
       Link,
+      Layout
     },
     props: {
         errors: Object,

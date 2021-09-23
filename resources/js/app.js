@@ -32,3 +32,10 @@ Vue.use(TiptapVuetifyPlugin, {
   // optional, default to 'md' (default vuetify icons before v2.0.0)
   iconsGroup: 'mdi'
 })
+
+Vue.filter('stripHTML', function (value) {
+  const div = document.createElement('div')
+  div.innerHTML = value
+  const text = div.textContent || div.innerText || ''
+  return text
+});

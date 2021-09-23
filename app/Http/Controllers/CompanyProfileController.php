@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Models\CompanyProfile;
 use App\Models\CompanyType;
+use App\Models\JobPost;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
@@ -14,10 +15,15 @@ use Inertia\Inertia;
 use Redirect;
 use App\Models\ActivityLog;
 use Session;
-
+use Mail; 
 
 class CompanyProfileController extends Controller
 {
+    
+    public function __construct()
+    {
+        $this->middleware(['auth','employer'],['except' => ['showCompany']]);
+    }
     
       /**
      * To view company profile form
@@ -102,7 +108,7 @@ class CompanyProfileController extends Controller
                 {
                     unset($data['logo_image_removed']);
                 }
-                
+                $data['slug'] = $this->createCompanySlug($data['name']);
                 CompanyProfile::create($data);
                
                 ActivityLog::addToLog(__('activitylogs.company_profile_created'),'company created');
@@ -229,6 +235,7 @@ class CompanyProfileController extends Controller
                     'twitter_user' => $data['twitter_user'],
                     'instagram_user' => $data['instagram_user'],
                     'logo_image_url' => $image_name,
+                    'slug' => $this->createCompanySlug($data['name']),
                 ];
                 if(!$request->file('logo_image_url') && (isset($data['logo_image_removed']) && $data['logo_image_removed'] == 0))
                 {
@@ -243,5 +250,88 @@ class CompanyProfileController extends Controller
                 return $this->sendErrorResponse($redirect_page,$message);
             }
         } 
+    }
+
+    public function createCompanySlug($title)
+    {
+        // Normalize the title
+        $slug = Str::slug($title);
+        // Get any that could possibly be related.
+        // This cuts the queries down by doing it once.
+        $allSlugs = $this->getRelatedSlugs($slug);
+        // If we haven't used it before then we are all good.
+        if (!$allSlugs->contains('slug', $slug)){
+            return $slug;
+        }
+    // Just append numbers like a savage until we find not used.
+        for ($i = 1; $i <= 10; $i++) {
+            $newSlug = $slug.'-'.$i;
+            if (! $allSlugs->contains('slug', $newSlug)) {
+                return $newSlug;
+            }
+        }
+    }
+
+    protected function getRelatedSlugs($slug)
+    {
+        return CompanyProfile::select('slug')->where('slug', 'like', $slug.'%')->get();
+    }
+
+    public function showCompany($slug = ''){
+        $company = CompanyProfile::with('job_posts')->join('locations','company_profiles.location_id','locations.id')
+        ->join('users','company_profiles.user_id','=','users.id')
+        ->select(
+            'company_profiles.id',
+            'company_profiles.user_id',
+            'company_profiles.name',
+            'company_profiles.mission',
+            'company_profiles.name',
+            'locations.name as location',
+            'company_profiles.local_employees',
+            'company_profiles.global_employees',
+            'company_profiles.year_founded',
+            'company_profiles.website_url',
+            'company_profiles.created_at',
+            'company_profiles.industry_ids',
+            'company_profiles.logo_image_url',
+            'company_profiles.uuid',
+            'company_profiles.unclaimed',
+            'users.role',
+        )
+        ->where('company_profiles.slug',$slug)->first();
+        if($company->user_id == Auth::id())
+        {
+            $company->unclaimed = 0;
+        }    
+        //$company->unclaimed    
+        $selected_industries = explode(',',$company['industry_ids']);
+        $industries = CompanyType::whereIn('id', $selected_industries)->pluck('name')->toArray();
+        $company['industry_types'] = implode(' | ',$industries);
+
+        $company['logo_image_url'] = ($company['logo_image_url']) ? getBucketImageUrl($company['uuid'],$company['logo_image_url'],'company') : '';
+
+        $job_posts = JobPost::where('company_profile_id',$company['id'])->orderBy('id','DESC')->get()->toArray();
+        
+        $job_post_model = new JobPost();
+        foreach($job_posts as $key => $job)
+        {
+            $job_posts[$key]['location_id'] = $job_post_model->getJobLocation($job['remotetype_id']);
+        }    
+        
+        return Inertia::render('single-company',['data'=>$company,'job_posts'=>$job_posts,'industries',$industries]);
+    }
+
+    public function claimProfile($id = ''){   
+       
+       //$status = CompanyProfile::where('uuid',$id)->update(['unclaimed'=>0]);
+       ActivityLog::addToLog(__('activitylogs.company_profile_updated'),'company claimed');
+       $user = CompanyProfile::join('users','company_profiles.user_id','=','users.id')
+       ->select('company_profiles.name as company_name','users.name','users.email')
+       ->where('company_profiles.uuid',$id)->first();  
+       Mail::send('emails.claimCompanyProfile',['user'=>$user], function($message){
+            $message->to(env('ADMIN_EMAIL'));
+            $message->subject(__('messages.profile_claimed'));
+        });
+        return redirect()->back()->with(['message' => __('messages.company_claimed')]);
     }
 }
