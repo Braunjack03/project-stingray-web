@@ -45,28 +45,29 @@ class HomeController extends Controller
 
     public function home(Request $request){
         
-        $job_posts = JobPost::join('company_profiles','job_posts.company_profile_id','company_profiles.id')
-        ->select(
-                 'job_posts.name as name',
-                 'job_posts.content as content',
-                 'company_profiles.name as company_name',
-                 'job_posts.apply_url as apply_url',
-                 'company_profiles.slug as company_slug',
-                 'job_posts.slug as job_slug'
-         )->when($request->q, function($query, $term) {
-                $query->where('job_posts.name', 'LIKE', '%'.$term.'%');
-        })->when($request->loc, function($query, $term) {
-            $query->where('job_posts.location_id', $term);
-        })
-        ->paginate(10);
-        $locations = Location::get();
-        return Inertia::render('job_posts', ['job_posts' => $job_posts,'location_id'=>$request->loc,'term'=>$request->q,'locations'=>$locations]);
-    }
-
-    public function userProfileData(Request $request)
-    {
-        echo '<pre>';
-        print_r($request->all());
-        die();
+        try{
+            $job_posts = JobPost::join('company_profiles','job_posts.company_profile_id','company_profiles.id')
+            ->select(
+                    'job_posts.name as name',
+                    'job_posts.content as content',
+                    'company_profiles.name as company_name',
+                    'job_posts.apply_url as apply_url',
+                    'company_profiles.slug as company_slug',
+                    'job_posts.slug as job_slug',
+                    'job_posts.created_at'
+            )->when($request->q, function($query, $term) {
+                    $query->where('job_posts.name', 'LIKE', '%'.$term.'%');
+                    $query->where('job_posts.content', 'LIKE', '%'.$term.'%');
+            })->when($request->loc, function($query, $term1) {
+                $query->where('job_posts.location_id', $term1);
+            })
+            ->orderBy('job_posts.created_at','DESC')
+            ->paginate($this->paginationLimit);
+            $locations = Location::get();
+            return Inertia::render('job_posts', ['job_posts' => $job_posts,'location_id'=>$request->loc,'term'=>$request->q,'locations'=>$locations]);
+        }catch (\Exception $e) {
+            $message = $e->getMessage();
+            return $this->sendErrorResponse('login',$message);
+        }
     }
 }

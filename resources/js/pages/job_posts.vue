@@ -32,7 +32,7 @@
 
                   <div v-if="job_posts.data.length > 0">
                      <v-row >
-                        <v-col  cols="3" v-for="data in job_posts.data" :key="data.id">
+                        <v-col md="3" class="pa-3 d-flex flex-column" v-for="data in job_posts.data" :key="data.id">
                            <CustomCard :data="data"/>
                         </v-col>
                      </v-row>
@@ -56,7 +56,7 @@
 import JobPost from '../components/JobPost.vue';
 import Layout from './Layout';
 import { Head,Link } from '@inertiajs/inertia-vue';
-import Pagination from '../components/UserPagination.vue';
+import Pagination from '../components/JobPagination.vue';
 
 export default {
    components: {
