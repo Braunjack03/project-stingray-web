@@ -16,9 +16,9 @@ class JobPost extends Model
         'name','user_id','slug','company_profile_id','uuid','apply_url', 'content','job_cat_id','location_id',
     ];
 
-    /*protected $casts = [
+    protected $casts = [
         'created_at' => 'datetime:d/m/Y'
-    ];*/
+    ];
 
 
     public const EXPLEVELS =  [
