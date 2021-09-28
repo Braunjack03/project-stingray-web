@@ -13,11 +13,11 @@ class JobPost extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name','user_id','slug','company_profile_id','uuid','apply_url', 'content','job_cat_id','location_id',
+        'name','user_id','slug','company_profile_id','uuid','apply_url', 'content','job_cat_id','location_id','remotetype_id',
     ];
 
     protected $casts = [
-        'created_at' => 'datetime:d/m/Y'
+        'created_at as created_on' => 'datetime:d/m/Y'
     ];
 
 

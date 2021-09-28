@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Models\JobPost;
 use App\Models\CompanyProfile;
+use App\Models\User;
 use App\Models\Location;
 use Inertia\Inertia;
 
@@ -38,6 +39,8 @@ class AdminController extends Controller
                     'role' => $user->role,
                     'is_email_verified' => $user->is_email_verified,
                     'jobs_count' => JobPost::count(),
+                    'employers_count' => User::where('role',$this->employerRole)->count(),
+                    'job_seekers_count' => User::where('role',$this->jobSeekerRole)->count(),
                     'companies_count' => CompanyProfile::count(),
                 ],
             ]);
@@ -78,6 +81,34 @@ class AdminController extends Controller
             ->paginate($this->paginationLimit);
             $locations = Location::get();
             return Inertia::render('admin/companies_listing', ['companies' => $companies]);
+        }catch (\Exception $e) {
+            $message = $e->getMessage();
+            return $this->sendErrorResponse('login',$message);
+        }
+    }
+
+    public function employers(Request $request){
+        
+        try{
+            $employers = User::join('employer_profiles','users.id','=','employer_profiles.user_id')
+            ->where('role',$this->employerRole)->orderBy('users.created_at','DESC')
+            ->paginate($this->paginationLimit);
+            //dd($employers);
+            return Inertia::render('admin/employers_listing', ['employers' => $employers]);
+        }catch (\Exception $e) {
+            $message = $e->getMessage();
+            return $this->sendErrorResponse('login',$message);
+        }
+    }
+
+    public function job_seekers(Request $request){
+        
+        try{
+            $job_seekers = User::join('job_seeker_profiles','users.id','=','job_seeker_profiles.user_id')
+            ->where('role',$this->jobSeekerRole)->orderBy('users.created_at','DESC')
+            ->paginate($this->paginationLimit);
+            //dd($employers);
+            return Inertia::render('admin/job_seekers_listing', ['job_seekers' => $job_seekers]);
         }catch (\Exception $e) {
             $message = $e->getMessage();
             return $this->sendErrorResponse('login',$message);

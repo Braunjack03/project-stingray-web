@@ -120,5 +120,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function() {
 
     Route::get('companies', [AdminController::class, 'companies'])->name('admin.companies');
 
+    Route::get('employers', [AdminController::class, 'employers'])->name('admin.employers');
+
+    Route::get('job_seekers', [AdminController::class, 'job_seekers'])->name('admin.job_seekers');
 
 });

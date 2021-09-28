@@ -31,7 +31,7 @@
                 color="teal accent-4"
                 @click="jobs()"
               >
-                View More
+                View All
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -57,11 +57,66 @@
                 color="teal accent-4"
                 @click="companies()"
               >
-                View More
+                View All
               </v-btn>
             </v-card-actions>
           </v-card>
         </v-col> 
+
+          <v-col> 
+              <v-card
+                max-width="100%"
+                outlined
+              >
+                <v-list-item >
+                  <v-list-item-content>
+                    <v-list-item-title class="text-h5 mb-1">
+                      Employers
+                    </v-list-item-title>
+                    <v-list-item-subtitle>{{user.employers_count}}</v-list-item-subtitle>
+                  </v-list-item-content>
+
+                </v-list-item>
+
+                <v-card-actions>
+                  <v-btn
+                    text
+                    color="teal accent-4"
+                    @click="companies()"
+                  >
+                    View All
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-col> 
+
+            <v-col> 
+              <v-card
+                max-width="100%"
+                outlined
+              >
+                <v-list-item >
+                  <v-list-item-content>
+                    <v-list-item-title class="text-h5 mb-1">
+                      Job Seeker
+                    </v-list-item-title>
+                    <v-list-item-subtitle>{{user.job_seekers_count}}</v-list-item-subtitle>
+                  </v-list-item-content>
+
+                </v-list-item>
+
+                <v-card-actions>
+                  <v-btn
+                    text
+                    color="teal accent-4"
+                    @click="companies()"
+                  >
+                    View All
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-col> 
+
            </v-row>  
         </v-container>
     </v-app>

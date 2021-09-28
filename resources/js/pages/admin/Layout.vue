@@ -6,9 +6,7 @@
       flat
     >
       <v-container class="py-0 fill-height">
-    
-
-
+        <h2>Admin Panel </h2>
         <v-spacer></v-spacer>
 
       </v-container>
@@ -44,8 +42,28 @@
 
                 <v-list-item  link>
                   <v-list-item-content>
+                    <v-list-item-title @click="employers()">
+                         Employers
+                    </v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+
+                <v-divider class="my-2"></v-divider>
+
+                <v-list-item  link>
+                  <v-list-item-content>
                     <v-list-item-title @click="companies()">
                          Companies
+                    </v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+
+                <v-divider class="my-2"></v-divider>
+
+                <v-list-item  link>
+                  <v-list-item-content>
+                    <v-list-item-title @click="job_seekers()">
+                         Job Seekers
                     </v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
@@ -112,11 +130,17 @@ import { Link } from '@inertiajs/inertia-vue'
         },
          jobs() {
             this.$inertia.visit('jobs')
-      
         },
         companies() {
             this.$inertia.visit('companies')
         },
+         employers() {
+            this.$inertia.visit('employers')
+        },
+        job_seekers() {
+            this.$inertia.visit('job_seekers')
+        },
+        
     }
   }
 </script>

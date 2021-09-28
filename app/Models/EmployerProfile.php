@@ -16,6 +16,10 @@ class EmployerProfile extends Model
         'user_id','profile_image','current_job_title', 'short_bio', 'linkedin',
     ];
 
+    protected $casts = [
+        'created_at' => 'datetime:d/m/Y'
+    ];
+
     public function getProfileImageAttribute($value)
     {
         if($value)
