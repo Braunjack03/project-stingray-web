@@ -20,6 +20,7 @@ class Controller extends BaseController
     public $errorStatus = 0;
     public $employerRole = 1;
     public $jobSeekerRole = 2;
+    public $paginationLimit = 10;
 
     public function sendValidationErrors($route,$error){
         $error = json_decode($error);

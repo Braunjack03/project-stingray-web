@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Inertia\Inertia;
 
 class JobSeeker
 {
@@ -19,7 +20,7 @@ class JobSeeker
     {
         if ($request->user() && $request->user()->role != 2)
         {
-            return new Response(view('unauthorized')->with('role', 'JobSeeker'));
+            return Inertia::render('unauthorized',['role'=>'JobSeeker']);
         }
         return $next($request);
     }

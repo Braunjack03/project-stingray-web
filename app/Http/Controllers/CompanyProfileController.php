@@ -278,60 +278,70 @@ class CompanyProfileController extends Controller
     }
 
     public function showCompany($slug = ''){
-        $company = CompanyProfile::with('job_posts')->join('locations','company_profiles.location_id','locations.id')
-        ->join('users','company_profiles.user_id','=','users.id')
-        ->select(
-            'company_profiles.id',
-            'company_profiles.user_id',
-            'company_profiles.name',
-            'company_profiles.mission',
-            'company_profiles.name',
-            'locations.name as location',
-            'company_profiles.local_employees',
-            'company_profiles.global_employees',
-            'company_profiles.year_founded',
-            'company_profiles.website_url',
-            'company_profiles.created_at',
-            'company_profiles.industry_ids',
-            'company_profiles.logo_image_url',
-            'company_profiles.uuid',
-            'company_profiles.unclaimed',
-            'users.role',
-        )
-        ->where('company_profiles.slug',$slug)->first();
-        if($company->user_id == Auth::id())
-        {
-            $company->unclaimed = 0;
-        }    
-        //$company->unclaimed    
-        $selected_industries = explode(',',$company['industry_ids']);
-        $industries = CompanyType::whereIn('id', $selected_industries)->pluck('name')->toArray();
-        $company['industry_types'] = implode(' | ',$industries);
 
-        $company['logo_image_url'] = ($company['logo_image_url']) ? getBucketImageUrl($company['uuid'],$company['logo_image_url'],'company') : '';
+        try{
+            $company = CompanyProfile::with('job_posts')->join('locations','company_profiles.location_id','locations.id')
+            ->join('users','company_profiles.user_id','=','users.id')
+            ->select(
+                'company_profiles.id',
+                'company_profiles.user_id',
+                'company_profiles.name',
+                'company_profiles.mission',
+                'company_profiles.name',
+                'locations.name as location',
+                'company_profiles.local_employees',
+                'company_profiles.global_employees',
+                'company_profiles.year_founded',
+                'company_profiles.website_url',
+                'company_profiles.created_at',
+                'company_profiles.industry_ids',
+                'company_profiles.logo_image_url',
+                'company_profiles.uuid',
+                'company_profiles.unclaimed',
+                'users.role',
+            )
+            ->where('company_profiles.slug',$slug)->first();
+            if($company->user_id == Auth::id())
+            {
+                $company->unclaimed = 0;
+            }       
+            $selected_industries = explode(',',$company['industry_ids']);
+            $industries = CompanyType::whereIn('id', $selected_industries)->pluck('name')->toArray();
+            $company['industry_types'] = implode(' | ',$industries);
 
-        $job_posts = JobPost::where('company_profile_id',$company['id'])->orderBy('id','DESC')->get()->toArray();
-        
-        $job_post_model = new JobPost();
-        foreach($job_posts as $key => $job)
-        {
-            $job_posts[$key]['location_id'] = $job_post_model->getJobLocation($job['remotetype_id']);
-        }    
-        
-        return Inertia::render('single-company',['data'=>$company,'job_posts'=>$job_posts,'industries',$industries]);
+            $company['logo_image_url'] = ($company['logo_image_url']) ? getBucketImageUrl($company['uuid'],$company['logo_image_url'],'company') : '';
+
+            $job_posts = JobPost::where('company_profile_id',$company['id'])->orderBy('id','DESC')->get()->toArray();
+            
+            $job_post_model = new JobPost();
+            foreach($job_posts as $key => $job)
+            {
+                $job_posts[$key]['location_id'] = $job_post_model->getJobLocation($job['remotetype_id']);
+            }    
+            
+            return Inertia::render('single-company',['data'=>$company,'job_posts'=>$job_posts,'industries',$industries]);
+
+        }catch (\Exception $e) {
+            $message = $e->getMessage();
+            return $this->sendErrorResponse('login',$message);
+        }
     }
 
     public function claimProfile($id = ''){   
-       
-       //$status = CompanyProfile::where('uuid',$id)->update(['unclaimed'=>0]);
-       ActivityLog::addToLog(__('activitylogs.company_profile_updated'),'company claimed');
-       $user = CompanyProfile::join('users','company_profiles.user_id','=','users.id')
-       ->select('company_profiles.name as company_name','users.name','users.email')
-       ->where('company_profiles.uuid',$id)->first();  
-       Mail::send('emails.claimCompanyProfile',['user'=>$user], function($message){
-            $message->to(env('ADMIN_EMAIL'));
-            $message->subject(__('messages.profile_claimed'));
-        });
-        return redirect()->back()->with(['message' => __('messages.company_claimed')]);
+       try{
+            //$status = CompanyProfile::where('uuid',$id)->update(['unclaimed'=>0]);
+            ActivityLog::addToLog(__('activitylogs.company_profile_updated'),'company claimed');
+            $user = CompanyProfile::join('users','company_profiles.user_id','=','users.id')
+            ->select('company_profiles.name as company_name','users.name','users.email')
+            ->where('company_profiles.uuid',$id)->first();  
+            Mail::send('emails.claimCompanyProfile',['user'=>$user], function($message){
+                $message->to(env('ADMIN_EMAIL'));
+                $message->subject(__('messages.profile_claimed'));
+            });
+            return redirect()->back()->with(['message' => __('messages.company_claimed')]);
+        }catch (\Exception $e) {
+            $message = $e->getMessage();
+            return $this->sendErrorResponse('login',$message);
+        }
     }
 }
