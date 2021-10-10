@@ -25,7 +25,7 @@ class LocationSeeder extends Seeder
     function load_locations(){
 
 
-        $name = "Remote/Flexiable";
+        $name = "Remote/Flexible";
         DB::table('locations')->insert([
             'name' => $name,
             'created_at' => now(),
