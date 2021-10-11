@@ -16,12 +16,7 @@
                     <v-text-field v-model="user.name" required></v-text-field>
                     <div v-if="errors.name" class="mt-2 error">{{ errors.name }}</div>
 
-                    <label>Location*</label>
-                      <v-checkbox
-                        v-model="user.remotetype_id"
-                        value="1" 
-                        label= "Remote"
-                      ></v-checkbox>
+                    
                      <v-row >
                       <v-col
                         class="d-flex"

@@ -14,7 +14,7 @@
                 <v-form ref="form" >
     
                     <label>Company Logo (Recommended 500px x 500px) </label>
-                    <v-file-input v-model="user.logo_image_url" accept="image/*" @change="onFileChange" show-size counter outlined dense></v-file-input>
+                    <v-file-input v-model="user.logo_image_url" accept="image/*" @change="onFileChange" outlined dense></v-file-input>
                     
                     <v-icon v-if="user.logo_image_src" color="gray darken-2" class="ml-auto" @click="removeImage()"> mdi-close-circle</v-icon>
                     <v-img

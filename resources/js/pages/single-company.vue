@@ -49,7 +49,10 @@
                     <li v-for="company in job_posts" :key="company.id">
                       <v-row no-gutters class="mt-5">
                         <v-col cols="8" sm="6" md="8" >
-                              <h4>{{ company.name }} ({{ company.location_id }})</h4>
+
+                        
+
+                              <h4><a :href="`/jobs/${data.slug}/${company.slug}`">{{ company.name }} ({{ company.location_id }})</a></h4>
                               <div v-html="company.content"></div>
                         </v-col>
                       </v-row>
