@@ -16,7 +16,7 @@
                     {{ $page.props.flash.message }}
                   </div>  
                   
-                    <ul v-if="job_posts" id="example-1">
+                  <ul v-if="job_posts" id="example-1">
                     <li v-for="company in job_posts" :key="company.id">
 
                      <v-row no-gutters class="mt-5">

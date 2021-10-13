@@ -16,7 +16,7 @@
                 <v-form ref="form" v-model="valid" lazy-validations >
     
                     <label>Profile Image (Recommended 500px x 500px) </label>
-                    <v-file-input accept="image/*" v-model="user.profile_image"  ref="fileInput" @change="onFileChange" show-size counter outlined dense></v-file-input>
+                    <v-file-input accept="image/*" v-model="user.profile_image"  ref="fileInput" @change="onFileChange" outlined dense></v-file-input>
                     
                     <v-icon v-if="user.profile_image_src" color="gray darken-2" class="ml-auto" @click="removeImage()"> mdi-close-circle</v-icon>
                     <v-img

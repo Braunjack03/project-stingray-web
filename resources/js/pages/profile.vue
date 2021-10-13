@@ -13,7 +13,7 @@
                 <v-form ref="form" v-model="valid" lazy-validations >
     
                     <label>Profile Image (Recommended 500px x 500px) </label>
-                    <v-file-input v-model="user.profile_image" accept="image/*" ref="fileInput" @change="onFileChange" show-size counter outlined dense></v-file-input>
+                    <v-file-input v-model="user.profile_image" accept="image/*" ref="fileInput" @change="onFileChange" outlined dense></v-file-input>
                     
                     <v-icon v-if="user.profile_image_src" color="gray darken-2" class="ml-auto" @click="removeImage()"> mdi-close-circle</v-icon>
                     <v-img
@@ -56,7 +56,7 @@
                     <div v-if="errors.twitter" class="mt-2 error">{{ errors.twitter }}</div>
                     
                     <label><strong>Current Resume </strong></label>
-                    <v-file-input show-size counter outlined dense v-model="user.current_resume"></v-file-input>
+                    <v-file-input outlined dense v-model="user.current_resume"></v-file-input>
                     <div v-if="errors.current_resume" class="mt-2 error">{{ errors.current_resume }}</div>
 
 

@@ -63,6 +63,7 @@ class HomeController extends Controller
             })
             ->orderBy('job_posts.created_at','DESC')
             ->paginate($this->paginationLimit);
+            
             $locations = Location::get();
             return Inertia::render('job_posts', ['job_posts' => $job_posts,'location_id'=>$request->loc,'term'=>$request->q,'locations'=>$locations]);
         }catch (\Exception $e) {

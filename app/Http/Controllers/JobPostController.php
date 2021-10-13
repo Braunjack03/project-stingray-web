@@ -79,7 +79,7 @@ class JobPostController extends Controller
         try{
             $user = Auth::user();
             $job_categories = JobCat::get();
-            $locations = Location::get();
+            $locations = Location::orderBy('id','desc')->get();
             
             $uuid = $request->all()['c_id'];
        
@@ -97,7 +97,7 @@ class JobPostController extends Controller
      * @return \Illuminate\View\View
      */
     public function store(Request $request){        
-          
+
         if(!Auth::check())
         {
             return $this->sendErrorResponse('login',__('messages.unauthorized'));
@@ -108,8 +108,8 @@ class JobPostController extends Controller
         $request->request->add(['user_id' => $user_id,'uuid'=>$job_uuid]);
 
         $data = $request->all();
-        
-        if(!isset($data['remotetype_id']))
+        $data['remotetype_id'] = 1;
+        if($data['location_id'] != 8)
         {
             $data['remotetype_id'] = 3;
         }

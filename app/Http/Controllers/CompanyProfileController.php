@@ -298,6 +298,7 @@ class CompanyProfileController extends Controller
                 'company_profiles.logo_image_url',
                 'company_profiles.uuid',
                 'company_profiles.unclaimed',
+                'company_profiles.slug',
                 'users.role',
             )
             ->where('company_profiles.slug',$slug)->first();

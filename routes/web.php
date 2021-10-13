@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\JobPost;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\HomeController;
@@ -108,5 +109,19 @@ Route::group(['prefix' => 'employer', 'middleware' => ['auth','employer']], func
 
     Route::get('delete-job', [JobPostController::class, 'destroy'])->name('jobs.delete');
 
+
+});
+
+Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function() {
+
+    Route::get('dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+
+    Route::get('jobs', [AdminController::class, 'jobs'])->name('admin.jobs');
+
+    Route::get('companies', [AdminController::class, 'companies'])->name('admin.companies');
+
+    Route::get('employers', [AdminController::class, 'employers'])->name('admin.employers');
+
+    Route::get('job_seekers', [AdminController::class, 'job_seekers'])->name('admin.job_seekers');
 
 });

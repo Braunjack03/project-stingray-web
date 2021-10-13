@@ -15,7 +15,7 @@
                     ></v-img>
             </v-col>        
             <v-col class="mt-12" md="6" cols="8">        
-            <h2>{{data.name}} <v-btn v-if="(data.unclaimed) == 1" v-on:click="claimProfile(data.uuid)" class="claim-profile">(Claim this Profile)</v-btn> </h2>
+            <h2>{{data.name}} <v-btn v-if="(data.unclaimed) == 1 && (data.role)==3" v-on:click="claimProfile(data.uuid)" class="claim-profile">(Claim this Profile)</v-btn> </h2>
             <p>{{data.industry_types}}</p>
                </v-col>
             </v-row>
@@ -49,7 +49,10 @@
                     <li v-for="company in job_posts" :key="company.id">
                       <v-row no-gutters class="mt-5">
                         <v-col cols="8" sm="6" md="8" >
-                              <h4>{{ company.name }} ({{ company.location_id }})</h4>
+
+                        
+
+                              <h4><a :href="`/jobs/${data.slug}/${company.slug}`">{{ company.name }} ({{ company.location_id }})</a></h4>
                               <div v-html="company.content"></div>
                         </v-col>
                       </v-row>
@@ -66,7 +69,7 @@
   import {Link } from '@inertiajs/inertia-vue'
 import Layout from './Layout'
     export default {
-         components: {
+         components: { 
         Link,
         Layout,
         },

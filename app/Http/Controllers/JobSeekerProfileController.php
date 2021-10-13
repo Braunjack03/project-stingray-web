@@ -97,14 +97,15 @@ class JobSeekerProfileController extends Controller
         ];
 
         $messages = [
-            'max' => 'The profile image must not be greater than 1 MB',
+            'profile_image.max' => 'The profile image must not be greater than 1 MB',
+            'current_resume.max' => 'The resume size must not be greater than 5 MB',
         ]; 
 
         $validator = Validator::make($data, [
             'name' => 'required',
             'current_job_title' => 'required',
             'profile_image' => 'nullable|mimes:jpeg,png,jpg,gif|max:1000',
-            'current_resume' => 'nullable|mimes:pdf,doc,docx,txt',
+            'current_resume' => 'nullable|mimes:pdf,doc,docx,txt|max:5000',
         ],$messages);
         
         if ($validator->fails()){
