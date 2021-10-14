@@ -66,7 +66,7 @@ class AuthController extends Controller
                         {
                             return redirect()->intended('/admin/dashboard');
                         }else{
-                            return redirect()->intended('/dashboard/profile');
+                            return redirect()->intended('/profile');
                         }
                     }else{
                         $user = User::where('email',$credentials['email'])->first();

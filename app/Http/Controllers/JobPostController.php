@@ -37,16 +37,12 @@ class JobPostController extends Controller
         try{
             $user = Auth::user();
             $companies = CompanyProfile::where('uuid',$request->all()['c_id']);
-            $job_posts = JobPost::where('company_profile_id',$companies->first()['id'])->orderBy('id','DESC')->get()->toArray();
+            $job_posts = JobPost::select('locations.name as location_id','job_posts.created_at as created_on','job_posts.name','job_posts.uuid')->join('locations','job_posts.location_id','=','locations.id')->where('job_posts.company_profile_id',$companies->first()['id'])->orderBy('job_posts.id','DESC')->get()->toArray();
             $job_posts_count = JobPost::where('company_profile_id',$companies->first()['id'])->count();
-            $job_post_model = new JobPost();
-            foreach($job_posts as $key => $job)
-            {
-                $job_posts[$key]['location_id'] = $job_post_model->getJobLocation($job['remotetype_id']);
-            }
+            
             $companies = CompanyProfile::where('uuid',$request->all()['c_id']);
             $job_post_counts = JobPost::where('company_profile_id',$companies->first()['id'])->count();
-            
+            //dd($job_posts);
             $response = ['status' => $this->successStatus,'message' => '','responseCode'=> $this->successResponse];
             $respones_array = [
                 'success' => $response,
