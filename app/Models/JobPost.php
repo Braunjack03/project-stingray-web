@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-\Carbon\Carbon::setToStringFormat('d-m-Y');
+//\Carbon\Carbon::setToStringFormat('d-m-Y');
 
 
 class JobPost extends Model

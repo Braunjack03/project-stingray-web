@@ -28,7 +28,7 @@
                         <v-col cols="8" sm="6" md="8" >
                               <h3>{{ company.name }}</h3>
                               Location: {{ company.location_id }} <br/>
-                              Published: {{ company.created_at }}<br/>
+                              Published: {{ setDateFormat(company.created_on) }}<br/>
                         </v-col>
                       </v-row>
                     </li>
@@ -89,6 +89,21 @@
       }, 
       showCreateForm() {
           this.showCreate = true;
+      },
+      setDateFormat(dateObject) {
+          var d = new Date(dateObject);
+          var day = d.getDate();
+          var month = d.getMonth() + 1;
+          var year = d.getFullYear();
+          if (day < 10) {
+              day = "0" + day;
+          }
+          if (month < 10) {
+              month = "0" + month;
+          }
+          var date = day + "/" + month + "/" + year;
+
+          return date;
       }
     },
   }

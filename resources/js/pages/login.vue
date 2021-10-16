@@ -60,6 +60,7 @@ import Layout from './Layout'
       submit() {
           let test = this.$inertia.post('/login', this.form );
           console.log('here',test);
+          console.log('fomm',this.form);
           if(this.form.email){ 
               window.localStorage.setItem("username",this.form.email); 
           }
