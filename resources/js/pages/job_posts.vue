@@ -1,16 +1,13 @@
 <template>
    <Layout>
       <Head title="Job Listing" />
-      <div>
-            <v-app app>
-               <v-container>
-                  <h2>Project Stingray</h2>
-                  <div class="filter text-center">
-                     <v-row >
-                      <v-col
-                        class="d-flex"
-                        cols="3"
-                      >
+
+              <section>
+               <div class="max-w-6xl mx-auto px-4 sm:px-6 relative">
+                  <div class="pt-10 pb-12 md:pt-16 md:pb-20">
+
+                     <div class="max-w-3xl mx-auto text-center pb-12 md:pb-20">
+                     
                         <v-select
                           v-model='location_id'
                           item-text="name"
@@ -19,15 +16,9 @@
                           label="Location"
                           @change="search"
                         ></v-select>
-                      </v-col>
-                       <v-col
-                        class="d-flex"
-                        cols="3"
-                      >
                      <input type="text" name="table_search" value= '' class="form-control float-right" placeholder="Search" v-model="term" @keyup="search">
-
-                      </v-col>
-                    </v-row>    
+  
+                    </div>
                   </div>
 
                   <div v-if="job_posts.data.length > 0">
@@ -45,9 +36,8 @@
                         </v-col>
                       </v-row>  
                   </div>
-               </v-container>
-         </v-app>
-      </div>
+            </div>
+         </section>
    </Layout>   
 </template>
 
@@ -63,7 +53,7 @@ export default {
       Head,
       Layout,
       'CustomCard': JobPost,
-      Pagination
+      Pagination,
    },
    props: {
       job_posts : Object,  

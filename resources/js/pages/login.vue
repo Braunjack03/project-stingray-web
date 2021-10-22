@@ -1,36 +1,73 @@
 <template>
     <Layout>
-    <v-app app>
-        <v-container>
-            <v-card class="mx-auto px-8 py-12" max-width="500" elevation="2">
 
-            <h2>Login</h2>   
-            <br/>
-                <v-form ref="form" >
-                    <div v-if="errors.message" class="mt-2 error">{{ errors.message }}</div>
-                    <div v-if="success" class="mt-2 success">{{ success.message }}</div>
-                    <label>Email address</label>
-                    <v-text-field v-model="form.email" :rules="form.emailRules" required></v-text-field>
+        <section class="relative">
+          <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="pt-32 pb-12 md:pt-40 md:pb-20">
+
+              <!-- Page header -->
+              <div class="max-w-3xl mx-auto text-center pb-12 md:pb-20">
+                <h1 class="h1">Welcome back. We exist to make entrepreneurship easier.</h1>
+              </div>
+
+        <!-- Form -->
+            <div class="max-w-sm mx-auto">
+              <div class="flex items-center my-6">
+                <div class="border-t border-gray-700 border-dotted flex-grow mr-3" aria-hidden="true"></div>
+                <div class="text-gray-400">sign in with your email</div>
+                <div class="border-t border-gray-700 border-dotted flex-grow ml-3" aria-hidden="true"></div>
+              </div>
+              <form>
+                <div v-if="errors.message" class="mt-2 error">{{ errors.message }}</div>
+                <div v-if="success" class="mt-2 success">{{ success.message }}</div>
+                <div class="flex flex-wrap -mx-3 mb-4">
+                  <div class="w-full px-3">
+                    <label class="block text-gray-300 text-sm font-medium mb-1" for="email">Email</label>
+
+                    <v-text-field v-model="form.email" :rules="form.emailRules" placeholder="you@yourcompany.com" autocomplete  class="form-input w-full text-gray-300" required  ></v-text-field>
                     <div v-if="errors.email" class="mt-2 error">{{ errors.email }}</div>
+                  </div>
+                </div>
+                <div class="flex flex-wrap -mx-3 mb-4">
+                  <div class="w-full px-3">
+                    <label class="block text-gray-300 text-sm font-medium mb-1" for="password">Password</label>
 
-                    <label>Password</label>
-                    <v-text-field v-model="form.password" :rules="form.passwordRules" type="password" required></v-text-field>
+                    <v-text-field v-model="form.password" :rules="form.passwordRules" type="password" class="form-input w-full text-gray-300" placeholder="Password (at least 10 characters)" autocomplete require></v-text-field>
                     
                     <div v-if="errors.password" class="mt-2 error">{{ errors.password }}</div>
+                  </div>
+                </div>
+                <div class="flex flex-wrap -mx-3 mb-4">
+                  <div class="w-full px-3">
+                    <div class="flex justify-between">
+                      <label class="flex items-center">
+                        <!--input type="checkbox" class="form-checkbox" />
+                        <span class="text-gray-400 ml-2">Keep me signed in</span-->
+                      </label>
+                      <Link to="/forgot-password" class="text-purple-600 hover:text-gray-200 transition duration-150 ease-in-out">Forgot Password?</Link>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex flex-wrap -mx-3 mt-6">
+                  <div class="w-full px-3">
+                     <v-btn :disabled="form.processing" class="btn text-white bg-purple-600 hover:bg-purple-700 w-full"  @click="submit()">Login</v-btn>
+                  </div>
+                </div>
+              </form>
+              <div class="text-gray-400 text-center mt-6">
+                Don’t you have an account? <Link to="/register" class="text-purple-600 hover:text-gray-200 transition duration-150 ease-in-out">Sign up</Link>
+              </div>
+            </div>
 
-                     <a href="/forgot-password" replace>Forgot Password?</a><br/><br/>
-                    <v-btn :disabled="form.processing" color="success" class="mr-4"  @click="submit()">Login</v-btn>
-                </v-form>
-                 <br/>
-                 <Link href="/register" text >Don't Have an Account? Register Here </Link>
-            </v-card>           
-        </v-container>
-    </v-app>
+            </div>
+        </div>
+      </section>
     </Layout>
 </template>   
 <script>
 import { Link } from '@inertiajs/inertia-vue'
 import Layout from './Layout'
+
 
   export default {
     components: {
