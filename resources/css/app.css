@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+label.v-label.theme--light {
+   color: rgba(155, 169, 180, var(--tw-text-opacity))
+}
+
+.register-form .v-icon.v-icon {color: #d6d6d6;}
+
+.register-form .v-input--selection-controls__ripple:before {background-color:#d6d6d6;}

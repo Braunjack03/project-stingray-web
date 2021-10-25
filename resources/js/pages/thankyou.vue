@@ -1,20 +1,31 @@
 <template>
-    <v-app app>
-        <v-container>
-            <v-card class="mx-auto px-8 py-12" max-width="500" elevation="2">
-               <h2>Thank You</h2>   
+  <Layout>   
+     <section class="relative">
+          <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="pt-32 pb-12 md:pt-40 md:pb-20">
+              
 
-                <Link href="/login" text >Click Here to Login </Link>
-            </v-card>          
-        </v-container>
-    </v-app>
+               <!-- Page header -->
+              <div class="max-w-3xl mx-auto text-center pb-12 md:pb-20">
+                <h1 class="h1">Thank You</h1>
+                <p class="text-xl text-gray-400 aos-init aos-animate" >Click Here to<Link href="/login" text > Login </Link></p>
+                
+              </div>
+
+        <!-- Form -->
+            </div>
+        </div>
+      </section>    
+    </Layout>   
 </template>   
 <script>
+ import Layout from './Layout'
 import { Link } from '@inertiajs/inertia-vue'
 
 export default {
   components: {
     Link,
+    Layout
   }
 }
 </script>

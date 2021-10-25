@@ -1,23 +1,35 @@
 <template>
     <Layout>
-        <v-app app>
-            <v-container>
-                <v-card class="mx-auto px-8 py-12" max-width="500" elevation="2">
+        <section class="relative">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+          <div class="pt-32 pb-12 md:pt-40 md:pb-20">
 
-                <h2>Enter Your Email</h2>   
-                <br/>
-                    <v-form ref="form"  v-model="valid" lazy-validations >
-                    <div v-if="errors.message" class="mt-2 error">{{ errors.message }}</div>
-                    <div v-if="success" class="mt-2 success">{{ success.message }}</div>
-                        <label>Email address</label>
-                        <v-text-field v-model="form.email" :rules="form.emailRules" required></v-text-field>
-                        <div v-if="errors.email" class="mt-2 error">{{ errors.email }}</div>
+               <!-- Page header -->
+                <div class="max-w-3xl mx-auto text-center pb-12 md:pb-20">
+                <h1 class="h1 mb-4">Forgot your password?</h1>
+                <p class="text-xl text-gray-400">We'll email you instructions on how to reset it.</p>
+                </div>
 
-                        <v-btn :disabled="!valid" color="success" class="mr-4" @click="submit()" >Send</v-btn>
-                    </v-form>
-                </v-card>           
-            </v-container>
-        </v-app>
+                <div class="max-w-sm mx-auto">
+                  <div v-if="errors.message" class="text-red-500 text-sm mt-2">{{ errors.message }}</div>
+                <div v-if="success" class="text-green-500 text-sm mt-2">{{ success.message }}</div>
+                   <form >
+                        <div class="flex flex-wrap -mx-3 mb-4">
+                        <div class="w-full px-3">
+                            <label class="block text-gray-300 text-sm font-medium mb-1" for="email">Email</label>
+                            <input id="email" type="email" v-model="form.email" :rules="form.emailRules" class="form-input w-full text-gray-300" placeholder="you@yourcompany.com" required />
+                        </div>
+                        </div>
+                        <div class="flex flex-wrap -mx-3 mt-6">
+                        <div class="w-full px-3">
+                            <button :disabled="!valid" type="button" @click="submit()" class="btn text-white bg-purple-600 hover:bg-purple-700 w-full">Reset Password</button>
+                        </div>
+                        </div>
+                    </form>  
+                </div>
+            </div>
+          </div>
+      </section>
     </Layout>
 </template>   
 <script>

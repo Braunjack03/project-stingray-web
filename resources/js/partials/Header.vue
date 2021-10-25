@@ -30,22 +30,23 @@
             <li>
               <Link href="/about" class="text-gray-300 hover:text-gray-200 px-4 py-2 flex items-center transition duration-150 ease-in-out">About us</Link>
             </li>
+             <li>
+              <Link v-if="isLoggedIn && isLoggedIn.role == 2" href="/dashboard" class="text-gray-300 hover:text-gray-200 px-4 py-2 flex items-center transition duration-150 ease-in-out">Dashboard</Link>
+            </li>
+            <li>
+              <Link v-if="isLoggedIn && isLoggedIn.role == 1" href="/employer/dashboard" class="text-gray-300 hover:text-gray-200 px-4 py-2 flex items-center transition duration-150 ease-in-out">Dashboard</Link>
+            </li>
+            <li>
+              <Link v-if="isLoggedIn && isLoggedIn.role == 2" href="/profile" class="text-gray-300 hover:text-gray-200 px-4 py-2 flex items-center transition duration-150 ease-in-out">Profile</Link>
+            </li>
+            <li>
+              <Link v-if="isLoggedIn && isLoggedIn.role == 1" href="/employer/profile" class="text-gray-300 hover:text-gray-200 px-4 py-2 flex items-center transition duration-150 ease-in-out">Profile</Link>
+            </li>
             <!-- 1st level: hover -->
-            <Dropdown title="Support">
-              <li>
-                <Link href="/contact" class="font-medium text-sm text-gray-400 hover:text-purple-600 flex py-2 px-4 leading-tight">Contact us</Link>
-              </li>
-              <li>
-                <Link href="/help" class="font-medium text-sm text-gray-400 hover:text-purple-600 flex py-2 px-4 leading-tight">Help center</Link>
-              </li>
-              <li>
-                <Link href="/404" class="font-medium text-sm text-gray-400 hover:text-purple-600 flex py-2 px-4 leading-tight">404</Link>
-              </li>
-            </Dropdown>
           </ul>
 
           <!-- Desktop sign in links -->
-          <ul class="flex flex-grow justify-end flex-wrap items-center">
+          <ul class="flex flex-grow justify-end flex-wrap items-center" v-if="!isLoggedIn">
             <li>
               <Link href="/login" class="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out">Sign in</Link>
             </li>
@@ -53,6 +54,15 @@
               <Link href="/register" class="btn-sm text-white bg-purple-600 hover:bg-purple-700 ml-3">Sign up</Link>
             </li>
           </ul>
+
+          <ul class="flex flex-grow justify-end flex-wrap items-center" v-if="isLoggedIn">
+             <Dropdown :title="getUserEmail()">
+              <li>
+                <Link v-on:click="logout" href="/logout" class="font-medium text-sm text-gray-400 hover:text-purple-600 flex py-2 px-4 leading-tight">Sign Out</Link>
+              </li>
+            </Dropdown>
+          </ul>
+         
 
         </nav>
 
@@ -84,25 +94,26 @@
               <li>
                 <Link href="/about" class="flex text-gray-300 hover:text-gray-200 py-2">About us</Link>
               </li>
-              <li class="py-2 my-2 border-t border-b border-gray-700">
-                <span class="flex text-gray-300 py-2">Support</span>
-                <ul class="pl-4">
-                  <li>
-                    <Link href="/contact" class="text-sm flex font-medium text-gray-400 hover:text-gray-200 py-2">Contact us</Link>
-                  </li>
-                  <li>
-                    <Link href="/help" class="text-sm flex font-medium text-gray-400 hover:text-gray-200 py-2">Help center</Link>
-                  </li>
-                  <li>
-                    <Link href="/404" class="text-sm flex font-medium text-gray-400 hover:text-gray-200 py-2">404</Link>
-                  </li>
-                </ul>
+              <li>
+                <Link v-if="isLoggedIn && isLoggedIn.role == 2" href="/dashboard" class="flex text-gray-300 hover:text-gray-200 py-2">Dashboard</Link>
               </li>
               <li>
-                <Link href="/login" class="flex font-medium w-full text-purple-600 hover:text-gray-200 py-2 justify-center">Sign in</Link>
+                <Link v-if="isLoggedIn && isLoggedIn.role == 1" href="/employer/dashboard" class="flex text-gray-300 hover:text-gray-200 py-2">Dashboard</Link>
               </li>
               <li>
-                <Link href="/register" class="font-medium w-full inline-flex items-center justify-center border border-transparent px-4 py-2 my-2 rounded-sm text-white bg-purple-600 hover:bg-purple-700 transition duration-150 ease-in-out">Sign up</Link>
+                <Link  v-if="isLoggedIn && isLoggedIn.role == 2" href="/profile" class="flex text-gray-300 hover:text-gray-200 py-2">Profile</Link>
+              </li>
+              <li>
+                <Link v-if="isLoggedIn && isLoggedIn.role == 1" href="/employer/profile" class="flex text-gray-300 hover:text-gray-200 py-2">Profile</Link>
+              </li>
+              <li>
+                <Link v-if="!isLoggedIn" href="/login" class="flex font-medium w-full text-purple-600 hover:text-gray-200 py-2 justify-center">Sign in</Link>
+              </li>
+              <li>
+                <Link v-if="!isLoggedIn" href="/register" class="font-medium w-full inline-flex items-center justify-center border border-transparent px-4 py-2 my-2 rounded-sm text-white bg-purple-600 hover:bg-purple-700 transition duration-150 ease-in-out">Sign up</Link>
+              </li>
+              <li>
+                <Link v-if="isLoggedIn" v-on:click="logout" href="/logout" class="font-medium w-full inline-flex items-center justify-center border border-transparent px-4 py-2 my-2 rounded-sm text-white bg-purple-600 hover:bg-purple-700 transition duration-150 ease-in-out">Sign Out</Link>
               </li>
             </ul>
           </nav>  
@@ -132,7 +143,16 @@ export default {
     };
   },
   methods: {
-    
+     logout() {
+        window.localStorage.removeItem("username");
+        window.location.replace("/logout")      
+      },
+      getUserEmail(){
+        if(this.$page.props.auth.user){
+          return this.$page.props.auth.user.email
+        }
+        
+      },
     clickOutside(e) {
       if (
         !this.mobileNavOpen ||

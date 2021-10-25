@@ -45,5 +45,5 @@ mix
     .postCss("resources/css/app.css", "public/css", [
         require("tailwindcss"),
        ])
-    .sass('resources/css/style.scss', 'public/css')
-    .sass('resources/css/additional-styles/theme.scss', 'public/css');
+    //.sass('resources/css/style.scss', 'public/css')
+    //.sass('resources/css/additional-styles/theme.scss', 'public/css');

@@ -1,9 +1,9 @@
 <template>
 <Layout>
     <Head title="Employer Profile" />
-    <v-app app>
-        <v-container>
-            <v-card class="mx-auto px-12 py-8" elevation="2">
+    <section class="relative">
+          <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="pt-32 pb-12 md:pt-40 md:pb-20">
 
             <h2>Your Settings  </h2>   
             <h3>Profile</h3>
@@ -64,10 +64,9 @@
                   <br/>
 
                   <Link v-if="(user.company_profile_count < 3)" href="/employer/create-company" color="text" class="mr-4" >Create New Company Profile</Link>
-            </v-card> 
-       
-        </v-container>
-    </v-app>
+             </div>
+        </div>
+      </section>
 </Layout>
 </template>
 <script>
