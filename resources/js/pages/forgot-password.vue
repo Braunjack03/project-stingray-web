@@ -1,5 +1,6 @@
 <template>
     <Layout>
+      <Head title="Forgot Password" />
         <section class="relative">
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
           <div class="pt-32 pb-12 md:pt-40 md:pb-20">
@@ -13,7 +14,7 @@
                 <div class="max-w-sm mx-auto">
                   <div v-if="errors.message" class="text-red-500 text-sm mt-2">{{ errors.message }}</div>
                 <div v-if="success" class="text-green-500 text-sm mt-2">{{ success.message }}</div>
-                   <form >
+                   <form class="forgot-password">
                         <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
                             <label class="block text-gray-300 text-sm font-medium mb-1" for="email">Email</label>
@@ -26,6 +27,9 @@
                         </div>
                         </div>
                     </form>  
+                  <div class="text-gray-400 text-center mt-6">
+                    <Link href="/login" class="text-purple-600 hover:text-gray-200 transition duration-150 ease-in-out">Cancel</Link>
+                  </div>
                 </div>
             </div>
           </div>
@@ -34,9 +38,13 @@
 </template>   
 <script>
 import Layout from './Layout'
+import { Head,Link } from '@inertiajs/inertia-vue'
+
   export default {
       components: {
       Layout,
+      Head,
+      Link
     },
     props: {
         errors: Object,

@@ -14,7 +14,6 @@
               <!--  -->
          </main>
         
-      <Footer/>
     </div>
 </template>
 

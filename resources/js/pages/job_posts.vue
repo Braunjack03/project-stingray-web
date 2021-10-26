@@ -1,7 +1,6 @@
 <template>
    <Layout>
       <Head title="Job Listing" />
-
               <section>
                <div class="max-w-6xl mx-auto px-4 sm:px-6 relative">
                   <div class="pt-10 pb-12 md:pt-16 md:pb-20">
@@ -38,6 +37,7 @@
                   </div>
             </div>
          </section>
+          <Footer/>
    </Layout>   
 </template>
 
@@ -47,6 +47,7 @@ import JobPost from '../components/JobPost.vue';
 import Layout from './Layout';
 import { Head,Link } from '@inertiajs/inertia-vue';
 import Pagination from '../components/JobPagination.vue';
+import Footer from '../partials/Footer.vue';
 
 export default {
    components: {
@@ -54,6 +55,7 @@ export default {
       Layout,
       'CustomCard': JobPost,
       Pagination,
+      Footer,
    },
    props: {
       job_posts : Object,  

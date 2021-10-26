@@ -1,5 +1,6 @@
 <template>
     <Layout>   
+        <Head title="Reset Password"/>
      <section class="relative">
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
           <div class="pt-32 pb-12 md:pt-40 md:pb-20">
@@ -12,7 +13,7 @@
                 <div class="max-w-sm mx-auto">
                     <div v-if="errors.message" class="mt-2 error">{{ errors.message }}</div>
                         <div v-if="success" class="mt-2 success">{{ success.message }}</div>
-                   <form >
+                   <form class="forgot-password">
                         <div class="flex flex-wrap -mx-3 mb-4">
                             <div class="w-full px-3">
                             <label class="block text-gray-300 text-sm font-medium mb-1" for="password">Password <span class="text-red-600">*</span></label>
@@ -45,9 +46,11 @@
 </template>   
 <script>
   import Layout from './Layout'
+  import { Head } from '@inertiajs/inertia-vue'
   export default {
       components: {
       Layout,
+      Head,
     },
     props: {
         errors: Object,

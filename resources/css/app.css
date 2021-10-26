@@ -10,3 +10,13 @@ label.v-label.theme--light {
 .register-form .v-icon.v-icon {color: #d6d6d6;}
 
 .register-form .v-input--selection-controls__ripple:before {background-color:#d6d6d6;}
+
+.register-form .flex , .login-form .flex, .forgot-password .flex{max-width: none;}
+
+.form-input, .form-textarea, .form-multiselect, .form-select, .form-checkbox, .form-radio {border: 1px solid rgba(51, 54, 58,1);}
+
+html{
+   overflow-y:auto !important}
+   .v-input--radio-group__input label {
+   margin-left: 0.5rem;
+   }
