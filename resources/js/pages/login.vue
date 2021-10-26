@@ -31,7 +31,7 @@
                   <div class="w-full px-3">
                     <label class="block text-gray-300 text-sm font-medium mb-1" for="password">Password</label>
 
-                    <input id="password" v-model="form.password" :rules="form.passwordRules" type="password" class="form-input w-full text-gray-300" placeholder="Password" autocomplete required />
+                    <input id="password" v-model="form.password" :rules="form.passwordRules" type="password" class="form-input w-full text-gray-300" placeholder="Password (at least 8 characters)" autocomplete required />
                     
                     <div v-if="errors.password" class="mt-2 error">{{ errors.password }}</div>
                   </div>
