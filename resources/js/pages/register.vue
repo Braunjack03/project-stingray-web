@@ -22,7 +22,7 @@
               <form class="register-form">
                 <div class="flex flex-wrap -mx-3 mb-4">
                   <div class="w-full px-3">
-                    <label class="block text-gray-300 text-sm font-medium mb-1" for="email">Email <span class="text-red-600">*</span></label>
+                    <label class="block text-gray-300 text-sm font-medium mb-1" for="email">Work Email <span class="text-red-600">*</span></label>
                     <input id="email" type="email" v-model="form.email" class="form-input w-full text-gray-300" placeholder="you@yourcompany.com" :rules="form.emailRules" required />
                     <p v-if="errors.email" class="text-red-500 text-sm mt-2">{{ errors.email }}</p>
                   </div>
@@ -56,6 +56,9 @@
                     ></v-radio>
                     </v-radio-group>
                   </div>
+                </div>
+                 <div class="text-sm text-gray-500 text-center">
+                  I agree to be contacted by Open PRO about this offer as per the Open PRO <a class="underline text-gray-400 hover:text-gray-200 hover:no-underline transition duration-150 ease-in-out" href="#0">Privacy Policy</a>.
                 </div>
                 <div class="flex flex-wrap -mx-3 mt-6">
                   <div class="w-full px-3">
