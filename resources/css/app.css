@@ -20,3 +20,32 @@ html{
    .v-input--radio-group__input label {
    margin-left: 0.5rem;
    }
+
+[data-aos^=fade][data-aos^=fade] {
+      opacity: 1 !important;
+  }   
+
+  .theme--light.v-input {
+   padding-top: 0 !important;
+   padding-bottom: 0 !important;
+}
+
+.v-text-field__details{
+   display: none !important;
+}
+
+
+.fileUpload {
+   border: rgba(197, 210, 220,1) !important;
+   margin-bottom: 20px!important;
+}
+
+.theme--light.v-input, .theme--light.v-input input, .theme--light.v-input textarea {
+    color: rgba(197, 210, 220,1) !important;
+}
+
+.theme--light.v-btn.v-btn--has-bg {
+   background-color: rgba(93, 93, 255, 1) !important;
+   color: #FFF !important;
+   height: 48px !important;
+}
