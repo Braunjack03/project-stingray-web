@@ -47,7 +47,7 @@
 
                     <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
-                          <label class="block text-gray-300 text-sm font-medium mb-1" for="email">Current Job Title </label>
+                          <label class="block text-gray-300 text-sm font-medium mb-1" for="email">Current Job Title <span class="text-red-600">*</span></label>
                            <v-text-field v-model="user.current_job_title" class="form-input input-field-outer w-full text-gray-300" placeholder="Current Job Title" required></v-text-field>
                           <div v-if="errors.current_job_title" class="mt-2 error">{{ errors.current_job_title }}</div>
                         </div>
