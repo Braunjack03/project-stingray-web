@@ -1,11 +1,15 @@
 <template>
 <Layout>
     <Head title="Job Posts" />
-    <v-app app>
-        <v-container>
-            <v-card class="mx-auto px-12 py-8" elevation="2">
-            <h2>{{company_details.name}} Job Posts</h2>
-            <br/>
+    <section class="relative">
+          <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="pt-32 pb-12 md:pt-40 md:pb-20">
+
+            <div class="max-w-3xl mx-auto text-center pb-12 md:pb-16">
+                <h1 class="h1 mb-4" data-aos="fade-up">{{company_details.name}} Job Posts</h1>
+            </div>
+
+            <div class="max-w-xl mx-auto">
             <Link v-if="companies_count > 0 && job_posts_count < 3" :href="'/employer/create-job?c_id='+company_details.uuid" color="text" class="mr-4" >Add New Job Post</Link>
 
             <br/><br/><br/>
@@ -33,13 +37,12 @@
                       </v-row>
                     </li>
                   </ul>
-                  
-                  <br/> 
           
-            </v-card> 
-       
-        </v-container>
-    </v-app>
+             </div>
+             </div>
+            </div>
+        </div>
+    </section>
 </Layout>
 </template>
 <script>

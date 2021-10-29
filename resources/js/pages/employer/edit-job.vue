@@ -1,13 +1,16 @@
 <template>
 <Layout>
-    <Head title="Edit Job" />
-    <v-app app>
-        <v-container>
-            <v-card class="mx-auto px-12 py-8" elevation="2">
+    <Head title="Create Job" />
+    <section class="relative">
+          <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="pt-32 pb-12 md:pt-40 md:pb-20">
 
-            <h2>Update Job  </h2> 
-            <h3>Job Information</h3>
-            <br/>
+            <div class="max-w-3xl mx-auto text-center pb-12 md:pb-16">
+                <h1 class="h1 mb-4" data-aos="fade-up">Update Job </h1>
+                <p>Job Information</p>
+            </div>
+
+            <div class="max-w-xl mx-auto">
                 <div v-if="errors" class="mt-2 error">{{ errors.message }}</div>
                 <div v-if="success" class="mt-2 success">{{ success.message }}</div>
                 <v-form ref="form" v-model="valid" validations >
@@ -57,11 +60,11 @@
                     <br/>
                     <v-btn :disabled="!valid" color="success" class="mr-4" @click="submit()" >Save Changes</v-btn>
                 </v-form>
-                <br/><br/>
-            </v-card> 
-       
-        </v-container>
-    </v-app>
+             </div>
+             </div>
+            </div>
+        </div>
+    </section>
 </Layout>
 </template>
 <script>

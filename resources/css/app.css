@@ -49,3 +49,82 @@ html{
    color: #FFF !important;
    height: 48px !important;
 }
+
+/* Form Field Style */
+.input-field-outer .v-input__slot:after,
+.input-field-outer.v-input--is-focused .v-input__slot:after{
+   display: none;
+}
+
+.input-field-outer input {
+   min-height: 48px;
+   margin: 0;
+}
+
+.input-field-outer.v-input--is-focused {
+   border-color:rgba(112, 125, 134, 1);
+}
+
+.input-field-outer .v-input__slot {
+   margin: 0;
+   padding: 0;
+}
+
+.input-field-outer .v-input__slot:before {
+   display: none;
+}
+
+.form-avataar .v-icon.text--darken-2, 
+.form-file-upload .v-icon.v-icon--link{
+   color: #c5d2dc;
+}
+
+.form-file-upload .v-input__control .v-file-input__text{
+    color: #c5d2dc!important;
+}
+
+
+.form-file-upload .v-input__control .v-input__slot{
+   margin-bottom: 0!important;
+   position: relative;
+   min-height: 50px!important;
+   border:1px solid rgb(51, 54, 58);
+   outline: 0px!important;
+}
+
+.form-file-upload .v-input__control fieldset{
+   border:0px solid rgb(51, 54, 58);
+   top: 0;
+   outline: 0px!important;
+}
+
+.form-file-upload .v-input__control,
+.form-file-upload .v-input__control .v-text-field__slot,
+.form-file-upload .v-input__control .v-file-input__text,
+.form-file-upload .v-input__control:focus,
+.form-file-upload .v-input__control .v-text-field__slot:focus,
+.form-file-upload .v-input__control .v-file-input__text:focus,
+.form-file-upload .v-input__control fieldset{
+   border: 0px!important;
+   outline: 0px!important;
+}
+
+.input-field-outer input::placeholder {
+  color: #c5d2dc!important;
+  opacity: .4;
+}
+
+.form-avataar {   
+    max-width: 200px;
+    position: relative;
+    margin: 10px auto 10px;
+}
+
+.form-avataar button.v-icon.v-icon--link {
+    position: absolute;
+    right: -6px;
+    top: -18px;
+}
+.fileUpload .v-input__prepend-outer{
+   order: 99;
+}

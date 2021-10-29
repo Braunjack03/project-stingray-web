@@ -1,120 +1,198 @@
 <template>
 <Layout>
     <Head title="Employer Profile" />
-    <v-app app>
-        <v-container>
-            <v-card class="mx-auto px-12 py-8" elevation="2">
+    <section class="relative">
+          <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="pt-32 pb-12 md:pt-40 md:pb-20">
 
-            <h2>Company Profile  </h2> 
-            <br/>
-                <div v-if="errors.message" class="mt-2 error">{{ errors.message }}</div>
-                <div v-if="success" class="mt-2 success">{{ success.message }}</div>
-                <v-form ref="form" v-model="valid" validations >
-    
-                    <label>Company Logo (Recommended 500px x 500px) </label>
-                    <v-file-input v-model="user.logo_image_url" accept="image/*" @change="onFileChange" outlined dense></v-file-input>
-                    
-                    <v-icon v-if="user.logo_image_src" color="gray darken-2" class="ml-auto" @click="removeImage()"> mdi-close-circle</v-icon>
-                    
-                    <v-img
-                      :src="user.logo_image_src"
-                      max-height="150"
-                      max-width="250"
-                    ></v-img>
-                    
-                     <br/><br/>   
-                    <label>Company Name *</label>
-                    <v-text-field v-model="user.name" required></v-text-field>
-                    <div v-if="errors.name" class="mt-2 error">{{ errors.name }}</div>
+            <div class="max-w-3xl mx-auto text-center pb-12 md:pb-16">
+                <h1 class="h1 mb-4" data-aos="fade-up">Company Profile</h1>
+            </div>
 
-                    <label>Number of local employees </label>
-                    <v-text-field v-model="user.local_employees" required></v-text-field>
-                    <div v-if="errors.local_employees" class="mt-2 error">{{ errors.local_employees }}</div>
-                    
-                    <label>Number of global employees </label>
-                    <v-text-field v-model="user.global_employees" required></v-text-field>
-                    <div v-if="errors.global_employees" class="mt-2 error">{{ errors.global_employees }}</div>
+              <div class="max-w-xl mx-auto">
 
-                    <label>Company Website </label>
-                    <v-text-field v-model="user.website_url" placeholder="https://example.com" required></v-text-field>
-                    <div v-if="errors.website_url" class="mt-2 error">{{ errors.website_url }}</div>
+                <div v-if="errors.message" class="text-red-500 text-sm mt-2">{{ errors.message }}</div>
+                  <div v-if="success" class="text-green-500 text-sm mt-2">{{ success.message }}</div>
+                <v-form ref="form" v-model="valid" validations class="form-outer-wrapper max-w-xl">
 
-                    <label>Company Mission </label>
-                    <v-textarea v-model="user.mission" rows="2" required></v-textarea>
-                    <div v-if="errors.mission" class="mt-2 error">{{ errors.mission }}</div>
+                    <div class="flex flex-wrap -mx-3 mb-4">
+                      <div class="w-full px-3 form-file-upload">
+                          <label class="block text-gray-300 text-sm font-medium mb-1">Company Logo (Recommended 500px x 500px) </label>
+                            <v-file-input class="fileUpload form-input input-field-outer w-full text-gray-300" v-model="user.logo_image_url" accept="image/*" @change="onFileChange" outlined dense></v-file-input>
+                            
+                            
+                            <v-icon v-if="user.logo_image_src" color="gray darken-2" class="ml-auto" @click="removeImage()"> mdi-close-circle</v-icon>
+                            
+                            <v-img
+                              :src="user.logo_image_src"
+                              max-height="150"
+                              max-width="250"
+                            ></v-img>
+                     </div>
+                    </div>   
+
+                     <div class="flex flex-wrap -mx-3 mb-4">
+                        <div class="w-full px-3">
+                          <label class="block text-gray-300 text-sm font-medium mb-1">Company Name <span class="text-red-600">*</span></label>
+                          <v-text-field v-model="user.name" class="form-input input-field-outer w-full text-gray-300" required></v-text-field>
+                          <div v-if="errors.name" class="mt-2 error">{{ errors.name }}</div>
+                        </div>
+                    </div>   
+
+                    <div class="flex flex-wrap -mx-3 mb-4">
+                        <div class="w-full px-3">
+                          <label class="block text-gray-300 text-sm font-medium mb-1">Number of local employees</label>
+                            <v-text-field v-model="user.local_employees" class="form-input input-field-outer w-full text-gray-300" required></v-text-field>
+                          <div v-if="errors.local_employees" class="mt-2 error">{{ errors.local_employees }}</div>
+                      </div>
+                    </div>   
                     
-                    <label>Company Industry (select up to 3) </label>
-                    <ul class="industries-list">
-                      <li v-for="(item, index) in industries" :key="index">
-                        <label>
-                          <input
-                            type="checkbox"
-                            v-model="industry"
-                            :value="index"
-                            :disabled="industry.length > 2 && industry.indexOf(index) === -1" 
-                            number> {{ item }} 
-                        </label>
-                      </li>
-                    </ul>
-                    <div v-if="errors.industry" class="mt-2 error">{{ errors.industry }}</div>
+                    <div class="flex flex-wrap -mx-3 mb-4">
+                        <div class="w-full px-3">
+                          <label class="block text-gray-300 text-sm font-medium mb-1">Number of global employees</label>
+                            <v-text-field v-model="user.global_employees" class="form-input input-field-outer w-full text-gray-300" required></v-text-field>
+                          <div v-if="errors.global_employees" class="mt-2 error">{{ errors.global_employees }}</div>
+                      </div>
+                    </div>   
+
+                    <div class="flex flex-wrap -mx-3 mb-4">
+                        <div class="w-full px-3">
+                          <label class="block text-gray-300 text-sm font-medium mb-1">Company Website</label>
+                          <v-text-field v-model="user.website_url" class="form-input input-field-outer w-full text-gray-300" placeholder="https://example.com" required></v-text-field>
+                          <div v-if="errors.website_url" class="mt-2 error">{{ errors.website_url }}</div>
+                       </div>
+                    </div>  
+
+                    <div class="flex flex-wrap -mx-3 mb-4">
+                        <div class="w-full px-3">
+                          <label class="block text-gray-300 text-sm font-medium mb-1">Company Mission</label>
+                          <v-textarea v-model="user.mission" rows="2" class="form-input input-field-outer w-full text-gray-300" required></v-textarea>
+                          <div v-if="errors.mission" class="mt-2 error">{{ errors.mission }}</div>
+                       </div>
+                    </div>  
+                    
+
+                    <div class="flex flex-wrap -mx-3 mb-4">
+                        <div class="w-full px-3">
+                          <label class="block text-gray-300 text-sm font-medium mb-1">Company Industry (select up to 3)</label>
+                            <ul class="industries-list">
+                              <li v-for="(item, index) in industries" :key="index">
+                                <label>
+                                  <input
+                                    type="checkbox"
+                                    v-model="industry"
+                                    :value="index"
+                                    :disabled="industry.length > 2 && industry.indexOf(index) === -1" 
+                                    number> {{ item }} 
+                                </label>
+                              </li>
+                            </ul>
+                            <div v-if="errors.industry" class="mt-2 error">{{ errors.industry }}</div>
+                     </div>
+                    </div>  
 
                     <h3>Local Address</h3>  
 
-                    <label>Address </label>
-                    <v-text-field v-model="user.street_addr_1"  required></v-text-field>
-                    <div v-if="errors.street_addr_1" class="mt-2 error">{{ errors.street_addr_1 }}</div>
+                    <div class="flex flex-wrap -mx-3 mb-4">
+                        <div class="w-full px-3">
+                          <label class="block text-gray-300 text-sm font-medium mb-1">Address</label>
+                          <v-text-field v-model="user.street_addr_1"   class="form-input input-field-outer w-full text-gray-300" required></v-text-field>
+                          <div v-if="errors.street_addr_1" class="mt-2 error">{{ errors.street_addr_1 }}</div>
+                        </div>
+                    </div>  
 
-                    <label>Address 2</label>
-                    <v-text-field v-model="user.street_addr_2"  required></v-text-field>
-                    <div v-if="errors.street_addr_2" class="mt-2 error">{{ errors.street_addr_2 }}</div>
+                    
+                     <div class="flex flex-wrap -mx-3 mb-4">
+                        <div class="w-full px-3">
+                          <label class="block text-gray-300 text-sm font-medium mb-1">Address 2</label>
+                          <v-text-field v-model="user.street_addr_2" class="form-input input-field-outer w-full text-gray-300" required></v-text-field>
+                          <div v-if="errors.street_addr_2" class="mt-2 error">{{ errors.street_addr_2 }}</div>
+                        </div>
+                    </div> 
 
-                    <label>City </label>
-                    <v-text-field v-model="user.city" required></v-text-field>
-                    <div v-if="errors.city" class="mt-2 error">{{ errors.city }}</div>
 
-                    <label>State </label>
-                      <v-row >
-                      <v-col
-                        class="d-flex"
-                        cols="12"
-                      >
-                        <v-select
-                          v-model='user.state_abbr'
-                          :items="items"
-                          label="State"
-                        ></v-select>
-                      </v-col>
-                    <div v-if="errors.state_abbr" class="mt-2 error">{{ errors.state }}</div>
-                    </v-row>
-                    <label>Zipcode </label>
-                    <v-text-field v-model="user.postcode" required></v-text-field>
-                    <div v-if="errors.postcode" class="mt-2 error">{{ errors.postcode }}</div>
+                     <div class="flex flex-wrap -mx-3 mb-4">
+                        <div class="w-full px-3">
+                          <label class="block text-gray-300 text-sm font-medium mb-1">City</label>
+                          <v-text-field v-model="user.city" class="form-input input-field-outer w-full text-gray-300" required></v-text-field>
+                          <div v-if="errors.city" class="mt-2 error">{{ errors.city }}</div>
+                        </div>
+                    </div> 
+
+                    <div class="flex flex-wrap -mx-3 mb-4">
+                        <div class="w-full px-3">
+                          <label class="block text-gray-300 text-sm font-medium mb-1">State </label>
+                            <v-row >
+                            <v-col
+                              class="d-flex"
+                              cols="12"
+                            >
+                              <v-select
+                                v-model='user.state_abbr'
+                                :items="items"
+                                label="State"
+                                class="form-input input-field-outer w-full text-gray-300"
+                              ></v-select>
+                            </v-col>
+                          <div v-if="errors.state_abbr" class="mt-2 error">{{ errors.state }}</div>
+                          </v-row>
+                      </div>
+                    </div> 
+
+                     <div class="flex flex-wrap -mx-3 mb-4">
+                        <div class="w-full px-3">
+                          <label class="block text-gray-300 text-sm font-medium mb-1">Zipcode </label>
+                          <v-text-field v-model="user.postcode" class="form-input input-field-outer w-full text-gray-300" required></v-text-field>
+                          <div v-if="errors.postcode" class="mt-2 error">{{ errors.postcode }}</div>
+                      </div>
+                    </div> 
 
                     <h3>Social</h3>  
 
-                     <label>LinkedIn</label>
-                    <v-text-field v-model="user.linkedin_user"></v-text-field>
+                       <div class="flex flex-wrap -mx-3 mb-4">
+                        <div class="w-full px-3">
+                          <label class="block text-gray-300 text-sm font-medium mb-1">LinkedIn</label>
+                    <v-text-field v-model="user.linkedin_user"class="form-input input-field-outer w-full text-gray-300" ></v-text-field>
                     <div v-if="errors.linkedin_user" class="mt-2 error">{{ errors.linkedin_user }}</div>
+                     </div>
+                    </div> 
 
-                     <label>Facebook</label>
-                    <v-text-field v-model="user.github_user"></v-text-field>
+                       <div class="flex flex-wrap -mx-3 mb-4">
+                        <div class="w-full px-3">
+                          <label class="block text-gray-300 text-sm font-medium mb-1">Facebook</label>
+                    <v-text-field v-model="user.github_user" class="form-input input-field-outer w-full text-gray-300" ></v-text-field>
                     <div v-if="errors.github_user" class="mt-2 error">{{ errors.facebook_user }}</div>
+                     </div>
+                    </div> 
 
-                     <label>Twitter</label>
-                    <v-text-field v-model="user.twitter_user"></v-text-field>
+                       <div class="flex flex-wrap -mx-3 mb-4">
+                        <div class="w-full px-3">
+                          <label class="block text-gray-300 text-sm font-medium mb-1">Twitter</label>
+                    <v-text-field v-model="user.twitter_user" class="form-input input-field-outer w-full text-gray-300" ></v-text-field>
                     <div v-if="errors.twitter_user" class="mt-2 error">{{ errors.twitter_user }}</div>
+                     </div>
+                    </div> 
 
-                    <label>Instagram</label>
-                    <v-text-field v-model="user.instagram_user"></v-text-field>
-                    <div v-if="errors.instagram_user" class="mt-2 error">{{ errors.instagram_user }}</div>
-                   
-                    <v-btn :disabled="!valid" color="success" class="mr-4" @click="submit()" >Save Changes</v-btn>
+                      <div class="flex flex-wrap -mx-3 mb-4">
+                        <div class="w-full px-3">
+                          <label class="block text-gray-300 text-sm font-medium mb-1">Instagram</label>
+                          <v-text-field v-model="user.instagram_user" class="form-input input-field-outer w-full text-gray-300" ></v-text-field>
+                          <div v-if="errors.instagram_user" class="mt-2 error">{{ errors.instagram_user }}</div>
+                     </div>
+                    </div> 
+
+                    <div class="flex flex-wrap -mx-3 mt-6">
+                        <div class="w-full px-3">
+                          <v-btn :disabled="!valid" @click="submit()" class="btn text-white bg-purple-600 hover:bg-purple-700 w-full">Save Changes</v-btn>
+                        </div>
+                      </div> 
+
                 </v-form>
-                <br/><br/>
-            </v-card> 
-       
-        </v-container>
-    </v-app>
+                </div>
+             </div>
+            </div>
+        </div>
+    </section>
 </Layout>
 </template>
 <script>
@@ -129,7 +207,7 @@
       errors : Object,  
       user: Object,
       success: Object,
-      industries: Object
+      industries: Array
     },
      data: () => ({
         industry:[],

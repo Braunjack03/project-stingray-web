@@ -1,22 +1,33 @@
 <template>
 <Layout>
     <Head title="Create Job" />
-    <v-app app>
-        <v-container>
-            <v-card class="mx-auto px-12 py-8" elevation="2">
+    <section class="relative">
+          <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="pt-32 pb-12 md:pt-40 md:pb-20">
 
-            <h2>Post a new Job  </h2> 
-            <h3>Job Information</h3>
-            <br/>
+            <div class="max-w-3xl mx-auto text-center pb-12 md:pb-16">
+                <h1 class="h1 mb-4" data-aos="fade-up">Post a new Job</h1>
+                <p>Job Information</p>
+            </div>
+
+            <div class="max-w-xl mx-auto">
                 <div v-if="errors" class="mt-2 error">{{ errors.message }}</div>
                 <div v-if="success" class="mt-2 success">{{ success.message }}</div>
                 <v-form ref="form" v-model="valid" validations >
     
-                    <label>Job Title* </label>
-                    <v-text-field v-model="user.name" required></v-text-field>
-                    <div v-if="errors.name" class="mt-2 error">{{ errors.name }}</div>
+                    <div class="flex flex-wrap -mx-3 mb-4">
+                        <div class="w-full px-3">
+                          <label class="block text-gray-300 text-sm font-medium mb-1">Job Title* </label>
+                          <v-text-field v-model="user.name" required></v-text-field>
+                          <div v-if="errors.name" class="mt-2 error">{{ errors.name }}</div>
+                        </div>
+                    </div>   
 
                     
+                    <div class="flex flex-wrap -mx-3 mb-4">
+                        <div class="w-full px-3">
+                          <label class="block text-gray-300 text-sm font-medium mb-1">Location</label>
+
                      <v-row >
                       <v-col
                         class="d-flex"
@@ -31,8 +42,13 @@
                         ></v-select>
                       </v-col>
                     <div v-if="errors.location_id" class="mt-2 error">{{ errors.location_id }}</div>
-                    </v-row>                   
-                    <label>Job Category *</label>
+                    </v-row>   
+                     </div>
+                    </div> 
+
+                    <div class="flex flex-wrap -mx-3 mb-4">
+                        <div class="w-full px-3">
+                          <label class="block text-gray-300 text-sm font-medium mb-1">Job Category *</label>
                       <v-row >
                       <v-col
                         class="d-flex"
@@ -48,21 +64,32 @@
                       </v-col>
                     <div v-if="errors.job_cat_id" class="mt-2 error">{{ errors.job_cat_id }}</div>
                     </v-row>
+                     </div>
+                    </div> 
 
-                    <label>Job Application URL *</label>
+                    <div class="flex flex-wrap -mx-3 mb-4">
+                        <div class="w-full px-3">
+                          <label class="block text-gray-300 text-sm font-medium mb-1"> Job Application URL *</label>
                     <v-text-field v-model="user.apply_url" placeholder="https://example.com" required></v-text-field>
                     <div v-if="errors.apply_url" class="mt-2 error">{{ errors.apply_url }}</div>
+                     </div>
+                    </div> 
 
-                    <label>Job Description *</label>
+                    <div class="flex flex-wrap -mx-3 mb-4">
+                        <div class="w-full px-3">
+                          <label class="block text-gray-300 text-sm font-medium mb-1">Job Description *</label>
                     <tiptap-vuetify v-model="user.content" :extensions="extensions"  />
-                    <br/>
+
+                     </div>
+                    </div> 
+
                     <v-btn :disabled="!valid" color="success" class="mr-4" @click="submit()" >Save Changes</v-btn>
                 </v-form>
-                <br/><br/>
-            </v-card> 
-       
-        </v-container>
-    </v-app>
+                </div>
+             </div>
+            </div>
+        </div>
+    </section>
 </Layout>
 </template>
 <script>
