@@ -39,10 +39,6 @@
                 <div class="flex flex-wrap -mx-3 mb-4">
                   <div class="w-full px-3">
                     <div class="flex justify-between">
-                      <label class="flex items-center">
-                        <input type="checkbox" class="form-checkbox" />
-                        <span class="text-gray-400 ml-2">Keep me signed in</span>
-                      </label>
                       <Link href="/forgot-password" class="text-purple-600 hover:text-gray-200 transition duration-150 ease-in-out">Forgot Password?</Link>
                     </div>
                   </div>

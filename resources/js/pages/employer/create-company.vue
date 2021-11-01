@@ -1,7 +1,7 @@
 <template>
 <Layout>
     <Head title="Employer Profile" />
-    <section class="relative">
+    <section class="relative" data-app>
           <div class="max-w-6xl mx-auto px-4 sm:px-6">
             <div class="pt-32 pb-12 md:pt-40 md:pb-20">
 
@@ -34,7 +34,7 @@
                      <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
                           <label class="block text-gray-300 text-sm font-medium mb-1">Company Name <span class="text-red-600">*</span></label>
-                          <v-text-field v-model="user.name" class="form-input input-field-outer w-full text-gray-300" required></v-text-field>
+                          <v-text-field v-model="user.name" class="form-input input-field-outer w-full text-gray-300" placeholder="Company Name *" required></v-text-field>
                           <div v-if="errors.name" class="mt-2 error">{{ errors.name }}</div>
                         </div>
                     </div>   
@@ -42,7 +42,7 @@
                     <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
                           <label class="block text-gray-300 text-sm font-medium mb-1">Number of local employees</label>
-                            <v-text-field v-model="user.local_employees" class="form-input input-field-outer w-full text-gray-300" required></v-text-field>
+                            <v-text-field v-model="user.local_employees" class="form-input input-field-outer w-full text-gray-300" placeholder="Number of local employees"  required></v-text-field>
                           <div v-if="errors.local_employees" class="mt-2 error">{{ errors.local_employees }}</div>
                       </div>
                     </div>   
@@ -50,7 +50,7 @@
                     <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
                           <label class="block text-gray-300 text-sm font-medium mb-1">Number of global employees</label>
-                            <v-text-field v-model="user.global_employees" class="form-input input-field-outer w-full text-gray-300" required></v-text-field>
+                            <v-text-field v-model="user.global_employees" class="form-input input-field-outer w-full text-gray-300" placeholder="Number of global employees" required></v-text-field>
                           <div v-if="errors.global_employees" class="mt-2 error">{{ errors.global_employees }}</div>
                       </div>
                     </div>   
@@ -66,7 +66,7 @@
                     <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
                           <label class="block text-gray-300 text-sm font-medium mb-1">Company Mission</label>
-                          <v-textarea v-model="user.mission" rows="2" class="form-input input-field-outer w-full text-gray-300" required></v-textarea>
+                          <v-textarea v-model="user.mission" rows="2" class="form-input input-field-outer w-full text-gray-300" placeholder="Company Mission" required></v-textarea>
                           <div v-if="errors.mission" class="mt-2 error">{{ errors.mission }}</div>
                        </div>
                     </div>  
@@ -91,12 +91,12 @@
                      </div>
                     </div>  
 
-                    <h3>Local Address</h3>  
+                    <h3 class="text-2xl mt-2 mb-1">Local Address</h3>  
 
                     <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
                           <label class="block text-gray-300 text-sm font-medium mb-1">Address</label>
-                          <v-text-field v-model="user.street_addr_1"   class="form-input input-field-outer w-full text-gray-300" required></v-text-field>
+                          <v-text-field v-model="user.street_addr_1"   class="form-input input-field-outer w-full text-gray-300" placeholder="Address" required></v-text-field>
                           <div v-if="errors.street_addr_1" class="mt-2 error">{{ errors.street_addr_1 }}</div>
                         </div>
                     </div>  
@@ -105,7 +105,7 @@
                      <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
                           <label class="block text-gray-300 text-sm font-medium mb-1">Address 2</label>
-                          <v-text-field v-model="user.street_addr_2" class="form-input input-field-outer w-full text-gray-300" required></v-text-field>
+                          <v-text-field v-model="user.street_addr_2" class="form-input input-field-outer w-full text-gray-300" placeholder="Address 2" required></v-text-field>
                           <div v-if="errors.street_addr_2" class="mt-2 error">{{ errors.street_addr_2 }}</div>
                         </div>
                     </div> 
@@ -114,7 +114,7 @@
                      <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
                           <label class="block text-gray-300 text-sm font-medium mb-1">City</label>
-                          <v-text-field v-model="user.city" class="form-input input-field-outer w-full text-gray-300" required></v-text-field>
+                          <v-text-field v-model="user.city" class="form-input input-field-outer w-full text-gray-300" placeholder="City" required></v-text-field>
                           <div v-if="errors.city" class="mt-2 error">{{ errors.city }}</div>
                         </div>
                     </div> 
@@ -132,6 +132,8 @@
                                 :items="items"
                                 label="State"
                                 class="form-input input-field-outer w-full text-gray-300"
+                                dense
+                                solo
                               ></v-select>
                             </v-col>
                           <div v-if="errors.state_abbr" class="mt-2 error">{{ errors.state }}</div>
@@ -142,17 +144,17 @@
                      <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
                           <label class="block text-gray-300 text-sm font-medium mb-1">Zipcode </label>
-                          <v-text-field v-model="user.postcode" class="form-input input-field-outer w-full text-gray-300" required></v-text-field>
+                          <v-text-field v-model="user.postcode" class="form-input input-field-outer w-full text-gray-300"  placeholder="Zipcode" required></v-text-field>
                           <div v-if="errors.postcode" class="mt-2 error">{{ errors.postcode }}</div>
                       </div>
                     </div> 
 
-                    <h3>Social</h3>  
+                    <h3 class="text-2xl mt-2 mb-1">Social</h3>  
 
                        <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
                           <label class="block text-gray-300 text-sm font-medium mb-1">LinkedIn</label>
-                    <v-text-field v-model="user.linkedin_user"class="form-input input-field-outer w-full text-gray-300" ></v-text-field>
+                    <v-text-field v-model="user.linkedin_user"class="form-input input-field-outer w-full text-gray-300" placeholder="LinkedIn"></v-text-field>
                     <div v-if="errors.linkedin_user" class="mt-2 error">{{ errors.linkedin_user }}</div>
                      </div>
                     </div> 
@@ -160,7 +162,7 @@
                        <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
                           <label class="block text-gray-300 text-sm font-medium mb-1">Facebook</label>
-                    <v-text-field v-model="user.github_user" class="form-input input-field-outer w-full text-gray-300" ></v-text-field>
+                    <v-text-field v-model="user.github_user" class="form-input input-field-outer w-full text-gray-300" placeholder="Facebook"></v-text-field>
                     <div v-if="errors.github_user" class="mt-2 error">{{ errors.facebook_user }}</div>
                      </div>
                     </div> 
@@ -168,7 +170,7 @@
                        <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
                           <label class="block text-gray-300 text-sm font-medium mb-1">Twitter</label>
-                    <v-text-field v-model="user.twitter_user" class="form-input input-field-outer w-full text-gray-300" ></v-text-field>
+                    <v-text-field v-model="user.twitter_user" class="form-input input-field-outer w-full text-gray-300" placeholder="Twitter"></v-text-field>
                     <div v-if="errors.twitter_user" class="mt-2 error">{{ errors.twitter_user }}</div>
                      </div>
                     </div> 
@@ -176,7 +178,7 @@
                       <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
                           <label class="block text-gray-300 text-sm font-medium mb-1">Instagram</label>
-                          <v-text-field v-model="user.instagram_user" class="form-input input-field-outer w-full text-gray-300" ></v-text-field>
+                          <v-text-field v-model="user.instagram_user" class="form-input input-field-outer w-full text-gray-300" placeholder="Instagram"></v-text-field>
                           <div v-if="errors.instagram_user" class="mt-2 error">{{ errors.instagram_user }}</div>
                      </div>
                     </div> 
@@ -207,7 +209,7 @@
       errors : Object,  
       user: Object,
       success: Object,
-      industries: Array
+      industries: Object
     },
      data: () => ({
         industry:[],

@@ -9,9 +9,6 @@
                 <h1 class="h1 mb-4" data-aos="fade-up">Profile Settings</h1>
             </div>
            
-                <div v-if="$page.props.flash.message" class="mt-2 success">
-                {{ $page.props.flash.message }}
-              </div>
               <div class="max-w-xl mx-auto">
                   <div v-if="errors.message" class="text-red-500 text-sm mt-2">{{ errors.message }}</div>
                   <div v-if="success" class="text-green-500 text-sm mt-2">{{ success.message }}</div>

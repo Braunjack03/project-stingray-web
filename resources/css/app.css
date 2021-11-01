@@ -109,7 +109,8 @@ html{
    outline: 0px!important;
 }
 
-.input-field-outer input::placeholder {
+.input-field-outer input::placeholder,
+.input-field-outer textarea::placeholder {
   color: #c5d2dc!important;
   opacity: .4;
 }
@@ -127,4 +128,45 @@ html{
 }
 .fileUpload .v-input__prepend-outer{
    order: 99;
+}
+
+ul.industries-list {
+    display: flex;
+    flex-flow: wrap;
+}
+
+ul.industries-list li {
+    max-width: 25%;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+
+.form-input.input-field-outer .v-input__control .v-input__slot[role="button"] {
+   background: transparent;
+   margin :0px;
+   color:#fff;
+}
+
+.form-input.input-field-outer .v-input__control .v-input__slot[role="button"]  .v-icon.v-icon,
+.v-select__selection{
+   color: #c5d2dc;
+}
+
+.tiptap-vuetify-editor.form-input.input-field-outer {
+   padding: 0;
+}
+
+
+
+@media (max-width:640px){
+   ul.industries-list li {
+      max-width: 50%;
+   }  
+}
+
+@media (max-width:480px){
+   ul.industries-list li {
+      max-width: 100%;
+   }  
 }
