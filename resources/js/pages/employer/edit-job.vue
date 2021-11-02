@@ -94,6 +94,12 @@
                           <v-btn :disabled="!valid" @click="submit()" class="btn text-white bg-purple-600 hover:bg-purple-700 w-full">Update Changes</v-btn>
                         </div>
                       </div>
+
+                      <div class="flex flex-wrap -mx-3 mt-6 text-center">
+                        <div class="w-full px-3">
+                          <p class="text-center">Please fill the required field(s)</p>                        
+                        </div>
+                      </div> 
                 </v-form>
              </div>
              </div>

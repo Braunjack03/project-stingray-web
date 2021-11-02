@@ -220,6 +220,11 @@
                 </div>
               </div>
 
+              <div class="flex flex-wrap -mx-3 mt-6 text-center">
+                  <div class="w-full px-3">
+                    <p class="text-center">Please fill the required field(s)</p>                        
+                  </div>
+                </div> 
               <!--label><strong>Current Resume </strong></label>
                         <v-file-input outlined dense v-model="user.current_resume"></v-file-input>
                         <div v-if="errors.current_resume" class="mt-2 error">{{ errors.current_resume }}</div-->

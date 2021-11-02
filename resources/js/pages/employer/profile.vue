@@ -6,10 +6,11 @@
             <div class="pt-32 pb-12 md:pt-40 md:pb-20">
 
             <div class="max-w-3xl mx-auto text-center pb-12 md:pb-16">
-                <h1 class="h1 mb-4" data-aos="fade-up">Profile Settings</h1>
+                <h1 class="h1 mb-4" data-aos="fade-up">Profile Settings </h1>
             </div>
            
               <div class="max-w-xl mx-auto">
+
                   <div v-if="errors.message" class="text-red-500 text-center text-sm mb-4">{{ errors.message }}</div>
                   <div v-if="success" class="text-green-500 text-center text-sm mb-4">{{ success.message }}</div>
 
@@ -77,7 +78,12 @@
                           <v-btn :disabled="!valid" @click="submit()" class="btn text-white bg-purple-600 hover:bg-purple-700 w-full">Save Changes</v-btn>
                         </div>
                       </div> 
-
+                      
+                    <div class="flex flex-wrap -mx-3 mt-6 text-center">
+                        <div class="w-full px-3">
+                          <p class="text-center">Please fill the required field(s)</p>                        
+                        </div>
+                      </div> 
                 </v-form>
                 <div class="flex flex-wrap -mx-3 mt-6">
                         <div class="w-full px-3">
