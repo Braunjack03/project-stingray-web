@@ -10,8 +10,12 @@
             </div>
            
               <div class="max-w-xl mx-auto">
-                  <div v-if="errors.message" class="text-red-500 text-sm mt-2">{{ errors.message }}</div>
-                  <div v-if="success" class="text-green-500 text-sm mt-2">{{ success.message }}</div>
+                  <div v-if="errors.message" class="text-red-500 text-center text-sm mb-4">{{ errors.message }}</div>
+                  <div v-if="success" class="text-green-500 text-center text-sm mb-4">{{ success.message }}</div>
+
+                  <div v-if="$page.props.flash.message" class="text-green-500 text-center text-sm mb-4">
+                  {{ $page.props.flash.message }}
+                </div>
                 <v-form ref="form" v-model="valid" lazy-validations class="form-outer-wrapper max-w-xl">
     
                     
@@ -37,7 +41,7 @@
                     <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
                           <label class="block text-gray-300 text-sm font-medium mb-1" for="email">Name <span class="text-red-600">*</span></label>
-                           <v-text-field v-model="user.name" class="form-input input-field-outer w-full text-gray-300" placeholder="Enter Name" required></v-text-field>
+                           <v-text-field v-model="user.name" :rules="[v => !!v || 'Name is required']" class="form-input input-field-outer w-full text-gray-300" placeholder="Enter Name" required></v-text-field>
                           <div v-if="errors.email" class="mt-2 error">{{ errors.name }}</div>
                         </div>
                     </div>
@@ -45,7 +49,7 @@
                     <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
                           <label class="block text-gray-300 text-sm font-medium mb-1" for="email">Current Job Title <span class="text-red-600">*</span></label>
-                           <v-text-field v-model="user.current_job_title" class="form-input input-field-outer w-full text-gray-300" placeholder="Current Job Title" required></v-text-field>
+                           <v-text-field v-model="user.current_job_title" :rules="[v => !!v || 'Current Job Title is required']" class="form-input input-field-outer w-full text-gray-300" placeholder="Current Job Title" required></v-text-field>
                           <div v-if="errors.current_job_title" class="mt-2 error">{{ errors.current_job_title }}</div>
                         </div>
                     </div>
@@ -70,7 +74,7 @@
 
                     <div class="flex flex-wrap -mx-3 mt-6">
                         <div class="w-full px-3">
-                          <v-btn @click="submit()" class="btn text-white bg-purple-600 hover:bg-purple-700 w-full">Save Changes</v-btn>
+                          <v-btn :disabled="!valid" @click="submit()" class="btn text-white bg-purple-600 hover:bg-purple-700 w-full">Save Changes</v-btn>
                         </div>
                       </div> 
 

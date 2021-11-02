@@ -10,10 +10,10 @@
             </div>
 
             <div class="max-w-xl mx-auto">
-            <Link v-if="companies_count > 0 && job_posts_count < 3" :href="'/employer/create-job?c_id='+company_details.uuid" color="text" class="mr-4" >Add New Job Post</Link>
+            <Link v-if="companies_count > 0 && job_posts_count < 3" :href="'/employer/create-job?c_id='+company_details.uuid" color="text" class="btn text-white bg-purple-600 hover:bg-purple-700 mb-3" >Add New Job Post</Link>
 
             <br/><br/><br/>
-            <h3>Current Job Posts</h3>
+            <h3 class="h3">Current Job Posts</h3>
             <br/>
 
                   <div v-if="$page.props.flash.message" class="mt-2 success">
@@ -24,16 +24,20 @@
                     <li v-for="company in job_posts" :key="company.id">
 
                      <v-row no-gutters class="mt-5">
-                        <v-col cols="3" sm="6" md="3" >
-                            <Link :href="'/employer/edit-job?id='+company.uuid" class="mr-4 btn" >EDIT</Link> | 
-                            <v-btn class="mr-4" v-on:click="deletejob(company.uuid)" color="#3f51b5" plain link >Delete</v-btn>
+                      <div class="col-sm-12 col-md-12 col-8 bg-white rounded-xl shadow-md overflow-hidden mt-5">
+                      <div class="">
+                        <v-col cols="12">
+                              <h3 class="uppercase tracking-wide text-xl text-indigo-500 font-semibold">{{ company.name }}</h3>
+                              <p class="mt-2 text-gray-800">Location: {{ company.location_id }} </p>
+                              <p class="mt-2 text-gray-800">Published: {{ setDateFormat(company.created_on) }}</p>
+                        </v-col>
+                        <v-col cols="12 flex">
+                            <Link :href="'/employer/edit-job?id='+company.uuid" class="mr-4 btn text-purple-800 custom-link" >EDIT</Link>
+                            <v-btn class="mr-4 text-purple-800 custom-link" v-on:click="deletejob(company.uuid)" color="#3f51b5" plain link >Delete</v-btn>
                           
                         </v-col>
-                        <v-col cols="8" sm="6" md="8" >
-                              <h3>{{ company.name }}</h3>
-                              Location: {{ company.location_id }} <br/>
-                              Published: {{ setDateFormat(company.created_on) }}<br/>
-                        </v-col>
+                      </div>
+                      </div>
                       </v-row>
                     </li>
                   </ul>

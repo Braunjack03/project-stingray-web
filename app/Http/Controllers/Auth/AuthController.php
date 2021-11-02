@@ -154,6 +154,11 @@ class AuthController extends Controller
                                 $message->subject(__('messages.verification_email'));
                             });
 
+                        Mail::send('emails.welcomeEmail', ['email' => $user->email], function($message) use($user){
+                            $message->to($user->email);
+                            $message->subject(__('messages.welcome_email'));
+                        });    
+
                         return Redirect::route('thankyou');
                 }catch (ModelNotFoundException $e){
                     return $this->sendErrorResponse($redirect_page,$e->getMessage());

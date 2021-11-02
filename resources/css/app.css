@@ -56,6 +56,11 @@ html{
    display: none;
 }
 
+.input-field-outer.form-input{
+   border: 0!important;
+   padding: 0!important;
+}
+
 .input-field-outer input {
    min-height: 48px;
    margin: 0;
@@ -83,19 +88,39 @@ html{
     color: #c5d2dc!important;
 }
 
+.input-field-outer.v-input--is-focused .v-input__control,
+.input-field-outer.v-input--has-state .v-input__control,
+.input-field-outer.v-input--has-state,
+.input-field-outer .v-input__control{
+   border:0px!important;
+   outline: 0!important;
+   border-color: transparent!important;
+}
+
+.input-field-outer .v-input__slot {
+    border: 1px solid rgba(51, 54, 58, var(--tw-border-opacity));
+    padding: 0 15px;
+}
+
+.input-field-outer.v-input--is-focused .v-input__slot{
+   border-color:rgba(112, 125, 134, 1)!important;
+}
+
+.input-field-outer.error--text .v-input__slot{
+   border-color: rgba(239,68,68,1) !important;
+}
 
 .form-file-upload .v-input__control .v-input__slot{
    margin-bottom: 0!important;
    position: relative;
    min-height: 50px!important;
-   border:1px solid rgb(51, 54, 58);
    outline: 0px!important;
 }
 
 .form-file-upload .v-input__control fieldset{
-   border:0px solid rgb(51, 54, 58);
    top: 0;
    outline: 0px!important;
+   border:0px;
 }
 
 .form-file-upload .v-input__control,
@@ -157,6 +182,61 @@ ul.industries-list li {
    padding: 0;
 }
 
+.theme--light.v-messages{
+   color:rgba(239,68,68,1) !important;
+}
+
+.input-field-outer {
+   border: 0px !important;
+   padding: 0 !important;
+   outline-color: red;
+}
+
+.input-field-outer .v-input__slot {
+   border: 1px solid rgba(51, 54, 58, var(--tw-border-opacity));
+   padding: 0 15px;
+}
+
+.v-text-field--outlined fieldset,
+.v-text-field.v-text-field--enclosed .v-text-field__details, 
+.v-text-field.v-text-field--enclosed:not(.v-text-field--rounded)>.v-input__control>.v-input__slot{
+   outline: 0px;
+}
+
+.v-text-field--filled>.v-input__control>.v-input__slot, 
+.v-text-field--full-width>.v-input__control>.v-input__slot, 
+.v-text-field--outlined>.v-input__control>.v-input__slot{
+   min-height: 50px!important;
+}
+
+body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
+   background: rgba(93, 93, 255, .5) !important;
+   color: inherit!important;
+}
+
+.v-text-field--outlined.v-input--has-state fieldset, 
+.v-text-field--outlined.v-input--is-focused fieldset,
+.form-input.input-field-outer fieldset{
+   border: 0px!important;
+}
+
+.input-field-outer .v-text-field__details {
+    display: block !important;
+}
+
+.input-field-outer .v-text-field__details .v-messages__message{
+   padding-top: 10px;
+}
+
+.custom-link {
+    color: rgb(63, 81, 181) !important;
+    height: auto !important;
+    opacity: 1 !important;
+    margin: 0!important;
+}
+.custom-link  .v-btn__content{
+   opacity: 1!important;
+}
 
 
 @media (max-width:640px){

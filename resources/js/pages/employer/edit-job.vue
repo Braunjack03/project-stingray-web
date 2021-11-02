@@ -18,7 +18,7 @@
                     <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
                           <label class="block text-gray-300 text-sm font-medium mb-1">Job Title <span class="text-red-600">*</span></label>
-                          <v-text-field v-model="user.name" class="form-input input-field-outer w-full text-gray-300" placeholder="Job Title" required></v-text-field>
+                          <v-text-field v-model="user.name" class="form-input input-field-outer w-full text-gray-300" :rules="[v => !!v || 'Job Title is required']" placeholder="Job Title" required></v-text-field>
                           <div v-if="errors.name" class="mt-2 error">{{ errors.name }}</div>
                         </div>
                     </div>   
@@ -48,9 +48,9 @@
                      </div>
                     </div> 
 
-                   <div class="flex flex-wrap -mx-3 mb-4">
+                    <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
-                          <label class="block text-gray-300 text-sm font-medium mb-1">Job Category *</label>
+                          <label class="block text-gray-300 text-sm font-medium mb-1">Job Category <span class="text-red-600">*</span></label>
                       <v-row >
                       <v-col
                         class="d-flex"
@@ -74,16 +74,16 @@
 
                     <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
-                          <label class="block text-gray-300 text-sm font-medium mb-1"> Job Application URL *</label>
-                    <v-text-field v-model="user.apply_url" class="form-input input-field-outer w-full text-gray-300" placeholder="https://example.com" required></v-text-field>
+                          <label class="block text-gray-300 text-sm font-medium mb-1"> Job Application URL <span class="text-red-600">*</span></label>
+                    <v-text-field v-model="user.apply_url" class="form-input input-field-outer w-full text-gray-300" :rules="[v => !!v || 'Job Application URL is required']" placeholder="https://example.com" required></v-text-field>
                     <div v-if="errors.apply_url" class="mt-2 error">{{ errors.apply_url }}</div>
                      </div>
                     </div> 
 
                     <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
-                          <label class="block text-gray-300 text-sm font-medium mb-1">Job Description *</label>
-                    <tiptap-vuetify v-model="user.content" :extensions="extensions" class="form-input input-field-outer w-full text-gray-300" />
+                          <label class="block text-gray-300 text-sm font-medium mb-1">Job Description <span class="text-red-600">*</span></label>
+                    <tiptap-vuetify v-model="user.content" :extensions="extensions" :rules="[v => !!v || 'Job Description is required']" class="form-input input-field-outer w-full text-gray-300" />
 
                      </div>
                     </div> 

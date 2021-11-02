@@ -14,7 +14,7 @@
                         <div v-if="errors.message" class="text-red-500 text-sm mt-2">{{ errors.message }}</div>
                         <div v-if="success" class="text-green-500 text-sm mt-2">{{ success.message }}</div>
     
-                        <v-form ref="form">
+                        <v-form ref="form" v-model="valid">
     
                             <div class="flex flex-wrap -mx-3 mb-4">
                                 <div class="w-full px-3 form-avataar">
@@ -35,7 +35,7 @@
                             <div class="flex flex-wrap -mx-3 mb-4">
                                 <div class="w-full px-3">
                                     <label class="block text-gray-300 text-sm font-medium mb-1">Company Name <span class="text-red-600">*</span></label>
-                                    <v-text-field v-model="user.name" class="form-input input-field-outer w-full text-gray-300" placeholder="Company Name *" required></v-text-field>
+                                    <v-text-field v-model="user.name" class="form-input input-field-outer w-full text-gray-300" :rules="[v => !!v || 'Company Name is required']" placeholder="Company Name" required></v-text-field>
                                     <div v-if="errors.name" class="mt-2 error">{{ errors.name }}</div>
                                 </div>
                             </div>
@@ -175,7 +175,7 @@
     
                             <div class="flex flex-wrap -mx-3 mt-6">
                                 <div class="w-full px-3">
-                                    <v-btn @click="submit()" class="btn text-white bg-purple-600 hover:bg-purple-700 w-full">Update Changes</v-btn>
+                                    <v-btn @click="submit()" :disabled="!valid" class="btn text-white bg-purple-600 hover:bg-purple-700 w-full">Update Changes</v-btn>
                                 </div>
                             </div>
                         </v-form>
@@ -204,7 +204,7 @@ export default {
     data: () => ({
         industry: [],
         items: ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'],
-
+        valid:true,
         form: {
             logo_image_url: '',
             name: '',

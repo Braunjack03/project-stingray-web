@@ -13,10 +13,10 @@
             <div v-if="errors.message" class="text-red-500 text-sm mt-2">
               {{ errors.message }}
             </div>
-            <div v-if="success" class="text-green-500 text-sm mt-2">
+            <div v-if="success" class="text-green-500 text-center text-sm mt-2">
               {{ success.message }}
             </div>
-            <form class="login-form">
+            <v-form ref="form" v-model="valid">
               <div class="flex flex-wrap -mx-3 mb-4"  v-if="user.profile_image_src">
                 <div class="w-full px-3 form-avataar">
                   <v-icon
@@ -61,9 +61,10 @@
                   >
                   <v-text-field
                     v-model="user.name"
-                    class="form-input input-field-outer w-full text-gray-300"
+                    class="form-input w-full input-field-outer text-gray-300"
                     placeholder="Name"
-                    autocomplete
+                    :rules="[v => !!v || 'Name is required']"
+                    outlined
                     required
                   ></v-text-field>
                   <div v-if="errors.email" class="mt-2 error">{{ errors.name }}</div>
@@ -81,8 +82,9 @@
                     v-model="user.current_job_title"
                     class="form-input w-full input-field-outer text-gray-300"
                     placeholder="Current Job Title"
-                    autocomplete
+                    outlined
                     required
+                    :rules="[v => !!v || 'Current Job Title is required']"
                   ></v-text-field>
                   <div v-if="errors.current_job_title" class="mt-2 error">
                     {{ errors.current_job_title }}
@@ -123,6 +125,7 @@
                     v-model="user.linkedin"
                     class="form-input w-full input-field-outer text-gray-300"
                     placeholder="Linkedin"
+                    
                     autocomplete
                   ></v-text-field>
                   <div v-if="errors.short_bio" class="mt-2 error">
@@ -194,8 +197,6 @@
                     >Current Resume
                   </label>
                   <v-file-input
-                    show-size
-                    counter
                     outlined
                     dense
                     v-model="user.current_resume"
@@ -209,13 +210,13 @@
 
               <div class="flex flex-wrap -mx-3 mt-6">
                 <div class="w-full px-3">
-                  <button
-                    type="button"
+                  <v-btn
+                    :disabled="!valid"
                     @click="submit()"
                     class="btn text-white bg-purple-600 hover:bg-purple-700 w-full"
                   >
                     Save Changes
-                  </button>
+                  </v-btn>
                 </div>
               </div>
 
@@ -231,7 +232,7 @@
                       
                         <br/><br/><br/>
                         <v-btn  color="success" class="mr-4" @click="submit()" >Save Changes</v-btn-->
-            </form>
+            </v-form>
           </div>
         </div>
       </div>
@@ -241,7 +242,16 @@
 <script>
 import Layout from "./Layout";
 import { Head } from "@inertiajs/inertia-vue";
+import { validationMixin } from 'vuelidate'
+import { required, maxLength, email } from 'vuelidate/lib/validators'
+
 export default {
+  mixins: [validationMixin],
+    validations: {
+      name: { required, maxLength: maxLength(10) },
+      current_job_title: { required },
+    },
+
   components: {
     Head,
     Layout,
@@ -266,12 +276,35 @@ export default {
       current_resume_removed: 0,
     },
   }),
+
+  computed: {
+      nameErrors () {
+        const errors = []
+        if (!this.$v.name.$dirty) return errors
+        !this.$v.name.maxLength && errors.push('Name must be at most 10 characters long')
+        !this.$v.name.required && errors.push('Name is required.')
+        return errors
+      },
+      jobTitleErrors () {
+        const errors = []
+        if (!this.$v.current_job_title.$dirty) return errors
+        !this.$v.current_job_title.required && errors.push('Current Job is required')
+        return errors
+      },
+    },
+
   methods: {
     validate() {
       this.$refs.form.validate();
       return true;
     },
     submit() {
+      /*this.$v.$touch();
+      if(this.user.name != '' && this.user.current_job_title != '')
+      {
+        this.$inertia.post("/profile", this.user);
+         this.$v.$reset()
+      }*/
       this.$inertia.post("/profile", this.user);
     },
     removeImage() {
