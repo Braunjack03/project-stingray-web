@@ -247,16 +247,8 @@
 <script>
 import Layout from "./Layout";
 import { Head } from "@inertiajs/inertia-vue";
-import { validationMixin } from 'vuelidate'
-import { required, maxLength, email } from 'vuelidate/lib/validators'
 
 export default {
-  mixins: [validationMixin],
-    validations: {
-      name: { required, maxLength: maxLength(10) },
-      current_job_title: { required },
-    },
-
   components: {
     Head,
     Layout,
@@ -281,23 +273,7 @@ export default {
       current_resume_removed: 0,
     },
   }),
-
-  computed: {
-      nameErrors () {
-        const errors = []
-        if (!this.$v.name.$dirty) return errors
-        !this.$v.name.maxLength && errors.push('Name must be at most 10 characters long')
-        !this.$v.name.required && errors.push('Name is required.')
-        return errors
-      },
-      jobTitleErrors () {
-        const errors = []
-        if (!this.$v.current_job_title.$dirty) return errors
-        !this.$v.current_job_title.required && errors.push('Current Job is required')
-        return errors
-      },
-    },
-
+  
   methods: {
     validate() {
       this.$refs.form.validate();
