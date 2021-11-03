@@ -3,8 +3,6 @@ import Vue from 'vue'
 import { createInertiaApp } from '@inertiajs/inertia-vue'
 import { TiptapVuetifyPlugin } from 'tiptap-vuetify';
 
-import Vuelidate from 'vuelidate'
-
 import vuetify from './vuetify';
 import '../css/style.scss';
 import '../css/additional-styles/theme.scss';
@@ -25,8 +23,6 @@ createInertiaApp({
     }).$mount(el)
   },
 })
-
-Vue.use(Vuelidate)
 
 Vue.use(TiptapVuetifyPlugin, {
   // the next line is important! You need to provide the Vuetify Object to this place.
