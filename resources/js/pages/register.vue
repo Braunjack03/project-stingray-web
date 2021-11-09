@@ -17,23 +17,25 @@
                 <div class="text-gray-400">Register with your email</div>
                 <div class="border-t border-gray-700 border-dotted flex-grow ml-3" aria-hidden="true"></div>
               </div>
-                    <div v-if="errors.message" class="text-red-500 text-sm mt-2">{{ errors.message }}</div>
 
-              <form class="register-form">
+              <div v-if="errors.message" class="text-red-500 text-sm mt-2">{{ errors.message }}</div>
+
+              <v-form class="register-form form-outer-wrapper" @submit.prevent="submit" >
                 <div class="flex flex-wrap -mx-3 mb-4">
                   <div class="w-full px-3">
                     <label class="block text-gray-300 text-sm font-medium mb-1" for="email">Work Email <span class="text-red-600">*</span></label>
-                    <input id="email" type="email" v-model="form.email" class="form-input w-full text-gray-300" placeholder="you@yourcompany.com" :rules="form.emailRules" required />
-                    <p v-if="errors.email" class="text-red-500 text-sm mt-2">{{ errors.email }}</p>
+                    <v-text-field v-model="email" :class="{ 'error--text': $v.email.$error }"  @input="$v.email.$touch()" @blur="$v.email.$touch()" class="form-input input-field-outer w-full text-gray-300" placeholder="you@yourcompany.com" autocomplete required ></v-text-field>
+
+                    <div v-if="$v.email.$error && !$v.email.required"  class="text-red-500 text-sm">Email is required</div>
+                    <div v-if="$v.email.$error && !$v.email.email"  class="text-red-500 text-sm">Please Enter a valid Email</div>
                   </div>
                 </div>
                 <div class="flex flex-wrap -mx-3 mb-4">
                   <div class="w-full px-3">
                     <label class="block text-gray-300 text-sm font-medium mb-1" for="password">Password <span class="text-red-600">*</span></label>
-
-                    <input id="password" type="password" v-model="form.password" :rules="form.passwordRules" class="form-input w-full text-gray-300" placeholder="Password (at least 8 characters)" autocomplete required />
-
-                    <p v-if="errors.password" class="text-red-500 text-sm mt-2">{{ errors.password }}</p>
+                    <v-text-field type="password" v-model="password" :class="{ 'error--text': $v.password.$error }" class="form-input input-field-outer w-full text-gray-300" @input="$v.password.$touch()" @blur="$v.password.$touch()" placeholder="Password (at least 8 characters)" autocomplete required ></v-text-field>
+                    <div v-if="$v.password.$error && !$v.password.required" class="text-red-500 text-sm ">Password is required</div>  
+                    <div v-if="$v.password.$error && !$v.password.minLength" class="text-red-500 text-sm ">The password must be at least 8 characters.</div>
                   </div>
                 </div>
 
@@ -42,10 +44,7 @@
 
                     <label class="block text-gray-300 text-sm font-medium mb-1" for="role">Your role: <span class="text-red-600">*</span></label>
 
-                      <v-radio-group
-                        v-model="form.user_type" :rules="form.userTypeRules"
-                        mandatory
-                        >
+                      <v-radio-group v-model="user_type" mandatory>
                     <v-radio
                         label="Job Seeker"
                         value="2"
@@ -55,6 +54,7 @@
                         value="1"
                     ></v-radio>
                     </v-radio-group>
+
                   </div>
                 </div>
                  <div class="text-sm text-gray-500 text-center">
@@ -62,10 +62,12 @@
                 </div>
                 <div class="flex flex-wrap -mx-3 mt-6">
                   <div class="w-full px-3">
-                    <button :disabled="!valid" type="button" class="btn text-white bg-purple-600 hover:bg-purple-700 w-full" @click="submit()">Sign up</button>
+                     <v-btn class="btn text-white bg-purple-600 hover:bg-purple-700 w-full" @click="submit">
+                        Sign up
+                      </v-btn>
                   </div>
                 </div>
-              </form>
+              </v-form>
               <div class="text-gray-400 text-center mt-6">
                 Already Have Account? <Link href="/login" class="text-purple-600 hover:text-gray-200 transition duration-150 ease-in-out">Sign in</Link>
               </div>
@@ -79,8 +81,16 @@
 <script>
 import { Head,Link } from '@inertiajs/inertia-vue'
 import Layout from './Layout'
-  export default {
+import { validationMixin } from 'vuelidate'
+import { required, email, minLength } from 'vuelidate/lib/validators'
+
+export default {
     name: 'SignUp',
+    mixins: [validationMixin],
+     validations: {
+      email: { required, email },
+      password: {required,minLength: minLength(8)}
+    },
     components: {
       Link,
       Head,
@@ -90,31 +100,19 @@ import Layout from './Layout'
         errors: Object,
     },
     data: () => ({
+        email:'',
+        password:'',
+        user_type:'',
         message: '',
-        valid: true,
-        form: {
-            email: '',
-            emailRules: [
-                v => !!v || 'E-mail is required',
-                v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-            ],
-            password: '',
-            passwordRules : [
-                v => !!v || 'Password is required',
-            ],
-            user_type: '',
-            userTypeRules : [
-                v => !!v || 'Your role is required',
-            ]
-        },
     }),
     methods: {
-      validate () {
-        this.$refs.form.validate();
-        return true;
-      },
       submit() {
-            this.$inertia.post('/register', this.form );
+          this.$v.$touch()
+          if(!this.$v.$invalid) {
+            console.log('submit');
+             let form = {email:this.email,password:this.password,user_type:this.user_type};
+             this.$inertia.post('/register', form);
+          }
        },
     },
   }

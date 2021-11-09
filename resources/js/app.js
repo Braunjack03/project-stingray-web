@@ -4,6 +4,7 @@ import { createInertiaApp } from '@inertiajs/inertia-vue'
 import { TiptapVuetifyPlugin } from 'tiptap-vuetify';
 
 import vuetify from './vuetify';
+
 import '../css/style.scss';
 import '../css/additional-styles/theme.scss';
 import '../css/additional-styles/utility-patterns.scss';
@@ -13,6 +14,11 @@ import '@mdi/font/css/materialdesignicons.css';
 
 // don't forget to import CSS styles
 import 'tiptap-vuetify/dist/main.css';
+
+import Vuelidate from 'vuelidate'
+
+Vue.use(Vuelidate)
+
 
 createInertiaApp({
   resolve: name => require(`./pages/${name}`),
