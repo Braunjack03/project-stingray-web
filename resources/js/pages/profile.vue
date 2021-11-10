@@ -16,7 +16,7 @@
             <div v-if="success" class="text-green-500 text-center text-sm mt-2">
               {{ success.message }}
             </div>
-            <v-form ref="form" v-model="valid">
+            <v-form ref="form" >
               <div class="flex flex-wrap -mx-3 mb-4"  v-if="user.profile_image_src">
                 <div class="w-full px-3 form-avataar">
                   <v-icon
@@ -41,7 +41,7 @@
                     >Profile Image (Recommended 500px x 500px)
                   </label>
                   <v-file-input
-                    v-model="user.profile_image"
+                    v-model="profile_image"
                     accept="image/*"
                     ref="fileInput"
                     class="fileUpload input-field-outer form-input w-full text-gray-300"
@@ -49,7 +49,6 @@
                     outlined
                     dense
                   ></v-file-input>
-                    <div v-if="errors.email" class="mt-2 error">{{ errors.email }}</div>
                 </div>
               </div>
 
@@ -59,15 +58,19 @@
                   <label class="block text-gray-300 text-sm font-medium mb-1" for="email"
                     >Name <span class="text-red-600">*</span></label
                   >
+                 
                   <v-text-field
-                    v-model="user.name"
+                    v-model="name"
                     class="form-input w-full input-field-outer text-gray-300"
                     placeholder="Name"
-                    :rules="[v => !!v || 'Name is required']"
+                    :class="{ 'error--text': $v.name.$error }"
+                    @input="$v.name.$touch()" 
+                    @blur="$v.name.$touch()"
                     outlined
                     required
                   ></v-text-field>
-                  <div v-if="errors.email" class="mt-2 error">{{ errors.name }}</div>
+
+                  <div v-if="$v.name.$error && !$v.name.required"  class="text-red-500 text-sm">Name is required</div>
                 </div>
               </div>
 
@@ -79,16 +82,17 @@
                     >Current Job Title <span class="text-red-600">*</span></label
                   >
                   <v-text-field
-                    v-model="user.current_job_title"
+                    v-model="current_job_title"
                     class="form-input w-full input-field-outer text-gray-300"
                     placeholder="Current Job Title"
+                    :class="{ 'error--text': $v.current_job_title.$error }"
+                    @input="$v.current_job_title.$touch()" 
+                    @blur="$v.current_job_title.$touch()"
                     outlined
                     required
-                    :rules="[v => !!v || 'Current Job Title is required']"
                   ></v-text-field>
-                  <div v-if="errors.current_job_title" class="mt-2 error">
-                    {{ errors.current_job_title }}
-                  </div>
+                  <div v-if="$v.current_job_title.$error && !$v.current_job_title.required"  class="text-red-500 text-sm">Current Job Title is required</div>
+
                 </div>
               </div>
 
@@ -100,14 +104,10 @@
                     >Short Bio
                   </label>
                   <v-text-field
-                    v-model="user.short_bio"
+                    v-model="short_bio"
                     class="form-textarea w-full input-field-outer text-gray-300"
                     placeholder="Short Bio"
-                    required
                   ></v-text-field>
-                  <div v-if="errors.short_bio" class="mt-2 error">
-                    {{ errors.short_bio }}
-                  </div>
                 </div>
               </div>
 
@@ -122,7 +122,7 @@
                   </label>
 
                   <v-text-field
-                    v-model="user.linkedin"
+                    v-model="linkedin"
                     class="form-input w-full input-field-outer text-gray-300"
                     placeholder="Linkedin"
                     
@@ -142,7 +142,7 @@
                     >Github
                   </label>
                   <v-text-field
-                    v-model="user.twitter"
+                    v-model="github"
                     class="form-input input-field-outer w-full text-gray-300"
                     placeholder="Github"
                     autocomplete
@@ -159,7 +159,7 @@
                     >Twitter
                   </label>
                   <v-text-field
-                    v-model="user.twitter"
+                    v-model="twitter"
                     class="form-input input-field-outer w-full text-gray-300"
                     placeholder="Twitter"
                     autocomplete
@@ -199,7 +199,7 @@
                   <v-file-input
                     outlined
                     dense
-                    v-model="user.current_resume"
+                    v-model="current_resume"
                     class="form-input fileUpload w-full input-field-outer text-gray-300"
                   ></v-file-input>
                   <div v-if="errors.current_resume" class="mt-2 error">
@@ -211,7 +211,6 @@
               <div class="flex flex-wrap -mx-3 mt-6">
                 <div class="w-full px-3">
                   <v-btn
-                    :disabled="!valid"
                     @click="submit()"
                     class="btn text-white bg-purple-600 hover:bg-purple-700 w-full"
                   >
@@ -225,18 +224,6 @@
                     <p class="text-center">Please fill the required field(s)</p>                        
                   </div>
                 </div> 
-              <!--label><strong>Current Resume </strong></label>
-                        <v-file-input outlined dense v-model="user.current_resume"></v-file-input>
-                        <div v-if="errors.current_resume" class="mt-2 error">{{ errors.current_resume }}</div-->
-
-              <!--v-btn v-if="user.current_resume_src" :href="user.current_resume_src" target="_blank">
-                        <v-icon color="gray darken-2">mdi-file-document</v-icon> {{user.current_resume_name}}
-                        </v-btn>
-                          <v-icon v-if="user.current_resume_src" color="gray darken-2" class="ml-auto" @click="removeResume()"> mdi-close-circle</v-icon>
-
-                      
-                        <br/><br/><br/>
-                        <v-btn  color="success" class="mr-4" @click="submit()" >Save Changes</v-btn-->
             </v-form>
           </div>
         </div>
@@ -247,8 +234,15 @@
 <script>
 import Layout from "./Layout";
 import { Head } from "@inertiajs/inertia-vue";
+import { validationMixin } from 'vuelidate'
+import { required} from 'vuelidate/lib/validators'
 
 export default {
+  mixins: [validationMixin],
+     validations: {
+      name: { required},
+      current_job_title: {required}
+    },
   components: {
     Head,
     Layout,
@@ -258,21 +252,19 @@ export default {
     user: Object,
     success: Object,
   },
-  data: () => ({
-    message: "",
-    valid: true,
-    form: {
-      profile_image: "",
-      current_job_title: "",
-      name: "",
-      short_bio: "",
-      github: "",
-      twitter: "",
-      current_resume: "",
-      profile_image_removed: 0,
-      current_resume_removed: 0,
-    },
-  }),
+  data (){
+     return {
+        name: this.user.name,
+        profile_image: this.user.profile_image,
+        current_job_title: this.user.current_job_title,
+        short_bio: this.user.short_bio,
+        github: this.user.github,
+        linkedin: this.user.linkedin,
+        twitter: this.user.twitter,
+        profile_image_removed:0,
+        current_resume_removed:0,
+     }
+  },
   
   methods: {
     validate() {
@@ -280,21 +272,39 @@ export default {
       return true;
     },
     submit() {
+       this.$v.$touch()
+      if(!this.$v.$invalid) {
+        console.log('submit');
+          let form = {
+             profile_image: this.profile_image,
+              current_job_title: this.current_job_title,
+              name: this.name,
+              short_bio: this.short_bio,
+              github: this.github,
+              linkedin:this.linkedin,
+              twitter:this.twitter,
+              current_resume: this.current_resume,
+              profile_image_removed: this.profile_image_removed,
+              current_resume_removed: this.current_resume_removed,
+            };
+            console.log('form',form);
+          this.$inertia.post("/profile", form);
+      }
       /*this.$v.$touch();
       if(this.user.name != '' && this.user.current_job_title != '')
       {
         this.$inertia.post("/profile", this.user);
          this.$v.$reset()
       }*/
-      this.$inertia.post("/profile", this.user);
+      
     },
     removeImage() {
       this.user.profile_image_src = "";
-      this.user.profile_image_removed = 1;
+      this.profile_image_removed = 1;
     },
     removeResume() {
       this.user.current_resume_src = "";
-      this.user.current_resume_removed = 1;
+      this.current_resume_removed = 1;
     },
     onFileChange(e) {
       this.user.profile_image_src = URL.createObjectURL(this.user.profile_image);

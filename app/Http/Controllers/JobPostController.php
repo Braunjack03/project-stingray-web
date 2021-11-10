@@ -197,6 +197,7 @@ class JobPostController extends Controller
         
 
         $data = $request->only(['name', 'content', 'apply_url', 'location_id', 'job_cat_id','remotetype_id']);
+        
         if(isset($data['remotetype_id']) && $data['remotetype_id'] == 0)
         {
             $data['remotetype_id'] = 3;
@@ -225,11 +226,12 @@ class JobPostController extends Controller
             return $this->sendJobValidationErrorsWithData($redirect_page,$validator->errors(),$data);
         }else{
             try{
-                $job = JobPost::where('id',$job_uuid);
+                $job = JobPost::where('uuid',$job_uuid);
                 $data['slug'] = $this->createJobPostSlug($data['name']);
                 $job->update($data);
-                $job_data = JobPost::where('id',$job_uuid)->first();
+                $job_data = JobPost::where('uuid',$job_uuid)->first();
                 $company_profile_id = CompanyProfile::select('uuid')->where('id',$job_data->company_profile_id)->first()['uuid'];
+
                 ActivityLog::addToLog(__('activitylogs.job_updated'),'job updated');
                 return redirect('employer/jobs?c_id='.$company_profile_id)->with( ['message' => __('messages.job_updated')] );
                  

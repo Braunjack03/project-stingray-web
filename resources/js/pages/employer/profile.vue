@@ -32,7 +32,7 @@
                     <div class="flex flex-wrap -mx-3 form-file-upload">
                       <div class="w-full px-3">
                           <label class="block text-gray-300 text-sm font-medium mb-1">Profile Image (Recommended 500px x 500px) </label>
-                          <v-file-input class="fileUpload form-input input-field-outer w-full text-gray-300" accept="image/*" v-model="user.profile_image"  ref="fileInput" @change="onFileChange" outlined dense></v-file-input>
+                          <v-file-input class="fileUpload form-input input-field-outer w-full text-gray-300" accept="image/*" v-model="profile_image"  ref="fileInput" @change="onFileChange" outlined dense></v-file-input>
                       </div>
                     </div>
 
@@ -42,23 +42,30 @@
                     <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
                           <label class="block text-gray-300 text-sm font-medium mb-1" for="email">Name <span class="text-red-600">*</span></label>
-                           <v-text-field v-model="user.name" :rules="[v => !!v || 'Name is required']" class="form-input input-field-outer w-full text-gray-300" placeholder="Enter Name" required></v-text-field>
-                          <div v-if="errors.email" class="mt-2 error">{{ errors.name }}</div>
+                           <v-text-field v-model="name" class="form-input input-field-outer w-full text-gray-300" placeholder="Enter Name" :class="{ 'error--text': $v.name.$error }"
+                              @input="$v.name.$touch()" 
+                              @blur="$v.name.$touch()" required></v-text-field>
+                            <div v-if="$v.name.$error && !$v.name.required"  class="text-red-500 text-sm">Name is required</div>
                         </div>
                     </div>
 
                     <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
                           <label class="block text-gray-300 text-sm font-medium mb-1" for="email">Current Job Title <span class="text-red-600">*</span></label>
-                           <v-text-field v-model="user.current_job_title" :rules="[v => !!v || 'Current Job Title is required']" class="form-input input-field-outer w-full text-gray-300" placeholder="Current Job Title" required></v-text-field>
-                          <div v-if="errors.current_job_title" class="mt-2 error">{{ errors.current_job_title }}</div>
+                           <v-text-field v-model="current_job_title" class="form-input input-field-outer w-full text-gray-300" placeholder="Current Job Title" 
+                            :class="{ 'error--text': $v.current_job_title.$error }"
+                            @input="$v.current_job_title.$touch()" 
+                            @blur="$v.current_job_title.$touch()"
+                           required></v-text-field>
+                          <div v-if="$v.current_job_title.$error && !$v.current_job_title.required"  class="text-red-500 text-sm">Current Job Title is required</div>
+
                         </div>
                     </div>
                     
                      <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
                             <label class="block text-gray-300 text-sm font-medium mb-1" for="email">Short Bio </label>
-                            <v-text-field v-model="user.short_bio" class="form-input input-field-outer w-full text-gray-300" placeholder="Short Bio" required></v-text-field>
+                            <v-text-field v-model="short_bio" class="form-input input-field-outer w-full text-gray-300" placeholder="Short Bio" required></v-text-field>
                             <div v-if="errors.short_bio" class="mt-2 error">{{ errors.short_bio }}</div>
                       </div>
                     </div>
@@ -68,14 +75,14 @@
                     <div class="flex flex-wrap -mx-3 mb-4">
                       <div class="w-full px-3">
                             <label class="block text-gray-300 text-sm font-medium mb-1" for="email">LinkedIn</label>
-                            <v-text-field v-model="user.linkedin" class="form-input input-field-outer w-full text-gray-300" placeholder="LinkedIn" required></v-text-field>
+                            <v-text-field v-model="linkedin" class="form-input input-field-outer w-full text-gray-300" placeholder="LinkedIn" required></v-text-field>
                             <div v-if="errors.linkedin" class="mt-2 error">{{ errors.linkedin }}</div>
                       </div>
                     </div>
 
                     <div class="flex flex-wrap -mx-3 mt-6">
                         <div class="w-full px-3">
-                          <v-btn :disabled="!valid" @click="submit()" class="btn text-white bg-purple-600 hover:bg-purple-700 w-full">Save Changes</v-btn>
+                          <v-btn @click="submit()" class="btn text-white bg-purple-600 hover:bg-purple-700 w-full">Save Changes</v-btn>
                         </div>
                       </div> 
                       
@@ -115,7 +122,15 @@
 <script>
   import Layout from '../Layout'
   import { Head,Link } from '@inertiajs/inertia-vue'
+  import { validationMixin } from 'vuelidate'
+import { required} from 'vuelidate/lib/validators'
+
   export default {
+      mixins: [validationMixin],
+     validations: {
+      name: { required},
+      current_job_title: {required}
+    },
     components: {
       Head,
       Layout,
@@ -127,31 +142,38 @@
       success: Object,
       companies : Array,
     },
-     data: () => ({
-        message: '',
-        valid: true,
-        form: {
-            profile_image: '',
-            current_job_title: '',
-            name: '',
-            short_bio: '',
-            profile_image_removed: 0,
-        },
-    }),
+    data (){
+     return {
+        name: this.user.name,
+        profile_image: this.user.profile_image,
+        current_job_title: this.user.current_job_title,
+        short_bio: this.user.short_bio,
+        linkedin: this.user.linkedin,
+        profile_image_removed:0,
+     }
+  },
      methods: {
-      validate () {
-        this.$refs.form.validate();
-        return true;
-      },
       submit() {
-            this.$inertia.post('/employer/profile', this.user );
+         this.$v.$touch()
+          if(!this.$v.$invalid) {
+              let form = {
+                  profile_image: this.profile_image,
+                  current_job_title: this.current_job_title,
+                  name: this.name,
+                  short_bio: this.short_bio,
+                  linkedin: this.linkedin,
+                  profile_image_removed: this.profile_image_removed,
+                };
+                console.log('form',form);
+              this.$inertia.post("/employer/profile", form);
+          }
        },
       removeImage(){
           this.user.profile_image_src = '';
-          this.user.profile_image_removed = 1;
+          this.profile_image_removed = 1;
       }, 
       onFileChange(e) {
-          this.user.profile_image_src = URL.createObjectURL(this.user.profile_image);
+          this.user.profile_image_src = URL.createObjectURL(this.profile_image);
         }
     },
   }

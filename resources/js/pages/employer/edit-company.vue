@@ -14,7 +14,7 @@
                         <div v-if="errors.message" class="text-red-500 text-sm mt-2">{{ errors.message }}</div>
                         <div v-if="success" class="text-green-500 text-sm mt-2">{{ success.message }}</div>
     
-                        <v-form ref="form" v-model="valid">
+                        <v-form ref="form" >
     
                             <div class="flex flex-wrap -mx-3 mb-4">
                                 <div class="w-full px-3 form-avataar">
@@ -35,16 +35,17 @@
                             <div class="flex flex-wrap -mx-3 mb-4">
                                 <div class="w-full px-3">
                                     <label class="block text-gray-300 text-sm font-medium mb-1">Company Name <span class="text-red-600">*</span></label>
-                                    <v-text-field v-model="user.name" class="form-input input-field-outer w-full text-gray-300" :rules="[v => !!v || 'Company Name is required']" placeholder="Company Name" required></v-text-field>
-                                    <div v-if="errors.name" class="mt-2 error">{{ errors.name }}</div>
+                                    <v-text-field v-model="name" class="form-input input-field-outer w-full text-gray-300" placeholder="Company Name" required></v-text-field>
+                                    <div v-if="$v.name.$error && !$v.name.required"  class="text-red-500 text-sm">Company Name is required</div>
                                 </div>
                             </div>
     
                             <div class="flex flex-wrap -mx-3 mb-4">
                                 <div class="w-full px-3">
                                     <label class="block text-gray-300 text-sm font-medium mb-1">Number of local employees</label>
-                                    <v-text-field v-model="user.local_employees" class="form-input input-field-outer w-full text-gray-300" placeholder="Number of local employees" required></v-text-field>
-                                    <div v-if="errors.local_employees" class="mt-2 error">{{ errors.local_employees }}</div>
+                                    <v-text-field v-model="local_employees" class="form-input input-field-outer w-full text-gray-300" placeholder="Number of local employees" required></v-text-field>
+                                    <div v-if="$v.local_employees.$error && !$v.local_employees.required"  class="text-red-500 text-sm">Number of local employees</div>
+
                                 </div>
                             </div>
     
@@ -175,7 +176,7 @@
     
                             <div class="flex flex-wrap -mx-3 mt-6">
                                 <div class="w-full px-3">
-                                    <v-btn @click="submit()" :disabled="!valid" class="btn text-white bg-purple-600 hover:bg-purple-700 w-full">Update Changes</v-btn>
+                                    <v-btn @click="submit()"  class="btn text-white bg-purple-600 hover:bg-purple-700 w-full">Update Changes</v-btn>
                                 </div>
                             </div>
                             <div class="flex flex-wrap -mx-3 mt-6 text-center">
@@ -187,7 +188,6 @@
                     </div>
                 </div>
             </div>
-            </div>
         </section>
     </Layout>
 </template>
@@ -195,7 +195,14 @@
 <script>
 import Layout from '../Layout'
 import { Head } from '@inertiajs/inertia-vue'
+import { validationMixin } from 'vuelidate'
+import { required} from 'vuelidate/lib/validators'
 export default {
+     mixins: [validationMixin],
+     validations: {
+      name: { required},
+      local_employees: {required},
+    },
     components: {
         Head,
         Layout,
@@ -206,7 +213,17 @@ export default {
         success: Object,
         industries: Object,
     },
-    data: () => ({
+    data (){
+     return {
+        name: this.user.name,
+        local_employees: this.user.local_employees,
+        logo_image_removed: 0,
+        industry:[],
+        items: ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming'],
+
+     }
+  },
+    /*data: () => ({
         industry: [],
         items: ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'],
         valid:true,
@@ -216,10 +233,32 @@ export default {
             logo_image_removed: 0,
             state_abbr: '',
         },
-    }),
+    }),*/
     methods: {
         submit() {
-            this.$inertia.post('/employer/edit-company?id=' + this.user.uuid, this.user);
+            this.$v.$touch()
+            if(!this.$v.$invalid) {
+              let form = {
+                  name: this.name,
+                  local_employees: this.local_employees,
+                  global_employees: this.user.global_employees,
+                  website_url: this.user.website_url,
+                  mission: this.user.mission,
+                  industry_ids: this.user.industry_ids,
+                  street_addr_1: this.user.street_addr_1,
+                  street_addr_2: this.user.street_addr_2,
+                  city: this.user.city,
+                  postcode: this.user.postcode,
+                  state_abbr: this.user.state_abbr,
+                  linkedin_user: this.user.linkedin_user,
+                  facebook_user: this.user.facebook_user,
+                  twitter_user: this.user.twitter_user,
+                  instagram_user: this.user.instagram_user,
+                  logo_image_removed: this.logo_image_removed,
+                };
+              this.$inertia.post('/employer/edit-company?id=' + this.user.uuid, form);
+          }
+            //this.$inertia.post('/employer/edit-company?id=' + this.user.uuid, form);
         },
         removeImage() {
             this.user.logo_image_src = '';

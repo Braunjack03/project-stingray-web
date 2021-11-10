@@ -166,8 +166,8 @@ class CompanyProfileController extends Controller
 
         $requested_data = $request->except(['logo_image_src']);
     
-        $user = CompanyProfile::where('uuid',$request->all()['uuid'])->first();
-        $user_uuid = $request->all()['uuid'];
+        $user = CompanyProfile::where('uuid',$request->all()['id'])->first();
+        $user_uuid = $request->all()['id'];
         $redirect_page = $request->path();
        
         $data = [
@@ -237,11 +237,12 @@ class CompanyProfileController extends Controller
                     'logo_image_url' => $image_name,
                     'slug' => $this->createCompanySlug($data['name']),
                 ];
+                
                 if(!$request->file('logo_image_url') && (isset($data['logo_image_removed']) && $data['logo_image_removed'] == 0))
                 {
                     unset($profile_data['logo_image_url']);
                 }
-                $user = CompanyProfile::where('id',$requested_data['id'])->update($profile_data);
+                $user = CompanyProfile::where('uuid',$requested_data['id'])->update($profile_data);
                 ActivityLog::addToLog(__('activitylogs.company_profile_updated'),'company updated');
                 return redirect()->route('employer.profile')->with(['message' => __('messages.company_profile_updated')]);
      
