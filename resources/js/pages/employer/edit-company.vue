@@ -240,6 +240,7 @@ export default {
             if(!this.$v.$invalid) {
               let form = {
                   name: this.name,
+                  logo_image_url: this.user.logo_image_url,
                   local_employees: this.local_employees,
                   global_employees: this.user.global_employees,
                   website_url: this.user.website_url,
