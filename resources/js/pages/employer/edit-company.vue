@@ -35,7 +35,8 @@
                             <div class="flex flex-wrap -mx-3 mb-4">
                                 <div class="w-full px-3">
                                     <label class="block text-gray-300 text-sm font-medium mb-1">Company Name <span class="text-red-600">*</span></label>
-                                    <v-text-field v-model="name" class="form-input input-field-outer w-full text-gray-300" placeholder="Company Name" required></v-text-field>
+                                    <v-text-field v-model="name" :class="{ 'error--text': $v.name.$error }"  @input="$v.name.$touch()" 
+                              @blur="$v.name.$touch()"  class="form-input input-field-outer w-full text-gray-300" placeholder="Company Name" required></v-text-field>
                                     <div v-if="$v.name.$error && !$v.name.required"  class="text-red-500 text-sm">Company Name is required</div>
                                 </div>
                             </div>
@@ -43,7 +44,8 @@
                             <div class="flex flex-wrap -mx-3 mb-4">
                                 <div class="w-full px-3">
                                     <label class="block text-gray-300 text-sm font-medium mb-1">Number of local employees</label>
-                                    <v-text-field v-model="local_employees" class="form-input input-field-outer w-full text-gray-300" placeholder="Number of local employees" required></v-text-field>
+                                    <v-text-field v-model="local_employees"  @input="$v.local_employees.$touch()" 
+                              @blur="$v.local_employees.$touch()"  :class="{ 'error--text': $v.local_employees.$error }" class="form-input input-field-outer w-full text-gray-300" placeholder="Number of local employees" required></v-text-field>
                                     <div v-if="$v.local_employees.$error && !$v.local_employees.required"  class="text-red-500 text-sm">Number of local employees</div>
 
                                 </div>
