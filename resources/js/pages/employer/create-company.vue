@@ -168,8 +168,8 @@
                        <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
                           <label class="block text-gray-300 text-sm font-medium mb-1">Facebook</label>
-                    <v-text-field v-model="user.github_user" class="form-input input-field-outer w-full text-gray-300" placeholder="Facebook"></v-text-field>
-                    <div v-if="errors.github_user" class="mt-2 error">{{ errors.facebook_user }}</div>
+                    <v-text-field v-model="user.facebook_user" class="form-input input-field-outer w-full text-gray-300" placeholder="Facebook"></v-text-field>
+                    <div v-if="errors.facebook_user" class="mt-2 error">{{ errors.facebook_user }}</div>
                      </div>
                     </div> 
 
