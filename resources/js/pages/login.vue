@@ -29,7 +29,6 @@
                     <div v-if="$v.email.length > 0 && $v.email.$error && !$v.email.email"  class="text-red-500 text-sm">Please Enter a valid Email</div>
                   </div>
                 </div>
-                {{$v.email}}
                 <div class="flex flex-wrap -mx-3 mb-4">
                   <div class="w-full px-3">
                     <label class="block text-gray-300 text-sm font-medium mb-1" for="password">Password</label>
