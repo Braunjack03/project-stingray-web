@@ -123,7 +123,6 @@ class JobPostController extends Controller
             'name.required' => 'Job Title is required',
             'job_cat_id.required' => 'The Job Category field is required.',
             'apply_url.required' => 'The Job Application URL field is required.',
-            'content.required' => 'The Job Description field is required.',
         ]; 
       
         $validator = Validator::make($data, [
@@ -131,7 +130,6 @@ class JobPostController extends Controller
             'location_id' => 'required',
             'job_cat_id' => 'required',
             'apply_url' => 'required',
-            'content' => 'required',
         ],$messages);
         
         if ($validator->fails()){
@@ -208,7 +206,6 @@ class JobPostController extends Controller
             'name.required' => 'Job Title is required',
             'job_cat_id.required' => 'The Job Category field is required.',
             'apply_url.required' => 'The Job Application URL field is required.',
-            'content.required' => 'The Job Description field is required.',
         ]; 
       
         $validator = Validator::make($request->all(), [
@@ -216,7 +213,6 @@ class JobPostController extends Controller
             'location_id' => 'required',
             'job_cat_id' => 'required',
             'apply_url' => 'required',
-            'content' => 'required',
         ],$messages);
         
         if ($validator->fails()){
