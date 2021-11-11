@@ -267,7 +267,7 @@
                   global_employees: this.user.global_employees,
                   website_url: this.user.website_url,
                   mission: this.user.mission,
-                  industry_ids: this.user.industry_ids,
+                  industry: this.industry,
                   street_addr_1: this.user.street_addr_1,
                   street_addr_2: this.user.street_addr_2,
                   city: this.user.city,

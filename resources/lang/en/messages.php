@@ -23,4 +23,6 @@ return [
     'job_updated' => 'Job Post updated Successfully!',
     'company_claimed' => 'Email sent to admin for claim verification.',
     'profile_claimed' => 'Company profile claim',
+    'contact_form_filled'=> 'Contact Form Filled',
+    'contact_form_submit'=> 'Contact Form Submitted Successfully.'
  ];

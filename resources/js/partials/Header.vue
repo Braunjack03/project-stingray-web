@@ -19,10 +19,7 @@
           <!-- Desktop menu links -->
           <ul class="flex flex-grow justify-end flex-wrap items-center">
             <li>
-              <Link href="/features" class="text-gray-300 hover:text-gray-200 px-4 py-2 flex items-center transition duration-150 ease-in-out">Features</Link>
-            </li>
-            <li>
-              <Link href="/pricing" class="text-gray-300 hover:text-gray-200 px-4 py-2 flex items-center transition duration-150 ease-in-out">Pricing</Link>
+              <Link href="/jobs" class="text-gray-300 hover:text-gray-200 px-4 py-2 flex items-center transition duration-150 ease-in-out">Job Listing</Link>
             </li>
             <li>
               <Link href="/blog" class="text-gray-300 hover:text-gray-200 px-4 py-2 flex items-center transition duration-150 ease-in-out">Blog</Link>
