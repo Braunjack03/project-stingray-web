@@ -90,9 +90,8 @@
 
                     <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
-                          <label class="block text-gray-300 text-sm font-medium mb-1">Job Description <span class="text-red-600">*</span></label>
-                      <tiptap-vuetify v-model="content" :extensions="extensions"  :class="{ 'error--text': $v.content.$error }" class="form-input input-field-outer w-full text-gray-300" />
-                      <div v-if="$v.content.$error && !$v.content.required"  class="text-red-500 text-sm">Job Description is required</div>
+                          <label class="block text-gray-300 text-sm font-medium mb-1">Job Description </label>
+                      <tiptap-vuetify v-model="content" :extensions="extensions" class="form-input input-field-outer w-full text-gray-300" />
 
                      </div>
                     </div> 
@@ -219,7 +218,6 @@ import { required} from 'vuelidate/lib/validators'
                   job_cat_id: this.job_cat_id,
                   location_id: this.location_id,
                   remotetype_id: this.remotetype_id,
-                  content: this.content,
                 };
 
               console.log('test',form);

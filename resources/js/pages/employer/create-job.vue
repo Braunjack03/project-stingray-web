@@ -70,7 +70,7 @@
                           item-value="id"
                           :items="job_categories"
                           label="Job Category"
-                          :class="{ 'error--text': $v.name.$error }"
+                          :class="{ 'error--text': $v.job_cat_id.$error }"
                           class="form-input input-field-outer w-full text-gray-300"
                           dense
                           solo
@@ -86,16 +86,15 @@
                     <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
                           <label class="block text-gray-300 text-sm font-medium mb-1"> Job Application URL <span class="text-red-600">*</span></label>
-                    <v-text-field v-model="apply_url" :class="{ 'error--text': $v.name.$error }" class="form-input input-field-outer w-full text-gray-300" :rules="[v => !!v || 'Job Application URL is required']" placeholder="https://example.com" required></v-text-field>
-                      <div v-if="$v.name.$error && !$v.name.required"  class="text-red-500 text-sm">Job Application URL is required</div>
+                    <v-text-field v-model="apply_url" :class="{ 'error--text': $v.apply_url.$error }" class="form-input input-field-outer w-full text-gray-300" placeholder="https://example.com" required></v-text-field>
+                      <div v-if="$v.apply_url.$error && !$v.apply_url.required"  class="text-red-500 text-sm">Job Application URL is required</div>
                      </div>
                     </div> 
 
                     <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
-                          <label class="block text-gray-300 text-sm font-medium mb-1">Job Description <span class="text-red-600">*</span></label>
-                          <tiptap-vuetify v-model="content" :extensions="extensions" :class="{ 'error--text': $v.content.$error }" class="form-input input-field-outer w-full text-gray-300" required/>
-                          <div v-if="$v.content.$error && !$v.content.required"  class="text-red-500 text-sm">Job Description is required</div>
+                          <label class="block text-gray-300 text-sm font-medium mb-1">Job Description </label>
+                          <tiptap-vuetify v-model="content" :extensions="extensions"  class="form-input input-field-outer w-full text-gray-300" />
 
                      </div>
                     </div> 
@@ -134,7 +133,6 @@ import { required} from 'vuelidate/lib/validators'
       name: { required},
       job_cat_id: {required},
       apply_url: {required},
-      content: {required}
     },
     components: {
       Head,
