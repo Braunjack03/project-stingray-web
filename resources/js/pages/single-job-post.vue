@@ -10,7 +10,7 @@
                   <h3 class="company-title">{{data.company_name}}</h3>   
                   <h2 class="post-title">{{data.name}}</h2>
                   <span class="location">Location : {{data.location}}</span>
-                  <span class="post-date">Date Posted: {{data.created_at}}</span>
+                  <span class="post-date">Date Posted: {{setDateFormat(data.created_at)}}</span>
 
                   <div v-html="data.content" class="post-detail-wrap"></div>
 
@@ -41,6 +41,23 @@ import {Link } from '@inertiajs/inertia-vue'
      data: () => ({
         message: '',
     }),
+    methods : {
+         setDateFormat(dateObject) {
+            var d = new Date(dateObject);
+            var day = d.getDate();
+            var month = d.getMonth() + 1;
+            var year = d.getFullYear();
+            if (day < 10) {
+            day = "0" + day;
+            }
+            if (month < 10) {
+            month = "0" + month;
+            }
+            var date = day + "/" + month + "/" + year;
+
+            return date;
+         },
+    }
   }
 
 </script>
