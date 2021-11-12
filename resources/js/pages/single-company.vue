@@ -17,9 +17,7 @@
                     ></v-img>
             </v-col>        
             <v-col lg="9" md="8" sm="7" cols="12" >        
-              <h2 class="post-title mb-0">{{data.name}} <v-btn v-if="(data.unclaimed) == 1 && (data.role)==3" v-on:click="claimProfile(data.uuid)" class="claim-profile ml-auto mr-0">(Claim this Profile)</v-btn> 
-                <v-btn v-on:click="claimProfile(data.uuid)" class="link-text ml-2" text>(Claim this Profile)</v-btn>
-              </h2>
+              <h2 class="post-title mb-0">{{data.name}} <v-btn v-if="(data.unclaimed) == 1 && (data.role)==3" v-on:click="claimProfile(data.uuid)" class="link-text ml-2" text>(Claim this Profile)</v-btn></h2>
               <p class="types-title mt-0">{{data.industry_types}}</p>
                 <v-row class="mt-0">
                   <v-col cols="12" sm="6" md="4">
