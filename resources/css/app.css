@@ -250,3 +250,75 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
       max-width: 100%;
    }  
 }
+
+
+/* Post Detail Page */
+.company-title {
+   font-size: 1.125rem;
+   font-weight: 400;
+}
+
+.post-title {
+   font-size: 2rem;
+   font-weight: 500;
+   margin-bottom: 1rem;
+}
+
+.location,.post-date {
+   font-size: 1rem;
+   padding-right: .6rem;
+   display: inline-block;
+}
+
+.post-detail-wrap {
+   display: block;
+   margin-bottom: 5rem;
+}
+
+.post-detail-wrap p strong,.section-title{
+   font-size: 1.3rem;
+   margin-top: 2rem;
+   display: inline-block;
+   width: calc(100% - .5rem);
+   font-weight: 500;
+   margin-left: -.5rem;
+}
+
+.section-title{
+   margin-left: 0;
+   width: 100%;
+}
+
+.post-detail-wrap p,.desc {
+   font-size: 1.125rem;
+   padding: .2rem 0 .2rem .5rem;
+   font-weight: 400;
+}
+
+.types-title{
+   font-size: 1rem;
+   margin-top: .5rem;
+   font-weight: 400;
+}
+
+.desc{
+   padding: 0;
+}
+
+.extra-info {
+   font-size: 1rem;
+   font-weight: 400;
+}
+
+.extra-info strong {
+   font-weight: 500;
+}
+
+.link-text{
+   color: rgba(93, 93, 255, 1) !important;
+}
+@media(min-width:575px){
+   .mt-sm-12{
+      margin-top: 3rem;
+   }
+}
