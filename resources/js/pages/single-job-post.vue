@@ -14,7 +14,7 @@
 
                   <div v-html="data.content" class="post-detail-wrap"></div>
 
-                  <div class="my-4 text-subtitle-1 ml-20 text-center">
+                  <div class="my-4 text-subtitle-1 text-center">
                     <v-btn  :href="data.apply_url" target="_blank" class="bg-purple-600 hover:bg-purple-700">
                       Apply on Company Website
                     </v-btn>

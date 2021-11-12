@@ -52,7 +52,7 @@
             </v-row>
              <v-row >
               <v-col cols="12" class="pa-2"> 
-                <h3 class="section-title">Jobs at {{data.name}}</h3>
+                <h3 class="desc">Jobs at {{data.name}}</h3>
                   <ul v-if="job_posts" id="example-1">
                     <li v-for="company in job_posts" :key="company.id">
                         <h4 class="post-title"><a :href="`/jobs/${data.slug}/${company.slug}`">{{ company.name }} <span class="text-sm">({{ company.location_id }})</span></a></h4>
