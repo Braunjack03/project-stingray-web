@@ -1,11 +1,9 @@
 <template>
 <Layout>
-    <Head title="Create Job" />
+    <Head :title="'Job List | '+ data.company_name" />
     <section class="relative" data-app>
           <div class="max-w-6xl mx-auto px-4 sm:px-6">
             <div class="pt-32 pb-12 md:pt-40 md:pb-20">
-
-
             <div class="max-w-4xl mx-auto">
                   <h3 class="company-title">{{data.company_name}}</h3>   
                   <h2 class="post-title">{{data.name}}</h2>
@@ -26,12 +24,13 @@
 </Layout>
 </template>
 <script>
-import {Link } from '@inertiajs/inertia-vue'
+import {Link,Head } from '@inertiajs/inertia-vue'
   import Layout from './Layout'
   export default {
      components: {
         Link,
         Layout,
+        Head,
     },
     props: {
       errors : Object,  

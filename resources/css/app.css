@@ -336,3 +336,107 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
       margin-top: 3rem;
    }
 }
+
+/* Lising page css */
+
+.filter-outer {
+   align-items: center;
+   justify-content: space-between;
+   flex-flow:wrap;
+}
+
+.filter-opt {
+   display: flex;
+   justify-content: flex-end;
+   flex-flow: wrap;
+}
+
+.filter-opt .form-control {
+   margin-left: 1rem;
+   border-bottom: 1px solid #ddd;
+   margin-bottom: 1rem;
+   min-height: 40px;
+}
+
+.filter-opt .v-input__control .v-input__slot {
+   margin: 0 0 1rem 0!important;
+   min-height: 40px;
+}
+
+.filter-opt .theme--light.v-text-field>.v-input__control>.v-input__slot:before{
+   border-color:#ddd;
+}
+
+.searc-show-title {
+   font-size: 1rem;
+   color: #999999;
+   padding: .5rem .5rem .5rem 0;
+}
+
+.job-card-wrap {
+   align-items: center;
+   display: flex;
+   flex-flow: wrap;
+   padding: 1rem 2rem!important;
+   background: #f5f5f5;
+}
+
+.card-text-wrap {
+   width: calc(100% - 150px);
+   padding-right: 1rem;
+}
+
+.card-text-wrap .v-card__title {
+   padding: 0;
+}
+
+.job-card-wrap .v-card__title {
+   font-size: 1.5rem;
+   color: #000;
+   font-weight: 500;
+   text-transform: capitalize;
+   margin-bottom: .6rem;
+}
+
+.job-card-wrap .text-subtitle-1 {
+   font-size: 1.12rem;
+   color: #444;
+   text-transform: capitalize;
+   padding: 0 0 .8rem 0px;
+}
+
+.description{
+   font-size: .9rem;
+   padding: 0 0 .5rem 0px;
+   line-height: 1.5;
+   color:rgb(155, 169, 180);
+}
+
+.date {
+   font-size: .8rem;
+   color:rgb(155, 169, 180);
+   letter-spacing: 0px;
+}
+
+.button-outter {
+   margin: 1rem 0;
+}
+
+.v-sheet.v-card:not(.v-sheet--outlined){
+   box-shadow: none;
+}
+
+@media (max-width:575px){
+   .card-text-wrap {
+      width: calc(100% - 0px);
+      padding-right: 0;
+   }
+   .job-card-wrap {
+      padding-left: 1rem !important;
+      padding-right: 1rem !important;
+   }
+   .filter-opt .form-control{
+      margin-left: 0;
+      width: 100%;
+   }
+}
