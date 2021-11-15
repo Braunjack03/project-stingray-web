@@ -24,7 +24,7 @@
 
             <!-- 2nd block -->
             <div class="text-sm">
-              <h6 class="text-gray-200 font-medium mb-1">Products</h6>
+              <h6 class="text-gray-200 font-medium mb-1 text-gray-500">Products</h6>
               <ul>
                 <li class="mb-1">
                   <Link href="#" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Web Studio</Link>
@@ -40,7 +40,7 @@
 
             <!-- 3rd block -->
             <div class="text-sm">
-              <h6 class="text-gray-200 font-medium mb-1">Resources</h6>
+              <h6 class="text-gray-200 font-medium mb-1 text-gray-500">Resources</h6>
               <ul>
                 <li class="mb-1">
                   <Link href="#" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Nostrud exercitation</Link>
@@ -62,7 +62,7 @@
 
             <!-- 4th block -->
             <div class="text-sm">
-              <h6 class="text-gray-200 font-medium mb-1">Company</h6>
+              <h6 class="text-gray-200 font-medium mb-1 text-gray-500">Company</h6>
               <ul>
                 <li class="mb-1">
                   <Link href="#" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Consectetur adipiscing</Link>
