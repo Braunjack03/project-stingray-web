@@ -168,6 +168,25 @@ ul.industries-list li {
     margin-bottom: 10px;
 }
 
+.radioColor .v-input__control label, .industries-list label {
+   color: #6e6e6e;
+}
+.register-form .radioColor .v-icon.v-icon {
+   color: #a1a1a1;
+}
+
+.cardStyle.v-sheet {
+   box-shadow: none !important;
+}
+
+.filter-opt .v-input__slot {
+   box-shadow: none !important;
+   border-bottom: 1px solid #ddd !important;
+}
+
+.filter-opt  .v-select__selection--comma {
+   color: #adadad !important;
+}
 
 .form-input.input-field-outer .v-input__control .v-input__slot[role="button"] {
    background: transparent;

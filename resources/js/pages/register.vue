@@ -40,7 +40,7 @@
                 </div>
 
                 <div class="flex flex-wrap -mx-3 mb-4">
-                  <div class="w-full px-3 text-gray-700">
+                  <div class="w-full px-3 text-gray-700 radioColor">
 
                     <label class="block text-gray-500 text-sm font-medium mb-1" for="role">Your role: <span class="text-red-600">*</span></label>
 

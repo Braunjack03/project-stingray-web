@@ -64,7 +64,7 @@ Route::get('/', [HomeController::class, 'home'])->name('home');
 
 Route::get('companies', [HomeController::class, 'companies'])->name('companies');
 
-Route::get('blog', [HomeController::class, 'blog'])->name('blog');
+Route::get('news', [HomeController::class, 'blog'])->name('blog');
 
 Route::get('jobs', [HomeController::class, 'jobs'])->name('jobs');
 

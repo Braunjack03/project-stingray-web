@@ -1,6 +1,6 @@
 <template>
 <Layout>
-    <Head title="Create Job" />
+    <Head title="Edit Job" />
     <section class="relative" data-app> 
           <div class="max-w-6xl mx-auto px-4 sm:px-6">
             <div class="pt-32 pb-12 md:pt-40 md:pb-20">

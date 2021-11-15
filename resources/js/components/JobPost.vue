@@ -1,6 +1,6 @@
 <template>
 
-    <v-card class="elevation-5 flex d-flex flex-column">
+    <v-card class="elevation-5 flex d-flex flex-column cardStyle">
       <v-card-text class="job-card-wrap">
         <div class="card-text-wrap">
           <v-card-title><Link :href="'jobs/'+data.company_slug+'/'+data.job_slug" color="text" class="mr-4">{{data.name}}</Link></v-card-title>      
