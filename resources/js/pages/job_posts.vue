@@ -1,14 +1,14 @@
 <template>
    <Layout>
       <Head title="Job Listing" />
-              <section>
+              <section data-app>
                <div class="max-w-6xl mx-auto px-4 sm:px-6 relative">
                   <div class="pt-10 pb-12">
 
                      <div class="mx-auto text-center pt-10 pb-3">
                         <div class="flex filter-outer">
                            <span class="searc-show-title">
-                              showing result 12800
+                              showing result {{job_posts.data.length}}
                            </span>
                            <div class="filter-opt">
                            <v-select
@@ -80,7 +80,7 @@ export default {
              {
                 this.term = '';
              }
-             this.$inertia.replace('/?loc='+this.location_id+'&q='+this.term);
+             this.$inertia.replace('/jobs?loc='+this.location_id+'&q='+this.term);
          }
       }
 }

@@ -5,7 +5,7 @@
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
         <div class="pt-32 pb-12 md:pt-40 md:pb-20">
           <div class="max-w-3xl mx-auto text-center pb-12 md:pb-16">
-            <h1 class="h1 mb-4" data-aos="fade-up">
+            <h1 class="h1 mb-4 text-gray-700" data-aos="fade-up">
               {{ company_details.name }} Job Posts
             </h1>
           </div>
@@ -20,7 +20,7 @@
             >
 
             <br /><br /><br />
-            <h3 class="h3">Current Job Posts</h3>
+            <h3 class="h3 text-gray-700">Current Job Posts</h3>
             <br />
 
             <div
@@ -53,11 +53,11 @@
                       <v-col cols="12 flex">
                         <Link
                           :href="'/employer/edit-job?id=' + company.uuid"
-                          class="mr-4 btn text-purple-800 custom-link"
+                          class="mr-4 btn text-purple-600 hover:text-purple-800 custom-link"
                           >EDIT</Link
                         >
                         <v-btn
-                          class="mr-4 text-purple-800 custom-link"
+                          class="mr-4 text-purple-600 hover:text-purple-800 custom-link"
                           v-on:click="deletejob(company.uuid)"
                           color="#3f51b5"
                           plain

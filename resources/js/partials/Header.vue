@@ -19,60 +19,45 @@
           <!-- Desktop menu links -->
           <ul class="flex flex-grow justify-end flex-wrap items-center">
             <li>
-              <Link href="/jobs" :class="(this.$page.component == 'job_posts') ? 'text-gray-600' : 'text-gray-300'" class=" hover:text-gray-200 px-4 py-2 flex items-center transition duration-150 ease-in-out">Job Listing</Link>
+              <Link href="/jobs" class="text-gray-600 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Jobs</Link>
             </li>
             <li>
-              <Link href="/blog" :class="(this.$page.component == 'job_posts') ? 'text-gray-600' : 'text-gray-300'" class="hover:text-gray-200 px-4 py-2 flex items-center transition duration-150 ease-in-out">Blog</Link>
+              <Link href="/companies" class="text-gray-600 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Companies</Link>
             </li>
             <li>
-              <Link href="/about" :class="(this.$page.component == 'job_posts') ? 'text-gray-600' : 'text-gray-300'" class="hover:text-gray-200 px-4 py-2 flex items-center transition duration-150 ease-in-out">About us</Link>
+              <Link href="/blog" class="text-gray-600 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Blog</Link>
             </li>
              <li>
-              <Link v-if="isLoggedIn && isLoggedIn.role == 2" href="/dashboard" :class="(this.$page.component == 'job_posts') ? 'text-gray-600' : 'text-gray-300'" class="hover:text-gray-200 px-4 py-2 flex items-center transition duration-150 ease-in-out">Dashboard</Link>
+              <Link v-if="isLoggedIn && isLoggedIn.role == 2" href="/dashboard" class="text-gray-600 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Dashboard</Link>
             </li>
             <li>
-              <Link v-if="isLoggedIn && isLoggedIn.role == 1" href="/employer/dashboard" :class="(this.$page.component == 'job_posts') ? 'text-gray-600' : 'text-gray-300'" class="hover:text-gray-200 px-4 py-2 flex items-center transition duration-150 ease-in-out">Dashboard</Link>
+              <Link v-if="isLoggedIn && isLoggedIn.role == 1" href="/employer/dashboard" class="text-gray-600 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Dashboard</Link>
             </li>
             <li>
-              <Link v-if="isLoggedIn && isLoggedIn.role == 2" href="/profile" :class="(this.$page.component == 'job_posts') ? 'text-gray-600' : 'text-gray-300'" class="hover:text-gray-200 px-4 py-2 flex items-center transition duration-150 ease-in-out">Profile</Link>
+              <Link v-if="isLoggedIn && isLoggedIn.role == 2" href="/profile" class="text-gray-600 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Profile</Link>
             </li>
             <li>
-              <Link v-if="isLoggedIn && isLoggedIn.role == 1" href="/employer/profile" :class="(this.$page.component == 'job_posts') ? 'text-gray-600' : 'text-gray-300'" class="hover:text-gray-200 px-4 py-2 flex items-center transition duration-150 ease-in-out">Profile</Link>
+              <Link v-if="isLoggedIn && isLoggedIn.role == 1" href="/employer/profile" class="text-gray-600 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Profile</Link>
             </li>
-             <!-- 1st level: hover -->
-            <Dropdown title="Support" class="(this.$page.component == 'job_posts') ? 'text-gray-600' : 'text-gray-400'">
-              <li>
-                <Link href="/contact" :class="(this.$page.component == 'job_posts') ? 'text-gray-600' : 'text-gray-400'" class="font-medium text-sm hover:text-purple-600 flex py-2 px-4 leading-tight">Contact us</Link>
-              </li>
-              <li>
-                <Link href="#" :class="(this.$page.component == 'job_posts') ? 'text-gray-600' : 'text-gray-400'" class="font-medium text-sm hover:text-purple-600 flex py-2 px-4 leading-tight">Help center</Link>
-              </li>
-              <li>
-                <Link href="/404" :class="(this.$page.component == 'job_posts') ? 'text-gray-600' : 'text-gray-400'" class="font-medium text-sm hover:text-purple-600 flex py-2 px-4 leading-tight">404</Link>
-              </li>
-            </Dropdown>
-            <!-- 1st level: hover -->
           </ul>
 
           <!-- Desktop sign in links -->
           <ul class="flex flex-grow justify-end flex-wrap items-center" v-if="!isLoggedIn">
             <li>
-              <Link href="/login"  class="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out">Sign in</Link>
+              <Link href="/login"  class="font-medium text-purple-600 hover:text-purple-600 px-4 py-3 flex items-center transition duration-150 ease-in-out">Login</Link>
             </li>
             <li>
-              <Link href="/register"  class="btn-sm text-white bg-purple-600 hover:bg-purple-700 ml-3">Sign up</Link>
+              <Link href="/register"  class="btn-sm text-white bg-purple-600 hover:bg-purple-700 ml-3">Join</Link>
             </li>
           </ul>
 
-          <ul class="flex flex-grow justify-end flex-wrap items-center" v-if="isLoggedIn">
-             <Dropdown :title="getUserEmail()">
-              <li>
-                <Link v-on:click="logout" href="/logout" :class="(this.$page.component == 'job_posts') ? 'text-gray-600' : 'text-gray-300'" class="font-medium text-sm text-gray-400 hover:text-purple-600 flex py-2 px-4 leading-tight">Sign Out</Link>
+          <ul class="flex flex-grow justify-end flex-wrap items-center text-gray-500" v-if="isLoggedIn">
+             <Dropdown :title="getUserEmail()" >
+              <li class="">
+                <Link v-on:click="logout" href="/logout" class="font-medium text-sm text-gray-600 hover:text-purple-600 flex py-2 px-4 leading-tight">Sign Out</Link>
               </li>
             </Dropdown>
           </ul>
-         
-
         </nav>
 
         <!-- Mobile menu -->
@@ -81,7 +66,7 @@
           <!-- Hamburger button -->
           <button class="hamburger" ref="hamburger" :class="{ active: mobileNavOpen }" aria-controls="mobile-nav" :aria-expanded="mobileNavOpen" @click="mobileNavOpen = !mobileNavOpen">
             <span class="sr-only">Menu</span>
-            <svg class="w-6 h-6 fill-current text-gray-300 hover:text-gray-200 transition duration-150 ease-in-out" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg class="w-6 h-6 fill-current text-gray-300 hover:text-purple-600 transition duration-150 ease-in-out" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <rect y="4" width="24" height="2" rx="1" />
               <rect y="11" width="24" height="2" rx="1" />
               <rect y="18" width="24" height="2" rx="1" />
@@ -92,34 +77,32 @@
           <nav id="mobile-nav" ref="mobileNav" class="absolute top-full z-20 left-0 w-full px-4 sm:px-6 overflow-hidden transition-all duration-300 ease-in-out" :style="[ mobileNavOpen ? { maxHeight: $refs.mobileNav.scrollHeight + 'px', opacity: 1 } : { maxHeight: 0, opacity: .8 } ]">
             <ul class="bg-gray-800 px-4 py-2">
               <li>
-                <Link href="/features" class="flex text-gray-300 hover:text-gray-200 py-2">Features</Link>
+                <Link href="/jobs" class="flex text-gray-300 hover:text-purple-600 py-2">Jobs</Link>
               </li>
               <li>
-                <Link href="/pricing" class="flex text-gray-300 hover:text-gray-200 py-2">Pricing</Link>
+                <Link href="/companies" class="flex text-gray-300 hover:text-purple-600 py-2">Companies</Link>
               </li>
               <li>
-                <Link href="/blog" class="flex text-gray-300 hover:text-gray-200 py-2">Blog</Link>
+                <Link href="/blog" class="flex text-gray-300 hover:text-purple-600 py-2">Blog</Link>
+              </li>
+              
+              <li>
+                <Link v-if="isLoggedIn && isLoggedIn.role == 2" href="/dashboard" class="flex text-gray-300 hover:text-purple-600 py-2">Dashboard</Link>
               </li>
               <li>
-                <Link href="/about" class="flex text-gray-300 hover:text-gray-200 py-2">About us</Link>
+                <Link v-if="isLoggedIn && isLoggedIn.role == 1" href="/employer/dashboard" class="flex text-gray-300 hover:text-purple-600 py-2">Dashboard</Link>
               </li>
               <li>
-                <Link v-if="isLoggedIn && isLoggedIn.role == 2" href="/dashboard" class="flex text-gray-300 hover:text-gray-200 py-2">Dashboard</Link>
+                <Link  v-if="isLoggedIn && isLoggedIn.role == 2" href="/profile" class="flex text-gray-300 hover:text-purple-600 py-2">Profile</Link>
               </li>
               <li>
-                <Link v-if="isLoggedIn && isLoggedIn.role == 1" href="/employer/dashboard" class="flex text-gray-300 hover:text-gray-200 py-2">Dashboard</Link>
+                <Link v-if="isLoggedIn && isLoggedIn.role == 1" href="/employer/profile" class="flex text-gray-300 hover:text-purple-600 py-2">Profile</Link>
               </li>
               <li>
-                <Link  v-if="isLoggedIn && isLoggedIn.role == 2" href="/profile" class="flex text-gray-300 hover:text-gray-200 py-2">Profile</Link>
+                <Link v-if="!isLoggedIn" href="/login" class="flex font-medium w-full text-purple-600 hover:text-purple-600 py-2 justify-center">Login</Link>
               </li>
               <li>
-                <Link v-if="isLoggedIn && isLoggedIn.role == 1" href="/employer/profile" class="flex text-gray-300 hover:text-gray-200 py-2">Profile</Link>
-              </li>
-              <li>
-                <Link v-if="!isLoggedIn" href="/login" class="flex font-medium w-full text-purple-600 hover:text-gray-200 py-2 justify-center">Sign in</Link>
-              </li>
-              <li>
-                <Link v-if="!isLoggedIn" href="/register" class="font-medium w-full inline-flex items-center justify-center border border-transparent px-4 py-2 my-2 rounded-sm text-white bg-purple-600 hover:bg-purple-700 transition duration-150 ease-in-out">Sign up</Link>
+                <Link v-if="!isLoggedIn" href="/register" class="font-medium w-full inline-flex items-center justify-center border border-transparent px-4 py-2 my-2 rounded-sm text-white bg-purple-600 hover:bg-purple-700 transition duration-150 ease-in-out">Join</Link>
               </li>
               <li>
                 <Link v-if="isLoggedIn" v-on:click="logout" href="/logout" class="font-medium w-full inline-flex items-center justify-center border border-transparent px-4 py-2 my-2 rounded-sm text-white bg-purple-600 hover:bg-purple-700 transition duration-150 ease-in-out">Sign Out</Link>

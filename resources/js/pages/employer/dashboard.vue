@@ -8,10 +8,10 @@
 
                  <!-- Page header -->
             <div class="max-w-3xl mx-auto text-center pb-12 md:pb-16">
-                <h1 class="h1 mb-4" data-aos="fade-up">Dashboard</h1>
+                <h1 class="h1 mb-4 text-gray-700" data-aos="fade-up">Dashboard</h1>
             </div>
         <!-- Form -->
-            <div class="max-w-xl mx-auto">
+            <div class="max-w-xl mx-auto  text-gray-500">
             <div v-if="$page.props.flash.message" class="mt-2 success">
             {{ $page.props.flash.message }}
           </div>  

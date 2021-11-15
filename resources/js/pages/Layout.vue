@@ -1,5 +1,5 @@
 <template>
-  <body class="font-inter antialiased text-gray-200 tracking-tight" :class="(this.$page.component == 'job_posts') ? 'bg-white' : 'bg-gray-900'">
+  <body class="font-inter antialiased text-gray-200 tracking-tight bg-white" :class="(this.$page.component == 'job_posts1') ? 'bg-white bg-gray-900' : ''">
 
     <div class="flex flex-col min-h-screen overflow-hidden">
     <Header/>

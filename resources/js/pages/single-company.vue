@@ -16,7 +16,7 @@
               ></v-img>
             </v-col>
             <v-col lg="9" md="8" sm="7" cols="12">
-              <h2 class="post-title mb-0">
+              <h2 class="post-title mb-0 text-gray-700">
                 {{ data.name }}
                 <v-btn
                   v-if="data.unclaimed == 1 && data.role == 3"
@@ -26,10 +26,10 @@
                   >(Claim this Profile)</v-btn
                 >
               </h2>
-              <p class="types-title mt-0">{{ data.industry_types }}</p>
-              <v-row class="mt-0">
+              <p class="types-title mt-0 text-gray-500">{{ data.industry_types }}</p>
+              <v-row class="mt-0 ">
                 <v-col cols="12" sm="6" md="4">
-                  <div class="extra-info">
+                  <div class="extra-info text-gray-500">
                     Location :
                     <span
                       ><strong>{{ data.location }}</strong></span
@@ -37,7 +37,7 @@
                   </div>
                 </v-col>
                 <v-col cols="12" sm="6" md="4">
-                  <div class="extra-info">
+                  <div class="extra-info text-gray-500">
                     Local Employees: <strong>{{ data.local_employees }}</strong
                     ><br />
                     Global Employees:
@@ -45,15 +45,15 @@
                   </div>
                 </v-col>
                 <v-col cols="12" sm="6" md="4">
-                  <div class="extra-info">
+                  <!--div class="extra-info">
                     Year Founded: <strong>{{ data.year_founded }}</strong
                     ><br />
-                  </div>
+                  </div-->
 
                   <v-btn
                     :href="data.website_url"
                     target="_blank"
-                    class="bg-purple-600 hover:bg-purple-700 mt-2"
+                    class="bg-purple-600 hover:bg-purple-700 "
                   >
                     View website
                   </v-btn>
@@ -64,17 +64,17 @@
 
           <v-row>
             <v-col cols="12" md="12">
-              <h3 class="post-title">About {{ data.name }}</h3>
-              <div class="desc" v-html="data.mission"></div>
+              <h3 class="post-title text-gray-700">About {{ data.name }}</h3>
+              <div class="desc text-gray-500" v-html="data.mission"></div>
             </v-col>
           </v-row>
           <v-row>
             <v-col cols="12" class="pa-2">
-              <h3 class="desc">Jobs at {{ data.name }}</h3>
-              <ul v-if="job_posts" id="example-1">
+              <h3 class="desc text-gray-700">Jobs at {{ data.name }}</h3>
+              <ul v-if="job_posts" id="example-1" class="text-gray-500">
                 <li v-for="company in job_posts" :key="company.id">
                   <h4 class="post-title">
-                    <a :href="`/jobs/${data.slug}/${company.slug}`"
+                    <a :href="`/jobs/${data.slug}/${company.slug}`" class="text-gray-700"
                       >{{ company.name }}
                       <span class="text-sm"
                         >({{ company.location_id }})</span

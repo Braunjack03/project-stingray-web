@@ -7,14 +7,14 @@
 
               <!-- Page header -->
               <div class="max-w-3xl mx-auto text-center pb-12 md:pb-9">
-                <h1 class="h1">Welcome back. We exist to make entrepreneurship easier.</h1>
+                <h1 class="h1 text-gray-600">Welcome back. We exist to make entrepreneurship easier.</h1>
               </div>
 
         <!-- Form -->
             <div class="max-w-sm mx-auto">
               <div class="flex items-center my-6">
                 <div class="border-t border-gray-700 border-dotted flex-grow mr-3" aria-hidden="true"></div>
-                <div class="text-gray-400">Sign in with your email</div>
+                <div class="text-gray-700">Sign in with your email</div>
                 <div class="border-t border-gray-700 border-dotted flex-grow ml-3" aria-hidden="true"></div>
               </div>
               <v-form class="login-form form-outer-wrapper" @submit.prevent="submit" >
@@ -22,8 +22,8 @@
                 <div v-if="success" class="text-green-500 text-sm mt-2">{{ success.message }}</div>
                 <div class="flex flex-wrap -mx-3 mb-4">
                   <div class="w-full px-3">
-                    <label class="block text-gray-300 text-sm font-medium mb-1" for="email">Email</label>
-                    <v-text-field v-model="email" :class="{ 'error--text': $v.email.$error }"  @input="$v.email.$touch()" @blur="$v.email.$touch()" class="form-input input-field-outer w-full text-gray-300" placeholder="you@yourcompany.com" autocomplete required ></v-text-field>
+                    <label class="block text-gray-500 text-sm font-medium mb-1" for="email">Email</label>
+                    <v-text-field v-model="email" :class="{ 'error--text': $v.email.$error }"  @input="$v.email.$touch()" @blur="$v.email.$touch()" class="form-input input-field-outer w-full text-gray-500" placeholder="you@yourcompany.com" autocomplete required ></v-text-field>
 
                     <div v-if="$v.email.$error && !$v.email.required"  class="text-red-500 text-sm">Email is required</div>
                     <div v-if="email.trim().length > 0 && $v.email.$error && !$v.email.email"  class="text-red-500 text-sm">Please Enter a valid Email</div>
@@ -31,8 +31,8 @@
                 </div>
                 <div class="flex flex-wrap -mx-3 mb-4">
                   <div class="w-full px-3">
-                    <label class="block text-gray-300 text-sm font-medium mb-1" for="password">Password</label>
-                    <v-text-field type="password" v-model="password" :class="{ 'error--text': $v.password.$error }" class="form-input input-field-outer w-full text-gray-300" @input="$v.password.$touch()" @blur="$v.password.$touch()" placeholder="Password (at least 8 characters)" autocomplete required ></v-text-field>
+                    <label class="block text-gray-500 text-sm font-medium mb-1" for="password">Password</label>
+                    <v-text-field type="password" v-model="password" :class="{ 'error--text': $v.password.$error }" class="form-input input-field-outer w-full text-gray-500" @input="$v.password.$touch()" @blur="$v.password.$touch()" placeholder="Password (at least 8 characters)" autocomplete required ></v-text-field>
                     <div v-if="$v.password.$error && !$v.password.required" class="text-red-500 text-sm ">Password is required</div>  
                     <div v-if="password.trim().length > 0 && $v.password.$error && !$v.password.minLength" class="text-red-500 text-sm ">The password must be at least 8 characters.</div>
                   
@@ -41,7 +41,7 @@
                 <div class="flex flex-wrap -mx-3 mb-4">
                   <div class="w-full px-3">
                     <div class="flex justify-between">
-                      <Link href="/forgot-password" class="text-purple-600 hover:text-gray-200 transition duration-150 ease-in-out">Forgot Password?</Link>
+                      <Link href="/forgot-password" class="text-purple-600 hover:text-purple-600 transition duration-150 ease-in-out">Forgot Password?</Link>
                     </div>
                   </div>
                 </div>
@@ -54,8 +54,8 @@
                   </div>
                 </div>
               </v-form>
-              <div class="text-gray-400 text-center mt-6">
-                Don’t you have an account? <Link href="/register" class="text-purple-600 hover:text-gray-200 transition duration-150 ease-in-out">Sign up</Link>
+              <div class="text-gray-700 text-center mt-6">
+                Don’t you have an account? <Link href="/register" class="text-purple-600 hover:text-purple-600 transition duration-150 ease-in-out">Sign up</Link>
               </div>
             </div>
 

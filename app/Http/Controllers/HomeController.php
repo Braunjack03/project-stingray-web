@@ -13,7 +13,7 @@ class HomeController extends Controller
 {    
     public function __construct()
     {
-        $this->middleware('auth',['except' => ['home','jobs']]);
+        $this->middleware('auth',['except' => ['home','jobs','companies','blog']]);
     }
     /**
      * Dashboard
@@ -44,33 +44,16 @@ class HomeController extends Controller
         }
     }
 
-    public function home(Request $request){
-        
-        try{
-            $job_posts = JobPost::join('company_profiles','job_posts.company_profile_id','company_profiles.id')
-            ->select(
-                    'job_posts.name as name',
-                    'job_posts.content as content',
-                    'company_profiles.name as company_name',
-                    'job_posts.apply_url as apply_url',
-                    'company_profiles.slug as company_slug',
-                    'job_posts.slug as job_slug',
-                    'job_posts.created_at'
-            )->when($request->q, function($query, $term) {
-                    $query->where('job_posts.name', 'LIKE', '%'.$term.'%');
-                    $query->where('job_posts.content', 'LIKE', '%'.$term.'%');
-            })->when($request->loc, function($query, $term1) {
-                $query->where('job_posts.location_id', $term1);
-            })
-            ->orderBy('job_posts.created_at','DESC')
-            ->paginate($this->paginationLimit);
-            
-            $locations = Location::get();
-            return Inertia::render('job_posts', ['job_posts' => $job_posts,'location_id'=>$request->loc,'term'=>$request->q,'locations'=>$locations]);
-        }catch (\Exception $e) {
-            $message = $e->getMessage();
-            return $this->sendErrorResponse('login',$message);
-        }
+    public function home(){
+        return Inertia::render('home');
+    }
+
+    public function blog(){
+        return Inertia::render('blog');
+    }
+
+    public function companies(){
+        return Inertia::render('companies');
     }
 
     public function jobs(Request $request){

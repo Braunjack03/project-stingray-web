@@ -41,7 +41,8 @@ html{
 }
 
 .theme--light.v-input, .theme--light.v-input input, .theme--light.v-input textarea {
-    color: rgba(197, 210, 220,1) !important;
+    /*color: rgba(197, 210, 220,1) !important;*/
+    color: rgb(85 89 95) !important;
 }
 
 .theme--light.v-btn.v-btn--has-bg {
@@ -136,7 +137,8 @@ html{
 
 .input-field-outer input::placeholder,
 .input-field-outer textarea::placeholder {
-  color: #c5d2dc!important;
+  /*color: #c5d2dc !important;*/
+  color: rgba(112, 125, 134, 1) !important;
   opacity: .4;
 }
 
@@ -287,7 +289,8 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
    width: calc(100% - .5rem);
    font-weight: 500;
    margin-left: -.5rem;
-   color:rgb(217, 227, 234);
+   /*color:rgb(217, 227, 234);*/
+   color:rgba(112, 125, 134, 1)
 }
 
 .section-title{
@@ -300,7 +303,7 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
    font-size: 1rem;
    padding: .2rem 0 .2rem .5rem;
    font-weight: 400;
-   color:rgb(155, 169, 180);
+   /*color:rgb(155, 169, 180);*/
 }
 
 .types-title{
@@ -318,13 +321,13 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
 .extra-info {
    font-size: 1rem;
    font-weight: 400;
-   color:rgb(155, 169, 180);
+   /*color:rgb(155, 169, 180);*/
    line-height: normal;
 }
 
 .extra-info strong {
    font-weight: 500;
-   color:rgb(217, 227, 234)
+   /*color:rgb(217, 227, 234)*/
 }
 
 .link-text{

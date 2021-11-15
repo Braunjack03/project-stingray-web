@@ -7,14 +7,14 @@
 
             <!-- Page header -->
             <div class="max-w-3xl mx-auto text-center pb-12 md:pb-9">
-              <h1 class="h1">Welcome. We exist to make entrepreneurship easier.</h1>
+              <h1 class="h1 text-gray-600">Welcome. We exist to make entrepreneurship easier.</h1>
             </div>
 
              <!-- Form -->
             <div class="max-w-sm mx-auto">
               <div class="flex items-center my-6">
                 <div class="border-t border-gray-700 border-dotted flex-grow mr-3" aria-hidden="true"></div>
-                <div class="text-gray-400">Register with your email</div>
+                <div class="text-gray-700">Register with your email</div>
                 <div class="border-t border-gray-700 border-dotted flex-grow ml-3" aria-hidden="true"></div>
               </div>
 
@@ -23,8 +23,8 @@
               <v-form class="register-form form-outer-wrapper" @submit.prevent="submit" >
                 <div class="flex flex-wrap -mx-3 mb-4">
                   <div class="w-full px-3">
-                    <label class="block text-gray-300 text-sm font-medium mb-1" for="email">Work Email <span class="text-red-600">*</span></label>
-                    <v-text-field v-model="email" :class="{ 'error--text': $v.email.$error }"  @input="$v.email.$touch()" @blur="$v.email.$touch()" class="form-input input-field-outer w-full text-gray-300" placeholder="you@yourcompany.com" autocomplete required ></v-text-field>
+                    <label class="block text-gray-500 text-sm font-medium mb-1" for="email">Work Email <span class="text-red-600">*</span></label>
+                    <v-text-field v-model="email" :class="{ 'error--text': $v.email.$error }"  @input="$v.email.$touch()" @blur="$v.email.$touch()" class="form-input input-field-outer w-full text-gray-500" placeholder="you@yourcompany.com" autocomplete required ></v-text-field>
 
                     <div v-if="$v.email.$error && !$v.email.required"  class="text-red-500 text-sm">Email is required</div>
                     <div v-if="$v.email.$error && !$v.email.email"  class="text-red-500 text-sm">Please Enter a valid Email</div>
@@ -32,19 +32,19 @@
                 </div>
                 <div class="flex flex-wrap -mx-3 mb-4">
                   <div class="w-full px-3">
-                    <label class="block text-gray-300 text-sm font-medium mb-1" for="password">Password <span class="text-red-600">*</span></label>
-                    <v-text-field type="password" v-model="password" :class="{ 'error--text': $v.password.$error }" class="form-input input-field-outer w-full text-gray-300" @input="$v.password.$touch()" @blur="$v.password.$touch()" placeholder="Password (at least 8 characters)" autocomplete required ></v-text-field>
+                    <label class="block text-gray-500 text-sm font-medium mb-1" for="password">Password <span class="text-red-600">*</span></label>
+                    <v-text-field type="password" v-model="password" :class="{ 'error--text': $v.password.$error }" class="form-input input-field-outer w-full text-gray-500" @input="$v.password.$touch()" @blur="$v.password.$touch()" placeholder="Password (at least 8 characters)" autocomplete required ></v-text-field>
                     <div v-if="$v.password.$error && !$v.password.required" class="text-red-500 text-sm ">Password is required</div>  
                     <div v-if="$v.password.$error && !$v.password.minLength" class="text-red-500 text-sm ">The password must be at least 8 characters.</div>
                   </div>
                 </div>
 
                 <div class="flex flex-wrap -mx-3 mb-4">
-                  <div class="w-full px-3 text-gray-400">
+                  <div class="w-full px-3 text-gray-700">
 
-                    <label class="block text-gray-300 text-sm font-medium mb-1" for="role">Your role: <span class="text-red-600">*</span></label>
+                    <label class="block text-gray-500 text-sm font-medium mb-1" for="role">Your role: <span class="text-red-600">*</span></label>
 
-                      <v-radio-group v-model="user_type" mandatory>
+                      <v-radio-group v-model="user_type" mandatory class="text-gray-500">
                     <v-radio
                         label="Job Seeker"
                         value="2"
@@ -57,9 +57,9 @@
 
                   </div>
                 </div>
-                 <div class="text-sm text-gray-500 text-center">
-                  I agree to be contacted by Open PRO about this offer as per the Open PRO <a class="underline text-gray-400 hover:text-gray-200 hover:no-underline transition duration-150 ease-in-out" href="#0">Privacy Policy</a>.
-                </div>
+                 <!--div class="text-sm text-gray-500 text-center">
+                  I agree to be contacted by Open PRO about this offer as per the Open PRO <a class="underline text-gray-700 hover:text-gray-600 hover:no-underline transition duration-150 ease-in-out" href="#0">Privacy Policy</a>.
+                </div-->
                 <div class="flex flex-wrap -mx-3 mt-6">
                   <div class="w-full px-3">
                      <v-btn class="btn text-white bg-purple-600 hover:bg-purple-700 w-full" @click="submit">
@@ -68,8 +68,8 @@
                   </div>
                 </div>
               </v-form>
-              <div class="text-gray-400 text-center mt-6">
-                Already Have Account? <Link href="/login" class="text-purple-600 hover:text-gray-200 transition duration-150 ease-in-out">Sign in</Link>
+              <div class="text-gray-700 text-center mt-6">
+                Already Have Account? <Link href="/login" class="text-purple-600 hover:text-gray-600 transition duration-150 ease-in-out">Sign in</Link>
               </div>
             </div>
 
