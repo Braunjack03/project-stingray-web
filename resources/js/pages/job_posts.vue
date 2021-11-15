@@ -18,6 +18,7 @@
                            :items="locations"
                            label="Location"
                            @change="search"
+                           solo
                            ></v-select>
                            <input type="text" name="table_search" value= '' class="form-control float-right" placeholder="Search" v-model="term" @keyup="search">
                         </div>
