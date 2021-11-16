@@ -25,7 +25,7 @@
                     <div class="max-w-xl mx-auto">
                       
                         <v-form ref="form">
-                            <div class="flex flex-wrap -mx-3 mb-4" v-if="user.profile_image_src">
+                            <div class="flex flex-wrap  mb-4" v-if="user.profile_image_src">
                                 <div class="w-full px-3 form-avataar">
                                     <v-icon v-if="user.profile_image_src" color="gray darken-2" class="ml-auto" @click="removeImage()">
                                         mdi-close-circle</v-icon>
@@ -33,7 +33,7 @@
                                 </div>
                             </div>
     
-                            <div class="flex flex-wrap -mx-3 form-file-upload">
+                            <div class="flex flex-wrap  form-file-upload">
                                 <div class="w-full px-3">
                                     <label class="block text-gray-700 text-sm font-medium mb-1" for="email">Profile Image (Recommended 500px x 500px)
                       </label>
@@ -42,7 +42,7 @@
                             </div>
     
     
-                            <div class="flex flex-wrap -mx-3 mb-4">
+                            <div class="flex flex-wrap  mb-4">
                                 <div class="w-full px-3">
                                     <label class="block text-gray-700 text-sm font-medium mb-1" for="email">Name <span class="text-red-600">*</span></label
                       >
@@ -62,7 +62,7 @@
                     </div>
                   </div>
     
-                  <div class="flex flex-wrap -mx-3 mb-4">
+                  <div class="flex flex-wrap  mb-4">
                     <div class="w-full px-3">
                       <label
                         class="block text-gray-700 input-field-outer text-sm font-medium mb-1"
@@ -84,7 +84,7 @@
                     </div>
                   </div>
     
-                  <div class="flex flex-wrap -mx-3 mb-4">
+                  <div class="flex flex-wrap  mb-4">
                     <div class="w-full px-3">
                       <label
                         class="block text-gray-700 text-sm font-medium mb-1"
@@ -95,9 +95,9 @@
                                 </div>
                             </div>
     
-                            <h4 class="text-2xl mt-2 mb-1 text-gray-700">Social Links</h4>
+                            <h4 class="text-2xl mt-2 ml-3 mb-1 text-gray-700">Social Links</h4>
     
-                            <div class="flex flex-wrap -mx-3 mb-4">
+                            <div class="flex flex-wrap  mb-4">
                                 <div class="w-full px-3">
                                     <label class="block text-gray-700 text-sm font-medium mb-1" for="current_job_title">LinkedIn
                       </label>
@@ -109,7 +109,7 @@
                                 </div>
                             </div>
     
-                            <div class="flex flex-wrap -mx-3 mb-4">
+                            <div class="flex flex-wrap  mb-4">
                                 <div class="w-full px-3">
                                     <label class="block text-gray-700 input-field-outer text-sm font-medium mb-1" for="current_job_title">Github
                       </label>
@@ -118,7 +118,7 @@
                                 </div>
                             </div>
     
-                            <div class="flex flex-wrap -mx-3 mb-4">
+                            <div class="flex flex-wrap  mb-4">
                                 <div class="w-full px-3">
                                     <label class="block text-gray-700 input-field-outer text-sm font-medium mb-1" for="current_job_title">Twitter
                       </label>
@@ -127,7 +127,7 @@
                                 </div>
                             </div>
     
-                            <div class="flex flex-wrap -mx-3 mb-4">
+                            <div class="flex flex-wrap  mb-4">
                                 <div class="w-full px-3">
                                     <v-btn v-if="user.current_resume_src" :href="user.current_resume_src" target="_blank">
                                         <v-icon color="gray darken-2">mdi-file-document</v-icon>
@@ -138,7 +138,7 @@
                                 </div>
                             </div>
     
-                            <div class="flex flex-wrap -mx-3 mb-4">
+                            <div class="flex flex-wrap  mb-4">
                                 <div class="w-full px-3  form-file-upload">
                                     <label class="block text-gray-700 text-sm font-medium mb-1" for="current_job_title">Current Resume
                       </label>
@@ -149,7 +149,7 @@
                                 </div>
                             </div>
     
-                            <div class="flex flex-wrap -mx-3 mt-6">
+                            <div class="flex flex-wrap  mt-6">
                                 <div class="w-full px-3">
                                     <v-btn @click="submit()" class="btn text-white bg-purple-600 hover:bg-purple-700 w-full">
                                         Save Changes
@@ -157,7 +157,7 @@
                                 </div>
                             </div>
     
-                            <div class="flex flex-wrap -mx-3 mt-6 text-center">
+                            <div class="flex flex-wrap  mt-6 text-center">
                                 <div class="w-full px-3">
                                     <p class="text-center text-gray-700">Please fill the required field(s)</p>
                                 </div>
