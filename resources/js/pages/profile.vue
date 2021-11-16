@@ -1,6 +1,12 @@
 <template>
     <Layout>
         <Head title="Profile" />
+         <v-overlay :value="overlay">
+          <v-progress-circular
+            indeterminate
+            size="64"
+          ></v-progress-circular>
+        </v-overlay>
         <section class="relative">
             <div class="max-w-6xl mx-auto px-4 sm:px-6">
                 <div class="pt-32 pb-12 md:pt-40 md:pb-20">
@@ -196,6 +202,7 @@ export default {
             current_resume:this.user.current_resume,
             profile_image_removed: 0,
             current_resume_removed: 0,
+            overlay: false,
         }
     },
 
@@ -206,6 +213,7 @@ export default {
         },
         submit() {
             this.$v.$touch()
+            this.overlay = true;
             if (!this.$v.$invalid) {
                 console.log('submit');
                 let form = {
@@ -222,6 +230,10 @@ export default {
                 };
                 console.log('form', form);
                 this.$inertia.post("/profile", form);
+                if(this.success && this.success.status == 1){
+                  this.overlay = false;
+                }
+
             }
             /*this.$v.$touch();
             if(this.user.name != '' && this.user.current_job_title != '')
@@ -240,7 +252,7 @@ export default {
             this.current_resume_removed = 1;
         },
         onFileChange(e) {
-            this.user.profile_image_src = URL.createObjectURL(this.user.profile_image);
+            this.user.profile_image_src = URL.createObjectURL(this.profile_image);
         },
     },
 };
