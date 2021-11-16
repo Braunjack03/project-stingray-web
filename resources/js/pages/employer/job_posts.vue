@@ -25,7 +25,7 @@
 
             <div
               v-if="$page.props.flash.message"
-              class="text-green-500 text-center text-sm mb-4"
+              class="text-green-500 text-center text-sm font-bold text-center text-sm my-4"
             >
               {{ $page.props.flash.message }}
             </div>

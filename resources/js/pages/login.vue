@@ -18,8 +18,8 @@
                 <div class="border-t border-gray-700 border-dotted flex-grow ml-3" aria-hidden="true"></div>
               </div>
               <v-form class="login-form form-outer-wrapper" @submit.prevent="submit" >
-                <div v-if="errors.message" class="text-red-500 text-sm mt-2">{{ errors.message }}</div>
-                <div v-if="success" class="text-green-500 text-sm mt-2">{{ success.message }}</div>
+                <div v-if="errors.message" class="text-red-500 text-sm font-bold text-center text-sm my-3">{{ errors.message }}</div>
+                <div v-if="success" class="text-green-500 text-sm font-bold text-center text-sm my-3">{{ success.message }}</div>
                 <div class="flex flex-wrap -mx-3 mb-4">
                   <div class="w-full px-3">
                     <label class="block text-gray-700 text-sm font-medium mb-1" for="email">Email</label>

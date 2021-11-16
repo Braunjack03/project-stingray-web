@@ -11,8 +11,8 @@
 
               <div class="max-w-xl mx-auto">
 
-                <div v-if="errors.message" class="text-red-500 text-sm mt-2">{{ errors.message }}</div>
-                  <div v-if="success" class="text-green-500 text-sm mt-2">{{ success.message }}</div>
+                <div v-if="errors.message" class="text-red-500 text-sm font-bold text-center text-sm my-3">{{ errors.message }}</div>
+                  <div v-if="success" class="text-green-500 text-sm font-bold text-center text-sm my-3">{{ success.message }}</div>
                 <v-form ref="form"  class="form-outer-wrapper max-w-xl">
 
                     <div class="flex flex-wrap -mx-3 mb-4">
