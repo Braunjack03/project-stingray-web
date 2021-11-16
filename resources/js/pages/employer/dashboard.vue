@@ -15,7 +15,7 @@
             <div v-if="$page.props.flash.message" class="mt-2 success">
             {{ $page.props.flash.message }}
           </div>  
-        <p v-if="(user.is_email_verified === 0)" class="error">Your email is not verified yet. Please verify.</p>  
+        <p v-if="(user.is_email_verified === 0)" class="text-red-500">Your email is not verified yet. Please verify.</p>  
             <H1>Welcome</H1>
             <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
         </div>

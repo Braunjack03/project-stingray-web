@@ -12,7 +12,7 @@
             </div>
         <!-- Form -->
             <div class="max-w-xl mx-auto text-gray-500">
-             <p v-if="(user.is_email_verified === 0)" class="error">Your email is not verified yet. Please verify.</p>  
+             <p v-if="(user.is_email_verified === 0)" class="text-red-500">Your email is not verified yet. Please verify.</p>  
             <H1>Welcome</H1>
             <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
 
