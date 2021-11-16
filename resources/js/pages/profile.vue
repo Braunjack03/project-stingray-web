@@ -15,14 +15,15 @@
                         <h1 class="h1 mb-4 text-gray-700" data-aos="fade-up">Profile Settings</h1>
                     </div>
                     <!-- Form -->
-                    <div class="max-w-xl mx-auto">
-                        <div v-if="errors.message" class="text-red-500 text-sm font-bold text-center text-sm my-3">
+                      <div v-if="errors.message" class="text-red-500 text-sm font-bold text-center text-sm my-3">
                             {{ errors.message }}
                         </div>
                         <!--v-alert v-if="success.message" dense type="success"> {{ success.message }}</v-alert-->
                         <div v-if="success" class="text-green-500 font-bold text-center text-sm my-3">
                   {{ success.message }}
                 </div>
+                    <div class="max-w-xl mx-auto">
+                      
                         <v-form ref="form">
                             <div class="flex flex-wrap -mx-3 mb-4" v-if="user.profile_image_src">
                                 <div class="w-full px-3 form-avataar">

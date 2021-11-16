@@ -11,10 +11,10 @@
            
               <div class="max-w-xl mx-auto">
 
-                  <div v-if="errors.message" class="text-red-500 text-center text-sm mb-4">{{ errors.message }}</div>
-                  <div v-if="success" class="text-green-500 text-center text-sm mb-4">{{ success.message }}</div>
+                  <div v-if="errors.message" class="text-red-500 text-center text-sm font-bold text-center text-sm my-3">{{ errors.message }}</div>
+                  <div v-if="success" class="text-green-500 text-center text-sm font-bold text-center text-sm my-3">{{ success.message }}</div>
 
-                  <div v-if="$page.props.flash.message" class="text-green-500 text-center text-sm mb-4">
+                  <div v-if="$page.props.flash.message" class="text-green-500 text-center text-sm font-bold text-center text-sm my-3">
                   {{ $page.props.flash.message }}
                 </div>
                 <v-form ref="form"  lazy-validations class="form-outer-wrapper max-w-xl">
