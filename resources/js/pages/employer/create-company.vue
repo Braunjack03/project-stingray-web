@@ -29,50 +29,50 @@
 
                     <div class="flex flex-wrap -mx-3 mb-4">
                       <div class="w-full px-3 form-file-upload">
-                          <label class="block text-gray-500 text-sm font-medium mb-1">Company Logo (Recommended 500px x 500px) </label>
-                            <v-file-input class="fileUpload form-input input-field-outer w-full text-gray-500" v-model="user.logo_image_url" accept="image/*" @change="onFileChange" outlined dense></v-file-input>
+                          <label class="block text-gray-700 text-sm font-medium mb-1">Company Logo (Recommended 500px x 500px) </label>
+                            <v-file-input class="fileUpload form-input input-field-outer w-full text-gray-700" v-model="user.logo_image_url" accept="image/*" @change="onFileChange" outlined dense></v-file-input>
                             
                      </div>
                     </div>   
 
                      <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
-                          <label class="block text-gray-500 text-sm font-medium mb-1">Company Name <span class="text-red-600">*</span></label>
+                          <label class="block text-gray-700 text-sm font-medium mb-1">Company Name <span class="text-red-600">*</span></label>
                           <v-text-field v-model="name" :class="{ 'error--text': $v.name.$error }" @input="$v.name.$touch()" 
-                              @blur="$v.name.$touch()" class="form-input input-field-outer w-full text-gray-500" placeholder="Company Name" required></v-text-field>
+                              @blur="$v.name.$touch()" class="form-input input-field-outer w-full text-gray-700" placeholder="Company Name" required></v-text-field>
                            <div v-if="$v.name.$error && !$v.name.required"  class="text-red-500 text-sm">Company Name is required</div>
                         </div>
                     </div>   
 
                     <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
-                          <label class="block text-gray-500 text-sm font-medium mb-1">Number of local employees <span class="text-red-600">*</span></label>
+                          <label class="block text-gray-700 text-sm font-medium mb-1">Number of local employees <span class="text-red-600">*</span></label>
                             <v-text-field v-model="local_employees" @input="$v.local_employees.$touch()" 
-                              @blur="$v.local_employees.$touch()" :class="{ 'error--text': $v.local_employees.$error }" class="form-input input-field-outer w-full text-gray-500" placeholder="Number of local employees" required></v-text-field>
+                              @blur="$v.local_employees.$touch()" :class="{ 'error--text': $v.local_employees.$error }" class="form-input input-field-outer w-full text-gray-700" placeholder="Number of local employees" required></v-text-field>
                           <div v-if="$v.local_employees.$error && !$v.local_employees.required"  class="text-red-500 text-sm">Number of local employees</div>
                       </div>
                     </div>   
                     
                     <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
-                          <label class="block text-gray-500 text-sm font-medium mb-1">Number of global employees</label>
-                            <v-text-field v-model="user.global_employees" class="form-input input-field-outer w-full text-gray-500" placeholder="Number of global employees" ></v-text-field>
+                          <label class="block text-gray-700 text-sm font-medium mb-1">Number of global employees</label>
+                            <v-text-field v-model="user.global_employees" class="form-input input-field-outer w-full text-gray-700" placeholder="Number of global employees" ></v-text-field>
                           <div v-if="errors.global_employees" class="mt-2 error">{{ errors.global_employees }}</div>
                       </div>
                     </div>   
 
                     <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
-                          <label class="block text-gray-500 text-sm font-medium mb-1">Company Website</label>
-                          <v-text-field v-model="user.website_url" class="form-input input-field-outer w-full text-gray-500" placeholder="https://example.com" ></v-text-field>
+                          <label class="block text-gray-700 text-sm font-medium mb-1">Company Website</label>
+                          <v-text-field v-model="user.website_url" class="form-input input-field-outer w-full text-gray-700" placeholder="https://example.com" ></v-text-field>
                           <div v-if="errors.website_url" class="mt-2 error">{{ errors.website_url }}</div>
                        </div>
                     </div>  
 
                     <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
-                          <label class="block text-gray-500 text-sm font-medium mb-1">Company Mission</label>
-                          <v-textarea v-model="user.mission" rows="2" class="form-input input-field-outer w-full text-gray-500" placeholder="Company Mission" ></v-textarea>
+                          <label class="block text-gray-700 text-sm font-medium mb-1">Company Mission</label>
+                          <v-textarea v-model="user.mission" rows="2" class="form-input input-field-outer w-full text-gray-700" placeholder="Company Mission" ></v-textarea>
                           <div v-if="errors.mission" class="mt-2 error">{{ errors.mission }}</div>
                        </div>
                     </div>  
@@ -80,7 +80,7 @@
 
                     <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
-                          <label class="block text-gray-500 text-sm font-medium mb-1">Company Industry (select up to 3)</label>
+                          <label class="block text-gray-700 text-sm font-medium mb-1">Company Industry (select up to 3)</label>
                             <ul class="industries-list">
                               <li v-for="(item, index) in industries" :key="index">
                                 <label>
@@ -101,8 +101,8 @@
 
                     <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
-                          <label class="block text-gray-500 text-sm font-medium mb-1">Address</label>
-                          <v-text-field v-model="user.street_addr_1"   class="form-input input-field-outer w-full text-gray-500" placeholder="Address" ></v-text-field>
+                          <label class="block text-gray-700 text-sm font-medium mb-1">Address</label>
+                          <v-text-field v-model="user.street_addr_1"   class="form-input input-field-outer w-full text-gray-700" placeholder="Address" ></v-text-field>
                           <div v-if="errors.street_addr_1" class="mt-2 error">{{ errors.street_addr_1 }}</div>
                         </div>
                     </div>  
@@ -110,8 +110,8 @@
                     
                      <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
-                          <label class="block text-gray-500 text-sm font-medium mb-1">Address 2</label>
-                          <v-text-field v-model="user.street_addr_2" class="form-input input-field-outer w-full text-gray-500" placeholder="Address 2" ></v-text-field>
+                          <label class="block text-gray-700 text-sm font-medium mb-1">Address 2</label>
+                          <v-text-field v-model="user.street_addr_2" class="form-input input-field-outer w-full text-gray-700" placeholder="Address 2" ></v-text-field>
                           <div v-if="errors.street_addr_2" class="mt-2 error">{{ errors.street_addr_2 }}</div>
                         </div>
                     </div> 
@@ -119,15 +119,15 @@
 
                      <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
-                          <label class="block text-gray-500 text-sm font-medium mb-1">City</label>
-                          <v-text-field v-model="user.city" class="form-input input-field-outer w-full text-gray-500" placeholder="City" ></v-text-field>
+                          <label class="block text-gray-700 text-sm font-medium mb-1">City</label>
+                          <v-text-field v-model="user.city" class="form-input input-field-outer w-full text-gray-700" placeholder="City" ></v-text-field>
                           <div v-if="errors.city" class="mt-2 error">{{ errors.city }}</div>
                         </div>
                     </div> 
 
                     <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
-                          <label class="block text-gray-500 text-sm font-medium mb-1">State </label>
+                          <label class="block text-gray-700 text-sm font-medium mb-1">State </label>
                             <v-row >
                             <v-col
                               class="d-flex"
@@ -137,7 +137,7 @@
                                 v-model='user.state_abbr'
                                 :items="items"
                                 label="State"
-                                class="form-input input-field-outer w-full text-gray-500"
+                                class="form-input input-field-outer w-full text-gray-700"
                                 dense
                                 solo
                               ></v-select>
@@ -149,8 +149,8 @@
 
                      <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
-                          <label class="block text-gray-500 text-sm font-medium mb-1">Zipcode </label>
-                          <v-text-field v-model="user.postcode" class="form-input input-field-outer w-full text-gray-500"  placeholder="Zipcode" ></v-text-field>
+                          <label class="block text-gray-700 text-sm font-medium mb-1">Zipcode </label>
+                          <v-text-field v-model="user.postcode" class="form-input input-field-outer w-full text-gray-700"  placeholder="Zipcode" ></v-text-field>
                           <div v-if="errors.postcode" class="mt-2 error">{{ errors.postcode }}</div>
                       </div>
                     </div> 
@@ -159,32 +159,32 @@
 
                        <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
-                          <label class="block text-gray-500 text-sm font-medium mb-1">LinkedIn</label>
-                    <v-text-field v-model="user.linkedin_user" class="form-input input-field-outer w-full text-gray-500" placeholder="LinkedIn"></v-text-field>
+                          <label class="block text-gray-700 text-sm font-medium mb-1">LinkedIn</label>
+                    <v-text-field v-model="user.linkedin_user" class="form-input input-field-outer w-full text-gray-700" placeholder="LinkedIn"></v-text-field>
                     <div v-if="errors.linkedin_user" class="mt-2 error">{{ errors.linkedin_user }}</div>
                      </div>
                     </div> 
 
                        <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
-                          <label class="block text-gray-500 text-sm font-medium mb-1">Facebook</label>
-                    <v-text-field v-model="user.facebook_user" class="form-input input-field-outer w-full text-gray-500" placeholder="Facebook"></v-text-field>
+                          <label class="block text-gray-700 text-sm font-medium mb-1">Facebook</label>
+                    <v-text-field v-model="user.facebook_user" class="form-input input-field-outer w-full text-gray-700" placeholder="Facebook"></v-text-field>
                     <div v-if="errors.facebook_user" class="mt-2 error">{{ errors.facebook_user }}</div>
                      </div>
                     </div> 
 
                        <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
-                          <label class="block text-gray-500 text-sm font-medium mb-1">Twitter</label>
-                    <v-text-field v-model="user.twitter_user" class="form-input input-field-outer w-full text-gray-500" placeholder="Twitter"></v-text-field>
+                          <label class="block text-gray-700 text-sm font-medium mb-1">Twitter</label>
+                    <v-text-field v-model="user.twitter_user" class="form-input input-field-outer w-full text-gray-700" placeholder="Twitter"></v-text-field>
                     <div v-if="errors.twitter_user" class="mt-2 error">{{ errors.twitter_user }}</div>
                      </div>
                     </div> 
 
                       <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
-                          <label class="block text-gray-500 text-sm font-medium mb-1">Instagram</label>
-                          <v-text-field v-model="user.instagram_user" class="form-input input-field-outer w-full text-gray-500" placeholder="Instagram"></v-text-field>
+                          <label class="block text-gray-700 text-sm font-medium mb-1">Instagram</label>
+                          <v-text-field v-model="user.instagram_user" class="form-input input-field-outer w-full text-gray-700" placeholder="Instagram"></v-text-field>
                           <div v-if="errors.instagram_user" class="mt-2 error">{{ errors.instagram_user }}</div>
                      </div>
                     </div> 
@@ -198,7 +198,7 @@
                       </div> 
                       <div class="flex flex-wrap -mx-3 mt-6 text-center">
                         <div class="w-full px-3">
-                          <p class="text-center text-gray-500">Please fill the required field(s)</p>                        
+                          <p class="text-center text-gray-700">Please fill the required field(s)</p>                        
                         </div>
                       </div> 
 

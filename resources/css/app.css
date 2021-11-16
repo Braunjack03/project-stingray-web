@@ -99,7 +99,8 @@ html{
 }
 
 .input-field-outer .v-input__slot {
-    border: 1px solid rgba(51, 54, 58, var(--tw-border-opacity));
+    /*border: 1px solid rgba(51, 54, 58, var(--tw-border-opacity));*/
+    border: 1px solid rgba(51, 54, 58, 0.2) !important;
     padding: 0 15px;
 }
 
@@ -169,7 +170,7 @@ ul.industries-list li {
 }
 
 .radioColor .v-input__control label, .industries-list label {
-   color: #6e6e6e;
+   color: rgba(51, 54, 58, 1);
 }
 .register-form .radioColor .v-icon.v-icon {
    color: #a1a1a1;
@@ -447,6 +448,7 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
 .v-sheet.v-card:not(.v-sheet--outlined){
    box-shadow: none;
 }
+
 
 @media (max-width:575px){
    .card-text-wrap {

@@ -37,14 +37,14 @@
 
               <div class="flex flex-wrap -mx-3 form-file-upload">
                 <div class="w-full px-3">
-                  <label class="block text-gray-500 text-sm font-medium mb-1" for="email"
+                  <label class="block text-gray-700 text-sm font-medium mb-1" for="email"
                     >Profile Image (Recommended 500px x 500px)
                   </label>
                   <v-file-input
                     v-model="profile_image"
                     accept="image/*"
                     ref="fileInput"
-                    class="fileUpload input-field-outer form-input w-full text-gray-500"
+                    class="fileUpload input-field-outer form-input w-full text-gray-700"
                     @change="onFileChange"
                     outlined
                     dense
@@ -55,13 +55,13 @@
 
               <div class="flex flex-wrap -mx-3 mb-4">
                 <div class="w-full px-3">
-                  <label class="block text-gray-500 text-sm font-medium mb-1" for="email"
+                  <label class="block text-gray-700 text-sm font-medium mb-1" for="email"
                     >Name <span class="text-red-600">*</span></label
                   >
                  
                   <v-text-field
                     v-model="name"
-                    class="form-input w-full input-field-outer text-gray-500"
+                    class="form-input w-full input-field-outer text-gray-700"
                     placeholder="Name"
                     :class="{ 'error--text': $v.name.$error }"
                     @input="$v.name.$touch()" 
@@ -77,13 +77,13 @@
               <div class="flex flex-wrap -mx-3 mb-4">
                 <div class="w-full px-3">
                   <label
-                    class="block text-gray-500 input-field-outer text-sm font-medium mb-1"
+                    class="block text-gray-700 input-field-outer text-sm font-medium mb-1"
                     for="current_job_title"
                     >Current Job Title <span class="text-red-600">*</span></label
                   >
                   <v-text-field
                     v-model="current_job_title"
-                    class="form-input w-full input-field-outer text-gray-500"
+                    class="form-input w-full input-field-outer text-gray-700"
                     placeholder="Current Job Title"
                     :class="{ 'error--text': $v.current_job_title.$error }"
                     @input="$v.current_job_title.$touch()" 
@@ -99,13 +99,13 @@
               <div class="flex flex-wrap -mx-3 mb-4">
                 <div class="w-full px-3">
                   <label
-                    class="block text-gray-500 text-sm font-medium mb-1"
+                    class="block text-gray-700 text-sm font-medium mb-1"
                     for="current_job_title"
                     >Short Bio
                   </label>
                   <v-text-field
                     v-model="short_bio"
-                    class="form-textarea w-full input-field-outer text-gray-500"
+                    class="form-textarea w-full input-field-outer text-gray-700"
                     placeholder="Short Bio"
                   ></v-text-field>
                 </div>
@@ -116,14 +116,14 @@
               <div class="flex flex-wrap -mx-3 mb-4">
                 <div class="w-full px-3">
                   <label
-                    class="block text-gray-500 text-sm font-medium mb-1"
+                    class="block text-gray-700 text-sm font-medium mb-1"
                     for="current_job_title"
                     >LinkedIn
                   </label>
 
                   <v-text-field
                     v-model="linkedin"
-                    class="form-input w-full input-field-outer text-gray-500"
+                    class="form-input w-full input-field-outer text-gray-700"
                     placeholder="Linkedin"
                     
                     autocomplete
@@ -137,13 +137,13 @@
               <div class="flex flex-wrap -mx-3 mb-4">
                 <div class="w-full px-3">
                   <label
-                    class="block text-gray-500 input-field-outer text-sm font-medium mb-1"
+                    class="block text-gray-700 input-field-outer text-sm font-medium mb-1"
                     for="current_job_title"
                     >Github
                   </label>
                   <v-text-field
                     v-model="github"
-                    class="form-input input-field-outer w-full text-gray-500"
+                    class="form-input input-field-outer w-full text-gray-700"
                     placeholder="Github"
                     autocomplete
                   ></v-text-field>
@@ -154,13 +154,13 @@
               <div class="flex flex-wrap -mx-3 mb-4">
                 <div class="w-full px-3">
                   <label
-                    class="block text-gray-500 input-field-outer text-sm font-medium mb-1"
+                    class="block text-gray-700 input-field-outer text-sm font-medium mb-1"
                     for="current_job_title"
                     >Twitter
                   </label>
                   <v-text-field
                     v-model="twitter"
-                    class="form-input input-field-outer w-full text-gray-500"
+                    class="form-input input-field-outer w-full text-gray-700"
                     placeholder="Twitter"
                     autocomplete
                   ></v-text-field>
@@ -192,7 +192,7 @@
               <div class="flex flex-wrap -mx-3 mb-4">
                 <div class="w-full px-3  form-file-upload">
                   <label
-                    class="block text-gray-500 text-sm font-medium mb-1"
+                    class="block text-gray-700 text-sm font-medium mb-1"
                     for="current_job_title"
                     >Current Resume
                   </label>
@@ -200,7 +200,7 @@
                     outlined
                     dense
                     v-model="current_resume"
-                    class="form-input fileUpload w-full input-field-outer text-gray-500"
+                    class="form-input fileUpload w-full input-field-outer text-gray-700"
                   ></v-file-input>
                   <div v-if="errors.current_resume" class="mt-2 error">
                     {{ errors.current_resume }}
@@ -221,7 +221,7 @@
 
               <div class="flex flex-wrap -mx-3 mt-6 text-center">
                   <div class="w-full px-3">
-                    <p class="text-center text-gray-500">Please fill the required field(s)</p>                        
+                    <p class="text-center text-gray-700">Please fill the required field(s)</p>                        
                   </div>
                 </div> 
             </v-form>

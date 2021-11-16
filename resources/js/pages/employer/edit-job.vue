@@ -21,8 +21,8 @@
                     
                     <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
-                          <label class="block text-gray-500 text-sm font-medium mb-1">Job Title <span class="text-red-600">*</span></label>
-                          <v-text-field v-model="name" class="form-input input-field-outer w-full text-gray-500" placeholder="Job Title" :class="{ 'error--text': $v.name.$error }"
+                          <label class="block text-gray-700 text-sm font-medium mb-1">Job Title <span class="text-red-600">*</span></label>
+                          <v-text-field v-model="name" class="form-input input-field-outer w-full text-gray-700" placeholder="Job Title" :class="{ 'error--text': $v.name.$error }"
                               @input="$v.name.$touch()" 
                               @blur="$v.name.$touch()" required ></v-text-field>
                           <div v-if="$v.name.$error && !$v.name.required"  class="text-red-500 text-sm">Job Title is required</div>
@@ -31,7 +31,7 @@
 
                     <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
-                          <label class="block text-gray-500 text-sm font-medium mb-1">Location</label>
+                          <label class="block text-gray-700 text-sm font-medium mb-1">Location</label>
 
                      <v-row >
                       <v-col
@@ -44,7 +44,7 @@
                           item-value="id"
                           :items="locations"
                           label="Location"
-                          class="form-input input-field-outer w-full text-gray-500"
+                          class="form-input input-field-outer w-full text-gray-700"
                           dense
                           solo
                         ></v-select>
@@ -56,7 +56,7 @@
 
                     <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
-                          <label class="block text-gray-500 text-sm font-medium mb-1">Job Category <span class="text-red-600">*</span></label>
+                          <label class="block text-gray-700 text-sm font-medium mb-1">Job Category <span class="text-red-600">*</span></label>
                       <v-row >
                       <v-col
                         class="d-flex"
@@ -68,7 +68,7 @@
                           item-value="id"
                           :items="job_categories"
                           label="Job Category"
-                          class="form-input input-field-outer w-full text-gray-500"
+                          class="form-input input-field-outer w-full text-gray-700"
                           :class="{ 'error--text': $v.job_cat_id.$error }"
                           dense
                           solo
@@ -82,16 +82,16 @@
 
                     <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
-                          <label class="block text-gray-500 text-sm font-medium mb-1"> Job Application URL <span class="text-red-600">*</span></label>
-                    <v-text-field v-model="apply_url" :class="{ 'error--text': $v.apply_url.$error }" class="form-input input-field-outer w-full text-gray-500" placeholder="https://example.com" required></v-text-field>
+                          <label class="block text-gray-700 text-sm font-medium mb-1"> Job Application URL <span class="text-red-600">*</span></label>
+                    <v-text-field v-model="apply_url" :class="{ 'error--text': $v.apply_url.$error }" class="form-input input-field-outer w-full text-gray-700" placeholder="https://example.com" required></v-text-field>
                     <div v-if="$v.apply_url.$error && !$v.apply_url.required"  class="text-red-500 text-sm">Job Application URL is required</div>
                      </div>
                     </div> 
 
                     <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full px-3">
-                          <label class="block text-gray-500 text-sm font-medium mb-1">Job Description </label>
-                      <tiptap-vuetify v-model="content" :extensions="extensions" class="form-input input-field-outer w-full text-gray-500" />
+                          <label class="block text-gray-700 text-sm font-medium mb-1">Job Description </label>
+                      <tiptap-vuetify v-model="content" :extensions="extensions" class="form-input input-field-outer w-full text-gray-700" />
 
                      </div>
                     </div> 
@@ -105,7 +105,7 @@
 
                       <div class="flex flex-wrap -mx-3 mt-6 text-center">
                         <div class="w-full px-3">
-                          <p class="text-center text-gray-500">Please fill the required field(s)</p>                        
+                          <p class="text-center text-gray-700">Please fill the required field(s)</p>                        
                         </div>
                       </div> 
                 </v-form>
