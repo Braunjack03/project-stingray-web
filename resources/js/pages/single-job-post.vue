@@ -5,7 +5,7 @@
           <div class="max-w-6xl mx-auto px-4 sm:px-6">
             <div class="pt-32 pb-12 md:pt-40 md:pb-20">
             <div class="max-w-4xl mx-auto">
-                  <h3 class="company-title text-gray-500">{{data.company_name}}</h3>   
+                  <h3 class="company-title text-gray-500"><Link :href="`/companies/${data.company_slug}`">{{data.company_name}}</Link></h3>   
                   <h2 class="post-title text-gray-700">{{data.name}}</h2>
                   <span class="location text-gray-500">Location : {{data.location}}</span>
                   <span class="post-date text-gray-500">Date Posted: {{setDateFormat(data.created_at)}}</span>

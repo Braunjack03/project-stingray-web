@@ -15,7 +15,7 @@
               <slot />
               <!--  -->
          </main>
-        
+    <Footer/>    
     </div>
   </body>
 </template>

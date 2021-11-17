@@ -25,7 +25,7 @@
               <Link href="/companies" class="text-gray-700 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Companies</Link>
             </li>
             <li>
-              <Link href="/news" class="text-gray-700 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">News</Link>
+              <Link href="https://blog.madeintampabay.org/" class="text-gray-700 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">News</Link>
             </li>
              <li>
               <Link v-if="isLoggedIn && isLoggedIn.role == 2" href="/dashboard" class="text-gray-700 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Dashboard</Link>
@@ -83,7 +83,7 @@
                 <Link href="/companies" class="flex text-gray-300 hover:text-purple-600 py-2">Companies</Link>
               </li>
               <li>
-                <Link href="/news" class="flex text-gray-300 hover:text-purple-600 py-2">News</Link>
+                <Link href="https://blog.madeintampabay.org/" class="flex text-gray-300 hover:text-purple-600 py-2">News</Link>
               </li>
               
               <li>
