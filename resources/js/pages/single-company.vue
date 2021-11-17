@@ -2,20 +2,18 @@
   <Layout>
     <Head :title="'Companies | ' + (data.name) ? data.name : ''" />
     <section class="relative" data-app>
-      <div class="max-w-6xl mx-auto px-4 sm:px-6">
-        <div class="pt-32 pb-12 md:pt-40 md:pb-20">
+      <div class="companyDetailOuter mt-30">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
           <div v-if="$page.props.flash.message" class="mt-2 success">
             {{ $page.props.flash.message }}
           </div>
-          <v-row>
-            <v-col lg="3" md="4" sm="5" cols="12">
+          <v-row class="companyDetail">
+            <v-col lg="2" md="3" sm="5" cols="12">
               <v-img
                 :src="data.logo_image_url"
-                max-height="150"
-                max-width="250"
               ></v-img>
             </v-col>
-            <v-col lg="9" md="8" sm="7" cols="12">
+            <v-col lg="10" md="9" sm="7" cols="12">
               <h2 class="post-title mb-0 text-gray-700">
                 {{ data.name }}
                 <v-btn
@@ -26,22 +24,31 @@
                   >(Claim this Profile)</v-btn
                 >
               </h2>
-              <p class="types-title mt-0 text-gray-500">{{ data.industry_types }}</p>
+              <p class="types-title mt-0">{{ data.industry_types }}</p>
               <v-row class="mt-0 ">
                 <v-col cols="12" sm="6" md="4">
-                  <div class="extra-info text-gray-500">
-                    Location :
-                    <span
+                  <div class="extra-info flex flex-wrap">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="#5d5dff">
+                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                    </svg>  Location
+                    <span class="loactionCity" 
                       ><strong>{{ data.location }}</strong></span
                     >
                   </div>
                 </v-col>
                 <v-col cols="12" sm="6" md="4">
-                  <div class="extra-info text-gray-500">
-                    Local Employees: <strong>{{ data.local_employees }}</strong
-                    ><br />
-                    Global Employees:
-                    <strong>{{ data.global_employees }}</strong>
+                  <div class="extra-info">
+                    <div class="employeesDetails flex flex-wrap">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="#5d5dff">
+                      <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                    </svg>  Local Employees: <strong>{{ data.local_employees }}</strong
+                    >
+                  </div>
+                  <div class="employeesDetails flex flex-wrap">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="#5d5dff">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                    </svg>  Global Employees: <strong>{{ data.global_employees }}</strong>
+                  </div>
                   </div>
                 </v-col>
                 <v-col cols="12" sm="6" md="4">
@@ -50,18 +57,61 @@
                     ><br />
                   </div-->
 
-                  <v-btn
+                  <a
                     :href="data.website_url"
                     target="_blank"
-                    class="bg-purple-600 hover:bg-purple-700 "
+                    class="background-transparent flex flex-wrap viewSite items-center"
                   >
-                    View website
-                  </v-btn>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="#5d5dff">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                  </svg> View website
+                  </a>
                 </v-col>
               </v-row>
             </v-col>
           </v-row>
+        </div>
+      </div>
 
+      <div class="tabBg">
+          <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <v-tabs
+            v-model="tab"
+            centered
+          >
+            <v-tabs-slider></v-tabs-slider>
+
+            <v-tab href="#tab-1">
+              Overview
+            </v-tab>
+
+            <v-tab href="#tab-2">
+              Jobs (30)
+            </v-tab>
+          </v-tabs>
+        </div>
+      </div>
+
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <v-tabs-items v-model="tab">
+          <v-tab-item
+            value="tab-1"
+          >
+            <v-card flat>
+              <v-card-text>asfdasfsafdsaf</v-card-text>
+            </v-card>
+          </v-tab-item>
+          <v-tab-item
+            value="tab-2"
+          >
+            <v-card flat>
+              <v-card-text>dddddd</v-card-text>
+            </v-card>
+          </v-tab-item>
+        </v-tabs-items>
+      </div>
+
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
           <v-row>
             <v-col cols="12" md="12">
               <h3 class="post-title text-gray-700">About {{ data.name }}</h3>
@@ -86,7 +136,6 @@
               </ul>
             </v-col>
           </v-row>
-        </div>
       </div>
     </section>
   </Layout>
@@ -108,6 +157,7 @@ export default {
   },
   data: () => ({
     message: "",
+     tab: null,
   }),
   methods: {
     claimProfile(id) {
