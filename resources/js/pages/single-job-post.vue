@@ -7,7 +7,7 @@
                 <v-row>
                 <v-col cols="12" sm="12" md="8">
                     <div class="singlePost--title mb-5">
-                          <h3 class="company-title"><Link :href="`/companies/${data.company_slug}`" class="flex items-center"><span class="companyTitle--logo"><img src="http://192.168.0.55:8000/images/logo-company.png"></span> {{data.company_name}}</Link></h3> 
+                          <h3 class="company-title"><Link :href="`/companies/${data.company_slug}`" class="flex items-center"><span class="companyTitle--logo"><img src="/images/company-logo.png"></span> {{data.company_name}}</Link></h3> 
                           <h2 class="post-title">{{data.name}}</h2>
                           <v-row>
                             <v-col cols="12" sm="6" md="4">
