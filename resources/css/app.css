@@ -261,11 +261,13 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
 }
 
 /* Company Profile Page */
-.companyDetailOuter.mt-30 {
+.companyProfile--outer, .singlePost--outer {
+   font-family: 'Inter' !important;
+}
+.companyDetailOuter {
     margin: 80px 0 0px;
     background: #f7f7f7;
     padding: 40px 0;
-    font-family: 'Inter' !important;
 }
 .companyDetail .v-responsive{
    overflow: unset;
@@ -278,11 +280,12 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
 }
 .companyDetail .v-responsive__sizer {
    height: 150px;
-    width: 150px;
+   width: 150px;
+   padding-bottom: inherit !important;
 }
 .companyDetail .post-title{
     color: #2a2e35;
-    font-weight: 900;
+    font-weight: 800;
     font-family: 'Inter';
     font-size: 35px;
     margin-bottom: 5px;
@@ -302,12 +305,12 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
     display: block;
     font-size: 18px;
     color: #666;
-    margin-top: 6px;
+    margin-top: 8px;
     flex-basis: 100%;
     padding-left: 20px;
 }
 .employeesDetails {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     color: #828181;
     font-size: 14px;
 }
@@ -320,17 +323,133 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
    font-size: 14px;
 }
 
-.tabBg {
+#tabBg {
    background: #eee;
 }
-.tabBg .theme--light.v-tabs>.v-tabs-bar {
+#tabBg .theme--light.v-tabs>.v-tabs-bar {
     background-color: transparent;
+    height: 50px;
 }
+#tabBg .v-tab {
+    font-size: 14px;
+    color: #666;
+    text-transform: capitalize;
+    letter-spacing: normal;
+    max-width: 270px;
+    width: 100%;
+    font-weight: 600;
+}
+#tabBg .v-tab--active {
+   color: #5d5dff;
+}
+#tabBg  .v-tabs-slider {
+    background-color: #5d5dff;
+}
+.aboutContent .post-title {
+   color: #2a2e35;
+   font-size: 20px;
+   font-weight: 600;
+}
+.aboutContent .desc {
+   color: #666;
+   font-size: 18px;
+   font-weight: 400;
+   line-height: 28px;
+}
+.aboutContent .post-detail-wrap {
+   margin-bottom: 2rem;
+}
+.aboutContent .post-detail-wrap p {
+    font-size: 18px;
+    padding: .2rem 0 .5rem .5rem;
+    color: #666;
+}
+.aboutContent .post-detail-wrap p strong {
+    font-size: 20px;
+    margin-top: 4px;
+    color: #2a2e35;
+    font-weight: 600;
+}  
 
+
+/* Single Post Page */
+.aboutContent .applyBtn.btnSticky {
+    top: 20px;
+    position: fixed;
+}
+.aboutContent .text-subtitle-1 .newBtn {
+    font-weight: 600;
+    padding: 0 30px !important;
+    height: 50px !important;
+    letter-spacing: normal;
+    font-size: 16px;
+}
+.aboutContent .singlePost--title .company-title {
+    color: #5d5dff;
+    font-size: 18px;
+    margin-bottom: 22px;
+    font-weight: 500;
+}
+.singlePost--title .companyTitle--logo {
+    width: 50px;
+    height: 50px;
+    background: #fff;
+    box-shadow: 0 0 20px rgba(0,0,0,.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+.singlePost--title .companyTitle--logo img {
+    margin: 0 auto;
+    width: 25px;
+}
+.aboutContent .singlePost--title .post-title {
+    font-size: 40px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+.singlePost--title .location, .singlePost--title .post-date {
+    color: #666;
+    font-weight: 500;
+    font-size: 16px;
+} 
+
+
+@media (max-width:960px){
+   .aboutContent .singlePost--title .post-title {
+       font-size: 30px;
+   } 
+   .aboutContent .applyBtn {
+       top: auto;
+       bottom: 20px;
+       left: 50%;
+       transform: translateX(-50%);
+   }
+}
 
 @media (max-width:640px){
    ul.industries-list li {
       max-width: 50%;
+   }
+   .companyDetail .post-title {
+       font-size: 24px;
+   }
+   .aboutContent .post-title {
+      font-size: 18px;
+   }
+   .aboutContent .desc {
+      font-size: 16px;
+      line-height: 24px;
+   }
+   .aboutContent .post-detail-wrap p {
+       font-size: 16px;
+   }
+   .aboutContent .post-detail-wrap p strong {
+       font-size: 16px;
+   } 
+   .aboutContent .singlePost--title .post-title {
+       font-size: 24px;
    }  
 }
 

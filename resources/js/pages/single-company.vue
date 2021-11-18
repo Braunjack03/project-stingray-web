@@ -1,19 +1,19 @@
 <template>
   <Layout>
     <Head :title="'Companies | ' + (data.name) ? data.name : ''" />
-    <section class="relative" data-app>
-      <div class="companyDetailOuter mt-30">
+    <section class="relative companyProfile--outer" data-app>
+      <div class="companyDetailOuter">
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
           <div v-if="$page.props.flash.message" class="mt-2 success">
             {{ $page.props.flash.message }}
           </div>
           <v-row class="companyDetail">
-            <v-col lg="2" md="3" sm="5" cols="12">
+            <v-col lg="2" md="2" sm="4" cols="12">
               <v-img
                 :src="data.logo_image_url"
               ></v-img>
             </v-col>
-            <v-col lg="10" md="9" sm="7" cols="12">
+            <v-col lg="10" md="10" sm="8" cols="12">
               <h2 class="post-title mb-0 text-gray-700">
                 {{ data.name }}
                 <v-btn
@@ -73,7 +73,7 @@
         </div>
       </div>
 
-      <div class="tabBg">
+      <div id="tabBg">
           <div class="max-w-6xl mx-auto px-4 sm:px-6">
             <v-tabs
             v-model="tab"
@@ -86,36 +86,70 @@
             </v-tab>
 
             <v-tab href="#tab-2">
-              Jobs (30)
+              Jobs ({{job_posts.length}})
             </v-tab>
           </v-tabs>
         </div>
       </div>
 
-      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="max-w-6xl mx-auto">
         <v-tabs-items v-model="tab">
           <v-tab-item
             value="tab-1"
           >
             <v-card flat>
-              <v-card-text>asfdasfsafdsaf</v-card-text>
+              <v-card-text>
+                <div class="max-w-6xl mx-auto px-2 pt-5">
+                  <div class="aboutContent">
+                      <h3 class="post-title">About {{ data.name }}</h3>
+                      <div class="desc" v-html="data.mission"></div>
+                  </div>
+                  <div class="aboutContent">
+                      <h3 class="desc text-gray-700 mb-3">Jobs at {{ data.name }}</h3>
+                      <ul v-if="job_posts" id="example-1">
+                        <li v-for="company in job_posts" :key="company.id">
+                          <h4 class="post-title">
+                            <a :href="`/jobs/${data.slug}/${company.slug}`" class="text-gray-700"
+                              >{{ company.name }}
+                              <span class="text-sm"
+                                >({{ company.location_id }})</span
+                              ></a
+                            >
+                          </h4>
+                          <div class="post-detail-wrap" v-html="company.content"></div>
+                        </li>
+                      </ul>
+                  </div>
+              </div>
+              </v-card-text>
             </v-card>
           </v-tab-item>
           <v-tab-item
             value="tab-2"
           >
             <v-card flat>
-              <v-card-text>dddddd</v-card-text>
+              <v-card-text>
+                
+                <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-4">
+
+                  <v-row v-if="job_posts">
+
+                        <v-col cols="12" md="12" class="pa-3 d-flex flex-column" v-for="data in job_posts" :key="data.id">
+                           <CustomCard :data="data"/>
+                        </v-col>
+                     </v-row>
+              </div> 
+              </v-card-text>
             </v-card>
           </v-tab-item>
         </v-tabs-items>
       </div>
 
-      <div class="max-w-6xl mx-auto px-4 sm:px-6">
-          <v-row>
+    <!--   <div class="max-w-6xl mx-auto px-4 sm:px-6">
+          <v-row class=" aboutContent">
             <v-col cols="12" md="12">
-              <h3 class="post-title text-gray-700">About {{ data.name }}</h3>
-              <div class="desc text-gray-500" v-html="data.mission"></div>
+              <h3 class="post-title">About {{ data.name }}</h3>
+              <div class="desc" v-html="data.mission"></div>
             </v-col>
           </v-row>
           <v-row>
@@ -136,17 +170,19 @@
               </ul>
             </v-col>
           </v-row>
-      </div>
+      </div> -->
     </section>
   </Layout>
 </template>
 <script>
 import { Link, Head } from "@inertiajs/inertia-vue";
+import JobPost from '../components/JobPost.vue';
 import Layout from "./Layout";
 export default {
   components: {
     Link,
     Layout,
+     'CustomCard': JobPost,
     Head,
   },
   props: {

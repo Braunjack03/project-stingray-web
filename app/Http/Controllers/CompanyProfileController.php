@@ -313,14 +313,15 @@ class CompanyProfileController extends Controller
 
             $company['logo_image_url'] = ($company['logo_image_url']) ? getBucketImageUrl($company['uuid'],$company['logo_image_url'],'company') : '';
 
-            $job_posts = JobPost::where('company_profile_id',$company['id'])->orderBy('id','DESC')->get()->toArray();
+            $job_posts = JobPost::select('job_posts.*','company_profiles.slug as company_slug')->join('company_profiles','job_posts.company_profile_id','company_profiles.id')
+            ->where('company_profile_id',$company['id'])->orderBy('id','DESC')->get()->toArray();
             
             $job_post_model = new JobPost();
             foreach($job_posts as $key => $job)
             {
                 $job_posts[$key]['location_id'] = $job_post_model->getJobLocation($job['remotetype_id']);
+                $job_posts[$key]['job_slug'] = $job['slug'];
             }    
-            
             return Inertia::render('single-company',['data'=>$company,'job_posts'=>$job_posts,'industries',$industries]);
 
         }catch (\Exception $e) {

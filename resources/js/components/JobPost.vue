@@ -3,9 +3,9 @@
     <v-card class="elevation-5 flex d-flex flex-column cardStyle">
       <v-card-text class="job-card-wrap">
         <div class="card-text-wrap">
-          <v-card-title><Link :href="'jobs/'+data.company_slug+'/'+data.job_slug" color="text" class="mr-4">{{data.name}}</Link></v-card-title>      
+          <v-card-title><Link :href="'/jobs/'+data.company_slug+'/'+data.job_slug" color="text" class="mr-4">{{data.name}}</Link></v-card-title>      
           <div class="card-outter">
-            <div class="text-subtitle-1">Company Name: <Link :href="'companies/'+data.company_slug">{{data.company_name}}</Link>
+            <div class="text-subtitle-1" v-if="data.company_name">Company Name: <Link :href="'companies/'+data.company_slug">{{data.company_name}}</Link>
             </div>
             <div class="description">{{data.content.substring(0,250) | stripHTML}}</div>
             <div class="date">{{timeDifference(new Date(data.created_at)) }} ago</div>
