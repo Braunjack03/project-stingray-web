@@ -217,6 +217,7 @@ import { required} from 'vuelidate/lib/validators'
                   apply_url: this.apply_url,
                   job_cat_id: this.job_cat_id,
                   location_id: this.location_id,
+                  content:this.content,
                   remotetype_id: this.remotetype_id,
                 };
 
