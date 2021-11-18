@@ -214,7 +214,7 @@ export default {
         },
         submit() {
             this.$v.$touch()
-            this.overlay = true;
+            this.overlay = false;
             if (!this.$v.$invalid) {
                 console.log('submit');
                 let form = {
