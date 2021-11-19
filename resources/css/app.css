@@ -568,7 +568,7 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
 /* Lising page css */
 
 .filter-outer {
-   align-items: center;
+   align-items: center; 
    justify-content: space-between;
    flex-flow:wrap;
 }
@@ -655,9 +655,12 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
 }
 
 /* Home Page */
+header {
+    background: #2a2e35;
+}
 section.homeBanner {
    background-image: url(../images/home-banner.jpg);
-}
+}  
 
 .browseList--block .browseList{
     box-shadow: none;
@@ -666,7 +669,7 @@ section.homeBanner {
     border-radius: 0;
     line-height: 48px;
     font-weight: 500;
-}
+}  
 .bannerForm .filter-opt {
     display: flex;
     justify-content: flex-end;
