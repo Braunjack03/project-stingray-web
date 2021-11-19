@@ -3,11 +3,6 @@
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div class="py-12 md:py-20">
 
-        <!-- Section header -->
-        <div class="max-w-3xl mx-auto text-center pb-12 md:pb-20">
-          <h2 class="h2" data-aos="fade-up">From the big picture to every tiny detail, we got you covered.</h2>
-        </div>
-
         <!-- Items -->
         <div class="grid gap-20" data-aos-id-target>
 
@@ -22,7 +17,9 @@
             <!-- Content -->
             <div class="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6">
               <div class="md:pl-4 lg:pl-12 xl:pl-16">
-                <div class="font-architects-daughter text-xl text-purple-600 mb-2" data-aos="fade-left" data-aos-anchor="[data-aos-id-target]">Be the change you want to see</div>
+                <div class="max-w-3xl mx-auto text-center pb-6 md:pb-10">
+                  <h2 class="h2 mb-4 darkColor">How It Works?</h2>
+                </div>
                 <div class="mt-6" data-aos="fade-left" data-aos-delay="200" data-aos-anchor="[data-aos-id-target]">
                   <h4 class="h4 mb-2"><span class="text-purple-600">.</span> For developers</h4>
                 </div>

@@ -696,7 +696,9 @@ section.homeBanner {
    font-size: 18px;
    font-weight: 600;
 }
-
+.dropMain li.relative> a {
+   color: #fff;
+}
   
 @media (max-width:575px){
    .card-text-wrap {

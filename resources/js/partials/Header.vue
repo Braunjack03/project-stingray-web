@@ -1,5 +1,5 @@
 <template>
-    <header class="absolute w-full z-30">
+    <header class="absolute w-full z-30" :class="(currentUrl == '/') ? 'homePage' : '' ">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div class="flex items-center justify-between h-20">
            <!-- Site branding -->
@@ -41,7 +41,7 @@
             </li>
           </ul>
 
-          <ul class="flex flex-grow justify-end flex-wrap items-center text-gray-500" v-if="isLoggedIn">
+          <ul class="flex flex-grow justify-end flex-wrap items-center text-gray-500 dropMain" v-if="isLoggedIn">
              <Dropdown :title="getUserEmail()" >
               <li>
               <Link v-if="isLoggedIn && isLoggedIn.role == 2" href="/dashboard" class="text-gray-700 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Dashboard</Link>
@@ -137,6 +137,7 @@ export default {
   data: function () {
     return {
       mobileNavOpen: false,
+      currentUrl : window.location.pathname,
     };
   },
   methods: {
