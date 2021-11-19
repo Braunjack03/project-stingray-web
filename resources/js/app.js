@@ -19,7 +19,6 @@ import Vuelidate from 'vuelidate'
 
 Vue.use(Vuelidate)
 
-
 createInertiaApp({
   resolve: name => require(`./pages/${name}`),
   setup({ el, app, props }) {
