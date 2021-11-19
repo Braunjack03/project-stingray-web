@@ -35,7 +35,7 @@
         <!-- Hero image -->
         <div>
           <div class="relative flex justify-center items-center" data-aos="fade-up" data-aos-delay="200">
-            <img class="mx-auto" src="/images/hero-image-01.jpg" width="1024" height="504" alt="Hero" />
+            <img class="mx-auto" src="images/hero-image-01.jpg" width="1024" height="504" alt="Hero" />
             <a class="absolute group" href="#0" aria-controls="modal">
               <svg class="w-16 h-16 sm:w-20 sm:h-20 hover:opacity-75 transition duration-150 ease-in-out" viewBox="0 0 88 88" xmlns="http://www.w3.org/2000/svg">
                 <defs>
