@@ -45,7 +45,9 @@ class HomeController extends Controller
     }
 
     public function home(){
-        return Inertia::render('home');
+        $job_posts = JobPost::count();
+        $locations = Location::get();
+        return Inertia::render('home',['count_job_posts'=>$job_posts,'locations'=>$locations]);
     }
 
     public function blog(){
