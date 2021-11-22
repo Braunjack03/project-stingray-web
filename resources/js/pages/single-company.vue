@@ -104,7 +104,7 @@
                       <h3 class="post-title">About {{ data.name }}</h3>
                       <div class="desc" v-html="data.mission"></div>
                   </div>
-                  <div class="aboutContent">
+                  <!--div class="aboutContent">
                       <h3 class="desc text-gray-700 mb-3">Jobs at {{ data.name }}</h3>
                       <ul v-if="job_posts" id="example-1">
                         <li v-for="company in job_posts" :key="company.id">
@@ -119,7 +119,7 @@
                           <div class="post-detail-wrap" v-html="company.content"></div>
                         </li>
                       </ul>
-                  </div>
+                  </div-->
               </div>
               </v-card-text>
             </v-card>
