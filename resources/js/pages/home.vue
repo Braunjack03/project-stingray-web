@@ -3,28 +3,30 @@
         <Head title="Home" />
         <section data-app class="homeBanner">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 relative">
-                <div class="pt-32 pb-12 md:pt-50 md:pb-20">
+                <div class="pt-8 pb-0 md:pt-50 md:pb-20">
                     <div class="max-w-3xl mx-auto text-center pb-12 md:pb-16">
                         <h1 class="h1 text-white mt-20" data-aos="fade-up">
                             Exciting Career Oppurtunities {{ count_job_posts }} Open Jobs
                         </h1>
     
-                        <div class="pb-12 bannerForm">
+                        <div class="pb-6 md:pb-12 bannerForm">
                             <div class="mx-auto text-center pt-10 pb-3">
                                 <h3 class="quickSearch mb-6">Qiuck Search</h3>
                                 <div class="flex filter-outer">
                                     <div class="filter-opt">
-                                        <!-- <v-select v-model="location_id" item-text="name" item-value="id" :items="locations" label="Location" solo></v-select> -->
-                                        <input type="text" name="" value="" class="form-control float-right" placeholder="Looking for" v-model="term" />
-                                        <input type="text" name="" value="" class="form-control float-right" placeholder="Location" v-model="term" />
-    
+                                        <span class="searchIcon"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="#666">
+                                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                        </svg></span>
+                                        <!-- <input type="text" name="" value="" class="form-control float-right pl-9" placeholder="Looking for" v-model="term" /> -->
+                                        <input type="text" name="" value="" class="form-control locationField float-right pl-9" placeholder="Looking For?" v-model="term" />
+                                        <v-select v-model="location_id" item-text="name" item-value="id" :items="locations" label="Location" solo></v-select>
                                         <v-btn class="
-                            btn
-                            text-white
-                            bg-purple-600
-                            hover:bg-purple-700
-                            w-full
-                          " @click="submit">
+                                            btn
+                                            text-white
+                                            bg-purple-600
+                                            hover:bg-purple-700
+                                            w-full
+                                          " @click="submit">
                                             Search
                                         </v-btn>
                                     </div>
