@@ -3,9 +3,9 @@
         <Head title="Home" />
         <section data-app class="homeBanner">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 relative">
-                <div class="pt-8 pb-0 md:pt-50 md:pb-20">
+                <div class="pt-32 pb-0 md:pt-50 md:pb-20">
                     <div class="max-w-3xl mx-auto text-center pb-12 md:pb-16">
-                        <h1 class="h1 text-white mt-20" data-aos="fade-up">
+                        <h1 class="h1 text-white mt-0 md:mt-20 " data-aos="fade-up">
                             Exciting Career Oppurtunities {{ count_job_posts }} Open Jobs
                         </h1>
     
