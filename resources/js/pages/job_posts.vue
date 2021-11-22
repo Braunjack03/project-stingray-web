@@ -2,8 +2,8 @@
    <Layout>
       <Head title="Job Listing" />
               <section data-app>
-               <div class="max-w-6xl mx-auto px-4 sm:px-6 relative">
-                  <div class="pt-10 pb-12">
+               <div class="max-w-6xl mx-auto px-4 sm:px-6 py-10 md:py-20 relative">
+                  <div class="pt-10 pb-6 md:pb-12">
 
                      <div class="mx-auto text-center pt-10 pb-3">
                         <div class="flex filter-outer">
