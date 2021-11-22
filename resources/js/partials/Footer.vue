@@ -11,7 +11,7 @@
             <div class="mb-2">
               <!-- Logo -->
               <Link href="/" class="inline-block" aria-label="Cruip">
-                <img src="images/logoNew.svg" width="180">
+                <img src="/images/logoNew.svg" width="180">
               </Link>
             </div>
             <div class="text-gray-400">Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</div>
