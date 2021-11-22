@@ -25,7 +25,7 @@
                             </v-col>
                           </v-row>                
                       </div>
-                      <div v-html="data.content" class="post-detail-wrap"></div>
+                      <div v-html="data.content" class="post-detail-wrap text-gray-700"></div>
                   </v-col>
                     <v-col cols="12" sm="12" md="4">
                       <div class="text-subtitle-1 text-center md:text-right applyBtn" :class="(scrollPosition > 100) ? 'btnSticky' : ''">
