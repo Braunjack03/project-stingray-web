@@ -759,6 +759,10 @@ section.homeBanner {
     width: calc(100% - 29px);
 }
 
+.forgot-password input#email {
+   color: rgb(85 89 95) !important;
+}
+
 /* Media */
 
 @media (max-width:1170px){
