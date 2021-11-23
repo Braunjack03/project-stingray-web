@@ -435,18 +435,21 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
     font-size: 16px;
 } 
 
+@media (max-width:1170px){
+   .aboutContent .applyBtn {
+       top: auto !important;
+       bottom: 20px !important;
+       left: 50%;
+       transition: inherit !important;
+       margin-left: 0px !important;
+       position: static !important;
+   }
+}
 
 @media (max-width:960px){
    .aboutContent .singlePost--title .post-title {
        font-size: 30px;
    } 
-   .aboutContent .applyBtn {
-       top: auto !important;
-       bottom: 20px !important;
-       left: 50%;
-       transform: translateX(-50%);
-       margin-left: 0 !important;
-   }
 }
 
 @media (max-width:640px){
@@ -791,6 +794,19 @@ section.homeBanner {
 }
 .v-input--is-label-active .v-select__selections .v-select__selection.v-select__selection--comma {
    color: #525252 !important;
+}
+
+
+/* Porfile Page */
+.resumeUploadbtn .v-btn__content {
+    white-space: initial;
+    width: 100%;
+    word-break: break-word;
+}
+.resumeUploadbtn .theme--light.v-btn.v-btn--has-bg{
+    height: auto !important;
+    min-height: 48px !important;
+    width: calc(100% - 29px);
 }
 
 @media (max-width:  1024px) {

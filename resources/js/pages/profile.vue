@@ -128,7 +128,7 @@
                             </div>
     
                             <div class="flex flex-wrap  mb-4">
-                                <div class="w-full px-3">
+                                <div class="w-full px-3 resumeUploadbtn">
                                     <v-btn v-if="user.current_resume_src" :href="user.current_resume_src" target="_blank">
                                         <v-icon color="gray darken-2">mdi-file-document</v-icon>
                                         {{ user.current_resume_name }}
