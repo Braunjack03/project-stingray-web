@@ -8,7 +8,7 @@
                      <div class="mx-auto text-center pt-10 pb-3">
                         <div class="flex filter-outer">
                            <span class="searc-show-title">
-                              showing result {{job_posts.data.length}}
+                              Showing Result {{job_posts.data.length}}
                            </span>
                            <div class="filter-opt">
                            <v-select

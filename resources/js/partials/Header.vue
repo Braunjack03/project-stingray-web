@@ -56,7 +56,7 @@
                 <Link v-if="isLoggedIn && isLoggedIn.role == 1" href="/employer/profile" class="text-gray-700 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Profile</Link>
               </li>
               <li class="">
-                <Link v-on:click="logout" href="/logout" class="font-medium text-sm text-gray-700 hover:text-purple-600 flex py-2 px-4 leading-tight">Sign Out</Link>
+                <Link v-on:click="logout" href="/logout" class="text-gray-700 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Sign Out</Link>
               </li>
             </Dropdown>
           </ul>

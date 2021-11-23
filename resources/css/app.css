@@ -588,6 +588,7 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
    border-bottom: 1px solid #ddd;
    margin-bottom: 1rem;
    min-height: 40px;
+   color: #525252;
 }
 
 .filter-opt .v-input__control .v-input__slot {
@@ -691,6 +692,7 @@ section.homeBanner {
     min-height: 48px;
     background: #fff;
     width: 300px;
+    color:#525252;
 }
 .bannerForm .filter-opt .form-control.locationField {
     border-right: 1px solid #ccc;
@@ -719,6 +721,7 @@ section.homeBanner {
     margin: 0 0 0!important;
     min-height: 48px;
     border-radius: 0;
+    padding-left: 12px !important;
 }
 
 .porcessIocn {
@@ -786,6 +789,9 @@ section.homeBanner {
    border-radius: 0;
    padding: 0 !important;
 }
+.v-input--is-label-active .v-select__selections .v-select__selection.v-select__selection--comma {
+   color: #525252 !important;
+}
 
 @media (max-width:  1024px) {
    .homeBanner .h1 {
@@ -832,6 +838,9 @@ section.homeBanner {
    }
    .job-card-wrap .v-card__title {
       font-size: 1.2rem;
+   }
+   #mobile-nav ul li a {
+    justify-content: center;
    }
 }
   
