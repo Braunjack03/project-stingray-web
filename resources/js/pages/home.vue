@@ -11,17 +11,15 @@
     
                         <div class="pb-6 md:pb-12 bannerForm">
                             <div class="mx-auto text-center pt-10 pb-3">
-                                <h3 class="quickSearch mb-6">Qiuck Search</h3>
+                                <h3 class="quickSearch mb-6">Quick Search</h3>
                                 <div class="flex filter-outer">
                                     <div class="filter-opt">
                                         <span class="searchIcon"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="#666">
                                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                         </svg></span>
                                         <!-- <input type="text" name="" value="" class="form-control float-right pl-9" placeholder="Looking for" v-model="term" /> -->
-                                        <v-text-field class="form-control locationField float-right pl-9 mt-0" :class="{ 'error--text': $v.term.$error }" placeholder="Looking For?" v-model="term" required ></v-text-field>
-                                        <div v-if="$v.term.$error && !$v.term.required"  class="text-red-500 text-sm">Looking For is required</div>
-                                        <v-select v-model="location_id" item-text="name" :class="{ 'error--text': $v.location_id.$error }" item-value="id" :items="locations" label="Location" solo required></v-select>
-                                        <div v-if="$v.location_id.$error && !$v.location_id.required"  class="text-red-500 text-sm">Location is required</div>
+                                        <v-text-field class="form-control locationField float-right pl-9 mt-0" placeholder="Looking For?" v-model="term" required ></v-text-field>
+                                        <v-select v-model="location_id" item-text="name" item-value="id" :items="locations" label="Location" solo required></v-select>
                                         <v-btn class="
                                             btn
                                             text-white
@@ -62,11 +60,6 @@ import { required} from 'vuelidate/lib/validators'
 
 
 export default {
-    mixins: [validationMixin],
-     validations: {
-      term: { required },
-      location_id: {required}
-    },
     components: {
         Head,
         Layout,
@@ -89,14 +82,9 @@ export default {
     },
     methods: {
         submit() {
-            this.$v.$touch()
-          if(this.$v.$invalid) {
-            console.log('error!')
-          } else {
             this.$inertia.replace(
                 "/jobs?loc=" + this.location_id + "&q=" + this.term
             );
-          }
         },
     },
 };
