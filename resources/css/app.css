@@ -435,57 +435,6 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
     font-size: 16px;
 } 
 
-@media (max-width:1170px){
-   .aboutContent .applyBtn {
-       top: auto !important;
-       bottom: 20px !important;
-       left: 50%;
-       transition: inherit !important;
-       margin-left: 0px !important;
-       position: static !important;
-   }
-}
-
-@media (max-width:960px){
-   .aboutContent .singlePost--title .post-title {
-       font-size: 30px;
-   } 
-}
-
-@media (max-width:640px){
-   ul.industries-list li {
-      max-width: 50%;
-   }
-   .companyDetail .post-title {
-       font-size: 24px;
-   }
-   .aboutContent .post-title {
-      font-size: 18px;
-   }
-   .aboutContent .desc {
-      font-size: 16px;
-      line-height: 24px;
-   }
-   .aboutContent .post-detail-wrap p {
-       font-size: 16px;
-   }
-   .aboutContent .post-detail-wrap p strong {
-       font-size: 16px;
-   } 
-   .aboutContent .singlePost--title .post-title {
-       font-size: 24px;
-   }  
-}
-
-@media (max-width:480px){
-   ul.industries-list li {
-      max-width: 100%;
-   }  
-}
-
-
-
-
 /* Post Detail Page */
 .company-title {
    font-size: 1.125rem;
@@ -699,6 +648,7 @@ section.homeBanner {
 }
 .bannerForm .filter-opt .form-control.locationField {
     border-right: 1px solid #ccc;
+    border-bottom: none;
 }
 .bannerForm .filter-opt button {
     width: 120px;
@@ -809,6 +759,19 @@ section.homeBanner {
     width: calc(100% - 29px);
 }
 
+/* Media */
+
+@media (max-width:1170px){
+   .aboutContent .applyBtn {
+       top: auto !important;
+       bottom: 20px !important;
+       left: 50%;
+       transition: inherit !important;
+       margin-left: 0px !important;
+       position: static !important;
+   }
+}
+
 @media (max-width:  1024px) {
    .homeBanner .h1 {
       font-size: 2.2rem;
@@ -835,6 +798,12 @@ section.homeBanner {
    }
 }
 
+@media (max-width:960px){
+   .aboutContent .singlePost--title .post-title {
+       font-size: 30px;
+   } 
+}
+
 @media (max-width:  767px) {
    .bannerForm .filter-opt .form-control, .bannerForm .filter-opt .form-control.locationField {
        width: 50%;
@@ -859,6 +828,31 @@ section.homeBanner {
     justify-content: center;
    }
 }
+
+@media (max-width:640px){
+   ul.industries-list li {
+      max-width: 50%;
+   }
+   .companyDetail .post-title {
+       font-size: 24px;
+   }
+   .aboutContent .post-title {
+      font-size: 18px;
+   }
+   .aboutContent .desc {
+      font-size: 16px;
+      line-height: 24px;
+   }
+   .aboutContent .post-detail-wrap p {
+       font-size: 16px;
+   }
+   .aboutContent .post-detail-wrap p strong {
+       font-size: 16px;
+   } 
+   .aboutContent .singlePost--title .post-title {
+       font-size: 24px;
+   }  
+}
   
 @media (max-width:575px){
    .card-text-wrap {
@@ -880,6 +874,9 @@ section.homeBanner {
     flex: 0 0 100% !important;
     max-width: 100% !important;
    }
+   ul.industries-list li {
+      max-width: 100%;
+   }  
 }
 
 @media (max-width:  451px) {

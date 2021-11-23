@@ -18,8 +18,10 @@
                                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                         </svg></span>
                                         <!-- <input type="text" name="" value="" class="form-control float-right pl-9" placeholder="Looking for" v-model="term" /> -->
-                                        <input type="text" name="" value="" class="form-control locationField float-right pl-9" placeholder="Looking For?" v-model="term" />
-                                        <v-select v-model="location_id" item-text="name" item-value="id" :items="locations" label="Location" solo></v-select>
+                                        <v-text-field class="form-control locationField float-right pl-9 mt-0" :class="{ 'error--text': $v.term.$error }" placeholder="Looking For?" v-model="term" required ></v-text-field>
+                                        <div v-if="$v.term.$error && !$v.term.required"  class="text-red-500 text-sm">Looking For is required</div>
+                                        <v-select v-model="location_id" item-text="name" :class="{ 'error--text': $v.location_id.$error }" item-value="id" :items="locations" label="Location" solo required></v-select>
+                                        <div v-if="$v.location_id.$error && !$v.location_id.required"  class="text-red-500 text-sm">Location is required</div>
                                         <v-btn class="
                                             btn
                                             text-white
@@ -55,10 +57,16 @@ import Process from "./../partials/Process.vue";
 import Target from "./../partials/Target.vue";
 import Newsletter from './../partials/Newsletter.vue'
 import BrowseJobs from './../partials/BrowseJobs.vue'
-
+import { validationMixin } from 'vuelidate'
+import { required} from 'vuelidate/lib/validators'
 
 
 export default {
+    mixins: [validationMixin],
+     validations: {
+      term: { required },
+      location_id: {required}
+    },
     components: {
         Head,
         Layout,
@@ -81,9 +89,14 @@ export default {
     },
     methods: {
         submit() {
+            this.$v.$touch()
+          if(this.$v.$invalid) {
+            console.log('error!')
+          } else {
             this.$inertia.replace(
                 "/jobs?loc=" + this.location_id + "&q=" + this.term
             );
+          }
         },
     },
 };

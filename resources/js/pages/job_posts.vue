@@ -36,7 +36,7 @@
                   </div>  
                   <div v-else >
                       <v-row >
-                        <v-col cols="9" class="mt-5 text-center">
+                        <v-col cols="12" class="mt-5 text-center text-gray-700">
                              No Job Found 
                         </v-col>
                       </v-row>  
