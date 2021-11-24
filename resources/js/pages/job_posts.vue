@@ -69,7 +69,6 @@ export default {
      mixins: [validationMixin],
      validations: {
       term: { required },
-      location_id: {required}
     },
    components: {
       Head,

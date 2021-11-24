@@ -72,13 +72,17 @@ class HomeController extends Controller
                     'job_posts.created_at'
             )->when($request->q, function($query, $term) {
                     $query->where('job_posts.name', 'LIKE', '%'.$term.'%');
-                    $query->where('job_posts.content', 'LIKE', '%'.$term.'%');
+                    $query->Orwhere('job_posts.content', 'LIKE', '%'.$term.'%');
             })->when($request->loc, function($query, $term1) {
-                $query->where('job_posts.location_id', $term1);
+                $query->Orwhere('job_posts.location_id', $term1);
             })
             ->orderBy('job_posts.created_at','DESC')
             ->paginate($this->paginationLimit);
+
+            //dd($job_posts);
+            //->paginate($this->paginationLimit);
             
+            //die('');
             $locations = Location::get();
             return Inertia::render('job_posts', ['job_posts' => $job_posts,'location_id'=>$request->loc,'term'=>$request->q,'locations'=>$locations]);
         }catch (\Exception $e) {

@@ -20,8 +20,8 @@
                                         <!-- <input type="text" name="" value="" class="form-control float-right pl-9" placeholder="Looking for" v-model="term" /> -->
                                         <v-text-field class="form-control locationField float-right pl-9 mt-0" :class="{ 'error--text': $v.term.$error }" placeholder="Looking For?" v-model="term" required ></v-text-field>
                                         <div v-if="$v.term.$error && !$v.term.required"  class="text-red-500 text-sm errorMsg-baaner">Looking For is required</div>
-                                        <v-select v-model="location_id" item-text="name" :class="{ 'error--text': $v.location_id.$error }" item-value="id" :items="locations" label="Location" solo required></v-select>
-                                        <div v-if="$v.location_id.$error && !$v.location_id.required"  class="text-red-500 text-sm errorMsg-baaner forLocation-error">Location is required</div>
+                                        <v-select v-model="location_id" item-text="name" item-value="id" :items="locations" label="Location" solo ></v-select>
+                                        <!--div v-if="$v.location_id.$error && !$v.location_id.required"  class="text-red-500 text-sm errorMsg-baaner forLocation-error">Location is required</div-->
                                         <v-btn class="
                                             btn
                                             text-white
@@ -65,7 +65,6 @@ export default {
     mixins: [validationMixin],
      validations: {
       term: { required },
-      location_id: {required}
     },
     components: {
         Head,
