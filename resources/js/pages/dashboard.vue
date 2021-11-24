@@ -1,6 +1,6 @@
 <template>
   <Layout>
-     <Head title="Profile" />
+     <Head title="Dashboard" />
    <section class="relative">
           <div class="max-w-6xl mx-auto px-4 sm:px-6">
             <div class="pt-32 pb-12 md:pt-40 md:pb-20">
