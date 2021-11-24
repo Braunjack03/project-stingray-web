@@ -543,6 +543,15 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
    color: #525252;
 }
 
+.filter-opt .form-control.error--text {
+   border-bottom: 1px solid red;
+}
+.jobserach-error {
+   position: absolute;
+   right: 245px;
+   bottom: -14px;
+}
+
 .filter-opt .v-input__control .v-input__slot {
    margin: 0 0 1rem 0!important;
    min-height: 40px;
@@ -565,7 +574,9 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
    padding: 1rem 2rem!important;
    background: #f5f5f5;
 }
-
+.jobsearchBtn {
+   margin-top: -8px;
+}
 .card-text-wrap {
    width: calc(100% - 150px);
    padding-right: 1rem;
@@ -573,6 +584,21 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
 
 .card-text-wrap .v-card__title {
    padding: 0;
+}
+
+.testJobs .card-text-wrap {
+   width: calc(100% - 190px);
+}
+
+.testJobs .button-outter .editJobsBtn {
+   display: inline-block;
+   padding: 15px 18px 15px;
+   border-radius: 4px;
+   margin-right: 6px;
+   box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+   font-weight: 500;
+   letter-spacing: 1px;
+   line-height: normal;
 }
 
 .job-card-wrap .v-card__title {
@@ -620,8 +646,18 @@ header.homePage {
 }  
 section.homeBanner {
    background-image: url(../images/home-banner.jpg);
-}  
-
+} 
+.bannerForm {
+   position: relative;
+} 
+.errorMsg-baaner {
+   position: absolute;
+   left: 0;
+   bottom: -24px;
+}
+.errorMsg-baaner.forLocation-error {
+   left: 300px;
+}
 .browseList--block .browseList{
     box-shadow: none;
     background: #f5f5f5;
@@ -809,12 +845,12 @@ section.homeBanner {
 }
 
 @media (max-width:  767px) {
-   .bannerForm .filter-opt .form-control, .bannerForm .filter-opt .form-control.locationField {
+   .bannerForm .filter-opt .form-control, .bannerForm .filter-opt .form-control.locationField, .bannerForm .v-select {
        width: 50%;
    }
    .bannerForm .filter-opt button {
        width: 100%;
-       margin-top: 10px;
+       margin-top: 30px;
    }
    .homeBanner .h1 {
       font-size: 2rem;
@@ -831,6 +867,21 @@ section.homeBanner {
    #mobile-nav ul li a {
     justify-content: center;
    }
+   .errorMsg-baaner {
+      bottom: auto;
+      top:50px;
+   }
+   .errorMsg-baaner.forLocation-error {
+      left: 50%;
+   }
+   .jobserach-error {
+      right: auto;
+      bottom: 30px;
+      left: 0;
+  }
+  .testJobs .card-text-wrap {
+   width: 100%;
+  }
 }
 
 @media (max-width:640px){
@@ -886,6 +937,13 @@ section.homeBanner {
 @media (max-width:  451px) {
    .bannerForm .filter-opt .form-control, .bannerForm .filter-opt .form-control.locationField {
        width: 100%;
-       margin-bottom: 10px;
+       margin-bottom: 30px;
+   }
+   .errorMsg-baaner {
+      top:50px;
+   }
+   .errorMsg-baaner.forLocation-error {
+      left: 0;
+      top:130px;
    }
 }

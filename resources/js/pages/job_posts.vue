@@ -10,17 +10,26 @@
                            <span class="searc-show-title">
                               Showing Result {{job_posts.data.length}}
                            </span>
-                           <div class="filter-opt">
+                           <div class="filter-opt relative">
                            <v-select
                            v-model='location_id'
                            item-text="name"
                            item-value="id"
                            :items="locations"
                            label="Location"
-                           @change="search"
                            solo
                            ></v-select>
-                           <input type="text" name="table_search" value= '' class="form-control float-right" placeholder="Search" v-model="term" @keyup="search">
+                           <input type="text" name="table_search" :class="{ 'error--text': $v.term.$error }" class="form-control float-right" placeholder="Search" v-model="term" @keydown.enter="submit">
+                           <div v-if="$v.term.$error && !$v.term.required"  class="text-red-500 text-sm jobserach-error">Search is required</div>
+
+                              <v-btn class="
+                                 btn
+                                 text-white
+                                 bg-purple-600
+                                 hover:bg-purple-700 ml-3 jobsearchBtn" 
+                              @click="submit">
+                                 Search
+                              </v-btn>
                         </div>
                         </div>
                     </div>
@@ -53,8 +62,15 @@ import Layout from './Layout';
 import { Head,Link } from '@inertiajs/inertia-vue';
 import Pagination from '../components/JobPagination.vue';
 import Footer from '../partials/Footer.vue';
+import { validationMixin } from 'vuelidate'
+import { required} from 'vuelidate/lib/validators'
 
 export default {
+     mixins: [validationMixin],
+     validations: {
+      term: { required },
+      location_id: {required}
+    },
    components: {
       Head,
       Layout,
@@ -75,13 +91,21 @@ export default {
       }
     },
       methods: {
-         search() {
-             if(this.term === null)
+
+          submit() {
+            this.$v.$touch()
+          if(this.$v.$invalid) {
+            console.log('error!')
+          } else {
+              if(this.term === null)
              {
                 this.term = '';
              }
-             this.$inertia.replace('/jobs?loc='+this.location_id+'&q='+this.term);
-         }
+            this.$inertia.replace(
+                "/jobs?loc=" + this.location_id + "&q=" + this.term
+            );
+          }
+        },
       }
 }
 </script>
