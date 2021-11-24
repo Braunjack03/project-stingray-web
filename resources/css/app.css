@@ -781,6 +781,9 @@ section.homeBanner {
 .v-input--is-label-active .v-select__selections .v-select__selection.v-select__selection--comma {
    color: #525252 !important;
 }
+.manageBtn {
+   min-width: 205px;
+}
 
 
 /* Porfile Page */
