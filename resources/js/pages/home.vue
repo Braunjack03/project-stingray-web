@@ -6,7 +6,7 @@
                 <div class="pt-32 pb-0 md:pt-50 md:pb-20">
                     <div class="max-w-3xl mx-auto text-center pb-12 md:pb-16">
                         <h1 class="h1 text-white mt-0 md:mt-20 " data-aos="fade-up">
-                            Exciting Career Oppurtunities {{ count_job_posts }} Open Jobs
+                            Your starting point for Tampa technology jobs and news
                         </h1>
     
                         <div class="pb-6 md:pb-12 bannerForm">
