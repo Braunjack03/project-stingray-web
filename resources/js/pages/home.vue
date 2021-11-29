@@ -77,7 +77,6 @@ export default {
         BrowseJobs
     },
     props: {
-        count_job_posts: Number,
         locations: Array,
     },
     data() {
