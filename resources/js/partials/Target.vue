@@ -18,7 +18,7 @@
             <div class="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6">
               <div class="md:pl-4 lg:pl-3 xl:pl-5">
                 <div class="pb-6 md:pb-10">
-                  <h2 class="h2 darkColor sectionTitle">How It Works?</h2>
+                  <h2 class="h2 darkColor sectionTitle">How does it work?</h2>
                 </div>
                 <ul class="howItWork--list">
                   <li>

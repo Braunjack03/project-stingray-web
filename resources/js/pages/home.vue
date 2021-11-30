@@ -11,7 +11,6 @@
     
                         <div class="pb-6 md:pb-12 bannerForm">
                             <div class="mx-auto text-center pt-10 pb-3">
-                                <h3 class="quickSearch mb-6">Quick Search</h3>
                                 <div class="flex filter-outer">
                                     <div class="filter-opt">
                                         <span class="searchIcon"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="#666">
