@@ -17,13 +17,13 @@
           <!-- Desktop menu links -->
           <ul class="flex flex-grow justify-end flex-wrap items-center">
             <li>
-              <Link href="/jobs" class="text-white-900 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Jobs</Link>
+              <Link href="/jobs" class="font-bold text-white-900 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Jobs</Link>
             </li>
             <li>
-              <Link href="/companies" class="text-white-900 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Companies</Link>
+              <Link href="/companies" class="font-bold text-white-900 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Companies</Link>
             </li>
             <li>
-              <a target="_blank" href="https://blog.madeintampabay.org/" class="text-white-900 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">News</a>
+              <a target="_blank" href="https://blog.madeintampabay.org/" class="font-bold text-white-900 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">News</a>
             </li>
           
           </ul>
@@ -31,10 +31,10 @@
           <!-- Desktop sign in links -->
           <ul class="flex flex-grow justify-end flex-wrap items-center" v-if="!isLoggedIn">
             <li>
-              <Link href="/login"  class="font-medium text-purple-600 hover:text-purple-600 px-4 py-3 flex items-center transition duration-150 ease-in-out">Login</Link>
+              <Link href="/login"  class="font-bold text-white-600 hover:text-purple-600 px-4 py-3 flex items-center transition duration-150 ease-in-out">Login</Link>
             </li>
             <li>
-              <Link href="/register"  class="font-medium text-purple-600 hover:text-purple-600 px-4 py-3 flex items-center transition duration-150 ease-in-out">Join</Link>
+              <Link href="/register"  class="font-bold text-white-600 hover:text-purple-600 px-4 py-3 flex items-center transition duration-150 ease-in-out">Join</Link>
             </li>
             <li>
               <Link href="#"  class="btn-sm text-white bg-purple-600 hover:bg-purple-700 ml-3">Post a Job</Link>
