@@ -24,6 +24,7 @@ class CompanyProfileFactory extends Factory
     {
         return [
             'profile_title' => $this->faker->catchPhrase,
+            'uuid' => $this->faker->uuid,
             'description' => $this->faker->paragraph(9),
             'slug' => $this->faker->slug,
             'name' => $this->faker->company,
@@ -43,7 +44,8 @@ class CompanyProfileFactory extends Factory
             'phone_contact' => $this->faker->phoneNumber,
             'lat' => $this->faker->latitude,
             'long' => $this->faker->longitude,
-            'featured' => rand(0,1)
+            'featured' => rand(0,1),
+            'location_id' => rand(99,102)
         ];
     }
 }

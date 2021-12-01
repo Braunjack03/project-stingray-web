@@ -20,10 +20,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // seed test data
-        $users = User::factory()->count(10)->create();
-        $company_profiles = CompanyProfile::factory()->count(10)->has(JobPost::factory()->count(5), 'job_posts')->create();
-        $job_posts = JobPost::factory()->count(10)->create();
-        $articles = Article::factory()->count(10)->create();
+        $users = User::factory()->count(100)->create();
+        $company_profiles = CompanyProfile::factory()->count(100)->has(JobPost::factory()->count(20), 'job_posts')->create();
+        //$job_posts = JobPost::factory()->count(500)->create();
+        $articles = Article::factory()->count(250)->create();
     }
 
 }

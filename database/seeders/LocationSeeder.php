@@ -46,15 +46,6 @@ class LocationSeeder extends Seeder
 
         ]);
 
-        $name = "Miami Area";
-        DB::table('locations')->insert([
-            'name' => $name,
-            'description' => 'All cities in the Miami area including Miami, Ft. Lauderdale, and Palm Springs.',
-            'created_at' => now(),
-            'updated_at' => now(),
-            'slug' => Str::slug($name, '-'),
-            'id' => 2
-        ]);
 
         $name = "Tampa";
         DB::table('locations')->insert([
@@ -82,6 +73,18 @@ class LocationSeeder extends Seeder
             'updated_at' => now(),
             'slug' => Str::slug($name, '-'),
         ]);
+        /*
+        $name = "Miami Area";
+        DB::table('locations')->insert([
+            'name' => $name,
+            'description' => 'All cities in the Miami area including Miami, Ft. Lauderdale, and Palm Springs.',
+            'created_at' => now(),
+            'updated_at' => now(),
+            'slug' => Str::slug($name, '-'),
+            'id' => 2
+        ]);
+
+
 
         $name = "Miami";
         DB::table('locations')->insert([
@@ -100,6 +103,7 @@ class LocationSeeder extends Seeder
             'updated_at' => now(),
             'slug' => Str::slug($name, '-'),
         ]);
+        */
 
     }
 
