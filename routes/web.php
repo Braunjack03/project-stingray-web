@@ -25,9 +25,9 @@ use App\Http\Controllers\JobPostController;
 |
 */
 
-Route::get('/contact', function() {
-    return Inertia::render('contact');
-});
+Route::get('contact', [HomeController::class, 'contact']);
+
+Route::post('contact', [HomeController::class, 'contactSubmit'])->name('contact');
 
 Route::get('/dashboard', function() {
     return Inertia::render('dashboard');
@@ -61,6 +61,12 @@ Route::post('reset-password/{token}', [ForgotPasswordController::class, 'submitR
 });*/
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
+
+Route::get('companies', [HomeController::class, 'companies'])->name('companies');
+
+Route::get('news', [HomeController::class, 'blog'])->name('blog');
+
+Route::get('jobs', [HomeController::class, 'jobs'])->name('jobs');
 
 Route::post('/search', [HomeController::class, 'home'])->name('search');
 

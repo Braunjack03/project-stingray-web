@@ -10,6 +10,7 @@ return [
     'email_verified' => 'Your e-mail is verified. You can now login.',
     'email_already_verified' => 'Your e-mail is already verified. You can now login.',
     'verification_email' => 'Email Verification Mail',
+    'welcome_email' => 'Welcome Mail',
     'reset_password_email' => 'Reset Password',
     'password_reset_link' => 'We have e-mailed your password reset link!',
     'invalid_token' => 'Invalid token!',
@@ -22,4 +23,6 @@ return [
     'job_updated' => 'Job Post updated Successfully!',
     'company_claimed' => 'Email sent to admin for claim verification.',
     'profile_claimed' => 'Company profile claim',
+    'contact_form_filled'=> 'Contact Form Filled',
+    'contact_form_submit'=> 'Contact Form Submitted Successfully.'
  ];

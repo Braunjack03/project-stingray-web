@@ -166,8 +166,8 @@ class CompanyProfileController extends Controller
 
         $requested_data = $request->except(['logo_image_src']);
     
-        $user = CompanyProfile::where('uuid',$request->all()['uuid'])->first();
-        $user_uuid = $request->all()['uuid'];
+        $user = CompanyProfile::where('uuid',$request->all()['id'])->first();
+        $user_uuid = $request->all()['id'];
         $redirect_page = $request->path();
        
         $data = [
@@ -237,11 +237,12 @@ class CompanyProfileController extends Controller
                     'logo_image_url' => $image_name,
                     'slug' => $this->createCompanySlug($data['name']),
                 ];
+                
                 if(!$request->file('logo_image_url') && (isset($data['logo_image_removed']) && $data['logo_image_removed'] == 0))
                 {
                     unset($profile_data['logo_image_url']);
                 }
-                $user = CompanyProfile::where('id',$requested_data['id'])->update($profile_data);
+                $user = CompanyProfile::where('uuid',$requested_data['id'])->update($profile_data);
                 ActivityLog::addToLog(__('activitylogs.company_profile_updated'),'company updated');
                 return redirect()->route('employer.profile')->with(['message' => __('messages.company_profile_updated')]);
      
@@ -296,6 +297,8 @@ class CompanyProfileController extends Controller
                 'company_profiles.created_at',
                 'company_profiles.industry_ids',
                 'company_profiles.logo_image_url',
+                'company_profiles.street_addr_1',
+                'company_profiles.city',
                 'company_profiles.uuid',
                 'company_profiles.unclaimed',
                 'company_profiles.slug',
@@ -312,14 +315,15 @@ class CompanyProfileController extends Controller
 
             $company['logo_image_url'] = ($company['logo_image_url']) ? getBucketImageUrl($company['uuid'],$company['logo_image_url'],'company') : '';
 
-            $job_posts = JobPost::where('company_profile_id',$company['id'])->orderBy('id','DESC')->get()->toArray();
+            $job_posts = JobPost::select('job_posts.*','company_profiles.slug as company_slug')->join('company_profiles','job_posts.company_profile_id','company_profiles.id')
+            ->where('company_profile_id',$company['id'])->orderBy('id','DESC')->get()->toArray();
             
             $job_post_model = new JobPost();
             foreach($job_posts as $key => $job)
             {
                 $job_posts[$key]['location_id'] = $job_post_model->getJobLocation($job['remotetype_id']);
+                $job_posts[$key]['job_slug'] = $job['slug'];
             }    
-            
             return Inertia::render('single-company',['data'=>$company,'job_posts'=>$job_posts,'industries',$industries]);
 
         }catch (\Exception $e) {

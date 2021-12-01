@@ -1,25 +1,21 @@
 <template>
 
-    <v-card class="elevation-5 flex d-flex flex-column" max-width="600">
-        <v-card-title><Link :href="'jobs/'+data.company_slug+'/'+data.job_slug" color="text" class="mr-4">{{data.name}}</Link></v-card-title>
-
-        <v-card-text>
-            <v-row align="center" class="mx-0">
-            </v-row>
-
-            <div class="my-4 text-subtitle-1">
-            Company Name: <Link :href="'companies/'+data.company_slug">{{data.company_name}}</Link>
+    <v-card class="elevation-5 flex d-flex flex-column cardStyle">
+      <v-card-text class="job-card-wrap">
+        <div class="card-text-wrap">
+          <v-card-title><Link :href="'/jobs/'+data.company_slug+'/'+data.job_slug" color="text" class="mr-4">{{data.name}}</Link></v-card-title>      
+          <div class="card-outter">
+            <div class="text-subtitle-1" v-if="data.company_name">Company Name: <Link :href="'companies/'+data.company_slug">{{data.company_name}}</Link>
             </div>
-
-            <div class="my-4 text-subtitle-1">
-             <v-btn  :href="data.apply_url" target="_blank" text>
+            <div class="description">{{data.content.substring(0,250) | stripHTML}}</div>
+            <div class="date">{{timeDifference(new Date(data.created_at)) }} ago</div>
+          </div>
+          </div>
+          <div class="button-outter">
+             <v-btn  :href="data.apply_url" target="_blank" class="text-white bg-purple-600 hover:bg-purple-700">
                 Apply Now
               </v-btn>
-            </div>
-
-            <div>{{data.content.substring(0,250) | stripHTML}}</div>
-            <div>{{timeDifference(new Date(data.created_at)) }} ago</div>
-
+          </div>
         </v-card-text>
 
     </v-card>

@@ -7,12 +7,13 @@ use Auth;
 use App\Models\JobPost;
 use App\Models\Location;
 use Inertia\Inertia;
+use Mail; 
 
 class HomeController extends Controller
 {    
     public function __construct()
     {
-        $this->middleware('auth',['except' => ['home']]);
+        $this->middleware('auth',['except' => ['home','jobs','companies','blog']]);
     }
     /**
      * Dashboard
@@ -43,7 +44,21 @@ class HomeController extends Controller
         }
     }
 
-    public function home(Request $request){
+    public function home(){
+        $job_posts = JobPost::count();
+        $locations = Location::get();
+        return Inertia::render('home',['count_job_posts'=>$job_posts,'locations'=>$locations]);
+    }
+
+    public function blog(){
+        return Inertia::render('blog');
+    }
+
+    public function companies(){
+        return Inertia::render('companies');
+    }
+
+    public function jobs(Request $request){
         
         try{
             $job_posts = JobPost::join('company_profiles','job_posts.company_profile_id','company_profiles.id')
@@ -57,15 +72,46 @@ class HomeController extends Controller
                     'job_posts.created_at'
             )->when($request->q, function($query, $term) {
                     $query->where('job_posts.name', 'LIKE', '%'.$term.'%');
-                    $query->where('job_posts.content', 'LIKE', '%'.$term.'%');
+                    $query->Orwhere('job_posts.content', 'LIKE', '%'.$term.'%');
             })->when($request->loc, function($query, $term1) {
-                $query->where('job_posts.location_id', $term1);
+                $query->Orwhere('job_posts.location_id', $term1);
             })
             ->orderBy('job_posts.created_at','DESC')
             ->paginate($this->paginationLimit);
+
+            //dd($job_posts);
+            //->paginate($this->paginationLimit);
             
+            //die('');
             $locations = Location::get();
             return Inertia::render('job_posts', ['job_posts' => $job_posts,'location_id'=>$request->loc,'term'=>$request->q,'locations'=>$locations]);
+        }catch (\Exception $e) {
+            $message = $e->getMessage();
+            return $this->sendErrorResponse('login',$message);
+        }
+    }
+
+    public function contact(){
+        try{
+            return Inertia::render('contact');
+
+        }catch (\Exception $e) {
+            $message = $e->getMessage();
+            return $this->sendErrorResponse('login',$message);
+        }
+    }
+
+    public function contactSubmit(Request $request){
+        try{
+            $data = $request->all();
+
+            Mail::send('emails.contactForm',['data'=>$data], function($message){
+                $message->to(env('ADMIN_EMAIL'));
+                $message->subject(__('messages.contact_form_filled'));
+            });
+
+            return $this->sendSuccessResponse('thankyou',__('messages.contact_form_submit'),[]);
+
         }catch (\Exception $e) {
             $message = $e->getMessage();
             return $this->sendErrorResponse('login',$message);

@@ -123,7 +123,6 @@ class JobPostController extends Controller
             'name.required' => 'Job Title is required',
             'job_cat_id.required' => 'The Job Category field is required.',
             'apply_url.required' => 'The Job Application URL field is required.',
-            'content.required' => 'The Job Description field is required.',
         ]; 
       
         $validator = Validator::make($data, [
@@ -131,7 +130,6 @@ class JobPostController extends Controller
             'location_id' => 'required',
             'job_cat_id' => 'required',
             'apply_url' => 'required',
-            'content' => 'required',
         ],$messages);
         
         if ($validator->fails()){
@@ -197,6 +195,7 @@ class JobPostController extends Controller
         
 
         $data = $request->only(['name', 'content', 'apply_url', 'location_id', 'job_cat_id','remotetype_id']);
+        
         if(isset($data['remotetype_id']) && $data['remotetype_id'] == 0)
         {
             $data['remotetype_id'] = 3;
@@ -207,7 +206,6 @@ class JobPostController extends Controller
             'name.required' => 'Job Title is required',
             'job_cat_id.required' => 'The Job Category field is required.',
             'apply_url.required' => 'The Job Application URL field is required.',
-            'content.required' => 'The Job Description field is required.',
         ]; 
       
         $validator = Validator::make($request->all(), [
@@ -215,7 +213,6 @@ class JobPostController extends Controller
             'location_id' => 'required',
             'job_cat_id' => 'required',
             'apply_url' => 'required',
-            'content' => 'required',
         ],$messages);
         
         if ($validator->fails()){
@@ -225,11 +222,12 @@ class JobPostController extends Controller
             return $this->sendJobValidationErrorsWithData($redirect_page,$validator->errors(),$data);
         }else{
             try{
-                $job = JobPost::where('id',$job_uuid);
+                $job = JobPost::where('uuid',$job_uuid);
                 $data['slug'] = $this->createJobPostSlug($data['name']);
                 $job->update($data);
-                $job_data = JobPost::where('id',$job_uuid)->first();
+                $job_data = JobPost::where('uuid',$job_uuid)->first();
                 $company_profile_id = CompanyProfile::select('uuid')->where('id',$job_data->company_profile_id)->first()['uuid'];
+
                 ActivityLog::addToLog(__('activitylogs.job_updated'),'job updated');
                 return redirect('employer/jobs?c_id='.$company_profile_id)->with( ['message' => __('messages.job_updated')] );
                  
@@ -261,10 +259,11 @@ class JobPostController extends Controller
             'job_posts.name as name',
             'job_posts.content as content',
             'company_profiles.name as company_name',
+            'company_profiles.slug as company_slug',
             'locations.name as location',
             'job_posts.created_at',
             'job_posts.apply_url'
-    )->where('job_posts.slug',$slug)->first();
+            )->where('job_posts.slug',$slug)->first();
 
         return Inertia::render('single-job-post',['data'=>$job_post]);
     }

@@ -3,17 +3,21 @@ import Vue from 'vue'
 import { createInertiaApp } from '@inertiajs/inertia-vue'
 import { TiptapVuetifyPlugin } from 'tiptap-vuetify';
 
-
-
 import vuetify from './vuetify';
-import '../css/app.css';
+
+import '../css/style.scss';
+import '../css/additional-styles/theme.scss';
+import '../css/additional-styles/utility-patterns.scss';
+import '../css/additional-styles/range-slider.scss';
+
 import '@mdi/font/css/materialdesignicons.css';
 
 // don't forget to import CSS styles
 import 'tiptap-vuetify/dist/main.css';
 
-import 'vuetify/dist/vuetify.min.css';
+import Vuelidate from 'vuelidate'
 
+Vue.use(Vuelidate)
 
 createInertiaApp({
   resolve: name => require(`./pages/${name}`),
@@ -24,7 +28,6 @@ createInertiaApp({
     }).$mount(el)
   },
 })
-
 
 Vue.use(TiptapVuetifyPlugin, {
   // the next line is important! You need to provide the Vuetify Object to this place.
