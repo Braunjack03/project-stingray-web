@@ -24,11 +24,15 @@ class JobPostFactory extends Factory
     {
         return [
             'name' => $this->faker->jobTitle,
-            'content' => $this->faker->paragraph(7),
+            'content' => $this->faker->paragraph(70),
             'apply_url' => $this->faker->url,
             'slug' => $this->faker->slug,
             'explevel_id' =>$this->faker->numberBetween(1,4),
-            'remotetype_id' => $this->faker->numberBetween(1,4)
+            'remotetype_id' => $this->faker->numberBetween(1,4),
+            'location_id' => rand(99,102),
+            'job_cat_id' => rand(2001,2014),
+            'is_published' => 1,
+
         ];
     }
 }

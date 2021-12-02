@@ -1,0 +1,3 @@
+php artisan db:seed --class=JobCatSeeder --force
+php artisan db:seed --class=LocationSeeder --force
+php artisan db:seed --class=CompanyTypeSeeder --force
