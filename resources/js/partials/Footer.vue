@@ -129,7 +129,7 @@
           </ul>
 
           <!-- Copyrights note -->
-          <div class="text-gray-400 text-sm mr-4">&copy; 2020 Open PRO. All rights reserved.</div>
+          <div class="text-gray-400 text-sm mr-4">&copy; 2021 Water Street Research. All rights reserved.</div>
 
         </div>
 
