@@ -26,20 +26,14 @@ Note: All commands are ran from the root of the project.
     * ```cp .env.example .env && php artisan key:generate```
 3. Install packages
     * ```composer install & npm install```
-4. Build vue side
-    * ```npm run dev```
+4. For development build the frontend using 
+    * ```npm run watch-poll```
 5. Serve Laravel Project
     * ```php artisan serve```
 6. Load default seed data for the various categories and types
-    * ```php artisan db:seed --class=JobCatSeeder --force```
-    * ```php artisan db:seed --class=LocationSeeder --force```
-    * ```php artisan db:seed --class=CompanyTypeSeeder --force```
-7. Load test data for job posts, companies, etc(Optional)
+    * ```bash scripts/run_seeds```
+7. For dev and QA load test data for job posts, companies, etc.  This will load approx 2000 jobs.
     * ```php artisan db:seed```
-
-### Database Schema
-The rough database schema is [viewable here](https://www.evernote.com/shard/s5/sh/82405885-ecee-c8b4-76c4-363a8eda0ffe/93f4a0a2a60560dfc5a1e20d3de066d6).  The schema will evolve over time but there are large number of n:m (many to many) relationships so it's useful to have a base diagram.
-
 ## Development Process <a name = "dev_process"></a>
 - All work will be managed out of Github issues and Github projects
 - Code should be checked-in at least once a day
