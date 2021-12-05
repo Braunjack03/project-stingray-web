@@ -1,6 +1,6 @@
 <template>
     <Layout>
-        <Head title="Home" />
+        <Head title="Made in Tampa" />
         <section data-app class="homeBanner">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 relative">
                 <div class="pt-32 pb-0 md:pt-50 md:pb-20">
@@ -54,7 +54,7 @@ import Footer from "../partials/Footer.vue";
 import HeroHome from "../partials/HeroHome.vue";
 import Process from "./../partials/Process.vue";
 import Target from "./../partials/Target.vue";
-import Newsletter from './../partials/Newsletter.vue'
+//import Newsletter from './../partials/Newsletter.vue'
 import BrowseJobs from './../partials/BrowseJobs.vue'
 import { validationMixin } from 'vuelidate'
 import { required} from 'vuelidate/lib/validators'
@@ -72,7 +72,7 @@ export default {
         HeroHome,
         Process,
         Target,
-        Newsletter,
+        //Newsletter,
         BrowseJobs
     },
     props: {
