@@ -79,12 +79,13 @@ class HomeController extends Controller
             ->orderBy('job_posts.created_at','DESC')
             ->paginate($this->paginationLimit);
 
+            $job_posts_count = JobPost::count();
             //dd($job_posts);
             //->paginate($this->paginationLimit);
             
             //die('');
             $locations = Location::get();
-            return Inertia::render('job_posts', ['job_posts' => $job_posts,'location_id'=>$request->loc,'term'=>$request->q,'locations'=>$locations]);
+            return Inertia::render('job_posts', ['job_posts' => $job_posts,'job_posts_count'=>$job_posts_count,'location_id'=>$request->loc,'term'=>$request->q,'locations'=>$locations]);
         }catch (\Exception $e) {
             $message = $e->getMessage();
             return $this->sendErrorResponse('login',$message);

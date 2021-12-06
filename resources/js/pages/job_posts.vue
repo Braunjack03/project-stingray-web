@@ -8,7 +8,7 @@
                      <div class="mx-auto text-center pt-10 pb-3">
                         <div class="flex filter-outer">
                            <span class="searc-show-title">
-                              Showing Result {{job_posts.data.length}}
+                              Total Number of jobs: {{job_posts_count}}
                            </span>
                            <div class="filter-opt relative">
                            <v-select
@@ -83,6 +83,7 @@ export default {
       filters: Object,
       term : String,
       locations : Array,
+      job_posts_count: Number,
     },
     data () {
       return {

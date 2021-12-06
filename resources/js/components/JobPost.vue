@@ -12,9 +12,10 @@
           </div>
           </div>
           <div class="button-outter">
-             <v-btn  :href="data.apply_url" target="_blank" class="text-white bg-purple-600 hover:bg-purple-700">
+            <Link :href="'/jobs/'+data.company_slug+'/'+data.job_slug" class="btn-sm text-white bg-purple-600 hover:bg-purple-700 ml-3">VIEW JOB</Link>
+             <!--v-btn  :href="data.apply_url" target="_blank" class="text-white bg-purple-600 hover:bg-purple-700">
                 Apply Now
-              </v-btn>
+              </v-btn-->
           </div>
         </v-card-text>
 

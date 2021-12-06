@@ -282,10 +282,10 @@ class CompanyProfileController extends Controller
 
         try{
             $company = CompanyProfile::with('job_posts')->join('locations','company_profiles.location_id','locations.id')
-            ->join('users','company_profiles.user_id','=','users.id')
+            //->join('users','company_profiles.user_id','=','users.id')
             ->select(
                 'company_profiles.id',
-                'company_profiles.user_id',
+                //'company_profiles.user_id',
                 'company_profiles.name',
                 'company_profiles.mission',
                 'company_profiles.name',
@@ -302,17 +302,21 @@ class CompanyProfileController extends Controller
                 'company_profiles.uuid',
                 'company_profiles.unclaimed',
                 'company_profiles.slug',
-                'users.role',
+                //'users.role',
             )
             ->where('company_profiles.slug',$slug)->first();
-            if($company->user_id == Auth::id())
+            /*if(Auth::check())
             {
-                $company->unclaimed = 0;
-            }       
+                if($company->user_id == Auth::id())
+                {
+                    $company->unclaimed = 0;
+                }
+            }*/
             $selected_industries = explode(',',$company['industry_ids']);
+           
             $industries = CompanyType::whereIn('id', $selected_industries)->pluck('name')->toArray();
             $company['industry_types'] = implode(' | ',$industries);
-
+            
             $company['logo_image_url'] = ($company['logo_image_url']) ? getBucketImageUrl($company['uuid'],$company['logo_image_url'],'company') : '';
 
             $job_posts = JobPost::select('job_posts.*','company_profiles.slug as company_slug')->join('company_profiles','job_posts.company_profile_id','company_profiles.id')
