@@ -61,13 +61,15 @@ class HomeController extends Controller
     public function jobs(Request $request){
         
         try{
-            $job_posts = JobPost::join('company_profiles','job_posts.company_profile_id','company_profiles.id')
+            $job_posts = JobPost::leftjoin('company_profiles','job_posts.company_profile_id','company_profiles.id')
+            ->leftjoin('locations', 'job_posts.location_id', 'locations.id')
             ->select(
                     'job_posts.name as name',
                     'job_posts.content as content',
                     'company_profiles.name as company_name',
                     'job_posts.apply_url as apply_url',
                     'company_profiles.slug as company_slug',
+                    'locations.name as location',
                     'job_posts.slug as job_slug',
                     'job_posts.created_at'
             )->when($request->q, function($query, $term) {
