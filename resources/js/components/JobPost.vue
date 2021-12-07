@@ -5,18 +5,19 @@
         <div class="card-text-wrap">
           <v-card-title><Link :href="'/jobs/'+data.company_slug+'/'+data.job_slug" color="text" class="mr-4">{{data.name}}</Link></v-card-title>      
           <div class="card-outter">
-            <div class="text-subtitle-1" v-if="data.company_name">Company Name: <Link :href="'companies/'+data.company_slug">{{data.company_name}}</Link>
+            <div class="text-subtitle-1" v-if="data.company_name">Company Name: <Link class="jobLocationLink" :href="'companies/'+data.company_slug">{{data.company_name}}</Link>
             </div>
             <div class="description">{{data.content.substring(0,250) | stripHTML}}</div>
             <div class="date">{{timeDifference(new Date(data.created_at)) }} ago</div>
           </div>
           </div>
           <div class="button-outter">
-            <Link :href="'/jobs/'+data.company_slug+'/'+data.job_slug" class="btn-sm text-white bg-purple-600 hover:bg-purple-700 ml-3">VIEW JOB</Link>
+            <Link :href="'/jobs/'+data.company_slug+'/'+data.job_slug" class="text-white bg-purple-600 hover:bg-purple-700 ml-3 viewJobsBtn">VIEW JOB</Link>
              <!--v-btn  :href="data.apply_url" target="_blank" class="text-white bg-purple-600 hover:bg-purple-700">
                 Apply Now
               </v-btn-->
           </div>
+          <Link :href="'/jobs/'+data.company_slug+'/'+data.job_slug" class="overlayLink"></Link>
         </v-card-text>
 
     </v-card>

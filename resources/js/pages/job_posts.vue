@@ -34,14 +34,13 @@
                         </div>
                     </div>
                   </div>
-
                   <div v-if="job_posts.data.length > 0">
                      <v-row >
                         <v-col cols="12" md="12" class="pa-3 d-flex flex-column" v-for="data in job_posts.data" :key="data.id">
                            <CustomCard :data="data"/>
                         </v-col>
                      </v-row>
-                     <pagination class="mt-5" :links="job_posts.links" />
+                     <pagination class="mt-5" :links="job_posts.links"/>
                   </div>  
                   <div v-else >
                       <v-row >

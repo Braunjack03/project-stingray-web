@@ -253,8 +253,8 @@ class JobPostController extends Controller
     {
 
         try {
-            $job_post = JobPost::join('company_profiles', 'job_posts.company_profile_id', 'company_profiles.id')
-                ->join('locations', 'job_posts.location_id', 'locations.id')
+            $job_post = JobPost::leftjoin('company_profiles', 'job_posts.company_profile_id', 'company_profiles.id')
+                ->leftjoin('locations', 'job_posts.location_id', 'locations.id')
                 ->select(
                     'job_posts.name as name',
                     'job_posts.content as content',
@@ -264,6 +264,7 @@ class JobPostController extends Controller
                     'job_posts.created_at',
                     'job_posts.apply_url'
                 )->where('job_posts.slug', $slug)->first();
+            
             return Inertia::render('single-job-post', ['data' => $job_post]);
         } catch (\Exception $e) {
             $message = $e->getMessage();
