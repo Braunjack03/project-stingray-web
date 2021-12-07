@@ -68,6 +68,8 @@ Route::get('news', [HomeController::class, 'blog'])->name('blog');
 
 Route::get('jobs', [HomeController::class, 'jobs'])->name('jobs');
 
+Route::get('hiring', [HomeController::class, 'hiring'])->name('hiring');
+
 Route::post('/search', [HomeController::class, 'home'])->name('search');
 
 Route::get('/jobs/{company}/{slug}', [JobPostController::class, 'showJobPost'])->name('home');

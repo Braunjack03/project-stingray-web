@@ -85,7 +85,7 @@
                 <Link href="/companies" class="flex text-gray-300 hover:text-purple-600 py-2">Companies</Link>
               </li>
               <li>
-                <Link href="https://blog.madeintampabay.org/" class="flex text-gray-300 hover:text-purple-600 py-2">News</Link>
+                <a target="_blank" href="https://blog.madeintampabay.org/" class="flex text-gray-300 hover:text-purple-600 py-2">News</a>
               </li>
               
               <li>

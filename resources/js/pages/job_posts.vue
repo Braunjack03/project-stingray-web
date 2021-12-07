@@ -8,7 +8,7 @@
                      <div class="mx-auto text-center pt-10 pb-3">
                         <div class="flex filter-outer">
                            <span class="searc-show-title">
-                              Showing Result {{job_posts.data.length}}
+                              Total Number of jobs: {{job_posts_count}}
                            </span>
                            <div class="filter-opt relative">
                            <v-select
@@ -34,14 +34,13 @@
                         </div>
                     </div>
                   </div>
-
                   <div v-if="job_posts.data.length > 0">
                      <v-row >
                         <v-col cols="12" md="12" class="pa-3 d-flex flex-column" v-for="data in job_posts.data" :key="data.id">
                            <CustomCard :data="data"/>
                         </v-col>
                      </v-row>
-                     <pagination class="mt-5" :links="job_posts.links" />
+                     <pagination class="mt-5" :links="job_posts.links"/>
                   </div>  
                   <div v-else >
                       <v-row >
@@ -83,6 +82,7 @@ export default {
       filters: Object,
       term : String,
       locations : Array,
+      job_posts_count: Number,
     },
     data () {
       return {
