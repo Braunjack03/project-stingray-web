@@ -32,8 +32,7 @@
                     <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
                     </svg>  Location
                     <span class="loactionCity" 
-                      ><strong>{{ data.street_addr_1 }}, {{ data.city }}</strong></span
-                    >
+                      ><strong>{{ data.city }}, {{ data.state_abbr }}</strong></span>
                   </div>
                 </v-col>
                 <v-col cols="12" sm="6" md="4">
@@ -102,7 +101,7 @@
                 <div class="max-w-6xl mx-auto px-2 pt-5">
                   <div class="aboutContent">
                       <h3 class="post-title">About {{ data.name }}</h3>
-                      <div class="desc" v-html="data.mission"></div>
+                      <div class="desc" v-html="data.description"></div>
                   </div>
                   <!--div class="aboutContent">
                       <h3 class="desc text-gray-700 mb-3">Jobs at {{ data.name }}</h3>
