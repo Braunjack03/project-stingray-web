@@ -10,7 +10,7 @@
                         <div class="flex filter-outer">
                            <span class="searc-show-title">
                               Total Number of jobs: {{job_posts_count}}
-
+                              {{location_id}}
                            </span>
                            <div class="filter-opt relative">
                            <v-select
@@ -90,7 +90,7 @@ export default {
     },
     data () {
       return {
-        location_id: (parseInt(new URL(location.href).searchParams.get('loc')) === undefined) ? 0: new URL(location.href).searchParams.get('loc'), 
+        location_id: (parseInt(new URL(location.href).searchParams.get('loc')) === undefined) ? 0: parseInt(new URL(location.href).searchParams.get('loc')), 
       }
     },
       methods: {
