@@ -131,22 +131,5 @@ export default {
         location_id: '',
       }
     },
-      methods: {
-
-          submit() {
-            this.$v.$touch()
-          if(this.$v.$invalid) {
-            console.log('error!')
-          } else {
-              if(this.term === null)
-             {
-                this.term = '';
-             }
-            this.$inertia.replace(
-                "/jobs?loc=" + this.location_id + "&q=" + this.term
-            );
-          }
-        },
-      }
 }
 </script>
