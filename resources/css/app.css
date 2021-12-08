@@ -890,6 +890,10 @@ section.homeBanner {
     font-size: .75rem;
 }
 
+.company-img-block .v-responsive {
+   max-width: 150px;
+}
+
 /* Media */
 
 @media (max-width:1170px){
