@@ -22,9 +22,9 @@
           </ul> -->
 
           <!-- Desktop sign in links -->
-          <ul class="flex flex-grow justify-end flex-wrap items-center" v-if="!isLoggedIn">
+          <ul class="flex flex-grow justify-end flex-wrap items-center" >
             <li>
-              <Link href="/jobs" class="font-bold text-white-900 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Jobs</Link>
+              <Link href="/jobs"  class="font-bold text-white-900 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Jobs</Link>
             </li>
             <li>
               <Link href="/companies" class="font-bold text-white-900 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Companies</Link>
@@ -38,11 +38,11 @@
             <!-- <li>
               <Link href="#"  class="font-bold text-white-600 hover:text-purple-600 px-4 py-3 flex items-center transition duration-150 ease-in-out">Employers</Link>
             </li> --> |
-            <li>
+            <li v-if="!isLoggedIn">
               <Link href="/register"  class="font-bold text-white-600 hover:text-purple-600 px-4 py-3 flex items-center transition duration-150 ease-in-out">Join</Link>
             </li>
-            <li>
-              <Link href="/login"  class="font-bold text-white-600 hover:text-purple-600 pl-4 py-3 flex items-center transition duration-150 ease-in-out">Sign In</Link>
+            <li v-if="!isLoggedIn">
+              <Link href="/login" class="font-bold text-white-600 hover:text-purple-600 pl-4 py-3 flex items-center transition duration-150 ease-in-out">Sign In</Link>
             </li>
           </ul>
 
