@@ -90,7 +90,7 @@ export default {
     },
     data () {
       return {
-        location_id: new URL(location.href).searchParams.get('loc')
+        location_id: (parseInt(new URL(location.href).searchParams.get('loc')) === undefined) ? 0: new URL(location.href).searchParams.get('loc'), 
       }
     },
       methods: {

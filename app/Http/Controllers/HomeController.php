@@ -62,8 +62,8 @@ class HomeController extends Controller
     public function jobs(Request $request){
         
         try{
-            $job_posts_query = JobPost::join('company_profiles','job_posts.company_profile_id','company_profiles.id')
-            ->join('locations', 'job_posts.location_id', 'locations.id')
+            $job_posts_query = JobPost::leftjoin('company_profiles','job_posts.company_profile_id','company_profiles.id')
+            ->leftjoin('locations', 'job_posts.location_id', 'locations.id')
             ->select(
                     'job_posts.name as name',
                     'job_posts.content as content',
@@ -77,13 +77,17 @@ class HomeController extends Controller
                     $query->where('job_posts.name', 'LIKE', '%'.$term.'%');
                     $query->where('job_posts.content', 'LIKE', '%'.$term.'%');
             })->when($request->loc, function($query, $term1) {
-                $query->where('job_posts.location_id', $term1);
+                if($term1 != 'null')
+                {
+                    $query->where('job_posts.location_id', $term1);
+                }
             })
             ->orderBy('job_posts.created_at','DESC');
 
+            $job_posts_count = $job_posts_query->count();
+
             $job_posts = $job_posts_query->paginate($this->paginationLimit);
 
-            $job_posts_count = $job_posts_query->count();
             //->paginate($this->paginationLimit);
             
             //die('');
