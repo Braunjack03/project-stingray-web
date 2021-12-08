@@ -54,11 +54,7 @@ class HomeController extends Controller
     public function blog(){
         return Inertia::render('blog');
     }
-
-    public function companies(){
-        return Inertia::render('companies');
-    }
-
+    
     public function jobs(Request $request){
         
         try{
@@ -99,7 +95,7 @@ class HomeController extends Controller
         }
     }
 
-    public function hiring(Request $request){
+    public function companies(Request $request){
         
         try{
             $company = CompanyProfile::with('job_posts')->leftjoin('locations','company_profiles.location_id','locations.id')
@@ -150,7 +146,7 @@ class HomeController extends Controller
                 $job_posts[$key]['job_slug'] = $job['slug'];
             }    */
             //dd($company);
-            return Inertia::render('hiring', ['data'=>$company]);
+            return Inertia::render('companies', ['data'=>$company]);
         }catch (\Exception $e) {
             $message = $e->getMessage();
             return $this->sendErrorResponse('login',$message);

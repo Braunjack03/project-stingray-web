@@ -3,7 +3,9 @@
         <v-card class="elevation-5 flex d-flex flex-column cardStyle">
             <v-card-text class="job-card-wrap company-card-wrap">
                 <div class="company-img-block">
-                <img src="http://192.168.0.55:8000/images/how-it-work.jpg">
+                  <v-img
+                    :src="(data.logo_image_url) ? data.logo_image_url : '/images/tampa_made_logo.svg'"
+                  ></v-img>
                 </div>
                 <div class="company-text-block">
                 <v-card-title class="p-0">{{data.name}}</v-card-title> 
@@ -11,11 +13,11 @@
                 <p class="description">{{data.mission}}</p>
                 </div>
                 <div class="company-jobs-block">
-                <a class="flex justify-center items-center" href="#">View {{data.job_posts.length}} Jobs 
+                <Link :href="'/companies/'+data.slug" color="text" class="flex justify-center items-center">View {{data.job_posts.length}} Jobs 
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
                     </svg>
-                </a>
+                </Link>
                 <div class="company-location">
                     <p><span>{{data.city}}</span> Location</p>
                 </div>
