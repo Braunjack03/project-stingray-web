@@ -139,8 +139,6 @@ class HomeController extends Controller
                 $company['logo_image_url'] = ($company['logo_image_url']) ? getBucketImageUrl($company['uuid'],$company['logo_image_url'],'company') : '';
             }
            
-            echo '<pre>'; print_r($company);
-            die();
             /*$industries = CompanyType::whereIn('id', $selected_industries)->pluck('name')->toArray();
             $company['industry_types'] = implode(' | ',$industries);
             
