@@ -927,6 +927,12 @@ section.homeBanner {
    .newsletterTitle {
        font-size: 2rem;
    }
+   .company-img-block {
+       flex-basis: 100px;
+   }
+   .company-text-block {
+       flex-basis: calc(100% - 250px);
+   }
 }
 
 @media (max-width:960px){
@@ -998,6 +1004,35 @@ section.homeBanner {
    .aboutContent .singlePost--title .post-title {
        font-size: 24px;
    }  
+   .job-card-wrap.company-card-wrap {
+       align-items: flex-start;
+   }
+   .company-text-block {
+       flex-basis: 100%;
+       order: 3;
+       margin-top: 12px;
+       padding: 0;
+       border-top: 1px solid #ddd;
+       padding-top: 5px;
+   }
+   .company-img-block {
+       flex-basis: calc(100% - 150px);
+   }
+   .company-img-block img {
+       border-radius: 50%;
+       -o-object-fit: cover;
+       object-fit: cover;
+       aspect-ratio: 1/1;
+       width: 100px;
+       height: 100px;
+   }
+   .company-jobs-block {
+       flex-basis: 150px;
+       order: 2;
+   }
+   .company-page-title .h3 {
+       font-size: 1.5rem;
+   }
 }
   
 @media (max-width:575px){
