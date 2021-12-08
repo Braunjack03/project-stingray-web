@@ -54,7 +54,7 @@ class HomeController extends Controller
     public function blog(){
         return Inertia::render('blog');
     }
-    
+
     public function jobs(Request $request){
         
         try{
@@ -70,8 +70,11 @@ class HomeController extends Controller
                     'job_posts.slug as job_slug',
                     'job_posts.created_at'
             )->when($request->q, function($query, $term) {
+                if($term != 'null')
+                {
                     $query->where('job_posts.name', 'LIKE', '%'.$term.'%');
                     $query->where('job_posts.content', 'LIKE', '%'.$term.'%');
+                }
             })->when($request->loc, function($query, $term1) {
                 if($term1 != 'null')
                 {
@@ -98,7 +101,7 @@ class HomeController extends Controller
     public function companies(Request $request){
         
         try{
-            $company = CompanyProfile::with('job_posts')->leftjoin('locations','company_profiles.location_id','locations.id')
+            $company = CompanyProfile::with(['job_posts','companytypes'])->leftjoin('locations','company_profiles.location_id','locations.id')
             //->join('users','company_profiles.user_id','=','users.id')
             ->select(
                 'company_profiles.id',
@@ -121,6 +124,7 @@ class HomeController extends Controller
                 'company_profiles.slug',
                 //'users.role',
             )
+            ->orderBy('company_profiles.created_at','DESC')
             ->paginate($this->paginationLimit);
             /*if(Auth::check())
             {
