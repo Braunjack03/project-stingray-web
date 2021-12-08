@@ -136,7 +136,7 @@ class HomeController extends Controller
             //$selected_industries = explode(',',$company['industry_ids']);
 
             foreach($company as $key => $comp){
-                $company['logo_image_url'] = ($company['logo_image_url']) ? getBucketImageUrl($company['uuid'],$company['logo_image_url'],'company') : '';
+                $company['logo_image_url'] = ($comp['logo_image_url']) ? getBucketImageUrl($comp['uuid'],$comp['logo_image_url'],'company') : '';
             }
            
             /*$industries = CompanyType::whereIn('id', $selected_industries)->pluck('name')->toArray();
