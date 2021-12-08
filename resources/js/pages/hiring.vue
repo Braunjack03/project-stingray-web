@@ -3,12 +3,13 @@
       <Head title="Job Listing" />
               <section data-app>
                <div class="max-w-6xl mx-auto px-4 sm:px-6 py-10 md:py-20 relative">
-                  <div class="pt-10 pb-6 md:pb-12">
+                  <div class="pt-16 pb-6 md:pb-12 company-page-title">
                      <h3 class="h3 text-gray-700 text-center">Tech Companies Hiring Right Now</h3>
                   </div>
-                  <div v-if="job_posts.data.length > 0">
-                     <v-row >
-                        <v-col cols="12" md="12" class="pa-3 d-flex flex-column">
+                  <div v-if="data.data.length > 0">
+                     <v-row v-for="data in data.data" :key="data.id">
+                        <CustomCard :data="data"/>   
+                        <!--v-col cols="12" md="12" class="pa-3 d-flex flex-column">
                            <v-card class="elevation-5 flex d-flex flex-column cardStyle">
                               <v-card-text class="job-card-wrap company-card-wrap">
                                  <div class="company-img-block">
@@ -79,9 +80,9 @@
                                  </div>
                               </v-card-text>
                            </v-card>
-                        </v-col>
+                        </v-col-->
                      </v-row>
-                     <pagination class="mt-5" :links="job_posts.links" />
+                     <pagination class="mt-5" :links="data.links" />
                   </div>  
                   <div v-else >
                       <v-row >
@@ -97,7 +98,7 @@
 
 <script>
 //import Card from '../components/Card.vue';
-import JobPost from '../components/JobPost.vue';
+import CompanyList from '../components/Company.vue';
 import Layout from './Layout';
 import { Head,Link } from '@inertiajs/inertia-vue';
 import Pagination from '../components/JobPagination.vue';
@@ -113,12 +114,12 @@ export default {
    components: {
       Head,
       Layout,
-      'CustomCard': JobPost,
+      'CustomCard': CompanyList,
       Pagination,
       Footer,
    },
    props: {
-      job_posts : Object,  
+      data : Object,  
       members:Object,
       filters: Object,
       term : String,

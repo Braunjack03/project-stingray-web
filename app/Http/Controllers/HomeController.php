@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Models\JobPost;
 use App\Models\Location;
+use App\Models\CompanyProfile;
 use Inertia\Inertia;
 use Mail; 
 
@@ -61,8 +62,8 @@ class HomeController extends Controller
     public function jobs(Request $request){
         
         try{
-            $job_posts = JobPost::leftjoin('company_profiles','job_posts.company_profile_id','company_profiles.id')
-            ->leftjoin('locations', 'job_posts.location_id', 'locations.id')
+            $job_posts_query = JobPost::join('company_profiles','job_posts.company_profile_id','company_profiles.id')
+            ->join('locations', 'job_posts.location_id', 'locations.id')
             ->select(
                     'job_posts.name as name',
                     'job_posts.content as content',
@@ -74,19 +75,20 @@ class HomeController extends Controller
                     'job_posts.created_at'
             )->when($request->q, function($query, $term) {
                     $query->where('job_posts.name', 'LIKE', '%'.$term.'%');
-                    $query->Orwhere('job_posts.content', 'LIKE', '%'.$term.'%');
+                    $query->where('job_posts.content', 'LIKE', '%'.$term.'%');
             })->when($request->loc, function($query, $term1) {
-                $query->Orwhere('job_posts.location_id', $term1);
+                $query->where('job_posts.location_id', $term1);
             })
-            ->orderBy('job_posts.created_at','DESC')
-            ->paginate(5);
+            ->orderBy('job_posts.created_at','DESC');
 
-            $job_posts_count = JobPost::count();
+            $job_posts = $job_posts_query->paginate($this->paginationLimit);
+
+            $job_posts_count = $job_posts_query->count();
             //->paginate($this->paginationLimit);
             
             //die('');
             $locations = Location::get();
-            return Inertia::render('job_posts', ['job_posts' => $job_posts,'job_posts_count'=>$job_posts_count,'location_id'=>$request->loc,'term'=>$request->q,'locations'=>$locations]);
+            return Inertia::render('job_posts', ['job_posts' => $job_posts,'job_posts_count'=>$job_posts_count,'loc_id'=>$request->loc,'location_id'=>$request->loc,'term'=>$request->q,'locations'=>$locations]);
         }catch (\Exception $e) {
             $message = $e->getMessage();
             return $this->sendErrorResponse('login',$message);
@@ -96,31 +98,55 @@ class HomeController extends Controller
     public function hiring(Request $request){
         
         try{
-            $job_posts = JobPost::join('company_profiles','job_posts.company_profile_id','company_profiles.id')
+            $company = CompanyProfile::with('job_posts')->leftjoin('locations','company_profiles.location_id','locations.id')
+            //->join('users','company_profiles.user_id','=','users.id')
             ->select(
-                    'job_posts.name as name',
-                    'job_posts.content as content',
-                    'company_profiles.name as company_name',
-                    'job_posts.apply_url as apply_url',
-                    'company_profiles.slug as company_slug',
-                    'job_posts.slug as job_slug',
-                    'job_posts.created_at'
-            )->when($request->q, function($query, $term) {
-                    $query->where('job_posts.name', 'LIKE', '%'.$term.'%');
-                    $query->Orwhere('job_posts.content', 'LIKE', '%'.$term.'%');
-            })->when($request->loc, function($query, $term1) {
-                $query->Orwhere('job_posts.location_id', $term1);
-            })
-            ->orderBy('job_posts.created_at','DESC')
-            ->paginate(5);
-
-            $job_posts_count = JobPost::count();
-            //dd($job_posts);
-            //->paginate($this->paginationLimit);
+                'company_profiles.id',
+                //'company_profiles.user_id',
+                'company_profiles.name',
+                'company_profiles.mission',
+                'company_profiles.name',
+                'locations.name as location',
+                'company_profiles.local_employees',
+                'company_profiles.global_employees',
+                'company_profiles.year_founded',
+                'company_profiles.website_url',
+                'company_profiles.created_at',
+                'company_profiles.industry_ids',
+                'company_profiles.logo_image_url',
+                'company_profiles.street_addr_1',
+                'company_profiles.city',
+                'company_profiles.uuid',
+                'company_profiles.unclaimed',
+                'company_profiles.slug',
+                //'users.role',
+            )
+            ->paginate($this->paginationLimit);
+            /*if(Auth::check())
+            {
+                if($company->user_id == Auth::id())
+                {
+                    $company->unclaimed = 0;
+                }
+            }*/
+            //$selected_industries = explode(',',$company['industry_ids']);
+           
+            /*$industries = CompanyType::whereIn('id', $selected_industries)->pluck('name')->toArray();
+            $company['industry_types'] = implode(' | ',$industries);
             
-            //die('');
-            $locations = Location::get();
-            return Inertia::render('hiring', ['job_posts' => $job_posts,'job_posts_count'=>$job_posts_count,'location_id'=>$request->loc,'term'=>$request->q,'locations'=>$locations]);
+            $company['logo_image_url'] = ($company['logo_image_url']) ? getBucketImageUrl($company['uuid'],$company['logo_image_url'],'company') : '';
+            */    
+            /*$job_posts = JobPost::select('job_posts.*','company_profiles.slug as company_slug')->join('company_profiles','job_posts.company_profile_id','company_profiles.id')
+            ->where('company_profile_id',$company['id'])->orderBy('id','DESC')->get()->toArray();
+            
+            $job_post_model = new JobPost();
+            foreach($job_posts as $key => $job)
+            {
+                $job_posts[$key]['location_id'] = $job_post_model->getJobLocation($job['remotetype_id']);
+                $job_posts[$key]['job_slug'] = $job['slug'];
+            }    */
+            //dd($company);
+            return Inertia::render('hiring', ['data'=>$company]);
         }catch (\Exception $e) {
             $message = $e->getMessage();
             return $this->sendErrorResponse('login',$message);

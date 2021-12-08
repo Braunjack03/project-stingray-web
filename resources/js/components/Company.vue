@@ -1,0 +1,80 @@
+<template>
+    <v-col cols="12" md="12" class="pa-3 d-flex flex-column">
+        <v-card class="elevation-5 flex d-flex flex-column cardStyle">
+            <v-card-text class="job-card-wrap company-card-wrap">
+                <div class="company-img-block">
+                <img src="http://192.168.0.55:8000/images/how-it-work.jpg">
+                </div>
+                <div class="company-text-block">
+                <v-card-title class="p-0">{{data.name}}</v-card-title> 
+                <div class="text-subtitle-1"><span>Fintech</span></div>
+                <p class="description">{{data.mission}}</p>
+                </div>
+                <div class="company-jobs-block">
+                <a class="flex justify-center items-center" href="#">View {{data.job_posts.length}} Jobs 
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+                <div class="company-location">
+                    <p><span>{{data.city}}</span> Location</p>
+                </div>
+                </div>
+            </v-card-text>
+        </v-card>
+    </v-col>
+
+</template>
+
+<script>
+  import {Link } from '@inertiajs/inertia-vue'
+    export default {
+         components: {
+        Link
+        },
+        props: ['data'],
+          methods: {
+         diff_weeks(dt2, dt1) 
+          {
+
+            var diff =(dt2.getTime() - dt1.getTime()) / 1000;
+            diff /= (60 * 60 * 24 * 7);
+            return Math.abs(Math.round(diff));
+           },
+        timeDifference(date){
+            var seconds = Math.floor((new Date() - date) / 1000);
+
+            var interval = seconds / 31536000;
+
+            if (interval > 1) {
+              return Math.floor(interval) + " years";
+            }
+            interval = seconds / 2592000;
+            if (interval > 1) {
+              return Math.floor(interval) + (Math.floor(interval) > 1 ? " months" : " month");
+
+            }
+            interval = seconds / 604800;
+            if (interval > 1) {
+              return Math.floor(interval) + (Math.floor(interval) > 1 ? " weeks" : " week");
+            }
+            interval = seconds / 86400;
+            if (interval > 1) {
+              return Math.floor(interval) + (Math.floor(interval) > 1 ? " days" : " day");
+
+            }
+            interval = seconds / 3600;
+            if (interval > 1) {
+              return Math.floor(interval) + (Math.floor(interval) > 1 ? " hours" : " hour");
+
+            }
+            interval = seconds / 60;
+            if (interval > 1) {
+              return Math.floor(interval) + (Math.floor(interval) > 1 ? " minutes" : " minute");
+
+            }
+            return Math.floor(seconds) + " seconds";
+        }   
+    }
+  }
+</script>
