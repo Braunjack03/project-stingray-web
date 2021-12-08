@@ -134,11 +134,13 @@ class HomeController extends Controller
                 }
             }*/
             //$selected_industries = explode(',',$company['industry_ids']);
-
+            
+            $data = [];
             foreach($company as $key => $comp){
-                $company['logo_image_url'] = ($comp['logo_image_url']) ? getBucketImageUrl($comp['uuid'],$comp['logo_image_url'],'company') : '';
+                $company[$key]['logo_image_url'] = ($comp['logo_image_url']) ? getBucketImageUrl($comp['uuid'],$comp['logo_image_url'],'company') : '';
+                
             }
-           
+            $data = $company;
             /*$industries = CompanyType::whereIn('id', $selected_industries)->pluck('name')->toArray();
             $company['industry_types'] = implode(' | ',$industries);
             
@@ -153,8 +155,8 @@ class HomeController extends Controller
                 $job_posts[$key]['location_id'] = $job_post_model->getJobLocation($job['remotetype_id']);
                 $job_posts[$key]['job_slug'] = $job['slug'];
             }    */
-            //dd($company);
-            return Inertia::render('companies', ['data'=>$company]);
+            //dd($data);
+            return Inertia::render('companies', ['data'=>$data]);
         }catch (\Exception $e) {
             $message = $e->getMessage();
             return $this->sendErrorResponse('login',$message);
