@@ -10,7 +10,6 @@
                         <div class="flex filter-outer">
                            <span class="searc-show-title">
                               Total Number of jobs: {{job_posts_count}}
-                              {{location_id}}
                            </span>
                            <div class="filter-opt relative">
                            <v-select
