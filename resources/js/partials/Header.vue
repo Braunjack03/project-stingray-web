@@ -44,7 +44,7 @@
             <li v-if="!isLoggedIn">
               <Link href="/login" class="font-bold text-white-600 hover:text-purple-600 pl-4 py-3 flex items-center transition duration-150 ease-in-out">Sign In</Link>
             </li>
-          </ul>
+          </ul> 
 
           <ul class="flex flex-grow justify-end flex-wrap items-center text-gray-500 dropMain" v-if="isLoggedIn">
              <Dropdown :title="getUserEmail()" >
