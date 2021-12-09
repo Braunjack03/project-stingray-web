@@ -880,7 +880,7 @@ section.homeBanner {
     font-weight: 600;
     line-height: 1.4;
     margin-top: .825rem;
-    font-size: .825rem;
+    font-size: .725rem;
     text-transform: uppercase;
 }
 .company-location p span {
@@ -936,6 +936,9 @@ section.homeBanner {
    }
    .company-text-block {
        flex-basis: calc(100% - 250px);
+   }
+   .company-img-block .v-responsive {
+      max-width: 100px;
    }
 }
 

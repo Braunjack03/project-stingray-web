@@ -22,6 +22,7 @@
                     <p><span>{{data.city}}</span> Location</p>
                 </div>
                 </div>
+                <Link :href="'/companies/'+data.slug" class="overlayLink"></Link>
             </v-card-text>
         </v-card>
     </v-col>
