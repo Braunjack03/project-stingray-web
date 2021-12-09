@@ -4,8 +4,8 @@
             <h2 class="h2 mb-4 darkColor text-center pb-8 md:pb-16 sectionTitle" data-aos="fade-up">Find a Technology or Start-up Job</h2>
             <div class="browseList--block">
                
-                <v-row v-for="data in data" :key="data.id">
-                    <v-col cols="6" sm="4" md="3" class="browseList--block">
+                <v-row >
+                    <v-col v-for="data in data" :key="data.id" cols="6" sm="4" md="3" class="browseList--block">
                         <div class="browseList darkColor">
                             {{data.name}}
                         </div>
