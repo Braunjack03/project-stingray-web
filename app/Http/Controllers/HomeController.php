@@ -49,7 +49,8 @@ class HomeController extends Controller
     public function home(){
         $job_posts = JobPost::count();
         $locations = Location::get();
-        return Inertia::render('home',['count_job_posts'=>$job_posts,'locations'=>$locations]);
+        $companytypes = CompanyType::get();
+        return Inertia::render('home',['count_job_posts'=>$job_posts,'locations'=>$locations,'companytypes' => $companytypes]);
     }
 
     public function blog(){
@@ -119,6 +120,7 @@ class HomeController extends Controller
                 'company_profiles.industry_ids',
                 'company_profiles.logo_image_url',
                 'company_profiles.street_addr_1',
+                'company_profiles.state_abbr as state',
                 'company_profiles.city',
                 'company_profiles.uuid',
                 'company_profiles.unclaimed',
