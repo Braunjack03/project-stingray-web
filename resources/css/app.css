@@ -685,7 +685,7 @@ section.homeBanner {
     display: flex;
     justify-content: flex-end;
     flex-flow: wrap;
-    max-width: 720px;
+    max-width: 760px;
     margin: 0 auto;
     position: relative;
 }
@@ -694,16 +694,19 @@ section.homeBanner {
     margin-bottom: 0;
     min-height: 48px;
     background: #fff;
-    width: 350px;
+    width: 370px;
     color:#525252;
 }
 .bannerForm .filter-opt .form-control.locationField {
-    border-right: 1px solid #ccc;
-    border-bottom: none;
+   border-right: 1px solid #ccc;
+   border-bottom: none;
+   border-radius: 4px 0px 0px 4px;
 }
-.bannerForm .filter-opt button {
-    width: 120px;
-    letter-spacing: normal;
+.bannerForm .filter-outer .filter-opt button {
+   width: 120px;
+   letter-spacing: normal;
+   border-radius: 0 4px 4px 0px;
+   height: 54px !important;
 }
 .quickSearch {
    color: #e5eaee;
@@ -719,11 +722,11 @@ section.homeBanner {
     top: 16px;
 }
 .bannerForm .v-select {
-    width: 240px;
+    width: 260px;
 }
 .bannerForm .filter-opt .v-input__control .v-input__slot {
     margin: 0 0 0!important;
-    min-height: 48px;
+    min-height: 54px;
     border-radius: 0;
     padding-left: 12px !important;
 }

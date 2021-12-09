@@ -321,7 +321,7 @@ class CompanyProfileController extends Controller
 
             $job_posts = JobPost::select('job_posts.*','company_profiles.slug as company_slug')
             ->leftjoin('company_profiles','job_posts.company_profile_id','company_profiles.id')
-            ->where('company_profile_id',$company['id'])->orderBy('id','DESC')->paginate($this->paginationLimit);
+            ->where('company_profile_id',$company['id'])->orderBy('id','DESC')->take(5)->get()->toArray();
             
             $job_post_model = new JobPost();
             foreach($job_posts as $key => $job)
@@ -329,7 +329,7 @@ class CompanyProfileController extends Controller
                 $job_posts[$key]['location_id'] = $job_post_model->getJobLocation($job['remotetype_id']);
                 $job_posts[$key]['job_slug'] = $job['slug'];
             }    
-            //dd($job_posts);
+            
             return Inertia::render('single-company',['data'=>$company,'job_posts'=>$job_posts,'industries',$industries]);
 
         }catch (\Exception $e) {
