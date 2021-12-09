@@ -85,12 +85,12 @@
             </v-tab>
 
             <v-tab href="#tab-2">
-              Jobs ({{job_posts.length}})
+              Jobs ({{data.job_posts.length}})
             </v-tab>
           </v-tabs>
         </div>
       </div>
-
+     
       <div class="max-w-6xl mx-auto">
         <v-tabs-items v-model="tab">
           <v-tab-item
@@ -132,11 +132,11 @@
                 <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-4">
 
                   <v-row v-if="job_posts">
-
-                        <v-col cols="12" md="12" class="pa-3 d-flex flex-column" v-for="data in job_posts" :key="data.id">
+                        <v-col cols="12" md="12" class="pa-3 d-flex flex-column" v-for="data in job_posts.data" :key="data.id">
                            <CustomCard :data="data"/>
                         </v-col>
                      </v-row>
+                     <pagination class="mt-5" :links="job_posts.links"/>
               </div> 
               </v-card-text>
             </v-card>
@@ -150,7 +150,8 @@
               <h3 class="post-title">About {{ data.name }}</h3>
               <div class="desc" v-html="data.mission"></div>
             </v-col>
-          </v-row>
+          </v-row>    props: [ 'selected' ],
+
           <v-row>
             <v-col cols="12" class="pa-2">
               <h3 class="desc text-gray-700">Jobs at {{ data.name }}</h3>
@@ -176,23 +177,29 @@
 <script>
 import { Link, Head } from "@inertiajs/inertia-vue";
 import JobPost from '../components/JobPost.vue';
+import Pagination from '../components/CompanyPagination.vue';
 import Layout from "./Layout";
 export default {
   components: {
     Link,
     Layout,
      'CustomCard': JobPost,
+    Pagination,
     Head,
   },
   props: {
     errors: Object,
     success: Object,
     data: Object,
-    job_posts: Array,
+    job_posts: Object,
+    selected : String,
   },
+   mounted() {
+      this.tab = this.selected
+  },  
   data: () => ({
     message: "",
-     tab: null,
+     tab: 'tab-2',
   }),
   methods: {
     claimProfile(id) {

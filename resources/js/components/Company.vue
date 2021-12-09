@@ -9,7 +9,7 @@
                 </div>
                 <div class="company-text-block">
                 <v-card-title class="p-0">{{data.name}}</v-card-title> 
-                <div class="text-subtitle-1"><span>Fintech</span></div>
+                <div class="text-subtitle-1"><span>{{data.industry_types}}</span></div>
                 <p class="description">{{data.mission}}</p>
                 </div>
                 <div class="company-jobs-block">
@@ -22,6 +22,7 @@
                     <p><span>{{data.city}}</span> Location</p>
                 </div>
                 </div>
+                <Link :href="'/companies/'+data.slug" class="overlayLink"></Link>
             </v-card-text>
         </v-card>
     </v-col>

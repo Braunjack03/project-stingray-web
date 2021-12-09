@@ -7,6 +7,7 @@ use Auth;
 use App\Models\JobPost;
 use App\Models\Location;
 use App\Models\CompanyProfile;
+use App\Models\CompanyType;
 use Inertia\Inertia;
 use Mail; 
 
@@ -126,31 +127,19 @@ class HomeController extends Controller
             )
             ->orderBy('company_profiles.created_at','DESC')
             ->paginate($this->paginationLimit);
-            /*if(Auth::check())
-            {
-                if($company->user_id == Auth::id())
-                {
-                    $company->unclaimed = 0;
-                }
-            }*/
-            //$selected_industries = explode(',',$company['industry_ids']);
+            
+            $data = [];
+            foreach($company as $key => $comp){
+                $company[$key]['logo_image_url'] = ($comp['logo_image_url']) ? getBucketImageUrl($comp['uuid'],$comp['logo_image_url'],'company') : '';
+
+                $selected_industries = explode(',',$comp['industry_ids']);
            
-            /*$industries = CompanyType::whereIn('id', $selected_industries)->pluck('name')->toArray();
-            $company['industry_types'] = implode(' | ',$industries);
-            
-            $company['logo_image_url'] = ($company['logo_image_url']) ? getBucketImageUrl($company['uuid'],$company['logo_image_url'],'company') : '';
-            */    
-            /*$job_posts = JobPost::select('job_posts.*','company_profiles.slug as company_slug')->join('company_profiles','job_posts.company_profile_id','company_profiles.id')
-            ->where('company_profile_id',$company['id'])->orderBy('id','DESC')->get()->toArray();
-            
-            $job_post_model = new JobPost();
-            foreach($job_posts as $key => $job)
-            {
-                $job_posts[$key]['location_id'] = $job_post_model->getJobLocation($job['remotetype_id']);
-                $job_posts[$key]['job_slug'] = $job['slug'];
-            }    */
-            //dd($company);
-            return Inertia::render('companies', ['data'=>$company]);
+                $industries = CompanyType::whereIn('id', $selected_industries)->pluck('name')->toArray();
+                $company[$key]['industry_types'] = implode(' | ',$industries);
+                
+            }
+            $data = $company;
+            return Inertia::render('companies', ['data'=>$data]);
         }catch (\Exception $e) {
             $message = $e->getMessage();
             return $this->sendErrorResponse('login',$message);
