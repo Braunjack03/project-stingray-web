@@ -949,16 +949,23 @@ section.homeBanner {
    .aboutContent .singlePost--title .post-title {
        font-size: 30px;
    } 
+   .bannerForm .filter-opt .form-control {
+      width: 330px;
+  }
 }
 
 @media (max-width:  767px) {
    .bannerForm .filter-opt .form-control, .bannerForm .filter-opt .form-control.locationField, .bannerForm .v-select {
        width: 50%;
    }
-   .bannerForm .filter-opt button {
-       width: 100%;
-       margin-top: 30px;
+   .bannerForm .filter-outer .filter-opt button {
+      width: 100%;
+      border-radius: 4px;
+      margin-top: 30px;
    }
+   .bannerForm .filter-opt .v-input__control .v-input__slot {
+      border-radius: 0 4px 4px 0;
+  }
    .homeBanner .h1 {
       font-size: 2rem;
    }
@@ -1090,6 +1097,9 @@ section.homeBanner {
        width: 100%;
        margin-bottom: 30px;
    }
+   .bannerForm .filter-opt .v-input__control .v-input__slot, .bannerForm .filter-opt .form-control.locationField {
+      border-radius:4px;
+  }
    .errorMsg-baaner {
       top:50px;
    }

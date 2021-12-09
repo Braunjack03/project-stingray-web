@@ -49,7 +49,7 @@ class HomeController extends Controller
     public function home(){
         $job_posts = JobPost::count();
         $locations = Location::get();
-        $companytypes = CompanyType::get();
+        $companytypes = CompanyType::take(40)->get();
         return Inertia::render('home',['count_job_posts'=>$job_posts,'locations'=>$locations,'companytypes' => $companytypes]);
     }
 
