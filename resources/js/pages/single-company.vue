@@ -17,7 +17,7 @@
               <h2 class="post-title mb-0 text-gray-700">
                 {{ data.name }}
                 <v-btn
-                  v-if="data.unclaimed == 1 && data.role == 3"
+                  v-if="data.unclaimed == 1"
                   v-on:click="claimProfile(data.uuid)"
                   class="link-text ml-2"
                   text
@@ -133,11 +133,11 @@
                 <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-4">
 
                   <v-row v-if="job_posts">
-                        <v-col cols="12" md="12" class="pa-3 d-flex flex-column" v-for="data in job_posts.data" :key="data.id">
+                        <v-col cols="12" md="12" class="pa-3 d-flex flex-column" v-for="data in job_posts" :key="data.id">
                            <CustomCard :data="data"/>
                         </v-col>
                      </v-row>
-                     <pagination class="mt-5" :links="job_posts.links"/>
+                     <!--pagination class="mt-5" :links="job_posts.links"/-->
               </div> 
               </v-card-text>
             </v-card>
@@ -192,7 +192,7 @@ export default {
     errors: Object,
     success: Object,
     data: Object,
-    job_posts: Object,
+    job_posts: Array,
     selected : String,
   },
    mounted() {
@@ -200,7 +200,7 @@ export default {
   },  
   data: () => ({
     message: "",
-     tab: 'tab-2',
+     tab: null,
   }),
   methods: {
     claimProfile(id) {
