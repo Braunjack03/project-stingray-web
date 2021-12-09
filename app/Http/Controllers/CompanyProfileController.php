@@ -281,7 +281,7 @@ class CompanyProfileController extends Controller
     public function showCompany($slug = ''){
 
         try{
-            $company = CompanyProfile::with('job_posts')->join('locations','company_profiles.location_id','locations.id')
+            $company = CompanyProfile::with('job_posts')->leftjoin('locations','company_profiles.location_id','locations.id')
             //->join('users','company_profiles.user_id','=','users.id')
             ->select(
                 'company_profiles.id',
