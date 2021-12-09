@@ -19,7 +19,7 @@
                     </svg>
                 </Link>
                 <div class="company-location">
-                    <p><span>{{data.city}}</span> Location</p>
+                    <p><span>{{data.city}}, {{data.state}}</span> Location</p>
                 </div>
                 </div>
                 <Link :href="'/companies/'+data.slug" class="overlayLink"></Link>
