@@ -28,7 +28,7 @@
           <div class="companyDetail">
             <div class="companyLogo">
               <v-img
-                :src="data.logo_image_url"
+                :src="(data.logo_image_url) ? data.logo_image_url : '/images/default-logo.png'"
               ></v-img>
             </div>
             <div class="conpanymainDetail">
