@@ -37,7 +37,7 @@
             </li>
             <!-- <li>
               <Link href="#"  class="font-bold text-white-600 hover:text-purple-600 px-4 py-3 flex items-center transition duration-150 ease-in-out">Employers</Link>
-            </li> --> |
+            </li> --> <span v-if="!isLoggedIn"> | </span>
             <li v-if="!isLoggedIn">
               <Link href="/register"  class="font-bold text-white-600 hover:text-purple-600 px-4 py-3 flex items-center transition duration-150 ease-in-out">Join</Link>
             </li>
