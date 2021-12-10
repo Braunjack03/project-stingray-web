@@ -38,8 +38,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="#5d5dff">
                     <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
                     </svg>  Location
-                    <span class="loactionCity" 
-                      ><strong>{{ data.city }}, {{ data.state }}</strong></span
+                    <span class="loactionCity"><strong>{{ data.city }}, {{ data.state }}</strong></span
                     >
                   </div>
                 </v-col>
@@ -95,6 +94,46 @@
           </v-col>
        </v-row>
       </div>
+     
+      <div class="max-w-6xl mx-auto">
+        <v-tabs-items v-model="tab">
+          <v-tab-item
+            value="tab-1"
+          >
+            <v-card flat>
+              <v-card-text>
+                <div class="max-w-6xl mx-auto px-2 pt-5">
+                  <div class="aboutContent">
+                      <h3 class="post-title">About {{ data.name }}</h3>
+                      <div class="desc" v-html="data.description"></div>
+                  </div>
+                  <!--div class="aboutContent">
+                      <h3 class="desc text-gray-700 mb-3">Jobs at {{ data.name }}</h3>
+                      <ul v-if="job_posts" id="example-1">
+                        <li v-for="company in job_posts" :key="company.id">
+                          <h4 class="post-title">
+                            <a :href="`/jobs/${data.slug}/${company.slug}`" class="text-gray-700"
+                              >{{ company.name }}
+                              <span class="text-sm"
+                                >({{ company.location_id }})</span
+                              ></a
+                            >
+                          </h4>
+                          <div class="post-detail-wrap" v-html="company.content"></div>
+                        </li>
+                      </ul>
+                  </div-->
+              </div>
+              </v-card-text>
+            </v-card>
+          </v-tab-item>
+          <v-tab-item
+            value="tab-2"
+          >
+            <v-card flat>
+              <v-card-text>
+                
+                <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-4">
 
       <div class="companyJobList">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-4">
