@@ -298,7 +298,7 @@ class CompanyProfileController extends Controller
                 'company_profiles.created_at',
                 'company_profiles.industry_ids',
                 'company_profiles.logo_image_url',
-                'company_profiles.street_addr_1',
+                'company_profiles.state_abbr as state',
                 'company_profiles.city',
                 'company_profiles.uuid',
                 'company_profiles.unclaimed',
