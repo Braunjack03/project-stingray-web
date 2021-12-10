@@ -288,6 +288,7 @@ class CompanyProfileController extends Controller
                 //'company_profiles.user_id',
                 'company_profiles.name',
                 'company_profiles.mission',
+                'company_profiles.description',
                 'company_profiles.name',
                 'locations.name as location',
                 'company_profiles.local_employees',

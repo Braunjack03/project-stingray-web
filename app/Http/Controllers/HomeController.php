@@ -72,28 +72,34 @@ class HomeController extends Controller
                     'job_posts.slug as job_slug',
                     'job_posts.created_at'
             )->when($request->q, function($query, $term) {
+                //echo $term;
                 if($term != 'null')
                 {
                     $query->where('job_posts.name', 'LIKE', '%'.$term.'%');
-                    $query->where('job_posts.content', 'LIKE', '%'.$term.'%');
+                    //$query->Orwhere('job_posts.content', 'LIKE', '%'.$term.'%');
                 }
             })->when($request->loc, function($query, $term1) {
-                if($term1 != 'null')
+                
+                if($term1 != 'null' && $term1 != 'NaN')
                 {
                     $query->where('job_posts.location_id', $term1);
                 }
             })
             ->orderBy('job_posts.created_at','DESC');
-
+            
             $job_posts_count = $job_posts_query->count();
 
             $job_posts = $job_posts_query->paginate($this->paginationLimit);
-
-            //->paginate($this->paginationLimit);
             
+            //dd($job_posts);
+            //->paginate($this->paginationLimit);
+            $term_u = $request->q;
+            if($term_u == 'null'){
+                $term_u = '';
+            }
             //die('');
             $locations = Location::get();
-            return Inertia::render('job_posts', ['job_posts' => $job_posts,'job_posts_count'=>$job_posts_count,'loc_id'=>$request->loc,'location_id'=>$request->loc,'term'=>$request->q,'locations'=>$locations]);
+            return Inertia::render('job_posts', ['job_posts' => $job_posts,'job_posts_count'=>$job_posts_count,'loc_id'=>$request->loc,'location_id'=>$request->loc,'term'=>$term_u,'locations'=>$locations]);
         }catch (\Exception $e) {
             $message = $e->getMessage();
             return $this->sendErrorResponse('login',$message);
@@ -140,6 +146,7 @@ class HomeController extends Controller
                 $company[$key]['industry_types'] = implode(' | ',$industries);
                 
             }
+            //dd($company);
             $data = $company;
             return Inertia::render('companies', ['data'=>$data]);
         }catch (\Exception $e) {
