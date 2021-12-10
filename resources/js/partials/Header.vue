@@ -84,32 +84,32 @@
           <nav id="mobile-nav" ref="mobileNav" class="absolute top-full z-20 left-0 w-full px-4 sm:px-6 overflow-hidden transition-all duration-300 ease-in-out" :style="[ mobileNavOpen ? { maxHeight: $refs.mobileNav.scrollHeight + 'px', opacity: 1 } : { maxHeight: 0, opacity: .8 } ]">
             <ul class="bg-gray-800 px-4 py-2">
               <li>
-                <Link href="/jobs" class="flex text-gray-300 hover:text-purple-600 py-2">Jobs</Link>
+                <Link href="/jobs" class="flex text-white-900 font-medium hover:text-purple-600 py-2">Jobs</Link>
               </li>
               <li>
-                <Link href="/companies" class="flex text-gray-300 hover:text-purple-600 py-2">Companies</Link>
+                <Link href="/companies" class="flex text-white-900 font-medium hover:text-purple-600 py-2">Companies</Link>
               </li>
               <li>
-                <a target="_blank" href="https://blog.madeintampabay.org/" class="flex text-gray-300 hover:text-purple-600 py-2">News</a>
+                <a target="_blank" href="https://blog.madeintampabay.org/" class="flex text-white-900 font-medium hover:text-purple-600 py-2">News</a>
               </li>
               
               <li>
-                <Link v-if="isLoggedIn && isLoggedIn.role == 2" href="/dashboard" class="flex text-gray-300 hover:text-purple-600 py-2">Dashboard</Link>
+                <Link v-if="isLoggedIn && isLoggedIn.role == 2" href="/dashboard" class="flex text-white-900 font-medium hover:text-purple-600 py-2">Dashboard</Link>
               </li>
               <li>
-                <Link v-if="isLoggedIn && isLoggedIn.role == 1" href="/employer/dashboard" class="flex text-gray-300 hover:text-purple-600 py-2">Dashboard</Link>
+                <Link v-if="isLoggedIn && isLoggedIn.role == 1" href="/employer/dashboard" class="flex text-white-900 font-medium hover:text-purple-600 py-2">Dashboard</Link>
               </li>
               <li>
-                <Link  v-if="isLoggedIn && isLoggedIn.role == 2" href="/profile" class="flex text-gray-300 hover:text-purple-600 py-2">Profile ({{getUserEmail()}})</Link>
+                <Link  v-if="isLoggedIn && isLoggedIn.role == 2" href="/profile" class="flex text-white-900 font-medium hover:text-purple-600 py-2">Profile ({{getUserEmail()}})</Link>
               </li>
               <li>
-                <Link v-if="isLoggedIn && isLoggedIn.role == 1" href="/employer/profile" class="flex text-gray-300 hover:text-purple-600 py-2">Profile ({{getUserEmail()}}) </Link>
+                <Link v-if="isLoggedIn && isLoggedIn.role == 1" href="/employer/profile" class="flex text-white-900 font-medium hover:text-purple-600 py-2">Profile ({{getUserEmail()}}) </Link>
               </li>
               <li>
-                <Link v-if="!isLoggedIn" href="/register" class="flex font-medium w-full text-purple-600 hover:text-purple-600 py-2 justify-center">Join</Link>
+                <Link v-if="!isLoggedIn" href="/register" class="flex text-white-900 font-medium w-full hover:text-purple-600 py-2 justify-center">Join</Link>
               </li>
               <li>
-                <Link v-if="!isLoggedIn" href="/login" class="flex font-medium w-full text-purple-600 hover:text-purple-600 py-2 justify-center">Sign In</Link>
+                <Link v-if="!isLoggedIn" href="/login" class="flex text-white-900 font-medium w-full  hover:text-purple-600 py-2 justify-center">Sign In</Link>
               </li>
               <li>
                 <Link v-if="!isLoggedIn" href="#" class="font-medium w-full inline-flex items-center justify-center border border-transparent px-4 py-2 my-2 rounded-sm text-white bg-purple-600 hover:bg-purple-700 transition duration-150 ease-in-out">Employers</Link>
