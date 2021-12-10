@@ -282,7 +282,7 @@ class CompanyProfileController extends Controller
 
         try{
             $company = CompanyProfile::with('job_posts')->leftjoin('locations','company_profiles.location_id','locations.id')
-            //->join('users','company_profiles.user_id','=','users.id')
+            //->leftjoin('users','company_profiles.user_id','=','users.id')
             ->select(
                 'company_profiles.id',
                 //'company_profiles.user_id',
@@ -317,12 +317,13 @@ class CompanyProfileController extends Controller
             $selected_industries = explode(',',$company['industry_ids']);
            
             $industries = CompanyType::whereIn('id', $selected_industries)->pluck('name')->toArray();
-            $company['industry_types'] = implode(' | ',$industries);
+            $company['industry_types'] = implode(' - ',$industries);
             
             $company['logo_image_url'] = ($company['logo_image_url']) ? getBucketImageUrl($company['uuid'],$company['logo_image_url'],'company') : '';
 
-            $job_posts_query = JobPost::select('job_posts.*','company_profiles.slug as company_slug')
+            $job_posts_query = JobPost::select('job_posts.*','locations.name as location','company_profiles.name as company_name','company_profiles.slug as company_slug')
             ->leftjoin('company_profiles','job_posts.company_profile_id','company_profiles.id')
+            ->leftjoin('locations','company_profiles.location_id','locations.id')
             ->where('company_profile_id',$company['id'])->orderBy('id','DESC');
 
             $job_posts_count = $job_posts_query->count();

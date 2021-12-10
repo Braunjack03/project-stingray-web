@@ -287,10 +287,13 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
     height: 245px;
     position: relative;
 }
-.companyPageBanner {
+.companyPageBanner img {
    width: 100%;
    height: 100%;
    object-fit: cover;
+}
+.conpanymainDetail {
+    padding-left: 200px;
 }
 .companyDetailOuter {
     padding: 20px 0;
@@ -402,7 +405,7 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
 
 .companyProfile--outer .companyDetail .v-image {
     position: absolute;
-    bottom: 45px;
+    top: -85px;
     width: 170px;
 }
 .companyProfile--outer .companyDetail--title .link-text {
@@ -414,7 +417,7 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
 .companyProfile--outer .companyDetail--title {
     position: absolute;
     bottom: 24px;
-    width: 100%;
+    width: calc(100% - 200px);
     margin-left: 200px;
 }
 .companyProfile--outer .companyDetail--title .post-title{
@@ -423,6 +426,17 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
 }
 .companyProfile--outer .companyDetail--title .types-title {
     color: #fff;
+}
+
+.companyJobList .cardTags {
+    font-size: 12px;
+    font-weight: 500;
+    color: #666;
+    margin-bottom: 0.2rem;
+}
+
+.companyCard.job-card-wrap .v-card__title {
+    margin-bottom: 0.2rem;
 }
 
 .companyAbout {
@@ -1009,6 +1023,9 @@ section.homeBanner {
       max-width: 100px;
       height: 100px;
    }
+   .companyPageBanner {
+      height: 150px;
+   }
 }
 
 @media (max-width:960px){
@@ -1018,6 +1035,33 @@ section.homeBanner {
    .bannerForm .filter-opt .form-control {
       width: 330px;
   }
+  .companyProfile--outer .companyDetail--title {
+       width: 100%;
+       margin-left: 0;
+       left: 0;
+       padding: 0 10px;
+       text-align: center;
+   }
+   .companyProfile--outer .companyDetail--title .post-title {
+       font-size: 1.5rem;
+   }
+   .companyDetailOuter {
+      padding: 20px 0 50px;
+   }
+   .conpanymainDetail {
+       padding-left: 30px;
+       flex-basis: calc(100% - 200px);
+   }
+   .companyDetail {
+      display: flex;
+      align-items: center;
+      flex-flow: wrap;
+   }
+   .companyProfile--outer .companyDetail .v-image {
+       position: relative;
+       top: 0;
+       width: 170px;
+   }
 }
 
 @media (max-width:  767px) {
@@ -1060,7 +1104,7 @@ section.homeBanner {
       left: 0;
   }
   .testJobs .card-text-wrap {
-   width: 100%;
+      width: 100%;
   }
 }
 
@@ -1071,7 +1115,7 @@ section.homeBanner {
    .companyDetail .post-title {
        font-size: 24px;
    }
-   .aboutContent .post-title {
+   .aboutContent .post-title, .companyJobList .post-title{
       font-size: 18px;
    }
    .aboutContent .desc {
@@ -1156,6 +1200,16 @@ section.homeBanner {
    ul.industries-list li {
       max-width: 100%;
    }  
+   .companyDetail {
+       justify-content: center;
+   }
+   .companyLogo {
+       margin-bottom: 40px;
+   }
+   .conpanymainDetail {
+       padding-left: 0;
+       flex-basis: 100%;
+   }
 }
 
 @media (max-width:  451px) {

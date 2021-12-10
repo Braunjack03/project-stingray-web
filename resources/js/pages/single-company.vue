@@ -3,7 +3,7 @@
     <Head :title="'Companies | ' + (data.name) ? data.name : ''" />
     <section class="relative companyProfile--outer" data-app>
       <div class="companyPageBanner">
-        <img src="http://192.168.0.55:8000/images/company-banner.jpg" alt="">
+        <img src="/images/company-banner.jpg" alt="">
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
         <div class="companyDetail--title">
           <h2 class="post-title mb-0 text-gray-700">
@@ -25,22 +25,22 @@
           <div v-if="$page.props.flash.message" class="mt-2 success">
             {{ $page.props.flash.message }}
           </div>
-          <v-row class="companyDetail">
-            <v-col lg="2" md="2" sm="4" cols="12">
+          <div class="companyDetail">
+            <div class="companyLogo">
               <v-img
                 :src="data.logo_image_url"
               ></v-img>
-            </v-col>
-            <v-col lg="10" md="10" sm="8" cols="12">
-              <v-row class="mt-0 ">
+            </div>
+            <div class="conpanymainDetail">
+              <v-row class="mt-0">
                 <v-col cols="12" sm="6" md="4">
                   <div class="extra-info flex flex-wrap">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="#5d5dff">
                     <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
                     </svg>  Location
                     <span class="loactionCity" 
-                      ><strong>{{ data.city }}, {{ data.state }}</strong></span
-                    >
+                      ><strong>{{ data.city }}, {{ data.state }}</strong>
+                    </span>
                   </div>
                 </v-col>
                 <v-col cols="12" sm="6" md="4">
@@ -48,8 +48,7 @@
                     <div class="employeesDetails flex flex-wrap">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="#5d5dff">
                       <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
-                    </svg>  Local Employees: <strong>{{ data.local_employees }}</strong
-                    >
+                    </svg>  Local Employees: <strong>{{ data.local_employees }}</strong>
                   </div>
                   <div class="employeesDetails flex flex-wrap">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="#5d5dff">
@@ -75,8 +74,8 @@
                   </a>
                 </v-col>
               </v-row>
-            </v-col>
-          </v-row>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -84,7 +83,7 @@
         <v-row>
           <v-col cols="12" md="6" class="pa-3 d-flex flex-column">
              <div class="aboutImg">
-                <img src="http://192.168.0.55:8000/images/aboutImg.jpg" alt="">
+                <img src="/images/aboutImg.jpg" alt="">
             </div>
           </v-col>
           <v-col cols="12" md="6" class="pa-3 d-flex flex-column">
@@ -108,7 +107,7 @@
          </v-row>
           <v-row v-if="job_posts">
               <v-col cols="12" md="12" class="pa-3 d-flex flex-column" v-for="data in job_posts" :key="data.id">
-                 <CustomCard :data="data"/>
+                 <CustomCard :data="data" />
               </v-col>
 
               <v-col cols="12" md="12" class="pa-3 d-flex flex-column text-center my-3">
@@ -125,14 +124,14 @@
 </template>
 <script>
 import { Link, Head } from "@inertiajs/inertia-vue";
-import JobPost from '../components/JobPost.vue';
+import CompanyJobPost from '../components/CompanyJobPost.vue';
 import Pagination from '../components/CompanyPagination.vue';
 import Layout from "./Layout";
 export default {
   components: {
     Link,
     Layout,
-     'CustomCard': JobPost,
+     'CustomCard': CompanyJobPost,
     Pagination,
     Head,
   },
@@ -155,6 +154,8 @@ export default {
     claimProfile(id) {
       this.$inertia.get("/claim-profile/" + id);
     },
+
+
   },
 };
 </script>
