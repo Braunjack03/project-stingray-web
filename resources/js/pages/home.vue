@@ -18,7 +18,7 @@
                                         </svg></span>
                                         <!-- <input type="text" name="" value="" class="form-control float-right pl-9" placeholder="Looking for" v-model="term" /> -->
                                         <v-text-field class="form-control locationField float-right pl-9 mt-0" :class="{ 'error--text': $v.term.$error }" placeholder="Looking for a job in..." v-model="term" @keydown.enter="submit" required ></v-text-field>
-                                        <div v-if="$v.term.$error && !$v.term.required"  class="text-red-500 text-sm errorMsg-baaner">Looking For is required</div>
+                                        <div v-if="$v.term.$error && !$v.term.required"  class="text-red-500 text-sm errorMsg-baaner">Looking for a job is required</div>
                                         <v-select v-model="location_id" item-text="name" item-value="id" :items="locations" label="Location" solo ></v-select>
                                         <!--div v-if="$v.location_id.$error && !$v.location_id.required"  class="text-red-500 text-sm errorMsg-baaner forLocation-error">Location is required</div-->
                                         <v-btn class="
