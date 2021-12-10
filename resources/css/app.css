@@ -282,18 +282,29 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
 .companyProfile--outer, .singlePost--outer {
    font-family: 'Inter' !important;
 }
+.companyPageBanner {
+    margin: 80px 0 0;
+    height: 245px;
+    position: relative;
+}
+.companyPageBanner {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+}
 .companyDetailOuter {
-    margin: 80px 0 0px;
+    padding: 20px 0;
+    width: 100%;
     background: #f7f7f7;
-    padding: 40px 0;
+    position: relative;
 }
 .companyDetail .v-responsive{
    overflow: unset;
 }
 .companyDetail .v-image__image {
     border-radius: 50%;
-    height: 150px;
-    width: 150px;
+    height: 170px;
+    width: 170px;
     box-shadow: 0px 0 25px rgb(0,0,0,0.1);
 }
 .companyDetail .v-responsive__sizer {
@@ -363,10 +374,10 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
 #tabBg  .v-tabs-slider {
     background-color: #5d5dff;
 }
-.aboutContent .post-title {
-   color: #2a2e35;
-   font-size: 20px;
-   font-weight: 600;
+.aboutContent .post-title, .companyJobList .post-title {
+    color: #2a2e35;
+    font-size: 35px;
+    font-weight: bold;
 }
 .aboutContent .desc {
    color: #666;
@@ -389,6 +400,58 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
     font-weight: 600;
 }  
 
+.companyProfile--outer .companyDetail .v-image {
+    position: absolute;
+    bottom: 45px;
+    width: 170px;
+}
+.companyProfile--outer .companyDetail--title .link-text {
+    text-transform: capitalize;
+    color: #6f6ffe !important;
+    font-size: 16px;
+    letter-spacing: normal;
+}
+.companyProfile--outer .companyDetail--title {
+    position: absolute;
+    bottom: 24px;
+    width: 100%;
+    margin-left: 200px;
+}
+.companyProfile--outer .companyDetail--title .post-title{
+    color: #fff;
+    font-weight: bold;
+}
+.companyProfile--outer .companyDetail--title .types-title {
+    color: #fff;
+}
+
+.companyAbout {
+    position: relative;
+    margin: 50px 0;
+}
+
+.companyProfile--outer .companyJobList {
+   background: #f7f7f7;
+   padding: 30px 0;
+}
+.companyProfile--outer .companyJobList .job-card-wrap {
+    background: #fff;
+}
+.companyProfile--outer .companyJobList .job-card-wrap:hover {
+    background: #eee;
+}
+.viewOther--Btn {
+    padding: 10px 24px;
+    border: 1px solid #5d5dff;
+    border-radius: 3px;
+    color: #5d5dff;
+    font-size: 16px;
+    transition: .4s all;
+}
+.viewOther--Btn:hover {
+    background: #5d5dff;
+    color: #fff;
+}
 
 /* Single Post Page */
 .aboutContent .applyBtn {
@@ -894,7 +957,9 @@ section.homeBanner {
 }
 
 .company-img-block .v-responsive {
-   max-width: 150px;
+    max-width: 150px;
+    height: 150px;
+    border-radius: 50%;
 }
 
 /* Media */
@@ -942,6 +1007,7 @@ section.homeBanner {
    }
    .company-img-block .v-responsive {
       max-width: 100px;
+      height: 100px;
    }
 }
 

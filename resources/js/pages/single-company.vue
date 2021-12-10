@@ -2,6 +2,24 @@
   <Layout>
     <Head :title="'Companies | ' + (data.name) ? data.name : ''" />
     <section class="relative companyProfile--outer" data-app>
+      <div class="companyPageBanner">
+        <img src="http://192.168.0.55:8000/images/company-banner.jpg" alt="">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="companyDetail--title">
+          <h2 class="post-title mb-0 text-gray-700">
+            {{ data.name }}
+            <v-btn
+              v-if="data.unclaimed == 1"
+              v-on:click="claimProfile(data.uuid)"
+              class="link-text"
+              text
+              >(Claim this Profile)</v-btn
+            >
+          </h2>
+          <p class="types-title mt-0">{{ data.industry_types }}</p>
+        </div>
+      </div>
+      </div>
       <div class="companyDetailOuter">
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
           <div v-if="$page.props.flash.message" class="mt-2 success">
@@ -14,25 +32,14 @@
               ></v-img>
             </v-col>
             <v-col lg="10" md="10" sm="8" cols="12">
-              <h2 class="post-title mb-0 text-gray-700">
-                {{ data.name }}
-                <v-btn
-                  v-if="data.unclaimed == 1"
-                  v-on:click="claimProfile(data.uuid)"
-                  class="link-text ml-2"
-                  text
-                  >(Claim this Profile)</v-btn
-                >
-              </h2>
-              <p class="types-title mt-0">{{ data.industry_types }}</p>
               <v-row class="mt-0 ">
                 <v-col cols="12" sm="6" md="4">
                   <div class="extra-info flex flex-wrap">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="#5d5dff">
                     <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
                     </svg>  Location
-                    <span class="loactionCity" 
-                      ><strong>{{ data.city }}, {{ data.state_abbr }}</strong></span>
+                    <span class="loactionCity"><strong>{{ data.city }}, {{ data.state }}</strong></span
+                    >
                   </div>
                 </v-col>
                 <v-col cols="12" sm="6" md="4">
@@ -72,23 +79,20 @@
         </div>
       </div>
 
-      <div id="tabBg">
-          <div class="max-w-6xl mx-auto px-4 sm:px-6">
-            <v-tabs
-            v-model="tab"
-            centered
-          >
-            <v-tabs-slider></v-tabs-slider>
-
-            <v-tab href="#tab-1">
-              Overview
-            </v-tab>
-
-            <v-tab href="#tab-2">
-              Jobs ({{data.job_posts.length}})
-            </v-tab>
-          </v-tabs>
-        </div>
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 companyAbout">
+        <v-row>
+          <v-col cols="12" md="6" class="pa-3 d-flex flex-column">
+             <div class="aboutImg">
+                <img src="http://192.168.0.55:8000/images/aboutImg.jpg" alt="">
+            </div>
+          </v-col>
+          <v-col cols="12" md="6" class="pa-3 d-flex flex-column">
+             <div class="aboutContent">
+                <h3 class="post-title">About {{ data.name }}</h3>
+                <div class="desc" v-html="data.description"></div>
+            </div>
+          </v-col>
+       </v-row>
       </div>
      
       <div class="max-w-6xl mx-auto">
@@ -131,46 +135,30 @@
                 
                 <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-4">
 
-                  <v-row v-if="job_posts">
-                        <v-col cols="12" md="12" class="pa-3 d-flex flex-column" v-for="data in job_posts" :key="data.id">
-                           <CustomCard :data="data"/>
-                        </v-col>
-                     </v-row>
-                     <!--pagination class="mt-5" :links="job_posts.links"/-->
-              </div> 
-              </v-card-text>
-            </v-card>
-          </v-tab-item>
-        </v-tabs-items>
+      <div class="companyJobList">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-4">
+          <v-row class="items-center">
+            <v-col cols="12" md="9" class="pa-3 d-flex flex-column">
+               <h3 class="post-title">Jobs at {{ data.name }}</h3>
+            </v-col>
+            <v-col cols="12" md="3" class="pa-3 d-flex flex-column text-right">
+               <span class="text-gray-700">{{job_posts_count}} Positions</span>
+            </v-col>
+         </v-row>
+          <v-row v-if="job_posts">
+              <v-col cols="12" md="12" class="pa-3 d-flex flex-column" v-for="data in job_posts" :key="data.id">
+                 <CustomCard :data="data"/>
+              </v-col>
+
+              <v-col cols="12" md="12" class="pa-3 d-flex flex-column text-center my-3">
+                 <button class="viewOther--Btn">
+                    View Other {{ data.name }} Jobs
+                  </button>
+              </v-col>
+           </v-row>
+        </div> 
       </div>
 
-    <!--   <div class="max-w-6xl mx-auto px-4 sm:px-6">
-          <v-row class=" aboutContent">
-            <v-col cols="12" md="12">
-              <h3 class="post-title">About {{ data.name }}</h3>
-              <div class="desc" v-html="data.mission"></div>
-            </v-col>
-          </v-row>    props: [ 'selected' ],
-
-          <v-row>
-            <v-col cols="12" class="pa-2">
-              <h3 class="desc text-gray-700">Jobs at {{ data.name }}</h3>
-              <ul v-if="job_posts" id="example-1" class="text-gray-500">
-                <li v-for="company in job_posts" :key="company.id">
-                  <h4 class="post-title">
-                    <a :href="`/jobs/${data.slug}/${company.slug}`" class="text-gray-700"
-                      >{{ company.name }}
-                      <span class="text-sm"
-                        >({{ company.location_id }})</span
-                      ></a
-                    >
-                  </h4>
-                  <div class="post-detail-wrap" v-html="company.content"></div>
-                </li>
-              </ul>
-            </v-col>
-          </v-row>
-      </div> -->
     </section>
   </Layout>
 </template>
@@ -193,6 +181,7 @@ export default {
     data: Object,
     job_posts: Array,
     selected : String,
+    job_posts_count:Number,
   },
    mounted() {
       this.tab = this.selected
