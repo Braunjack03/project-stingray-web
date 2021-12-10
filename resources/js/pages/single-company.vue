@@ -100,10 +100,10 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-4">
           <v-row class="items-center">
             <v-col cols="12" md="9" class="pa-3 d-flex flex-column">
-               <h3 class="post-title">Jobs at Acme Widgets</h3>
+               <h3 class="post-title">Jobs at {{ data.name }}</h3>
             </v-col>
             <v-col cols="12" md="3" class="pa-3 d-flex flex-column text-right">
-               <span class="text-gray-700">{{job_posts.length}} Positions</span>
+               <span class="text-gray-700">{{job_posts_count}} Positions</span>
             </v-col>
          </v-row>
           <v-row v-if="job_posts">
@@ -142,6 +142,7 @@ export default {
     data: Object,
     job_posts: Array,
     selected : String,
+    job_posts_count:Number,
   },
    mounted() {
       this.tab = this.selected

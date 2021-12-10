@@ -320,9 +320,13 @@ class CompanyProfileController extends Controller
             
             $company['logo_image_url'] = ($company['logo_image_url']) ? getBucketImageUrl($company['uuid'],$company['logo_image_url'],'company') : '';
 
-            $job_posts = JobPost::select('job_posts.*','company_profiles.slug as company_slug')
+            $job_posts_query = JobPost::select('job_posts.*','company_profiles.slug as company_slug')
             ->leftjoin('company_profiles','job_posts.company_profile_id','company_profiles.id')
-            ->where('company_profile_id',$company['id'])->orderBy('id','DESC')->take(5)->get()->toArray();
+            ->where('company_profile_id',$company['id'])->orderBy('id','DESC');
+
+            $job_posts_count = $job_posts_query->count();
+
+            $job_posts = $job_posts_query->take(5)->get()->toArray();
             
             $job_post_model = new JobPost();
             foreach($job_posts as $key => $job)
@@ -331,7 +335,7 @@ class CompanyProfileController extends Controller
                 $job_posts[$key]['job_slug'] = $job['slug'];
             }    
             
-            return Inertia::render('single-company',['data'=>$company,'job_posts'=>$job_posts,'industries',$industries]);
+            return Inertia::render('single-company',['data'=>$company,'job_posts_count'=>$job_posts_count,'job_posts'=>$job_posts,'industries',$industries]);
 
         }catch (\Exception $e) {
             $message = $e->getMessage();
