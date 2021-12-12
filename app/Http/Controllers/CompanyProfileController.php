@@ -281,13 +281,15 @@ class CompanyProfileController extends Controller
     public function showCompany($slug = ''){
 
         try{
-            $company = CompanyProfile::with('job_posts')->join('locations','company_profiles.location_id','locations.id')
-            ->join('users','company_profiles.user_id','=','users.id')
+            $company = CompanyProfile::with('job_posts')->leftjoin('locations','company_profiles.location_id','locations.id')
+            //->leftjoin('users','company_profiles.user_id','=','users.id')
             ->select(
                 'company_profiles.id',
-                'company_profiles.user_id',
+                //'company_profiles.user_id',
                 'company_profiles.name',
                 'company_profiles.mission',
+                'company_profiles.description',
+                'company_profiles.state_abbr',
                 'company_profiles.name',
                 'locations.name as location',
                 'company_profiles.local_employees',
@@ -297,26 +299,36 @@ class CompanyProfileController extends Controller
                 'company_profiles.created_at',
                 'company_profiles.industry_ids',
                 'company_profiles.logo_image_url',
-                'company_profiles.street_addr_1',
+                'company_profiles.state_abbr as state',
                 'company_profiles.city',
                 'company_profiles.uuid',
                 'company_profiles.unclaimed',
                 'company_profiles.slug',
-                'users.role',
+                //'users.role',
             )
             ->where('company_profiles.slug',$slug)->first();
-            if($company->user_id == Auth::id())
+            /*if(Auth::check())
             {
-                $company->unclaimed = 0;
-            }       
+                if($company->user_id == Auth::id()) 
+                {
+                    $company->unclaimed = 0;
+                }
+            }*/
             $selected_industries = explode(',',$company['industry_ids']);
+           
             $industries = CompanyType::whereIn('id', $selected_industries)->pluck('name')->toArray();
-            $company['industry_types'] = implode(' | ',$industries);
-
+            $company['industry_types'] = implode(' - ',$industries);
+            
             $company['logo_image_url'] = ($company['logo_image_url']) ? getBucketImageUrl($company['uuid'],$company['logo_image_url'],'company') : '';
 
-            $job_posts = JobPost::select('job_posts.*','company_profiles.slug as company_slug')->join('company_profiles','job_posts.company_profile_id','company_profiles.id')
-            ->where('company_profile_id',$company['id'])->orderBy('id','DESC')->get()->toArray();
+            $job_posts_query = JobPost::select('job_posts.*','locations.name as location','company_profiles.name as company_name','company_profiles.slug as company_slug')
+            ->leftjoin('company_profiles','job_posts.company_profile_id','company_profiles.id')
+            ->leftjoin('locations','company_profiles.location_id','locations.id')
+            ->where('company_profile_id',$company['id'])->orderBy('id','DESC');
+
+            $job_posts_count = $job_posts_query->count();
+
+            $job_posts = $job_posts_query->take(5)->get()->toArray();
             
             $job_post_model = new JobPost();
             foreach($job_posts as $key => $job)
@@ -324,7 +336,8 @@ class CompanyProfileController extends Controller
                 $job_posts[$key]['location_id'] = $job_post_model->getJobLocation($job['remotetype_id']);
                 $job_posts[$key]['job_slug'] = $job['slug'];
             }    
-            return Inertia::render('single-company',['data'=>$company,'job_posts'=>$job_posts,'industries',$industries]);
+            
+            return Inertia::render('single-company',['data'=>$company,'job_posts_count'=>$job_posts_count,'job_posts'=>$job_posts,'industries',$industries]);
 
         }catch (\Exception $e) {
             $message = $e->getMessage();

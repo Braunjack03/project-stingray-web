@@ -23,15 +23,15 @@
                 <ul class="howItWork--list">
                   <li>
                     <span><img src="images/how01.svg" width="30"></span> 
-                    <p>Let us know what you're looking for.</p>
+                    <p>Create a profile and let us know what you're looking for.</p>
                   </li>
                   <li>
                     <span><img src="images/how02.svg" width="30"></span>
-                    <p>We'll send them to our proffessionals.</p>
+                    <p>We'll match your profile with available jobs.</p>
                   </li>
                   <li>
                     <span><img src="images/how03.svg" width="30"></span> 
-                    <p>Voila! Here's your job done :)</p>
+                    <p>Boom! A recruiter contacts you about dream job :)</p>
                   </li>
                 </ul>
               </div>

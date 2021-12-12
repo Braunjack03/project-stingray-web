@@ -1,6 +1,6 @@
 <template>
     <Layout>
-        <Head title="Home" />
+        <Head title="Made in Tampa" />
         <section data-app class="homeBanner">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 relative">
                 <div class="pt-32 pb-0 md:pt-50 md:pb-20">
@@ -17,8 +17,8 @@
                                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                         </svg></span>
                                         <!-- <input type="text" name="" value="" class="form-control float-right pl-9" placeholder="Looking for" v-model="term" /> -->
-                                        <v-text-field class="form-control locationField float-right pl-9 mt-0" :class="{ 'error--text': $v.term.$error }" placeholder="Looking For?" v-model="term" @keydown.enter="submit" required ></v-text-field>
-                                        <div v-if="$v.term.$error && !$v.term.required"  class="text-red-500 text-sm errorMsg-baaner">Looking For is required</div>
+                                        <v-text-field class="form-control locationField float-right pl-9 mt-0" :class="{ 'error--text': $v.term.$error }" placeholder="Looking for a job in..." v-model="term" @keydown.enter="submit" required ></v-text-field>
+                                        <div v-if="$v.term.$error && !$v.term.required"  class="text-red-500 text-sm errorMsg-baaner">Looking for a job is required</div>
                                         <v-select v-model="location_id" item-text="name" item-value="id" :items="locations" label="Location" solo ></v-select>
                                         <!--div v-if="$v.location_id.$error && !$v.location_id.required"  class="text-red-500 text-sm errorMsg-baaner forLocation-error">Location is required</div-->
                                         <v-btn class="
@@ -41,7 +41,7 @@
     
         </section>
         <Process />
-         <BrowseJobs/>
+         <BrowseJobs :data="companytypes"/>
         <Target />
         <Newsletter />
     </Layout>
@@ -54,7 +54,7 @@ import Footer from "../partials/Footer.vue";
 import HeroHome from "../partials/HeroHome.vue";
 import Process from "./../partials/Process.vue";
 import Target from "./../partials/Target.vue";
-import Newsletter from './../partials/Newsletter.vue'
+//import Newsletter from './../partials/Newsletter.vue'
 import BrowseJobs from './../partials/BrowseJobs.vue'
 import { validationMixin } from 'vuelidate'
 import { required} from 'vuelidate/lib/validators'
@@ -72,11 +72,12 @@ export default {
         HeroHome,
         Process,
         Target,
-        Newsletter,
+        //Newsletter,
         BrowseJobs
     },
     props: {
         locations: Array,
+        companytypes: Object
     },
     data() {
         return {

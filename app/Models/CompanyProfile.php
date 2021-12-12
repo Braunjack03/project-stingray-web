@@ -22,5 +22,10 @@ class CompanyProfile extends Model
         return $this->hasMany(JobPost::class);
     }
 
+    public function companytypes()
+    {
+        return $this->hasMany(CompanyType::class,'id','industries_ids');
+    }
+
 
 }
