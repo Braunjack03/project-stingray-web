@@ -45,7 +45,8 @@ class CompanyProfileFactory extends Factory
             'lat' => $this->faker->latitude,
             'long' => $this->faker->longitude,
             'featured' => rand(0,1),
-            'location_id' => rand(99,102)
+            'location_id' => rand(99,102),
+            'unclaimed' => rand(0,1)
         ];
     }
 }
