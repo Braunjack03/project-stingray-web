@@ -22,8 +22,13 @@ class DatabaseSeeder extends Seeder
         // seed test data
         $users = User::factory()->count(100)->create();
         $company_profiles = CompanyProfile::factory()->count(100)->has(JobPost::factory()->count(20), 'job_posts')->create();
-        //$job_posts = JobPost::factory()->count(500)->create();
+        $job_posts = JobPost::factory()->count(500)->create();
         $articles = Article::factory()->count(250)->create();
+
+        // Seed article / company_profiles many to many relationship
+        $this->call([
+            ArticleCompanyProfile::class
+        ]);
     }
 
 }
