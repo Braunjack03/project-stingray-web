@@ -84,7 +84,7 @@
           <v-col cols="12" md="6" class="pa-3 d-flex flex-column">
              <div class="aboutImg">
                 <v-img
-                :src="(data.featured_image_url) ? data.featured_image_url : '/images/aboutImg.png'"
+                :src="(data.featured_image_url) ? data.featured_image_url : '/images/aboutImg.jpg'"
               ></v-img>
             </div>
           </v-col>
@@ -107,7 +107,7 @@
                <span class="text-gray-700">{{job_posts_count}} Positions</span>
             </v-col>
          </v-row>
-          <div v-if="job_posts.data">
+          <div v-if="job_posts.data.length > 0">
                      <v-row >
                         <v-col cols="12" md="12" class="pa-3 d-flex flex-column" v-for="data in job_posts.data" :key="data.id">
                            <CustomCard :data="data" />
@@ -118,7 +118,7 @@
                   <div v-else >
                       <v-row >
                         <v-col cols="12" class="mt-5 text-center text-gray-700">
-                             No Job Found 
+                             {{ data.name }} has no jobs posted 
                         </v-col>
                       </v-row>  
                   </div>
