@@ -83,13 +83,15 @@
         <v-row>
           <v-col cols="12" md="6" class="pa-3 d-flex flex-column">
              <div class="aboutImg">
-                <img src="/images/aboutImg.jpg" alt="">
+                <v-img
+                :src="(data.featured_image_url) ? data.featured_image_url : '/images/aboutImg.png'"
+              ></v-img>
             </div>
           </v-col>
           <v-col cols="12" md="6" class="pa-3 d-flex flex-column">
              <div class="aboutContent">
                 <h3 class="post-title">About {{ data.name }}</h3>
-                <div class="desc" v-html="data.description"></div>
+                <div class="desc" v-html="data.mission"></div>
             </div>
           </v-col>
        </v-row>
@@ -105,17 +107,35 @@
                <span class="text-gray-700">{{job_posts_count}} Positions</span>
             </v-col>
          </v-row>
-          <v-row v-if="job_posts">
+          <div v-if="job_posts.data">
+                     <v-row >
+                        <v-col cols="12" md="12" class="pa-3 d-flex flex-column" v-for="data in job_posts.data" :key="data.id">
+                           <CustomCard :data="data" />
+                        </v-col>
+                     </v-row>
+                     <pagination class="mt-5" :links="job_posts.links" />
+                  </div>  
+                  <div v-else >
+                      <v-row >
+                        <v-col cols="12" class="mt-5 text-center text-gray-700">
+                             No Job Found 
+                        </v-col>
+                      </v-row>  
+                  </div>
+
+          <!--v-row v-if="job_posts">
               <v-col cols="12" md="12" class="pa-3 d-flex flex-column" v-for="data in job_posts" :key="data.id">
                  <CustomCard :data="data" />
               </v-col>
 
               <v-col cols="12" md="12" class="pa-3 d-flex flex-column text-center my-3">
-                 <button class="viewOther--Btn">
+                 <button class="viewOther--Btn" @click="handleButton(page)">
                     View Other {{ data.name }} Jobs
                   </button>
-              </v-col>
-           </v-row>
+              </v-co>
+              <pagination class="mt-5" :links="job_posts.links" />
+           </v-row-->
+           
         </div> 
       </div>
 
@@ -139,7 +159,7 @@ export default {
     errors: Object,
     success: Object,
     data: Object,
-    job_posts: Array,
+    job_posts: Object,
     selected : String,
     job_posts_count:Number,
   },
@@ -149,12 +169,30 @@ export default {
   data: () => ({
     message: "",
      tab: null,
+     page:1,
   }),
   methods: {
     claimProfile(id) {
       this.$inertia.get("/claim-profile/" + id);
     },
+    handleButton(page) {
 
+      console.log('here',page);
+            //if(!this.moreMsgFetched){
+                var newdata = this.$inertia.get(this.data.slug+'?page=2')
+                console.log('testing', newdata);
+                /*.then((response) => {
+                    this.moreMessages = response.data;
+                    this.messages = this.moreMessages.splice(0, 10);
+                    this.moreMsgFetched = true;
+                });*/
+                this.page += 1;
+            //}
+             //if you want to replace the messages array every time with 10 more messages
+            //this.messages = nextMsgs
+            //if you wnt to add 10 more messages to messages array
+            //this.messages.push(nextMsgs);
+        }
 
   },
 };

@@ -628,7 +628,7 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
 }
 .jobserach-error {
    position: absolute;
-   right: 245px;
+   left: 20px;
    bottom: -14px;
 }
 

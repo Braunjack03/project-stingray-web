@@ -93,22 +93,38 @@ class CompanyProfileController extends Controller
                 
                 $profile_image = '';
                 $image_name = '';
+                $headerimage_name = '';
+                $featured_image = '';
                 if ($image = $request->file('logo_image_url')) {
                     $image_name = time() . '_' . $image->getClientOriginalName();
                     $profile_image = Storage::disk('s3Company')->putFileAs('company/'.$user_uuid, $image,$image_name);
                 }
+
+                if ($headerimage = $request->file('featured_image_url')) {
+                    $headerimage_name = time() . '_' . $headerimage->getClientOriginalName();
+                    $featured_image = Storage::disk('s3Company')->putFileAs('company/'.$user_uuid, $headerimage,$headerimage_name);
+                }
+
                 if(isset($data['industry']))
                 {   
                     $data['industry_ids'] = isset($data['industry']) ? implode(',',$data['industry']) : $data['industry'];
                 }
                 $data['uuid'] = $user_uuid;    
                 $data['logo_image_url'] = $image_name;
+                $data['featured_image_url'] = $headerimage_name;
 
                 if(!$request->file('logo_image_url') && (isset($data['logo_image_removed']) && $data['logo_image_removed'] == 0))
                 {
                     unset($data['logo_image_removed']);
                 }
+
+                if(!$request->file('featured_image_url') && (isset($data['featured_image_removed']) && $data['featured_image_removed'] == 0))
+                {
+                    unset($data['featured_image_removed']);
+                }
+
                 $data['slug'] = $this->createCompanySlug($data['name']);
+                
                 CompanyProfile::create($data);
                
                 ActivityLog::addToLog(__('activitylogs.company_profile_created'),'company created');
@@ -141,6 +157,7 @@ class CompanyProfileController extends Controller
                 }
                 
                 $user->logo_image_src = ($user->logo_image_url) ? getBucketImageUrl($request->all()['id'],$user->logo_image_url,'company') : '';
+                $user->featured_image_src = ($user->featured_image_url) ? getBucketImageUrl($request->all()['id'],$user->featured_image_url,'company') : '';
 
             }
             $industries = CompanyType::pluck('name','id');
@@ -164,7 +181,7 @@ class CompanyProfileController extends Controller
             return $this->sendErrorResponse('login',__('messages.unauthorized'));
         }
 
-        $requested_data = $request->except(['logo_image_src']);
+        $requested_data = $request->except(['logo_image_src','featured_image_url']);
     
         $user = CompanyProfile::where('uuid',$request->all()['id'])->first();
         $user_uuid = $request->all()['id'];
@@ -189,6 +206,7 @@ class CompanyProfileController extends Controller
             'twitter_user' => isset($requested_data['twitter_user']) ? $requested_data['twitter_user'] : '',
             'instagram_user' => isset($requested_data['instagram_user']) ? $requested_data['instagram_user'] : '',
             'logo_image_removed' => isset($requested_data['logo_image_removed']) ? $requested_data['logo_image_removed'] : '',
+            'featured_image_removed' => isset($requested_data['featured_image_removed']) ? $requested_data['featured_image_removed'] : '',
         ];
 
         $messages = [
@@ -212,9 +230,16 @@ class CompanyProfileController extends Controller
             try{
                 $profile_image = '';
                 $image_name = '';
+                $headerimage_name = '';
+                $featured_image = '';
                 if ($image = $request->file('logo_image_url')) {
                     $image_name = time() . '_' . $image->getClientOriginalName();
                     $profile_image = Storage::disk('s3Company')->putFileAs('company/'.$user_uuid, $image,$image_name);
+                }
+
+                if ($headerimage = $request->file('featured_image_url')) {
+                    $headerimage_name = time() . '_' . $headerimage->getClientOriginalName();
+                    $featured_image = Storage::disk('s3Company')->putFileAs('company/'.$user_uuid, $headerimage,$headerimage_name);
                 }
                 
                 $profile_data = [
@@ -235,14 +260,23 @@ class CompanyProfileController extends Controller
                     'twitter_user' => $data['twitter_user'],
                     'instagram_user' => $data['instagram_user'],
                     'logo_image_url' => $image_name,
+                    'featured_image_url' => $headerimage_name,
                     'slug' => $this->createCompanySlug($data['name']),
                 ];
                 
+
+               
                 if(!$request->file('logo_image_url') && (isset($data['logo_image_removed']) && $data['logo_image_removed'] == 0))
                 {
                     unset($profile_data['logo_image_url']);
                 }
-                $user = CompanyProfile::where('uuid',$requested_data['id'])->update($profile_data);
+
+                if(!$request->file('featured_image_url') && (isset($data['featured_image_removed']) && $data['featured_image_removed'] == 0))
+                {
+                    unset($data['featured_image_removed']);
+                }
+
+                $user = CompanyProfile::where('uuid',$requested_data['id'])->updatimagee($profile_data);
                 ActivityLog::addToLog(__('activitylogs.company_profile_updated'),'company updated');
                 return redirect()->route('employer.profile')->with(['message' => __('messages.company_profile_updated')]);
      
@@ -278,7 +312,7 @@ class CompanyProfileController extends Controller
         return CompanyProfile::select('slug')->where('slug', 'like', $slug.'%')->get();
     }
 
-    public function showCompany($slug = ''){
+    public function showCompany(Request $request,$slug = ''){
 
         try{
             $company = CompanyProfile::with('job_posts')->leftjoin('locations','company_profiles.location_id','locations.id')
@@ -299,6 +333,7 @@ class CompanyProfileController extends Controller
                 'company_profiles.created_at',
                 'company_profiles.industry_ids',
                 'company_profiles.logo_image_url',
+                'company_profiles.featured_image_url',
                 'company_profiles.state_abbr as state',
                 'company_profiles.city',
                 'company_profiles.uuid',
@@ -321,6 +356,8 @@ class CompanyProfileController extends Controller
             
             $company['logo_image_url'] = ($company['logo_image_url']) ? getBucketImageUrl($company['uuid'],$company['logo_image_url'],'company') : '';
 
+            $company['featured_image_url'] = ($company['featured_image_url']) ? getBucketImageUrl($company['uuid'],$company['featured_image_url'],'company') : '';
+
             $job_posts_query = JobPost::select('job_posts.*','locations.name as location','company_profiles.name as company_name','company_profiles.slug as company_slug')
             ->leftjoin('company_profiles','job_posts.company_profile_id','company_profiles.id')
             ->leftjoin('locations','company_profiles.location_id','locations.id')
@@ -328,15 +365,16 @@ class CompanyProfileController extends Controller
 
             $job_posts_count = $job_posts_query->count();
 
-            $job_posts = $job_posts_query->take(5)->get()->toArray();
-            
-            $job_post_model = new JobPost();
+            $job_posts = $job_posts_query->paginate(5);
+            /*$job_post_model = new JobPost();
+            /*$job_posts1 = [];
             foreach($job_posts as $key => $job)
             {
-                $job_posts[$key]['location_id'] = $job_post_model->getJobLocation($job['remotetype_id']);
-                $job_posts[$key]['job_slug'] = $job['slug'];
-            }    
-            
+                $job_posts1[] = $job;
+                $job_posts1[$key]['location_id'] = $job_post_model->getJobLocation($job['remotetype_id']);
+                $job_posts1[$key]['job_slug'] = $job['slug'];
+            }*/
+            //dd($job_posts);
             return Inertia::render('single-company',['data'=>$company,'job_posts_count'=>$job_posts_count,'job_posts'=>$job_posts,'industries',$industries]);
 
         }catch (\Exception $e) {
