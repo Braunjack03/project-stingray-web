@@ -14,7 +14,7 @@ class CompanyProfile extends Model
     ];
         
     protected $fillable = [
-        'name','uuid','user_id','slug','website_url','year_founded','description','profile_title','logo_image_url','local_employees','global_employees','mission','industry_ids','street_addr_1','street_addr_2','city','postcode','state_abbr', 'website', 'linkedin_user', 'facebook_user', 'twitter_user', 'instagram_user','lat','long',
+        'name','uuid','user_id','slug','website_url','year_founded','description','profile_title','featured_image_url','logo_image_url','local_employees','global_employees','mission','industry_ids','street_addr_1','street_addr_2','city','postcode','state_abbr', 'website', 'linkedin_user', 'facebook_user', 'twitter_user', 'instagram_user','lat','long',
     ];
 
     public function job_posts()

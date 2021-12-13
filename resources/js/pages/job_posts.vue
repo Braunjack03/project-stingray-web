@@ -12,6 +12,8 @@
                               Total Number of jobs: {{job_posts_count}}
                            </span>
                            <div class="filter-opt relative">
+                           <input type="text" name="table_search" :class="{ 'error--text': $v.term.$error }" class="form-control float-right" placeholder="Search" v-model="term" @keydown.enter="submit">
+                           <div v-if="$v.term.$error && !$v.term.required"  class="text-red-500 text-sm jobserach-error">Search is required</div>
                            <v-select
                            v-model="location_id"
                            item-text="name"
@@ -21,8 +23,7 @@
                            persistent-hint
                            single-line
                            ></v-select>
-                           <input type="text" name="table_search" :class="{ 'error--text': $v.term.$error }" class="form-control float-right" placeholder="Search" v-model="term" @keydown.enter="submit">
-                           <div v-if="$v.term.$error && !$v.term.required"  class="text-red-500 text-sm jobserach-error">Search is required</div>
+                          
 
                               <v-btn class="
                                  btn

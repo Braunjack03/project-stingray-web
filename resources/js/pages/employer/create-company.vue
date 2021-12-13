@@ -70,6 +70,26 @@
                     </div>  
 
                     <div class="flex flex-wrap mb-4">
+                      <div class="w-full px-3 form-avataar">
+                          <v-icon v-if="user.featured_image_src" color="gray darken-2" class="ml-auto" @click="removeFeaturedImage()"> mdi-close-circle</v-icon>
+                            
+                            <v-img
+                              :src="user.featured_image_src"
+                              max-height="150"
+                              max-width="250"
+                            ></v-img>
+                      </div>
+                    </div>
+
+                    <div class="flex flex-wrap mb-4">
+                      <div class="w-full px-3 form-file-upload">
+                          <label class="block text-gray-700 text-sm font-medium mb-1">Featured Image (Recommended 500px x 500px) </label>
+                            <v-file-input class="fileUpload form-input input-field-outer w-full text-gray-700" v-model="user.featured_image_url" accept="image/*" @change="onFeaturedFileChange" outlined dense></v-file-input>
+                        
+                     </div>
+                    </div>   
+
+                    <div class="flex flex-wrap mb-4">
                         <div class="w-full px-3">
                           <label class="block text-gray-700 text-sm font-medium mb-1">Company Mission</label>
                           <v-textarea v-model="user.mission" rows="2" class="form-input input-field-outer w-full text-gray-700" placeholder="Company Mission" ></v-textarea>
@@ -266,6 +286,7 @@
                   local_employees: this.local_employees,
                   global_employees: this.user.global_employees,
                   website_url: this.user.website_url,
+                  featured_image_url: this.user.featured_image_url,
                   mission: this.user.mission,
                   industry: this.industry,
                   street_addr_1: this.user.street_addr_1,
@@ -289,8 +310,16 @@
           this.user.logo_image_url = '';
           this.user.logo_image_removed = 1;
       }, 
+      removeFeaturedImage(){
+          this.user.featured_image_src = '';
+          this.user.featured_image_url = '';
+          this.user.featured_image_removed = 1;
+      }, 
       onFileChange() {
         this.user.logo_image_src = URL.createObjectURL(this.user.logo_image_url)
+      },  
+      onFeaturedFileChange() {
+        this.user.featured_image_src = URL.createObjectURL(this.user.featured_image_url)
       },  
     },
   }
