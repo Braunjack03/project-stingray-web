@@ -91,7 +91,7 @@
           <v-col cols="12" md="6" class="pa-3 d-flex flex-column">
              <div class="aboutContent">
                 <h3 class="post-title">About {{ data.name }}</h3>
-                <div class="desc" v-html="data.mission"></div>
+                <div class="desc" v-html="data.description"></div>
             </div>
           </v-col>
        </v-row>
