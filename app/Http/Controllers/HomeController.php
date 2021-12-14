@@ -89,7 +89,7 @@ class HomeController extends Controller
             
             $job_posts_count = $job_posts_query->count();
 
-            $job_posts = $job_posts_query->paginate($this->paginationLimit);
+            $job_posts = $job_posts_query->paginate($this->paginationLimit)->onEachSide(1);
             
             //dd($job_posts);
             //->paginate($this->paginationLimit);

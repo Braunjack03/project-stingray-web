@@ -95,6 +95,14 @@
                                     <div v-if="errors.mission" class="mt-2 error">{{ errors.mission }}</div>
                                 </div>
                             </div>
+
+                            <div class="flex flex-wrap mb-4">
+                                <div class="w-full px-3">
+                                    <label class="block text-gray-700 text-sm font-medium mb-1">Company Description</label>
+                                    <v-textarea v-model="user.description" rows="2" class="form-input input-field-outer w-full text-gray-700" placeholder="Company Description" ></v-textarea>
+                                    <div v-if="errors.description" class="mt-2 error">{{ errors.description }}</div>
+                                </div>
+                            </div>  
     
                             <div class="flex flex-wrap mb-4">
                                 <div class="w-full px-3">
@@ -269,6 +277,7 @@ export default {
                   website_url: this.user.website_url,
                   featured_image_url: this.user.featured_image_url,
                   mission: this.user.mission,
+                  description: this.user.description,
                   industry_ids: this.user.industry_ids,
                   street_addr_1: this.user.street_addr_1,
                   street_addr_2: this.user.street_addr_2,

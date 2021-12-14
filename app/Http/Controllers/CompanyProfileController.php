@@ -58,7 +58,7 @@ class CompanyProfileController extends Controller
             return $this->sendErrorResponse('login',__('messages.unauthorized'));
         }
 
-        $data = $request->except(['logo_image_src']);
+        $data = $request->except(['logo_image_src','featured_image_url']);
         $user_id = Auth::id();
        
         $data['user_id'] = $user_id;
@@ -195,6 +195,7 @@ class CompanyProfileController extends Controller
             'global_employees' => isset($requested_data['global_employees']) ? $requested_data['global_employees'] : '',
             'website_url' => isset($requested_data['website_url']) ? $requested_data['website_url'] : '',
             'mission' => isset($requested_data['mission']) ? $requested_data['mission'] : '',
+            'description' => isset($requested_data['description']) ? $requested_data['description'] : '',
             'industry_ids' => (isset($requested_data['industry_ids']) && is_array($requested_data['industry_ids'])) ? implode(',',$requested_data['industry_ids']) : $requested_data['industry_ids'],
             'street_addr_1' => isset($requested_data['street_addr_1']) ? $requested_data['street_addr_1'] : '',
             'street_addr_2' => isset($requested_data['street_addr_2']) ? $requested_data['street_addr_2'] : '',
@@ -249,6 +250,7 @@ class CompanyProfileController extends Controller
                     'global_employees' => $data['global_employees'],
                     'website_url' => $data['website_url'],
                     'mission' => $data['mission'],
+                    'description' => $data['description'],
                     'industry_ids' =>  ltrim($data['industry_ids'], ','),
                     'street_addr_1' => $data['street_addr_1'],
                     'street_addr_2' => $data['street_addr_2'],
@@ -264,7 +266,7 @@ class CompanyProfileController extends Controller
                     'slug' => $this->createCompanySlug($data['name']),
                 ];
                 
-
+              
                
                 if(!$request->file('logo_image_url') && (isset($data['logo_image_removed']) && $data['logo_image_removed'] == 0))
                 {
@@ -273,10 +275,10 @@ class CompanyProfileController extends Controller
 
                 if(!$request->file('featured_image_url') && (isset($data['featured_image_removed']) && $data['featured_image_removed'] == 0))
                 {
-                    unset($data['featured_image_removed']);
+                    unset($data['featured_image_url']);
                 }
 
-                $user = CompanyProfile::where('uuid',$requested_data['id'])->updatimagee($profile_data);
+                $user = CompanyProfile::where('uuid',$requested_data['id'])->update($profile_data);
                 ActivityLog::addToLog(__('activitylogs.company_profile_updated'),'company updated');
                 return redirect()->route('employer.profile')->with(['message' => __('messages.company_profile_updated')]);
      
