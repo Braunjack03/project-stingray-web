@@ -94,7 +94,7 @@ class HomeController extends Controller
             //dd($job_posts);
             //->paginate($this->paginationLimit);
             $term_u = $request->q;
-            if($term_u == 'null'){
+            if($term_u == 'null' || $term_u == 'NaN'){
                 $term_u = '';
             }
             //die('');

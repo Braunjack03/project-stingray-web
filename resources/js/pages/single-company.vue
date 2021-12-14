@@ -122,20 +122,6 @@
                         </v-col>
                       </v-row>  
                   </div>
-
-          <!--v-row v-if="job_posts">
-              <v-col cols="12" md="12" class="pa-3 d-flex flex-column" v-for="data in job_posts" :key="data.id">
-                 <CustomCard :data="data" />
-              </v-col>
-
-              <v-col cols="12" md="12" class="pa-3 d-flex flex-column text-center my-3">
-                 <button class="viewOther--Btn" @click="handleButton(page)">
-                    View Other {{ data.name }} Jobs
-                  </button>
-              </v-co>
-              <pagination class="mt-5" :links="job_posts.links" />
-           </v-row-->
-           
         </div> 
       </div>
 
