@@ -11,12 +11,12 @@
           </div>
           </div>
           <div class="button-outter">
-            <Link :href="'/jobs/'+data.company_slug+'/'+data.job_slug" class="text-white bg-purple-600 hover:bg-purple-700 ml-3 viewJobsBtn">VIEW JOB</Link>
+            <Link :href="'/jobs/'+data.company_slug+'/'+data.slug" class="text-white bg-purple-600 hover:bg-purple-700 ml-3 viewJobsBtn">VIEW JOB</Link>
              <!--v-btn  :href="data.apply_url" target="_blank" class="text-white bg-purple-600 hover:bg-purple-700">
                 Apply Now
               </v-btn-->
           </div>
-          <Link :href="'/jobs/'+data.company_slug+'/'+data.job_slug" class="overlayLink"></Link>
+          <Link :href="'/jobs/'+data.company_slug+'/'+data.slug" class="overlayLink"></Link>
         </v-card-text>
 
     </v-card>
