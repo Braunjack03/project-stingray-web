@@ -44,16 +44,8 @@
             <li v-if="!isLoggedIn">
               <Link href="/login" class="font-bold text-white-600 hover:text-purple-600 pl-4 py-3 flex items-center transition duration-150 ease-in-out">Sign In</Link>
             </li>
-          </ul> 
-
-          <ul class="flex flex-grow justify-end flex-wrap items-center text-gray-500 dropMain" v-if="isLoggedIn">
-             <Dropdown :title="getUserEmail()" >
-              <li>
-              <Link v-if="isLoggedIn && isLoggedIn.role == 2" href="/dashboard" class="text-gray-700 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Dashboard</Link>
-              </li>
-              <li>
-                <Link v-if="isLoggedIn && isLoggedIn.role == 1" href="/employer/dashboard" class="text-gray-700 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Dashboard</Link>
-              </li>
+            <li v-if="isLoggedIn">
+            <Dropdown :title="getUserEmail()" >
               <li>
                 <Link v-if="isLoggedIn && isLoggedIn.role == 2" href="/profile" class="text-gray-700 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Profile</Link>
               </li>
@@ -64,7 +56,28 @@
                 <Link v-on:click="logout" href="/logout" class="text-gray-700 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Sign Out</Link>
               </li>
             </Dropdown>
-          </ul>
+              </li>
+          </ul> 
+
+          <!-- <ul class="flex flex-grow justify-end flex-wrap items-center text-gray-500 dropMain" v-if="isLoggedIn">
+             <Dropdown :title="getUserEmail()" >
+              li>
+              <Link v-if="isLoggedIn && isLoggedIn.role == 2" href="/dashboard" class="text-gray-700 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Dashboard</Link>
+              </li>
+              <li>
+                <Link v-if="isLoggedIn && isLoggedIn.role == 1" href="/employer/dashboard" class="text-gray-700 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Dashboard</Link>
+              </li
+              <li>
+                <Link v-if="isLoggedIn && isLoggedIn.role == 2" href="/profile" class="text-gray-700 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Profile</Link>
+              </li>
+              <li>
+                <Link v-if="isLoggedIn && isLoggedIn.role == 1" href="/employer/profile" class="text-gray-700 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Profile</Link>
+              </li>
+              <li class="">
+                <Link v-on:click="logout" href="/logout" class="text-gray-700 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Sign Out</Link>
+              </li>
+            </Dropdown>
+          </ul> -->
         </nav>
 
         <!-- Mobile menu -->
@@ -93,12 +106,12 @@
                 <a target="_blank" href="https://blog.madeintampabay.org/" class="flex text-white-900 font-medium hover:text-purple-600 py-2">News</a>
               </li>
               
-              <li>
+              <!--li>
                 <Link v-if="isLoggedIn && isLoggedIn.role == 2" href="/dashboard" class="flex text-white-900 font-medium hover:text-purple-600 py-2">Dashboard</Link>
               </li>
               <li>
                 <Link v-if="isLoggedIn && isLoggedIn.role == 1" href="/employer/dashboard" class="flex text-white-900 font-medium hover:text-purple-600 py-2">Dashboard</Link>
-              </li>
+              </li-->
               <li>
                 <Link  v-if="isLoggedIn && isLoggedIn.role == 2" href="/profile" class="flex text-white-900 font-medium hover:text-purple-600 py-2">Profile ({{getUserEmail()}})</Link>
               </li>
