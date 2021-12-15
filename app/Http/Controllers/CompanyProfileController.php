@@ -390,13 +390,16 @@ class CompanyProfileController extends Controller
             //$status = CompanyProfile::where('uuid',$id)->update(['unclaimed'=>0]);
             ActivityLog::addToLog(__('activitylogs.company_profile_updated'),'company claimed');
             $user = CompanyProfile::join('users','company_profiles.user_id','=','users.id')
-            ->select('company_profiles.name as company_name','users.name','users.email')
+            ->select('company_profiles.name as company_name','users.name','users.email','company_profiles.slug as company_slug')
             ->where('company_profiles.uuid',$id)->first();  
             Mail::send('emails.claimCompanyProfile',['user'=>$user], function($message){
                 $message->to(env('ADMIN_EMAIL'));
                 $message->subject(__('messages.profile_claimed'));
             });
-            return redirect()->back()->with(['message' => __('messages.company_claimed')]);
+
+            $redirect_link = "/companies/".$user->company_slug;
+            return redirect()->intended($redirect_link)->with(['message' => __('messages.company_claimed')]);
+            //return redirect()->back()->with(['message' => __('messages.company_claimed')]);
         }catch (\Exception $e) {
             $message = $e->getMessage();
             return $this->sendErrorResponse('login',$message);
