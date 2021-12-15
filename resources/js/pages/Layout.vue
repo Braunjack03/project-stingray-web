@@ -10,7 +10,7 @@
               <PageIllustration />
             </div>
                 <div class="verifyEmailText" v-if="currentHref && currentHref[3] != 'companies' && currentUrl != '/' && currentHref[3] != 'jobs'">
-                  <p v-if="isLoggedIn && isLoggedIn.is_email_verified == 0">Your email is not verified yet. Please verify.</p>
+                  <p v-if="isLoggedIn && isLoggedIn.is_email_verified == 0">Please verify your email address</p>
                 </div>
               <slot />
               <!--  -->
