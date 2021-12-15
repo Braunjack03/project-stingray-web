@@ -9,7 +9,7 @@
             <div class="relative max-w-6xl mx-auto h-0 pointer-events-none" aria-hidden="true">
               <PageIllustration />
             </div>
-                <div class="verifyEmailText" v-if="currentHref.indexOf('companies') != 25 && currentUrl != '/' && currentUrl != '/jobs' && currentHref.indexOf('jobs') != -1">
+                <div class="verifyEmailText" v-if="currentHref.indexOf('companies') != 25 && currentUrl != '/' && currentHref.indexOf('jobs') != 25">
                   <p v-if="isLoggedIn && isLoggedIn.is_email_verified == 0">Your email is not verified yet. Please verify.</p>
                 </div>
               <slot />
