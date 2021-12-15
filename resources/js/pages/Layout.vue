@@ -9,9 +9,7 @@
             <div class="relative max-w-6xl mx-auto h-0 pointer-events-none" aria-hidden="true">
               <PageIllustration />
             </div>
-            {{currentHref.indexOf('companies')}}--
-            {{currentHref.indexOf('jobs')}}
-                <div class="verifyEmailText" v-if="currentHref.indexOf('companies') != 25 && currentUrl != '/' && currentHref.indexOf('jobs') != 25">
+                <div class="verifyEmailText" v-if="currentHref && currentHref[3] != 'companies' && currentUrl != '/' && currentHref[3] != 'jobs'">
                   <p v-if="isLoggedIn && isLoggedIn.is_email_verified == 0">Your email is not verified yet. Please verify.</p>
                 </div>
               <slot />
@@ -47,7 +45,7 @@ import PageIllustration from '../partials/PageIllustration.vue'
     data: function () {
       return {
           currentUrl : window.location.pathname,
-          currentHref : window.location.href,
+          currentHref : window.location.href.split("/"),
         };
     },
      filters: {
