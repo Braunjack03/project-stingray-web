@@ -859,6 +859,14 @@ section.homeBanner {
    font-weight: 600;
    font-size: 2.4rem;
 }
+.verifyEmailText {
+   display: block;
+   position: absolute;
+   top: 100px;
+   color: #cb0000;
+   width: 100%;
+   text-align: center;
+}
 
 /* Footer */
 .footerBg {

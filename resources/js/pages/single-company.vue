@@ -22,7 +22,7 @@
       </div>
       <div class="companyDetailOuter">
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
-          <div v-if="$page.props.flash.message" class="mt-2 success">
+          <div v-if="$page.props.flash.message" class="text-center text-green-500 text-sm mt-2 success">
             {{ $page.props.flash.message }}
           </div>
           <div class="companyDetail">

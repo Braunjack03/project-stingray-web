@@ -393,7 +393,7 @@ class CompanyProfileController extends Controller
             ->select('company_profiles.name as company_name','users.name','users.email','company_profiles.slug as company_slug')
             ->where('company_profiles.uuid',$id)->first();  
             Mail::send('emails.claimCompanyProfile',['user'=>$user], function($message){
-                $message->to('aniltpss@yopmail.com');
+                $message->to(env('ADMIN_EMAIL'));
                 $message->subject(__('messages.profile_claimed'));
             });
 

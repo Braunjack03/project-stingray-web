@@ -77,6 +77,11 @@ import { required, email, minLength } from 'vuelidate/lib/validators'
       email: { required, email },
       password: {required,minLength: minLength(8)}
     },
+    computed: {
+      isLoggedIn() {
+        return this.$page.props.auth.user;
+      },
+    },
     components: {
       Link,
       Head,
@@ -112,6 +117,8 @@ import { required, email, minLength } from 'vuelidate/lib/validators'
              let form = {email:this.email,password:this.password};
              this.$inertia.post('/login', form);
             if(this.form.email){ 
+              Inertia.reload()
+
                 window.localStorage.setItem("username",this.form.email); 
             }
           }
