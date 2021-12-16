@@ -1327,6 +1327,7 @@ section.homeBanner {
    .singlePage--articles .postBlock--content .postBlock--title {
        font-size: 2rem;
    }
+}
   
 @media (max-width:575px){
    .card-text-wrap {
