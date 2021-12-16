@@ -29,7 +29,7 @@
             <li>
               <Link href="/companies" class="font-bold text-white-900 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Companies</Link>
             </li>
-            <li>
+            <li> 
               <a target="_blank" href="https://blog.madeintampabay.org/" class="font-bold text-white-900 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">News</a>
             </li>
             <li>

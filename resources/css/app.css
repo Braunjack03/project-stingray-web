@@ -846,6 +846,7 @@ section.homeBanner {
    background: url(../images/newsletter.jpg);
    background-repeat: no-repeat;
 }
+
 .newsletterBg:after {
     position: absolute;
     content: "";

@@ -60,7 +60,7 @@ class HomeController extends Controller
     public function articles(){
         return Inertia::render('article');
     }
-
+ 
     public function articleDetail(){
         return Inertia::render('single-article');
     }

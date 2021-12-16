@@ -28,7 +28,7 @@
            </v-col>
            <v-col cols="12" md="12">
               <div class="postBlock">
-                 <div class="postBlock--img">
+                 <div class="postSingle--img">
                      <img src="http://192.168.0.55:8000/images/blog-post-01.jpg" alt="post-images">
                  </div>
               </div>
