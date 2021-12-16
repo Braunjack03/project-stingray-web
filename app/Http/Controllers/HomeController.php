@@ -15,7 +15,7 @@ class HomeController extends Controller
 {    
     public function __construct()
     {
-        $this->middleware('auth',['except' => ['home','jobs','companies','blog','hiring']]);
+        $this->middleware('auth',['except' => ['home','jobs','companies','blog','hiring','articles','articleDetail']]);
     }
     /**
      * Dashboard
@@ -55,6 +55,14 @@ class HomeController extends Controller
 
     public function blog(){
         return Inertia::render('blog');
+    }
+
+    public function articles(){
+        return Inertia::render('article');
+    }
+
+    public function articleDetail(){
+        return Inertia::render('single-article');
     }
 
     public function jobs(Request $request){
