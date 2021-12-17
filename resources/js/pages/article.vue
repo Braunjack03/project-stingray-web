@@ -23,7 +23,7 @@
                      <v-col cols="12" md="6">
                         <div class="postBlock">
                            <div class="postBlock--content">
-                               <button class="text-white rounded-full" v-for="tag in latest.tags" :key="tag.id">
+                              <button class="text-white rounded-full" :class="tag.name.toLowerCase()+'Btn'" v-for="tag in latest.tags" :key="tag.id">
                                  {{tag.name}}
                                </button>
                                <h3 class="postBlock--title"><Link :href="'/articles/'+latest.slug">{{latest.title}}</Link></h3>
@@ -66,6 +66,7 @@ export default {
    components: {
       Head,
       Layout,
+      Link,
       'CustomCard': Article,
       Pagination,
       Footer,

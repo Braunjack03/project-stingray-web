@@ -15,7 +15,7 @@
                         <p><a href="#">{{data.name}} </a> - {{new Date(data.created_at).toDateString().slice(4,10)+','+new Date(data.created_at).toDateString().slice(10)}}</p>
                       </div>
                       <div class="mt-4 lg:mt-0">
-                        <button class="text-white rounded-full" v-for="tag in data.tags" :key="tag.id">
+                        <button class="text-white rounded-full" :class="tag.name.toLowerCase()+'Btn'" v-for="tag in data.tags" :key="tag.id">
                           {{tag.name}}
                         </button>
                       </div>
