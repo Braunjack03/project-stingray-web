@@ -1125,7 +1125,7 @@ section.homeBanner {
 .postSocialLink .fill-current {
     fill: #5d5dff;
 }
-.blogPost--block .articlesTitle {
+.singleArticles--outer .blogPost--block .articlesTitle {
     border-top: 1px solid #666;
     padding-top: 12px;
 }
