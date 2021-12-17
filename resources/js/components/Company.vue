@@ -2,6 +2,7 @@
     <v-col cols="12" md="12" class="pa-3 d-flex flex-column">
         <v-card class="elevation-5 flex d-flex flex-column cardStyle">
             <v-card-text class="job-card-wrap company-card-wrap">
+              {{data}}
                 <div class="company-img-block">
                   <v-img
                     :src="(data.logo_image_url) ? data.logo_image_url : '/images/default-logo.png'"
