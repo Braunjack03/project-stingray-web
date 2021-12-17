@@ -13,6 +13,7 @@ use App\Http\Controllers\JobSeekerProfileController;
 use App\Http\Controllers\EmployerProfileController;
 use App\Http\Controllers\CompanyProfileController;
 use App\Http\Controllers\JobPostController;
+use App\Http\Controllers\ArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,9 +67,9 @@ Route::get('news', [HomeController::class, 'blog'])->name('blog');
 
 Route::get('jobs', [HomeController::class, 'jobs'])->name('jobs');
 
-Route::get('articles', [HomeController::class, 'articles'])->name('articles');
+Route::get('articles', [ArticleController::class, 'index'])->name('articles');
 
-Route::get('article-details', [HomeController::class, 'articleDetail'])->name('article_details');
+Route::get('articles/{slug}', [ArticleController::class, 'show'])->name('article_details');
 
 Route::get('companies', [HomeController::class, 'companies'])->name('companies');
 
