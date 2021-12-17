@@ -66,6 +66,7 @@ export default {
    components: {
       Head,
       Layout,
+      Link,
       'CustomCard': Article,
       Pagination,
       Footer,
