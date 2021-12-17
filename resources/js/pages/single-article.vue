@@ -26,7 +26,7 @@
            <v-col cols="12" md="12">
               <div class="postBlock">
                  <div class="postSingle--img">
-                     <img :src="data.header_image" :alt="data.title">
+                     <img class="mx-auto" :src="data.header_image" :alt="data.title">
                  </div>
               </div>
            </v-col>
@@ -35,7 +35,7 @@
         <v-row class="blogPost--block mb-0 md:mb-6 singlePage--content justify-center">
            <v-col cols="12" md="9">
               <div class="postBlock--content">
-                  {{data.content}}
+                  <p>{{data.content}}</p>
               </div>
            </v-col>
         </v-row>
