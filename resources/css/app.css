@@ -1048,18 +1048,22 @@ section.homeBanner {
     background: #5d5dff;
     margin: 0 4px;
 }
-.postBlock--content .engineeringBtn {
+.postBlock--content .startupBtn {
     background: #3b82f6;
 }
-.postBlock--content .desingBtn {
+.postBlock--content .investmentBtn {
     background: #ec4899;
 }
-.postBlock--content .tutorialsBtn {
+.postBlock--content .hiringBtn {
     background: #3bb8a6;
 }
 .postBlock--content .engineeringBtn {
     background: #3b82f6;
 }
+.postBlock--content .cultureBtn {
+   background: rgb(34 197 94/1);
+}
+
 
 .blogPostTop--block .postBlock--content .postBlock--title {
     font-size: 2rem;
