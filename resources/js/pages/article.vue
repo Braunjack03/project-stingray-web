@@ -15,7 +15,7 @@
                      <v-col cols="12" md="6">
                         <div class="postBlock">
                            <div class="postBlock--img">
-                               <img src="/images/blog-post-01.jpg" alt="post-images">
+                               <img :src="latest.header_image" :alt="latest.title">
                                <div class="imgShadow"></div>
                            </div>
                         </div>
@@ -23,111 +23,26 @@
                      <v-col cols="12" md="6">
                         <div class="postBlock">
                            <div class="postBlock--content">
-                               <button class="text-white rounded-full">
-                                 Product
+                               <button class="text-white rounded-full" v-for="tag in latest.tags" :key="tag.id">
+                                 {{tag.name}}
                                </button>
-                               <button class="text-white rounded-full engineeringBtn">
-                                 Engineering
-                               </button>
-                               <h3 class="postBlock--title"><a href="#">The quick brown fox jumped over the lazy dog.</a></h3>
-                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                               <h3 class="postBlock--title"><Link :href="'/articles/'+latest.slug">{{latest.title}}</Link></h3>
+                               <p>{{latest.content}}</p>
                                <div class="postPersonal--detail">
                                   <img src="/images/news-author-01.jpg" alt="post-images">
-                                  <p><a href="#">Anastasia Dan </a> - Jan 17, 2020</p>
+                                  <p><a href="#">{{latest.name}} </a> - {{new Date(latest.created_at).toDateString().slice(4,10)+','+new Date(latest.created_at).toDateString().slice(10)}} </p>
                                </div>
                            </div>
                         </div>
                      </v-col>
                   </v-row>
-                  <v-row class="blogPost--block">
+                  <v-row class="blogPost--block" >
                      <v-col cols="12">
                         <h2 class="articlesTitle">Latest articles</h2>
                      </v-col>
-                     <v-col cols="12" md="4" sm="6">
-                        <div class="postBlock">
-                           <div class="postBlock--img">
-                               <img src="/images/news-01.jpg" alt="post-images">
-                           </div>
-                           <div class="postBlock--content">
-                               <button class="text-white rounded-full">
-                                 Product
-                               </button>
-                               <button class="text-white rounded-full engineeringBtn">
-                                 Engineering
-                               </button>
-                               <h3 class="postBlock--title"><a href="#">The quick brown fox jumped over the lazy dog.</a></h3>
-                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                               <div class="postPersonal--detail">
-                                  <img src="/images/news-author-01.jpg" alt="post-images">
-                                  <p><a href="#">Anastasia Dan </a> - Jan 17, 2020</p>
-                               </div>
-                           </div>
-                          </div>
-                      </v-col>
-                      <v-col cols="12" md="4" sm="6">
-                        <div class="postBlock">
-                           <div class="postBlock--img">
-                               <img src="/images/news-01.jpg" alt="post-images">
-                           </div>
-                           <div class="postBlock--content">
-                               <button class="text-white rounded-full">
-                                 Product
-                               </button>
-                               <button class="text-white rounded-full desingBtn">
-                                 Desing
-                               </button>
-                               <h3 class="postBlock--title"><a href="#">The quick brown fox jumped over the lazy dog.</a></h3>
-                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                               <div class="postPersonal--detail">
-                                  <img src="/images/news-author-01.jpg" alt="post-images">
-                                  <p><a href="#">Anastasia Dan </a> - Jan 17, 2020</p>
-                               </div>
-                           </div>
-                          </div>
-                      </v-col>
-                      <v-col cols="12" md="4" sm="6">
-                        <div class="postBlock">
-                           <div class="postBlock--img">
-                               <img src="/images/news-01.jpg" alt="post-images">
-                           </div>
-                           <div class="postBlock--content">
-                               <button class="text-white rounded-full">
-                                 Product
-                               </button>
-                               <button class="text-white rounded-full tutorialsBtn">
-                                 Tutorials and articles
-                               </button>
-                               <h3 class="postBlock--title"><a href="#">The quick brown fox jumped over the lazy dog.</a></h3>
-                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                               <div class="postPersonal--detail">
-                                  <img src="/images/news-author-01.jpg" alt="post-images">
-                                  <p><a href="#">Anastasia Dan </a> - Jan 17, 2020</p>
-                               </div>
-                           </div>
-                          </div>
-                      </v-col>
-                      <v-col cols="12" md="4" sm="6">
-                        <div class="postBlock">
-                           <div class="postBlock--img">
-                               <img src="/images/news-01.jpg" alt="post-images">
-                           </div>
-                           <div class="postBlock--content">
-                               <button class="text-white rounded-full">
-                                 Product
-                               </button>
-                               <button class="text-white rounded-full">
-                                 Engineering
-                               </button>
-                               <h3 class="postBlock--title"><a href="#">The quick brown fox jumped over the lazy dog.</a></h3>
-                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                               <div class="postPersonal--detail">
-                                  <img src="/images/news-author-01.jpg" alt="post-images">
-                                  <p><a href="#">Anastasia Dan </a> - Jan 17, 2020</p>
-                               </div>
-                           </div>
-                          </div>
-                      </v-col>
+                        <CustomCard v-for="data in articles.data" :key="data.id" :data="data"/>
                   </v-row>
+                  <pagination class="mt-5" :links="articles.links" />
                </div>
             </section>
    </Layout>   
@@ -135,7 +50,7 @@
 
 <script>
 //import Card from '../components/Card.vue';
-import CompanyList from '../components/Company.vue';
+import Article from '../components/Article.vue';
 import Layout from './Layout';
 import { Head,Link } from '@inertiajs/inertia-vue';
 import Pagination from '../components/CompanyPagination.vue';
@@ -151,22 +66,24 @@ export default {
    components: {
       Head,
       Layout,
-      'CustomCard': CompanyList,
+      'CustomCard': Article,
       Pagination,
       Footer,
    },
    props: {
-      data : Object,  
-      members:Object,
-      filters: Object,
-      term : String,
-      locations : Array,
-      job_posts_count: Number,
+      latest: Object,
+      articles : Object,
     },
     data () {
       return {
         location_id: '',
       }
     },
+     methods: {
+      setDateFomat(date) 
+         {
+            return date.toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long'})
+         },
+    }
 }
 </script>
