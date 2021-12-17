@@ -39,12 +39,38 @@
               </div>
            </v-col>
         </v-row>
-
-        <v-row class="blogPost--block">
+        <v-row class="blogPost--block" v-if="articles.length">
          <v-col cols="12">
-            <h2 class="articlesTitle">More from Open PRO</h2>
+            <h2 class="articlesTitle">Companies</h2>
          </v-col>
-          <CustomCard v-for="data1 in articles" :key="data1.id" :data="data1"/>
+
+          <v-col cols="12" md="12" class="pa-3 d-flex flex-column" v-for="data1 in articles" :key="data1.id">
+              <v-card class="elevation-5 flex d-flex flex-column cardStyle">
+                  <v-card-text class="job-card-wrap company-card-wrap">
+                      <div class="company-img-block">
+                        <v-img
+                          :src="(data1.logo_image_url) ? data1.logo_image_url : '/images/default-logo.png'"
+                        ></v-img>
+                      </div>
+                      <div class="company-text-block">
+                      <v-card-title class="p-0">{{data1.name}}</v-card-title> 
+                      <div class="text-subtitle-1"><span>{{data1.industry_types}}</span></div>
+                      <p class="description">{{data1.mission}}</p>
+                      </div>
+                      <div class="company-jobs-block">
+                      <Link :href="'/companies/'+data1.slug" color="text" class="flex justify-center items-center">View {{data1.job_posts.length}} Jobs 
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                              <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                          </svg>
+                      </Link>
+                      <div class="company-location" v-if="data1.city">
+                          <p><span>{{data1.city}}, {{data1.state}}</span> Location</p>
+                      </div>
+                      </div>
+                      <Link :href="'/companies/'+data1.slug" class="overlayLink"></Link>
+                  </v-card-text>
+              </v-card>
+          </v-col>
         </v-row>
       </div>
 
@@ -53,15 +79,13 @@
 </template>
 <script>
 import { Link, Head } from "@inertiajs/inertia-vue";
-import Article from '../components/Article.vue';
-import Pagination from '../components/CompanyPagination.vue';
+import Company from '../components/Company.vue';
 import Layout from "./Layout";
 export default {
   components: {
     Link,
     Layout,
-    'CustomCard': Article,
-    Pagination,
+    'CustomCard': Company,
     Head,
   },
   props: {
