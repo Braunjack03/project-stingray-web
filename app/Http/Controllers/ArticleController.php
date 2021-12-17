@@ -24,7 +24,7 @@ class ArticleController extends Controller
 
         $data = Article::with('tags')->select('articles.*','users.id as author_id','users.name')->leftjoin('users','articles.author_id','users.id')->where('is_published',1)->where('articles.slug',$slug)->first();
 
-        $latestarticles = CompanyProfile::with('job_posts')->join('article_company_profile','company_profiles.id','=','article_company_profile.company_profile_id')->where('article_company_profile.article_id', $data->id)->get();
+        $latestarticles = CompanyProfile::with('job_posts')->join('article_company_profile','company_profiles.id','=','article_company_profile.company_profile_id')->where('article_company_profile.article_id', $data->id)->take(3)->get();
         //dd($latestarticles);
         return Inertia::render('single-article',['data'=>$data,'articles'=>$latestarticles]);
     }
