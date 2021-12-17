@@ -846,6 +846,7 @@ section.homeBanner {
    background: url(../images/newsletter.jpg);
    background-repeat: no-repeat;
 }
+
 .newsletterBg:after {
     position: absolute;
     content: "";
@@ -989,6 +990,143 @@ section.homeBanner {
    width:250px;
 }
 
+/* Blog Page */
+.blogPost--block .articlesTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #33363a;
+    border-bottom: 1px solid #666;
+    padding-bottom: 12px;
+}
+.postBlock--img {
+    overflow: hidden;
+    aspect-ratio: 16/9;
+}
+.postBlock--img img {
+    transition: .6s all;
+}
+.postBlock--img:hover img {
+    transform: scale(1.04);
+}
+.postBlock--content {
+    padding: 1rem 0;
+}
+.postBlock--content .postBlock--title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 1.3;
+    color: #33363a;
+    margin: .6rem 0;
+}
+.postBlock--content p {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: rgb(155, 169, 180);
+    margin-bottom: 1rem;
+}
+.postPersonal--detail {
+    display: flex;
+    align-items: center;
+}
+.postPersonal--detail img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 16px;
+}
+.postPersonal--detail p {
+    margin: 0;
+}
+.postPersonal--detail p a {
+    color: #33363a;
+}
+.postBlock--content button {
+    font-size: 12px;
+    padding: 4px 11px;
+    font-weight: 600;
+    background: #5d5dff;
+    margin: 0 4px;
+}
+.postBlock--content .engineeringBtn {
+    background: #3b82f6;
+}
+.postBlock--content .desingBtn {
+    background: #ec4899;
+}
+.postBlock--content .tutorialsBtn {
+    background: #3bb8a6;
+}
+.postBlock--content .engineeringBtn {
+    background: #3b82f6;
+}
+
+.blogPostTop--block .postBlock--content .postBlock--title {
+    font-size: 2rem;
+}
+.blogPostTop--block .postBlock--img {
+    position: relative;
+}
+.blogPostTop--block .imgShadow {
+    position: absolute;
+    inset: 0;
+    background: #ddd;
+    z-index: 0;
+    width: calc(100% - 30px);
+    transform: translate(30px, 30px);
+    transition: .6s all;
+}
+.blogPostTop--block .postBlock--img img {
+    width: calc(100% - 30px);
+    position: relative;
+    z-index: 1;
+    transform: translateY(-30px);
+    height: 100%;
+}
+.blogPostTop--block .postBlock--img:hover .imgShadow {
+   transform: translate(0px, 0px);
+}
+
+.blogPostTop--block .postBlock--img:hover img {
+   transform: translateY(0px) scale(1.04);
+}
+
+.singlePage--articles .postBlock--content .postBlock--title {
+    font-size: 3.25rem;
+    font-weight: 800;
+    line-height: 1.15;
+}
+
+.singlePage--content .postBlock--content {
+    padding: 0;
+}
+.singlePage--content .postBlock--content p, .singlePage--content .postBlock--content ul {
+    margin-bottom: 2rem;
+    color: #666;
+}
+.singlePage--content .postBlock--content p a {
+    color: #33363a;  
+}
+.singlePage--content .postBlock--content ul li {
+    list-style: disc;
+    color: #666;
+    margin-left: 18px;  
+}
+.singlePage--content .postBlock--content ul.postSocialLink{
+   margin-bottom: 0;
+}
+.singlePage--content .postBlock--content ul.postSocialLink  li {
+   list-style: none;
+} 
+.postSocialLink .fill-current {
+    fill: #5d5dff;
+}
+.blogPost--block .articlesTitle {
+    border-top: 1px solid #666;
+    padding-top: 12px;
+}
+
+
 /* Media */
 
 @media (max-width:1170px){
@@ -1002,7 +1140,7 @@ section.homeBanner {
    }
 }
 
-@media (max-width:  1024px) {
+@media (max-width:  1023.98px) {
    .homeBanner .h1 {
       font-size: 2.2rem;
    }
@@ -1038,6 +1176,20 @@ section.homeBanner {
    }
    .companyPageBanner {
       height: 150px;
+   }
+   .singlePage--articles .postBlock--content .postBlock--title {
+       font-size: 2.5rem;
+   }
+   .blogPostTop--block .postBlock--content .postBlock--title {
+       font-size: 1.5rem;
+   }
+   .mobileJustify {
+       justify-content: center;
+       flex-flow: column;
+       text-align: center;
+   }
+   #mobile-nav ul li a {
+       justify-content: center;
    }
 }
 
@@ -1172,6 +1324,9 @@ section.homeBanner {
    }
    .company-page-title .h3 {
        font-size: 1.5rem;
+   }
+   .singlePage--articles .postBlock--content .postBlock--title {
+       font-size: 2rem;
    }
 }
   
