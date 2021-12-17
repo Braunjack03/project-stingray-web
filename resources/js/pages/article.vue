@@ -15,7 +15,7 @@
                      <v-col cols="12" md="6">
                         <div class="postBlock">
                            <div class="postBlock--img">
-                               <img src="http://192.168.0.55:8000/images/blog-post-01.jpg" alt="post-images">
+                               <img src="/images/blog-post-01.jpg" alt="post-images">
                                <div class="imgShadow"></div>
                            </div>
                         </div>
@@ -32,7 +32,7 @@
                                <h3 class="postBlock--title"><a href="#">The quick brown fox jumped over the lazy dog.</a></h3>
                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                <div class="postPersonal--detail">
-                                  <img src="http://192.168.0.55:8000/images/news-author-01.jpg" alt="post-images">
+                                  <img src="/images/news-author-01.jpg" alt="post-images">
                                   <p><a href="#">Anastasia Dan </a> - Jan 17, 2020</p>
                                </div>
                            </div>
@@ -46,7 +46,7 @@
                      <v-col cols="12" md="4" sm="6">
                         <div class="postBlock">
                            <div class="postBlock--img">
-                               <img src="http://192.168.0.55:8000/images/news-01.jpg" alt="post-images">
+                               <img src="/images/news-01.jpg" alt="post-images">
                            </div>
                            <div class="postBlock--content">
                                <button class="text-white rounded-full">
@@ -58,7 +58,7 @@
                                <h3 class="postBlock--title"><a href="#">The quick brown fox jumped over the lazy dog.</a></h3>
                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                <div class="postPersonal--detail">
-                                  <img src="http://192.168.0.55:8000/images/news-author-01.jpg" alt="post-images">
+                                  <img src="/images/news-author-01.jpg" alt="post-images">
                                   <p><a href="#">Anastasia Dan </a> - Jan 17, 2020</p>
                                </div>
                            </div>
@@ -67,7 +67,7 @@
                       <v-col cols="12" md="4" sm="6">
                         <div class="postBlock">
                            <div class="postBlock--img">
-                               <img src="http://192.168.0.55:8000/images/news-01.jpg" alt="post-images">
+                               <img src="/images/news-01.jpg" alt="post-images">
                            </div>
                            <div class="postBlock--content">
                                <button class="text-white rounded-full">
@@ -79,7 +79,7 @@
                                <h3 class="postBlock--title"><a href="#">The quick brown fox jumped over the lazy dog.</a></h3>
                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                <div class="postPersonal--detail">
-                                  <img src="http://192.168.0.55:8000/images/news-author-01.jpg" alt="post-images">
+                                  <img src="/images/news-author-01.jpg" alt="post-images">
                                   <p><a href="#">Anastasia Dan </a> - Jan 17, 2020</p>
                                </div>
                            </div>
@@ -88,7 +88,7 @@
                       <v-col cols="12" md="4" sm="6">
                         <div class="postBlock">
                            <div class="postBlock--img">
-                               <img src="http://192.168.0.55:8000/images/news-01.jpg" alt="post-images">
+                               <img src="/images/news-01.jpg" alt="post-images">
                            </div>
                            <div class="postBlock--content">
                                <button class="text-white rounded-full">
@@ -100,7 +100,7 @@
                                <h3 class="postBlock--title"><a href="#">The quick brown fox jumped over the lazy dog.</a></h3>
                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                <div class="postPersonal--detail">
-                                  <img src="http://192.168.0.55:8000/images/news-author-01.jpg" alt="post-images">
+                                  <img src="/images/news-author-01.jpg" alt="post-images">
                                   <p><a href="#">Anastasia Dan </a> - Jan 17, 2020</p>
                                </div>
                            </div>
@@ -109,7 +109,7 @@
                       <v-col cols="12" md="4" sm="6">
                         <div class="postBlock">
                            <div class="postBlock--img">
-                               <img src="http://192.168.0.55:8000/images/news-01.jpg" alt="post-images">
+                               <img src="/images/news-01.jpg" alt="post-images">
                            </div>
                            <div class="postBlock--content">
                                <button class="text-white rounded-full">
@@ -121,7 +121,7 @@
                                <h3 class="postBlock--title"><a href="#">The quick brown fox jumped over the lazy dog.</a></h3>
                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                <div class="postPersonal--detail">
-                                  <img src="http://192.168.0.55:8000/images/news-author-01.jpg" alt="post-images">
+                                  <img src="/images/news-author-01.jpg" alt="post-images">
                                   <p><a href="#">Anastasia Dan </a> - Jan 17, 2020</p>
                                </div>
                            </div>

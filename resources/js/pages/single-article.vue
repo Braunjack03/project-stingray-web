@@ -11,7 +11,7 @@
                      <p class="text-center lg:text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                      <div class="postPersonal--detail justify-between mobileJustify">
                       <div class="flex items-center">
-                        <img src="http://192.168.0.55:8000/images/news-author-01.jpg" alt="post-images">
+                        <img src="/images/news-author-01.jpg" alt="post-images">
                         <p><a href="#">Anastasia Dan </a> - Jan 17, 2020</p>
                       </div>
                       <div class="mt-4 lg:mt-0">
@@ -29,7 +29,7 @@
            <v-col cols="12" md="12">
               <div class="postBlock">
                  <div class="postSingle--img">
-                     <img src="http://192.168.0.55:8000/images/blog-post-01.jpg" alt="post-images">
+                     <img src="/images/blog-post-01.jpg" alt="post-images">
                  </div>
               </div>
            </v-col>
@@ -41,7 +41,7 @@
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis enim lobortis scelerisque fermentum. Neque sodales ut etiam sit amet. Ligula ullamcorper malesuada proin libero nunc consequat interdum varius. Quam pellentesque nec nam aliquam sem et tortor consequat. Pellentesque <a href="#">adipiscing</a> commodo elit at imperdiet. Semper auctor neque vitae tempus quam pellentesque nec. Amet dictum sit amet justo donec enim diam. Varius sit amet mattis vulputate enim nulla aliquet porttitor. Odio pellentesque diam volutpat commodo sed. Elit sed vulputate mi sit amet mauris commodo quis imperdiet.</p>
                   <p class="px-3 mx-8 border-l-2"><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis enim lobortis scelerisque fermentum. Neque sodales ut etiam sit amet. Ligula ullamcorper malesuada proin</em></p>
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis enim lobortis scelerisque fermentum. Neque sodales ut etiam sit amet. Ligula ullamcorper malesuada proin</p>
-                  <img class="mb-2" src="http://192.168.0.55:8000/images/news-inner-image01.jpg" alt="post-images">
+                  <img class="mb-2" src="/images/news-inner-image01.jpg" alt="post-images">
                   <p class="text-center"><small>Photo by Helena Lopes on Unsplash</small></p>
 
                   <h3 class="h3 text-gray-700 mb-4">Challenges of designing for masses</h3>
@@ -105,7 +105,7 @@
          <v-col cols="12" md="4" sm="6">
             <div class="postBlock">
                <div class="postBlock--img">
-                   <img src="http://192.168.0.55:8000/images/news-01.jpg" alt="post-images">
+                   <img src="/images/news-01.jpg" alt="post-images">
                </div>
                <div class="postBlock--content">
                    <button class="text-white rounded-full">
@@ -117,7 +117,7 @@
                    <h3 class="postBlock--title"><a href="#">The quick brown fox jumped over the lazy dog.</a></h3>
                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                    <div class="postPersonal--detail">
-                      <img src="http://192.168.0.55:8000/images/news-author-01.jpg" alt="post-images">
+                      <img src="/images/news-author-01.jpg" alt="post-images">
                       <p><a href="#">Anastasia Dan </a> - Jan 17, 2020</p>
                    </div>
                </div>
@@ -126,7 +126,7 @@
           <v-col cols="12" md="4" sm="6">
             <div class="postBlock">
                <div class="postBlock--img">
-                   <img src="http://192.168.0.55:8000/images/news-01.jpg" alt="post-images">
+                   <img src="/images/news-01.jpg" alt="post-images">
                </div>
                <div class="postBlock--content">
                    <button class="text-white rounded-full">
@@ -138,7 +138,7 @@
                    <h3 class="postBlock--title"><a href="#">The quick brown fox jumped over the lazy dog.</a></h3>
                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                    <div class="postPersonal--detail">
-                      <img src="http://192.168.0.55:8000/images/news-author-01.jpg" alt="post-images">
+                      <img src="/images/news-author-01.jpg" alt="post-images">
                       <p><a href="#">Anastasia Dan </a> - Jan 17, 2020</p>
                    </div>
                </div>
@@ -147,7 +147,7 @@
           <v-col cols="12" md="4" sm="6">
             <div class="postBlock">
                <div class="postBlock--img">
-                   <img src="http://192.168.0.55:8000/images/news-01.jpg" alt="post-images">
+                   <img src="/images/news-01.jpg" alt="post-images">
                </div>
                <div class="postBlock--content">
                    <button class="text-white rounded-full">
@@ -159,7 +159,7 @@
                    <h3 class="postBlock--title"><a href="#">The quick brown fox jumped over the lazy dog.</a></h3>
                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                    <div class="postPersonal--detail">
-                      <img src="http://192.168.0.55:8000/images/news-author-01.jpg" alt="post-images">
+                      <img src="/images/news-author-01.jpg" alt="post-images">
                       <p><a href="#">Anastasia Dan </a> - Jan 17, 2020</p>
                    </div>
                </div>
