@@ -26,7 +26,7 @@ class ArticleCompanyProfile extends Seeder
 
         Article::all()->each(function (Article $article) {
             $tags = Tag::inRandomOrder()->take(random_int(0,5))->get()->pluck('id');
-            $article->company_profiles()->sync($tags);
+            $article->tags()->sync($tags);
         });
 
 

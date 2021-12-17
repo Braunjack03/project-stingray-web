@@ -13,4 +13,9 @@ class Article extends Model
     {
         return $this->belongsToMany(CompanyProfile::class)->withTimestamps();
     }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class)->withTimestamps();
+    }
 }
