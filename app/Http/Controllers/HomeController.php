@@ -146,7 +146,9 @@ class HomeController extends Controller
             
             $data = [];
             foreach($company as $key => $comp){
-                $company[$key]['logo_image_url'] = ($comp['logo_image_url']) ? getBucketImageUrl($comp['uuid'],$comp['logo_image_url'],'company') : '';
+                if(!str_starts_with($company[$key]['logo_image_url'], 'https://')){
+                    $company[$key]['logo_image_url'] = ($comp['logo_image_url']) ? getBucketImageUrl($comp['uuid'],$comp['logo_image_url'],'company') : '';
+                }
 
                 $selected_industries = explode(',',$comp['industry_ids']);
            

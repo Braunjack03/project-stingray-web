@@ -356,9 +356,14 @@ class CompanyProfileController extends Controller
             $industries = CompanyType::whereIn('id', $selected_industries)->pluck('name')->toArray();
             $company['industry_types'] = implode(' - ',$industries);
             
-            $company['logo_image_url'] = ($company['logo_image_url']) ? getBucketImageUrl($company['uuid'],$company['logo_image_url'],'company') : '';
+            // If we don't have a url then assume it's in the S3 bucket
+            if(!str_starts_with($company['logo_image_url'], 'https://')){
+                $company['logo_image_url'] = ($company['logo_image_url']) ? getBucketImageUrl($company['uuid'],$company['logo_image_url'],'company') : '';
+            }
 
-            $company['featured_image_url'] = ($company['featured_image_url']) ? getBucketImageUrl($company['uuid'],$company['featured_image_url'],'company') : '';
+            if(!str_starts_with($company['logo_image_url'], 'https://')){
+                $company['featured_image_url'] = ($company['featured_image_url']) ? getBucketImageUrl($company['uuid'],$company['featured_image_url'],'company') : '';
+            }
 
             $job_posts_query = JobPost::select('job_posts.*','locations.name as location','company_profiles.name as company_name','company_profiles.slug as company_slug')
             ->leftjoin('company_profiles','job_posts.company_profile_id','company_profiles.id')
