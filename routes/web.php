@@ -54,13 +54,6 @@ Route::get('account/verify/{token}', [AuthController::class, 'verifyAccount'])->
 Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
 Route::post('reset-password/{token}', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
  
-/*Route::get('/', function() {
-
-    //$job_posts = JobPost::with('company_profile')->all();
-    #$job_posts = DB::table('job_posts')->join('company_profiles', 'company_profiles.id', '=', 'job_posts.company_profile_id')->get('content', 'job_posts.name', 'company_profiles.name');
-  
-});*/
-
 Route::get('/', [HomeController::class, 'home'])->name('home');
 
 Route::get('news', [HomeController::class, 'blog'])->name('blog');

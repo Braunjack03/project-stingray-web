@@ -14,7 +14,7 @@
                     <img src="/images/made_in_tampa_logo.svg" width="200">
               </Link>
             </div>
-            <div class="text-gray-400">Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</div>
+            <div class="text-gray-400">Celebrating Tampa Bay's booming technology scene. Jobs, news articles, company profiles, and more.</div>
           </div>
 
           <!-- 2nd, 3rd and 4th blocks -->
@@ -22,16 +22,16 @@
 
             <!-- 2nd block -->
             <div class="text-sm">
-              <h6 class="text-white font-medium mb-1">Products</h6>
+              <h6 class="text-white font-medium mb-1">About</h6>
               <ul>
                 <li class="mb-1">
-                  <Link href="#" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Web Studio</Link>
+                  <Link href="#" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">About Us</Link>
                 </li>
                 <li class="mb-1">
-                  <Link href="#" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">DynamicBox Flex</Link>
+                  <Link href="#" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Privacy Policy</Link>
                 </li>
                 <li class="mb-1">
-                  <Link href="#" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Programming Forms</Link>
+                  <Link href="#" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Terms of use</Link>
                 </li>
               </ul>
             </div>
@@ -41,41 +41,29 @@
               <h6 class="text-white font-medium mb-1">Resources</h6>
               <ul>
                 <li class="mb-1">
-                  <Link href="#" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Nostrud exercitation</Link>
+                  <Link href="#" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Provide Feedback</Link>
                 </li>
                 <li class="mb-1">
-                  <Link href="#" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Visual mockups</Link>
+                  <Link href="#" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Report a Concern</Link>
                 </li>
                 <li class="mb-1">
-                  <Link href="#" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Nostrud exercitation</Link>
+                  <Link href="#" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Browse Articles</Link>
                 </li>
                 <li class="mb-1">
-                  <Link href="#" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Visual mockups</Link>
-                </li>
-                <li class="mb-1">
-                  <Link href="#" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Nostrud exercitation</Link>
+                  <Link href="#" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Browse Jobs</Link>
                 </li>
               </ul>
             </div>
 
             <!-- 4th block -->
             <div class="text-sm">
-              <h6 class="text-white font-medium mb-1">Company</h6>
+              <h6 class="text-white font-medium mb-1">Get Involved</h6>
               <ul>
                 <li class="mb-1">
-                  <Link href="#" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Consectetur adipiscing</Link>
+                  <Link href="#" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Employers</Link>
                 </li>
                 <li class="mb-1">
-                  <Link href="#" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Labore et dolore</Link>
-                </li>
-                <li class="mb-1">
-                  <Link href="#" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Consectetur adipiscing</Link>
-                </li>
-                <li class="mb-1">
-                  <Link href="#" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Labore et dolore</Link>
-                </li>
-                <li class="mb-1">
-                  <Link href="#" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Consectetur adipiscing</Link>
+                  <Link href="#" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Partnerships</Link>
                 </li>
               </ul>
             </div>
