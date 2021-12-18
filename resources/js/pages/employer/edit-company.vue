@@ -67,6 +67,26 @@
                                     <div v-if="errors.website_url" class="mt-2 error">{{ errors.website_url }}</div>
                                 </div>
                             </div>
+
+                             <div class="flex flex-wrap mb-4">
+                                <div class="w-full px-3 form-avataar">
+                                    <v-icon v-if="user.featured_image_src" color="gray darken-2" class="ml-auto" @click="removeHeaderImage()"> mdi-close-circle</v-icon>
+                                        
+                                        <v-img
+                                        :src="user.featured_image_src"
+                                        max-height="150"
+                                        max-width="250"
+                                        ></v-img>
+                                </div>
+                                </div>
+
+                                <div class="flex flex-wrap mb-4">
+                                <div class="w-full px-3 form-file-upload">
+                                    <label class="block text-gray-700 text-sm font-medium mb-1">Header Image (Recommended 500px x 500px) </label>
+                                        <v-file-input class="fileUpload form-input input-field-outer w-full text-gray-700" v-model="user.featured_image_url" accept="image/*" @change="onHeaderFileChange" outlined dense></v-file-input>
+                                    
+                                </div>
+                            </div>  
     
                             <div class="flex flex-wrap mb-4">
                                 <div class="w-full px-3">
@@ -75,6 +95,14 @@
                                     <div v-if="errors.mission" class="mt-2 error">{{ errors.mission }}</div>
                                 </div>
                             </div>
+
+                            <div class="flex flex-wrap mb-4">
+                                <div class="w-full px-3">
+                                    <label class="block text-gray-700 text-sm font-medium mb-1">Company Description</label>
+                                    <v-textarea v-model="user.description" rows="2" class="form-input input-field-outer w-full text-gray-700" placeholder="Company Description" ></v-textarea>
+                                    <div v-if="errors.description" class="mt-2 error">{{ errors.description }}</div>
+                                </div>
+                            </div>  
     
                             <div class="flex flex-wrap mb-4">
                                 <div class="w-full px-3">
@@ -220,6 +248,7 @@ export default {
         name: this.user.name,
         local_employees: this.user.local_employees,
         logo_image_removed: 0,
+        featured_image_removed: 0,
         industry:[],
         items: ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming'],
 
@@ -246,7 +275,9 @@ export default {
                   local_employees: this.local_employees,
                   global_employees: this.user.global_employees,
                   website_url: this.user.website_url,
+                  featured_image_url: this.user.featured_image_url,
                   mission: this.user.mission,
+                  description: this.user.description,
                   industry_ids: this.user.industry_ids,
                   street_addr_1: this.user.street_addr_1,
                   street_addr_2: this.user.street_addr_2,
@@ -267,9 +298,16 @@ export default {
             this.user.logo_image_src = '';
             this.user.logo_image_removed = 1;
         },
+        removeHeaderImage(){
+            this.user.featured_image_src = '';
+            this.user.featured_image_removed = 1;
+        }, 
         onFileChange(e) {
             this.user.logo_image_src = URL.createObjectURL(this.user.logo_image_url);
-        }
+        },
+        onHeaderFileChange() {
+        this.user.featured_image_src = URL.createObjectURL(this.user.featured_image_url)
+      },    
     },
 }
 </script>

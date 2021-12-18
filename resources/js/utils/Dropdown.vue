@@ -7,7 +7,7 @@
     @focusout="dropdownOpen = false"
   >
     <a
-      class="text-gray-500 hover:text-gray-700 px-4 py-2 flex items-center transition duration-150 ease-in-out"
+      class="text-white-900 hover:text-white-700 px-4 py-2 flex items-center transition duration-150 ease-in-out"
       href="#0"
       aria-haspopup="true"
       aria-expanded={dropdownOpen}

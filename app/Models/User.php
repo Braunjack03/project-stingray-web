@@ -45,4 +45,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
         'created_at' => 'datetime:d/m/Y'
     ];
+
+    protected $appends = [ 'is_email_verified' ];
+
 }

@@ -15,7 +15,7 @@ class HomeController extends Controller
 {    
     public function __construct()
     {
-        $this->middleware('auth',['except' => ['home','jobs','companies','blog','hiring']]);
+        $this->middleware('auth',['except' => ['home','jobs','companies','blog','hiring','articles','articleDetail']]);
     }
     /**
      * Dashboard
@@ -57,6 +57,14 @@ class HomeController extends Controller
         return Inertia::render('blog');
     }
 
+    public function articles(){
+        return Inertia::render('article');
+    }
+ 
+    public function articleDetail(){
+        return Inertia::render('single-article');
+    }
+
     public function jobs(Request $request){
         
         try{
@@ -89,12 +97,12 @@ class HomeController extends Controller
             
             $job_posts_count = $job_posts_query->count();
 
-            $job_posts = $job_posts_query->paginate($this->paginationLimit);
+            $job_posts = $job_posts_query->paginate($this->paginationLimit)->onEachSide(1);
             
             //dd($job_posts);
             //->paginate($this->paginationLimit);
             $term_u = $request->q;
-            if($term_u == 'null'){
+            if($term_u == 'null' || $term_u == 'NaN'){
                 $term_u = '';
             }
             //die('');
