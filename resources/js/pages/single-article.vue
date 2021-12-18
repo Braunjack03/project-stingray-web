@@ -35,7 +35,7 @@
         <v-row class="blogPost--block mb-0 md:mb-6 singlePage--content justify-center">
            <v-col cols="12" md="9">
               <div class="postBlock--content">
-                  <p>{{data.content}}</p>
+                  <p><span v-html="data.content"></span></p>
               </div>
            </v-col>
         </v-row>

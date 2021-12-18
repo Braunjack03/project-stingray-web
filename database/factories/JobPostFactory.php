@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\JobPost;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Utils;
 //use Illuminate\Support\Str;
 
 class JobPostFactory extends Factory
@@ -24,7 +25,7 @@ class JobPostFactory extends Factory
     {
         return [
             'name' => $this->faker->jobTitle,
-            'content' => $this->faker->paragraph(70),
+            'content' => $this->getFakeParagraphs(rand(5,12)),
             'apply_url' => $this->faker->url,
             'slug' => $this->faker->slug,
             'explevel_id' =>$this->faker->numberBetween(1,4),
@@ -35,4 +36,18 @@ class JobPostFactory extends Factory
 
         ];
     }
+
+    private function getFakeParagraphs($num)
+    {
+        $paragraphs = $num;
+        $i = 0;
+        $ret = "";
+        while ($i < $paragraphs) {
+            $ret .= "<p>" . $this->faker->paragraph(rand(3, 8)) . "</p>";
+            $i++;
+        }
+        return $ret;
+    }
+
+    
 }

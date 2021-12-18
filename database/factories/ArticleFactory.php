@@ -22,16 +22,32 @@ class ArticleFactory extends Factory
      */
     public function definition()
     {
+        $content = $this->getFakeParagraphs(rand(3,12));
+
         return [
-            'title' => $this->faker->words($this->faker->numberBetween(3,9), true),
+            'title' => ucwords($this->faker->words($this->faker->numberBetween(3,6), true)),
             'sub_title' => $this->faker->words($this->faker->numberBetween(6,10), true),
             'created_at' => now(),
             'publish_date' => now(),
             'is_published' => 1,
             'author_id' => rand(2,5),
-            'content' => $this->faker->paragraphs(random_int(2,8), true),
+            'content' => $content,
             'header_image' => 'https://ik.imagekit.io/stingray/article/placeholder.jpg',
             'slug' => $this->faker->slug,
         ];
     }
+
+    private function getFakeParagraphs($num)
+    {
+        $paragraphs = $num;
+        $i = 0;
+        $ret = "";
+        while ($i < $paragraphs) {
+            $ret .= "<p>" . $this->faker->paragraph(rand(3, 10)) . "</p>";
+            $i++;
+        }
+        return $ret;
+    }
+
+
 }

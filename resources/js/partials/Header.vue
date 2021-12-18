@@ -31,13 +31,10 @@
             </li>
             <li> 
               <Link href="/articles" class="font-bold text-white-900 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">News</Link>
-            </li> |
+            </li> 
             <li>
               <Link href="#"  class="btn-sm text-white bg-purple-600 hover:bg-purple-700 mx-4">Employers</Link>
             </li>
-            <!-- <li>
-              <Link href="#"  class="font-bold text-white-600 hover:text-purple-600 px-4 py-3 flex items-center transition duration-150 ease-in-out">Employers</Link>
-            </li> --> <span v-if="!isLoggedIn"> | </span>
             <li v-if="!isLoggedIn">
               <Link href="/register"  class="font-bold text-white-600 hover:text-purple-600 px-4 py-3 flex items-center transition duration-150 ease-in-out">Join</Link>
             </li>

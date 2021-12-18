@@ -6,7 +6,7 @@
                   <v-row>
                      <v-col cols="12" md="8">
                         <div class="pt-16 pb-2 md:pb-8 company-page-title">
-                           <h1 class="h1 text-gray-700 text-center md:text-left">Refreshing news for developers and designers</h1>
+                           <h1 class="h1 text-gray-700 text-center md:text-left">The Latest Tampa Bay Technology and Start-up News</h1>
                         </div>
                      </v-col>
                   </v-row>
@@ -27,7 +27,7 @@
                                  {{tag.name}}
                                </button>
                                <h3 class="postBlock--title"><Link :href="'/articles/'+latest.slug">{{latest.title}}</Link></h3>
-                               <p>{{latest.content}}</p>
+                               <p>{{latest.content.substring(0,255) | stripHTML}}</p>
                                <div class="postPersonal--detail">
                                   <img src="/images/news-author-01.jpg" alt="post-images">
                                   <p><a href="#">{{latest.name}} </a> - {{new Date(latest.created_at).toDateString().slice(4,10)+','+new Date(latest.created_at).toDateString().slice(10)}} </p>
