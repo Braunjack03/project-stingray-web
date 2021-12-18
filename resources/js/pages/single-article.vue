@@ -26,7 +26,7 @@
            <v-col cols="12" md="12">
               <div class="postBlock">
                  <div class="postSingle--img">
-                     <img class="mx-auto" :src="data.header_image" :alt="data.title">
+                     <img class="mx-auto" :src="data.header_image + '?tr=w-1024,h-567'" :alt="data.title">
                  </div>
               </div>
            </v-col>

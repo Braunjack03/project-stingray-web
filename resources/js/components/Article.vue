@@ -2,7 +2,7 @@
      <v-col cols="12" md="4" sm="6" >
       <div class="postBlock">
           <div class="postBlock--img">
-              <img :src="data.header_image" :alt="data.title">
+              <img :src="data.header_image + '?tr=w-350,h-200'" :alt="data.title">
           </div>
           <div class="postBlock--content">
                 <button class="text-white rounded-full" :class="tag.name.toLowerCase()+'Btn'" v-for="tag in data.tags" :key="tag.id">
