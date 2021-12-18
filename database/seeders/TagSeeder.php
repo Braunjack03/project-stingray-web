@@ -21,11 +21,17 @@ class TagSeeder extends Seeder
 
     function load_tags(){
 
-        $tags = ['Investment', 'Hiring', 'Productivity', 'Culture', 'Startup'];
+        $tags = ['Investment' => 'pink', 
+                 'Hiring' => 'cyan', 
+                 'Productivity' => 'violet', 
+                 'Culture' => 'green', 
+                 'Wellness' => 'gray',
+                 'Startup' => 'blue'];
 
-        foreach($tags as $tag){
+        foreach($tags as $tag=>$color){
         DB::table('tags')->insert([
             'name' => $tag,
+            'color' => $color,
             'created_at' => now(),
             'updated_at' => now(),
 
