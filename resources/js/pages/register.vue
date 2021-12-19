@@ -7,7 +7,7 @@
 
             <!-- Page header -->
             <div class="max-w-3xl mx-auto text-center pb-12 md:pb-9">
-              <h1 class="h1 text-gray-700">Welcome. We exist to make entrepreneurship easier.</h1>
+              <h1 class="h1 text-gray-700">Register for Made in Tampa</h1>
             </div>
 
              <!-- Form -->

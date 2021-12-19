@@ -1,6 +1,6 @@
 <template>
    <Layout>
-      <Head title="Job Listing" />
+      <Head title="Companies Hiring the Tampa Bay" />
               <section data-app>
                <div class="max-w-6xl mx-auto px-4 sm:px-6 py-10 md:py-20 relative">
                   <div class="pt-16 pb-6 md:pb-12 company-page-title">

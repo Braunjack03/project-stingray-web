@@ -41,7 +41,7 @@
         </v-row>
         <v-row class="blogPost--block" v-if="articles.length">
          <v-col cols="12">
-            <h2 class="articlesTitle">Companies</h2>
+            <h2 class="articlesTitle">Companies Mentioned in the Article</h2>
          </v-col>
 
           <v-col cols="12" md="12" class="pa-3 d-flex flex-column" v-for="data1 in articles" :key="data1.id">

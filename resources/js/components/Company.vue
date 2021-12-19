@@ -10,7 +10,7 @@
                 <div class="company-text-block">
                 <v-card-title class="p-0">{{data.name}}</v-card-title> 
                 <div class="text-subtitle-1"><span>{{data.industry_types}}</span></div>
-                <p class="description">{{data.mission}}</p>
+                <p class="description">{{data.description.substring(0,250) | stripHTML}}</p>
                 </div>
                 <div class="company-jobs-block">
                 <Link :href="'/companies/'+data.slug" color="text" class="flex justify-center items-center">View {{data.job_posts.length}} Jobs 
