@@ -23,9 +23,14 @@ class DatabaseSeeder extends Seeder
         print("Seeding users. \n");
         $users = User::factory()->count(100)->create();
         print("Seeding company profiles.\n");
-        $company_profiles = CompanyProfile::factory()->count(100)->has(JobPost::factory()->count(20), 'job_posts')->create();
-        print("Seeding job posts.\n");
-        $job_posts = JobPost::factory()->count(500)->create();
+
+        for ($i = 0; $i < 20; $i++) {
+            $company_profiles_1 = CompanyProfile::factory()->count(5)->has(JobPost::factory()->count(rand(4, 20)), 'job_posts')->create();
+        }
+        $company_profiles_2 = CompanyProfile::factory()->count(5)->has(JobPost::factory()->count(rand(1, 3)), 'job_posts')->create();
+        $company_profiles_3 = CompanyProfile::factory()->count(3)->has(JobPost::factory()->count(0), 'job_posts')->create();
+        $company_profiles_4 = CompanyProfile::factory()->count(3)->has(JobPost::factory()->count(100), 'job_posts')->create();
+
         print("Seeding articles.\n");
         $articles = Article::factory()->count(250)->create();
 
@@ -34,5 +39,4 @@ class DatabaseSeeder extends Seeder
             ArticleCompanyProfile::class
         ]);
     }
-
 }
