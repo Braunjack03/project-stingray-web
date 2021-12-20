@@ -26,6 +26,8 @@ use App\Http\Controllers\ArticleController;
 |
 */
 
+
+
 Route::get('contact', [HomeController::class, 'contact']);
 
 Route::post('contact', [HomeController::class, 'contactSubmit'])->name('contact');
@@ -129,3 +131,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function() {
     Route::get('job_seekers', [AdminController::class, 'job_seekers'])->name('admin.job_seekers');
 
 });
+
+Route::get('/{vue_capture?}', function () {
+    return Inertia::render('404');
+})->where('vue_capture', '[\/\w\.-]*');

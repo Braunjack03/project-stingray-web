@@ -386,7 +386,7 @@ class CompanyProfileController extends Controller
 
         }catch (\Exception $e) {
             $message = $e->getMessage();
-            return $this->sendErrorResponse('login',$message);
+            return $this->sendErrorResponse('404',$message);
         }
     }
 
