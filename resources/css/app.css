@@ -277,6 +277,21 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
 .custom-pagination div {
     display: inherit;
 }
+.custom-pagination div a {
+   border-radius: 50%;
+   padding: 0;
+   width: 40px;
+   height: 40px;
+   text-align: center;
+   line-height: 40px;
+   font-size: .8rem;
+   font-weight: 500;
+}
+.custom-pagination div:first-child a, .custom-pagination div:last-child a {
+   width: auto;
+   padding: 0px 14px;
+   border-radius: 30px;
+}
 
 /* Company Profile Page */
 .companyProfile--outer, .singlePost--outer {
@@ -564,7 +579,6 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
    font-size: 1rem;
    padding: .2rem 0 .2rem .5rem;
    font-weight: 400;
-   /*color:rgb(155, 169, 180);*/
 }
 
 .types-title{
@@ -709,10 +723,10 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
 }
 
 .description{
-   font-size: .9rem;
+   font-size: 1.125rem;
    padding: 0 0 .5rem 0px;
    line-height: 1.5;
-   color:rgb(155, 169, 180);
+   color: var(--textColor);
 }
 
 .date {
@@ -784,6 +798,10 @@ section.homeBanner {
    letter-spacing: normal;
    border-radius: 0 4px 4px 0px;
    height: 54px !important;
+   box-shadow: none;
+}
+button{
+   box-shadow: none !important;
 }
 .quickSearch {
    color: #e5eaee;
@@ -912,10 +930,10 @@ section.homeBanner {
     padding: 0 20px;
     border-radius: 4px;
     letter-spacing: 1px;
-    box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+   /* box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);*/
 }
-
-/* Hiring Page */
+  
+/* Hiring Page */  
 .job-card-wrap.company-card-wrap {
     padding: 1rem 1rem!important;
 }
@@ -1019,9 +1037,9 @@ section.homeBanner {
     margin: .6rem 0;
 }
 .postBlock--content p {
-    font-size: 1rem;
+    font-size: 1.125rem;
     line-height: 1.5;
-    color: rgb(155, 169, 180);
+    color: var(--textColor);
     margin-bottom: 1rem;
 }
 .postPersonal--detail {
@@ -1037,6 +1055,7 @@ section.homeBanner {
 }
 .postPersonal--detail p {
     margin: 0;
+    font-size: 1rem;
 }
 .postPersonal--detail p a {
     color: #33363a;
@@ -1046,7 +1065,7 @@ section.homeBanner {
     padding: 4px 11px;
     font-weight: 600;
     background: #5d5dff;
-    margin: 0 4px;
+    margin: 0 6px 0 0;
 }
 .postBlock--content .startupBtn {
     background: #3b82f6;
@@ -1101,12 +1120,15 @@ section.homeBanner {
     line-height: 1.15;
 }
 
+.singleArticles--outer .postContainer {
+    max-width: 768px;
+    margin: 0 auto;
+}
 .singlePage--content .postBlock--content {
     padding: 0;
 }
 .singlePage--content .postBlock--content p, .singlePage--content .postBlock--content ul {
     margin-bottom: 2rem;
-    color: #666;
 }
 .singlePage--content .postBlock--content p a {
     color: #33363a;  
@@ -1128,6 +1150,17 @@ section.homeBanner {
 .singleArticles--outer .blogPost--block .articlesTitle {
     border-top: 1px solid #666;
     padding-top: 12px;
+}
+.postSingle--img {
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    max-width: 1024px;
+    margin: 0 auto;
+}
+.postSingle--img img {
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
 }
 
 
@@ -1194,6 +1227,9 @@ section.homeBanner {
    }
    #mobile-nav ul li a {
        justify-content: center;
+   }
+   .postBlock--content p, .description {
+      font-size: 1rem;
    }
 }
 
