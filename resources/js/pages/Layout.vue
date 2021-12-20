@@ -9,7 +9,7 @@
             <div class="relative max-w-6xl mx-auto h-0 pointer-events-none" aria-hidden="true">
               <PageIllustration />
             </div>
-                <div class="verifyEmailText" v-if="currentHref && currentHref[3] != 'companies' && currentHref[3] != 'articles' && currentUrl != '/' && currentHref[3] != 'jobs'">
+                 <div class="verifyEmailText" v-if="currentHref && currentHref.includes('login') != true && currentHref.includes('register') != true && currentHref.includes('companies') != true && currentHref.includes('articles') == false && currentUrl != '/' && currentHref.includes('jobs') == false">
                   <p v-if="isLoggedIn && isLoggedIn.is_email_verified == 0">Please verify your email address</p>
                 </div>
               <slot />
@@ -45,7 +45,7 @@ import PageIllustration from '../partials/PageIllustration.vue'
     data: function () {
       return {
           currentUrl : window.location.pathname,
-          currentHref : window.location.href.split("/"),
+          currentHref : window.location.toString(),
         };
     },
      filters: {
