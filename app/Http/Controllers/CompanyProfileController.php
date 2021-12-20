@@ -392,11 +392,13 @@ class CompanyProfileController extends Controller
 
     public function claimProfile($id = ''){   
        try{
+           //dd($id);
             //$status = CompanyProfile::where('uuid',$id)->update(['unclaimed'=>0]);
             ActivityLog::addToLog(__('activitylogs.company_profile_updated'),'company claimed');
-            $user = CompanyProfile::join('users','company_profiles.user_id','=','users.id')
+            $user = CompanyProfile::leftjoin('users','company_profiles.user_id','=','users.id')
             ->select('company_profiles.name as company_name','users.name','users.email','company_profiles.slug as company_slug')
             ->where('company_profiles.uuid',$id)->first();  
+       
             Mail::send('emails.claimCompanyProfile',['user'=>$user], function($message){
                 $message->to(env('ADMIN_EMAIL'));
                 $message->subject(__('messages.profile_claimed'));
