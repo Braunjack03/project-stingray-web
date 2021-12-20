@@ -15,7 +15,7 @@
                      <v-col cols="12" md="6">
                         <div class="postBlock">
                            <div class="postBlock--img">
-                               <img :src="latest.header_image + '?tr=w-700,h-410'" :alt="latest.title">
+                               <Link :href="'/articles/'+latest.slug"><img :src="latest.header_image + '?tr=w-700,h-410'" :alt="latest.title"></Link>
                                <div class="imgShadow"></div>
                            </div>
                         </div>
