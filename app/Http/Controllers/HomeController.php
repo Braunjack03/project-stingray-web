@@ -121,7 +121,7 @@ class HomeController extends Controller
     {
 
         try {
-            $company = CompanyProfile::with(['job_posts', 'companytypes'])->leftjoin('locations', 'company_profiles.location_id', 'locations.id')
+            $company = CompanyProfile::leftjoin('locations', 'company_profiles.location_id', 'locations.id')
                 //->join('users','company_profiles.user_id','=','users.id')
                 ->select(
                     'company_profiles.id',
@@ -146,6 +146,7 @@ class HomeController extends Controller
                     'company_profiles.description',
                     //'users.role',
                 )
+                ->withCount('job_posts')
                 ->orderBy('company_profiles.created_at', 'DESC')
                 ->paginate($this->paginationLimit);
 
@@ -160,7 +161,6 @@ class HomeController extends Controller
                 $industries = CompanyType::whereIn('id', $selected_industries)->pluck('name')->toArray();
                 $company[$key]['industry_types'] = implode(' | ', $industries);
             }
-            //dd($company);
             $data = $company;
             return Inertia::render('companies', ['data' => $data]);
         } catch (\Exception $e) {
