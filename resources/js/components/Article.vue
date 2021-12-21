@@ -5,7 +5,7 @@
               <Link :href="'/articles/'+data.slug"><img :src="data.header_image + '?tr=w-350,h-200'" :alt="data.title"></Link>
           </div>
           <div class="postBlock--content">
-                <button class="text-white rounded-full" :class="'bg-'+tag.name+'-500'" v-for="tag in data.tags" :key="tag.id">
+                <button class="text-white rounded-full" :class="'bg-'+tag.color+'-500'" v-for="tag in data.tags" :key="tag.id">
                   {{tag.name}}
                 </button>
               <h3 class="postBlock--title"><Link :href="'/articles/'+data.slug"> {{data.title}}</Link></h3>
