@@ -16,7 +16,7 @@ class ArticleController extends Controller
         try{
             $article = Article::with('tags')->select('articles.*','users.id as author_id','users.name')->leftjoin('users','articles.author_id','users.id')->where('is_published',1)->orderBy('articles.id','DESC')->first();
         
-            $latestarticles = Article::with('tags')->leftjoin('users','articles.author_id','users.id')->whereNotIn('articles.id', [$article->id])->where('is_published',1)->orderBy('articles.id','DESC')->paginate(9)->onEachSide(1);
+            $latestarticles = Article::with('tags')->select('articles.*','users.id as author_id','users.name')->leftjoin('users','articles.author_id','users.id')->whereNotIn('articles.id', [$article->id])->where('is_published',1)->orderBy('articles.id','DESC')->paginate(9)->onEachSide(1);
             
             return Inertia::render('article',['latest'=>$article,'articles'=>$latestarticles]);
 
