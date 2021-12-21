@@ -264,11 +264,16 @@ class JobPostController extends Controller
                     'job_posts.created_at',
                     'job_posts.apply_url'
                 )->where('job_posts.slug', $slug)->first();
-            
-            return Inertia::render('single-job-post', ['data' => $job_post]);
+              
+            if($job_post != null && $job_post != '')
+            {
+                return Inertia::render('single-job-post', ['data' => $job_post]);
+            }else{
+                return $this->sendErrorResponse('404','');
+            }
         } catch (\Exception $e) {
             $message = $e->getMessage();
-            return $this->sendErrorResponse('single-job-post', $message);
+            return $this->sendErrorResponse('404', $message);
         }
     }
 
