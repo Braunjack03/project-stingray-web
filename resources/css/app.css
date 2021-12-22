@@ -295,7 +295,7 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
 
 /* Company Profile Page */
 .companyProfile--outer, .singlePost--outer {
-   font-family: 'Inter' !important;
+   font-family: Inter, sans-serif !important;
 }
 .companyPageBanner {
     margin: 80px 0 0;
@@ -311,7 +311,7 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
     padding-left: 200px;
 }
 .companyDetailOuter {
-    padding: 20px 0;
+    padding: 1.225rem 0;
     width: 100%;
     background: #f7f7f7;
     position: relative;
@@ -331,7 +331,7 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
    padding-bottom: inherit !important;
 }
 .companyDetail .post-title{
-    color: #2a2e35;
+    color: var(--darkColor);
     font-weight: 800;
     font-family: 'Inter';
     font-size: 35px;
@@ -345,13 +345,13 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
 }
 .companyDetail .extra-info {
     color: #828181;
-    font-size: 14px;
+    font-size: .875rem;
     font-family: 'Inter';
 }
 .companyDetail .extra-info span.loactionCity {
     display: block;
-    font-size: 18px;
-    color: #666;
+    font-size: 1.125rem;
+    color: var(--textColor);
     margin-top: 8px;
     flex-basis: 100%;
     padding-left: 20px;
@@ -359,15 +359,15 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
 .employeesDetails {
     margin-bottom: 12px;
     color: #828181;
-    font-size: 14px;
+    font-size: .875rem;
 }
 .employeesDetails strong {
-   color: #666;
+   color: var(--textColor);
    margin-left: 2px;
 }
 .viewSite {
-   color: #5d5dff;
-   font-size: 14px;
+   color: var(--blueColor);
+   font-size: .875rem;
 }
 
 #tabBg {
@@ -379,7 +379,7 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
 }
 #tabBg .v-tab {
     font-size: 14px;
-    color: #666;
+    color: var(--textColor);
     text-transform: capitalize;
     letter-spacing: normal;
     max-width: 270px;
@@ -387,34 +387,34 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
     font-weight: 600;
 }
 #tabBg .v-tab--active {
-   color: #5d5dff;
+   color: var(--blueColor);
 }
 #tabBg  .v-tabs-slider {
-    background-color: #5d5dff;
+    background-color: var(--blueColor);
 }
 .aboutContent .post-title, .companyJobList .post-title {
-    color: #2a2e35;
-    font-size: 35px;
+    color: var(--darkColor);
+    font-size: 2.5rem;
     font-weight: bold;
 }
 .aboutContent .desc {
-   color: #666;
-   font-size: 18px;
+   color: var(--textColor);
+   font-size: 1.125rem;
    font-weight: 400;
-   line-height: 28px;
+   line-height: 1.5;
 }
 .aboutContent .post-detail-wrap {
    margin-bottom: 2rem;
 }
 .aboutContent .post-detail-wrap p {
-    font-size: 18px;
+    font-size: 1.125rem;
     padding: .2rem 0 .5rem .5rem;
-    color: #666;
+    color: var(--textColor);
 }
 .aboutContent .post-detail-wrap p strong {
-    font-size: 20px;
+    font-size: 1.225rem;
     margin-top: 4px;
-    color: #2a2e35;
+    color: var(--darkColor);
     font-weight: 600;
 }  
 
@@ -426,7 +426,7 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
 .companyProfile--outer .companyDetail--title .link-text {
     text-transform: capitalize;
     color: #6f6ffe !important;
-    font-size: 16px;
+    font-size: 1rem;
     letter-spacing: normal;
 }
 .companyProfile--outer .companyDetail--title {
@@ -444,9 +444,9 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
 }
 
 .companyJobList .cardTags {
-    font-size: 12px;
+    font-size: .75rem;
     font-weight: 500;
-    color: #666;
+    color: var(--textColor);
     margin-bottom: 0.2rem;
 }
 
@@ -471,14 +471,14 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
 }
 .viewOther--Btn {
     padding: 10px 24px;
-    border: 1px solid #5d5dff;
+    border: 1px solid var(--blueColor);
     border-radius: 3px;
-    color: #5d5dff;
-    font-size: 16px;
+    color: var(--blueColor);
+    font-size: 1rem;
     transition: .4s all;
 }
 .viewOther--Btn:hover {
-    background: #5d5dff;
+    background: var(--blueColor);
     color: #fff;
 }
 
@@ -497,13 +497,13 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
     padding: 0 30px !important;
     height: 50px !important;
     letter-spacing: normal;
-    font-size: 16px;
+    font-size: 1rem;
     box-shadow: none;
 }
 .aboutContent .singlePost--title .company-title {
-    color: #5d5dff;
-    font-size: 18px;
-    margin-bottom: 22px;
+    color: var(--blueColor);
+    font-size: 1.125rem;
+    margin-bottom: 1.325rem;
     font-weight: 500;
 }
 .singlePost--title .companyTitle--logo {
@@ -514,21 +514,21 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
     border-radius: 50%;
     display: flex;
     align-items: center;
-    margin-right: 20px;
+    margin-right: 1.225rem;
 }
 .singlePost--title .companyTitle--logo img {
     margin: 0 auto;
     width: 25px;
 }
 .aboutContent .singlePost--title .post-title {
-    font-size: 40px;
+    font-size: 3.25rem;
     font-weight: 800;
     margin-bottom: 10px;
 }
 .singlePost--title .location, .singlePost--title .post-date {
-    color: #666;
+    color: var(--textColor);
     font-weight: 500;
-    font-size: 16px;
+    font-size: 1rem;
 } 
 
 /* Post Detail Page */
@@ -597,13 +597,11 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
 .extra-info {
    font-size: 1rem;
    font-weight: 400;
-   /*color:rgb(155, 169, 180);*/
    line-height: normal;
 }
 
 .extra-info strong {
    font-weight: 500;
-   /*color:rgb(217, 227, 234)*/
 }
 
 .link-text{
@@ -658,7 +656,7 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
 
 .searc-show-title {
    font-size: 1rem;
-   color: #999999;
+   color: var(--textColor);
    padding: .5rem .5rem .5rem 0;
 }
 
@@ -710,8 +708,8 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
 
 .job-card-wrap .v-card__title {
    font-size: 1.5rem;
-   color: #000;
-   font-weight: 500;
+   color: var(--darkColor);
+   font-weight: bold;
    text-transform: capitalize;
    margin-bottom: .6rem;
 }
@@ -732,7 +730,7 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
 
 .date {
    font-size: .8rem;
-   color:#666;
+   color:var(--textColor);
    letter-spacing: 0px;
 }
 
@@ -746,7 +744,7 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
 
 /* Home Page */
 header {
-    background: #2a2e35;
+    background: var(--darkColor);
 }
 header.homePage {
     background: transparent;
@@ -806,7 +804,7 @@ button{
 }
 .quickSearch {
    color: #e5eaee;
-   font-size: 18px;
+   font-size: 1.125rem;
    font-weight: 600;
 }
 .dropMain li.relative> a {
@@ -814,8 +812,8 @@ button{
 }
 .bannerForm .searchIcon {
     position: absolute;
-    left: 8px;
-    top: 16px;
+    left: .5rem;
+    top: 1rem;
 }
 .bannerForm .v-select {
     width: 260px;
@@ -840,8 +838,8 @@ button{
 
 /* How It Work (Home Page )*/
 .howItWork--list li {
-    color: var(--darkColor);
-    font-size: 20px;
+    color: var(--textColor);
+    font-size: 1.25rem;
     margin-bottom: 30px;
     display: flex;
     align-items: center;
@@ -890,7 +888,7 @@ button{
 
 /* Footer */
 .footerBg {
-    background: #2a2e35;
+    background: var(--darkColor);
 }
 .footerIcon--bg {
    background: #212328;
@@ -951,7 +949,7 @@ button{
     padding: 0 1.5rem;
 }
 .company-text-block .text-subtitle-1 span:not(:last-child) {
-    margin-right: 16px;
+    margin-right: 1rem;
     position: relative;
 }
 .company-text-block .text-subtitle-1 span:not(:last-child)::after {
@@ -969,11 +967,11 @@ button{
     flex-basis: 150px;
 }
 .company-jobs-block a {
-    background: #5d5dff;
+    background: var(--blueColor);
     color: #fff;
     padding: .5rem .875rem;
     width: calc(100% + 1rem);
-    font-size: 12px;
+    font-size: .75rem;
     margin-bottom: .8rem;
     margin-left: 1rem;
     font-weight: 600;
@@ -1005,7 +1003,7 @@ button{
 }
 
 .flex.filter-outer .v-select {
-   margin-left:20px ;
+   margin-left:1.25rem ;
    width:250px;
 }
 
@@ -1014,7 +1012,7 @@ button{
     font-size: 1.5rem;
     font-weight: bold;
     color: #33363a;
-    border-bottom: 1px solid #666;
+    border-bottom: 1px solid var(--textColor);
     padding-bottom: 12px;
 }
 .postBlock--img {
@@ -1023,6 +1021,7 @@ button{
 }
 .postBlock--img img {
     transition: .6s all;
+    width: 100%;
 }
 .postBlock--img:hover img {
     transform: scale(1.04);
@@ -1052,7 +1051,7 @@ button{
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
-    margin-right: 16px;
+    margin-right: 1rem;
 }
 .postPersonal--detail p {
     margin: 0;
@@ -1062,7 +1061,7 @@ button{
     color: #33363a;
 }
 .postBlock--content button {
-    font-size: 12px;
+    font-size: .75rem;
     padding: 4px 11px;
     font-weight: 600;
     margin: 0 6px 0 0;
@@ -1130,8 +1129,8 @@ background-color: rgb(236 72 153);
 }
 .singlePage--content .postBlock--content ul li {
     list-style: disc;
-    color: #666;
-    margin-left: 18px;  
+    color: var(--textColor);
+    margin-left: 1.125rem;  
 }
 .singlePage--content .postBlock--content ul.postSocialLink{
    margin-bottom: 0;
@@ -1140,10 +1139,10 @@ background-color: rgb(236 72 153);
    list-style: none;
 } 
 .postSocialLink .fill-current {
-    fill: #5d5dff;
+    fill: var(--blueColor);
 }
 .singleArticles--outer .blogPost--block .articlesTitle {
-    border-top: 1px solid #666;
+    border-top: 1px solid var(--textColor);
     padding-top: 12px;
 }
 .postSingle--img {
@@ -1176,12 +1175,6 @@ background-color: rgb(236 72 153);
    .homeBanner .h1 {
       font-size: 2.2rem;
    }
-   .processblock h4 {
-      font-size: 1.2rem;
-   }
-   .sectionTitle {
-
-   }
    .howItWork--list li span {
        flex-basis: 50px;
        height: 50px;
@@ -1190,8 +1183,7 @@ background-color: rgb(236 72 153);
       flex-basis: calc(100% - 60px);
    } 
    .howItWork--list li {
-       font-size: 18px;
-       margin-bottom: 12px;
+       margin-bottom: .75rem;
    }
    .newsletterTitle {
        font-size: 2rem;
@@ -1209,29 +1201,22 @@ background-color: rgb(236 72 153);
    .companyPageBanner {
       height: 150px;
    }
-   .singlePage--articles .postBlock--content .postBlock--title {
-       font-size: 2.5rem;
-   }
-   .blogPostTop--block .postBlock--content .postBlock--title {
-       font-size: 1.5rem;
-   }
-   .mobileJustify {
-       justify-content: center;
-       flex-flow: column;
-       text-align: center;
-   }
    #mobile-nav ul li a {
        justify-content: center;
    }
-   .postBlock--content p, .description {
-      font-size: 1rem;
+   .blogPostTop--block .postBlock--content .postBlock--title {
+      font-size: 1.5rem;
+   }
+}
+
+@media (max-width:800px) and (min-width:768px) {
+   header ul li a {
+       margin: 0;
+       padding: .4rem .7rem !important;
    }
 }
 
 @media (max-width:960px){
-   .aboutContent .singlePost--title .post-title {
-       font-size: 30px;
-   } 
    .bannerForm .filter-opt .form-control {
       width: 330px;
   }
@@ -1277,16 +1262,13 @@ background-color: rgb(236 72 153);
       border-radius: 0 4px 4px 0;
   }
    .homeBanner .h1 {
-      font-size: 2rem;
+      font-size: 2.25rem;
    }
    .sectionTitle {
-      font-size: 1.6rem !important;
+      font-size: 2rem !important;
    }
    .newsletterBg:after {
        background: #f5f5f5;
-   }
-   .job-card-wrap .v-card__title {
-      font-size: 1.2rem;
    }
    #mobile-nav ul li a {
     justify-content: center;
@@ -1306,6 +1288,14 @@ background-color: rgb(236 72 153);
   .testJobs .card-text-wrap {
       width: 100%;
   }
+  .singlePage--articles .postBlock--content .postBlock--title {
+       font-size: 2.5rem;
+  }
+  .mobileJustify {
+       justify-content: center;
+       flex-flow: column;
+       text-align: center;
+   }
 }
 
 @media (max-width:640px){
@@ -1316,20 +1306,10 @@ background-color: rgb(236 72 153);
        font-size: 24px;
    }
    .aboutContent .post-title, .companyJobList .post-title{
-      font-size: 18px;
+      font-size: 1.325rem;
    }
-   .aboutContent .desc {
-      font-size: 16px;
-      line-height: 24px;
-   }
-   .aboutContent .post-detail-wrap p {
-       font-size: 16px;
-   }
-   .aboutContent .post-detail-wrap p strong {
-       font-size: 16px;
-   } 
    .aboutContent .singlePost--title .post-title {
-       font-size: 24px;
+       font-size: 2.5rem;
    }  
    .job-card-wrap.company-card-wrap {
        align-items: flex-start;
@@ -1361,7 +1341,7 @@ background-color: rgb(236 72 153);
        font-size: 1.5rem;
    }
    .singlePage--articles .postBlock--content .postBlock--title {
-       font-size: 2rem;
+       font-size: 2.5rem;
    }
 }
   

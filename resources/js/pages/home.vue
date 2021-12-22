@@ -43,7 +43,7 @@
         <Process />
          <BrowseJobs :data="companytypes"/>
         <Target />
-        <Newsletter />
+        <!--Newsletter /-->
     </Layout>
 </template>
 
@@ -77,7 +77,7 @@ export default {
     },
     props: {
         locations: Array,
-        companytypes: Object
+        companytypes: Array || Object,
     },
     data() {
         return {

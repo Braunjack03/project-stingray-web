@@ -30,7 +30,7 @@
               <img src="images/process01.svg" width="30" />
             </div>
             <h4 class="h4 mb-2 darkColor">The Right Job for You</h4>
-            <p class="md:text-lg textColor text-center">
+            <p class="text-lg textColor text-center">
               Find a workplace that fits your lifestyle whether you prefer to come into the office or work 100% remote.
             </p>
           </div>
@@ -45,7 +45,7 @@
               <img src="images/process02.svg" width="30" />
             </div>
             <h4 class="h4 mb-2 darkColor">Cool Kids</h4>
-            <p class="md:text-lg textColor text-center">
+            <p class="text-lg textColor text-center">
               The nations's most experimental and creative tech companies call Tampa Bay home.
               You'll find everything from cyber security start-ups to crypto and
               Web 3.0
@@ -62,7 +62,7 @@
               <img src="images/process03.svg" width="30" />
             </div>
             <h4 class="h4 mb-2 darkColor">We Go Deeper</h4>
-            <p class="md:text-lg textColor text-center">
+            <p class="text-lg textColor text-center">
               Our in-depth reporting helps you understand workplace culture before you even talk to a recruiter.
             </p>
           </div>

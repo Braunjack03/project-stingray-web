@@ -4,7 +4,7 @@
               <section data-app>
                <div class="max-w-6xl mx-auto px-4 sm:px-6 py-10 md:py-20 relative">
                   <div class="pt-16 pb-6 md:pb-12 company-page-title">
-                     <h3 class="h3 text-gray-700 text-center">Companies Hiring in the Tampa Bay</h3>
+                     <h1 class="h1 text-gray-700 text-center">Companies Hiring in the Tampa Bay</h1>
                   </div>
                   <div v-if="data.data.length > 0">
                      <v-row v-for="data in data.data" :key="data.id">
