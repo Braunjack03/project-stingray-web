@@ -12,14 +12,14 @@
       
       
              <!-- Desktop navigation -->
-        <nav class="hidden md:flex md:flex-grow">
+        <nav class="hidden lg:flex lg:flex-grow">
 
           <!-- Desktop menu links -->
           <!-- <ul class="flex flex-grow justify-end flex-wrap items-center">
             <li>
               <Link href="#"  class="btn-sm text-white bg-purple-600 hover:bg-purple-700 ml-3">Post a Job</Link>
             </li>
-          </ul> -->
+          </ul> -->  
 
           <!-- Desktop sign in links -->
           <ul class="flex flex-grow justify-end flex-wrap items-center" >
@@ -78,7 +78,7 @@
         </nav>
 
         <!-- Mobile menu -->
-        <div class="md:hidden">
+        <div class="lg:hidden">
 
           <!-- Hamburger button -->
           <button class="hamburger" ref="hamburger" :class="{ active: mobileNavOpen }" aria-controls="mobile-nav" :aria-expanded="mobileNavOpen" @click="mobileNavOpen = !mobileNavOpen">

@@ -7,7 +7,7 @@
                   <div class="pt-10 pb-6 md:pb-12">
 
                      <div class="mx-auto text-center pt-10 pb-3">
-                        <div class="flex filter-outer">
+                        <div class="flex filter-outer jobsFilter">
                            <span class="searc-show-title">
                               Total Number of jobs: {{job_posts_count}}
                            </span>

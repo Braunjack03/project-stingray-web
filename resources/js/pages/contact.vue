@@ -1,24 +1,24 @@
 <template>
   <Layout>
      <Head title="Contact Us" />
-        <section class="relative" data-app>
+        <section class="relative contactUs--outer" data-app>
             <div class="max-w-6xl mx-auto px-4 sm:px-6">
                 <div class="pt-32 pb-12 md:pt-40 md:pb-20">
                 
 
                     <!-- Page header -->
-                <div class="max-w-3xl mx-auto text-center pb-12 md:pb-16">
+                <div class="max-w-3xl mx-auto text-center pb-9">
                     <h1 class="h1 mb-4 text-gray-700" data-aos="fade-up">Contact Us</h1>
                 </div>
             <!-- Form -->
-                <div class="max-w-xl mx-auto">
+                <div class="max-w-sm mx-auto">
                     <div v-if="success" class="text-green-500 text-center text-sm mt-2">
                         {{ success.message }}
                     </div>
                     <v-form ref="form" @submit.prevent="submit">
 
-                        <div class="flex flex-wrap -mx-3 mb-4">
-                            <div class="w-full px-3">
+                        <div class="flex flex-wrap mb-4">
+                            <div class="w-full">
                             <label class="block text-gray-700 text-sm font-medium mb-1">Subject <span class="text-red-600">*</span></label>
                                 <v-row >
                                 <v-col
@@ -39,18 +39,18 @@
                         </div>
                         </div> 
                         
-                         <div class="flex flex-wrap -mx-3 mb-4">
-                            <div class="w-full px-3">
-                                <label class="block text-gray-500 text-sm font-medium mb-1" for="email">Name <span class="text-red-600">*</span></label>
+                         <div class="flex flex-wrap mb-4">
+                            <div class="w-full">
+                                <label class="block text-gray-700 text-sm font-medium mb-1" for="email">Name <span class="text-red-600">*</span></label>
                                 <v-text-field v-model="name" :class="{ 'error--text': $v.name.$error }"  @input="$v.name.$touch()" @blur="$v.name.$touch()" class="form-input input-field-outer w-full text-gray-300" placeholder="Name" autocomplete required ></v-text-field>
 
                                 <div v-if="$v.name.$error && !$v.name.required"  class="text-red-500 text-sm">Name is required</div>
                             </div>
                         </div>
 
-                        <div class="flex flex-wrap -mx-3 mb-4">
-                            <div class="w-full px-3">
-                                <label class="block text-gray-500 text-sm font-medium mb-1" for="email">Email <span class="text-red-600">*</span></label>
+                        <div class="flex flex-wrap mb-4">
+                            <div class="w-full">
+                                <label class="block text-gray-700 text-sm font-medium mb-1" for="email">Email <span class="text-red-600">*</span></label>
                                 <v-text-field v-model="email" :class="{ 'error--text': $v.email.$error }"  @input="$v.email.$touch()" @blur="$v.email.$touch()" class="form-input input-field-outer w-full text-gray-300" placeholder="you@yourcompany.com" autocomplete required ></v-text-field>
 
                                 <div v-if="$v.email.$error && !$v.email.required"  class="text-red-500 text-sm">Email is required</div>
@@ -58,15 +58,19 @@
                             </div>
                         </div>
 
-                        <div class="flex flex-wrap -mx-3 mb-4">
-                            <div class="w-full px-3">
-                                <label class="block text-gray-500 text-sm font-medium mb-1" for="email">Message <span class="text-red-600">*</span></label>
+                        <div class="flex flex-wrap mb-4">
+                            <div class="w-full">
+                                <label class="block text-gray-700 text-sm font-medium mb-1" for="email">Message <span class="text-red-600">*</span></label>
                                 <v-textarea v-model="message" :class="{ 'error--text': $v.message.$error }"  @input="$v.message.$touch()" @blur="$v.message.$touch()" class="form-input input-field-outer w-full text-gray-300" placeholder="Message" autocomplete required ></v-textarea>
 
                                 <div v-if="$v.message.$error && !$v.message.required"  class="text-red-500 text-sm">Message is required</div>
                             </div>
                         </div>
-                        <v-btn class="btn text-white bg-purple-600 hover:bg-purple-700 w-full" @click="submit">Submit</v-btn>
+                        <div class="flex flex-wrap mb-4">
+                            <div class="w-full">
+                                <v-btn class="btn text-white bg-purple-600 hover:bg-purple-700 w-full" @click="submit">Submit</v-btn>
+                            </div>
+                        </div>
                     </v-form>
                 </div>
             </div>
@@ -107,7 +111,7 @@
       submit() {
           this.$v.$touch()
           if(!this.$v.$invalid) {
-             let form = {email:this.email,message:this.message};
+             let form = {email:this.email,message:this.message,name:this.name,subject:this.subject};
              this.$inertia.post('/contact', form);
              this.$v.$reset()
           }

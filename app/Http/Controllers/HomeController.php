@@ -15,7 +15,7 @@ class HomeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['home', 'jobs', 'companies', 'blog', 'hiring','contact']]);
+        $this->middleware('auth', ['except' => ['home', 'jobs', 'companies', 'blog', 'hiring','contact','contactSubmit']]);
     }
     /**
      * Dashboard
@@ -173,10 +173,9 @@ class HomeController extends Controller
     {
         try {
             $data = $request->all();
-
-            Mail::send('emails.contactForm', ['data' => $data], function ($message) {
+            Mail::send('emails.contactForm', ['data' => $data], function ($message) use ($data) {
                 $message->to(env('ADMIN_EMAIL'));
-                $message->subject(__('messages.contact_form_filled'));
+                $message->subject($data['subject']);
             });
 
             return $this->sendSuccessResponse('thankyou', __('messages.contact_form_submit'), []);

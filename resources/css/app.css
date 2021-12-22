@@ -506,15 +506,14 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
     margin-bottom: 1.325rem;
     font-weight: 500;
 }
+.singlePost--title .company-title{
+    display: inline-block;
+    background: #f3f3f3;
+    padding: 12px 20px;
+    border-radius: 30px;
+}
 .singlePost--title .companyTitle--logo {
-    width: 50px;
-    height: 50px;
-    background: #fff;
-    box-shadow: 0 0 20px rgba(0,0,0,.2);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    margin-right: 1.225rem;
+    margin-right: .5rem;
 }
 .singlePost--title .companyTitle--logo img {
     margin: 0 auto;
@@ -1007,6 +1006,10 @@ button{
    width:250px;
 }
 
+.bannerForm .filter-outer .v-select {
+   margin-left:0;
+}
+
 /* Blog Page */
 .blogPost--block .articlesTitle {
     font-size: 1.5rem;
@@ -1157,10 +1160,16 @@ background-color: rgb(236 72 153);
     height: 100%;
 }
 
+/* Contact Us */
+.contactUs--outer .v-input__slot {
+    box-shadow: none !important;
+}
+
 
 /* Media */
 
-@media (max-width:1170px){
+
+@media (max-width:1263.98px){
    .aboutContent .applyBtn {
        top: auto !important;
        bottom: 20px !important;
@@ -1172,18 +1181,19 @@ background-color: rgb(236 72 153);
 }
 
 @media (max-width:  1023.98px) {
-   .homeBanner .h1 {
-      font-size: 2.2rem;
-   }
    .howItWork--list li span {
        flex-basis: 50px;
        height: 50px;
+   }
+   .jobsFilter .filter-opt {
+      width: 100%;
    }
    .howItWork--list li p {
       flex-basis: calc(100% - 60px);
    } 
    .howItWork--list li {
        margin-bottom: .75rem;
+       font-size: 1.125rem;
    }
    .newsletterTitle {
        font-size: 2rem;
@@ -1262,7 +1272,7 @@ background-color: rgb(236 72 153);
       border-radius: 0 4px 4px 0;
   }
    .homeBanner .h1 {
-      font-size: 2.25rem;
+      font-size: 2.5rem;
    }
    .sectionTitle {
       font-size: 2rem !important;
@@ -1317,10 +1327,10 @@ background-color: rgb(236 72 153);
    .company-text-block {
        flex-basis: 100%;
        order: 3;
-       margin-top: 12px;
+       margin-top: .75rem;
        padding: 0;
        border-top: 1px solid #ddd;
-       padding-top: 5px;
+       padding-top: .75rem;
    }
    .company-img-block {
        flex-basis: calc(100% - 150px);
@@ -1359,7 +1369,11 @@ background-color: rgb(236 72 153);
       width: 100%;
    }
    .flex.filter-outer .v-select {
-      margin-left: 0px;}
+      margin-left: 0px;
+   }
+   .bannerForm .flex.filter-outer .v-select {
+      width:50%;
+   }
 }
 
 @media screen and ( max-width: 520px ){
