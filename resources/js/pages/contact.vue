@@ -32,9 +32,10 @@
                                     class="form-input input-field-outer w-full text-gray-700"
                                     dense
                                     solo
+                                    :class="{ 'error--text': $v.subject.$error }" 
                                 ></v-select>
-                                </v-col>
                                 <div v-if="$v.subject.$error && !$v.subject.required"  class="text-red-500 text-sm">Subject is required</div>
+                                </v-col>
                             </v-row>
                         </div>
                         </div> 
