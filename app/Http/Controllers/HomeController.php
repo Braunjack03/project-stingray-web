@@ -178,7 +178,7 @@ class HomeController extends Controller
                 $message->subject($data['subject']);
             });
 
-            return $this->sendSuccessResponse('thankyou', __('messages.contact_form_submit'), []);
+            return $this->sendSuccessResponse('contact', __('messages.contact_form_submit'), []);
         } catch (\Exception $e) {
             $message = $e->getMessage();
             return $this->sendErrorResponse('login', $message);
