@@ -28,6 +28,9 @@
                   <Link href="#" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">About Us</Link>
                 </li>
                 <li class="mb-1">
+                  <Link href="/contact" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Contact Us</Link>
+                </li>
+                <li class="mb-1">
                   <Link href="#" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Privacy Policy</Link>
                 </li>
                 <li class="mb-1">
