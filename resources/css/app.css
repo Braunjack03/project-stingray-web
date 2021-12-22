@@ -1007,6 +1007,10 @@ button{
    width:250px;
 }
 
+.bannerForm .filter-outer .v-select {
+   margin-left:0;
+}
+
 /* Blog Page */
 .blogPost--block .articlesTitle {
     font-size: 1.5rem;
@@ -1157,6 +1161,11 @@ background-color: rgb(236 72 153);
     height: 100%;
 }
 
+/* Contact Us */
+.contactUs--outer .v-input__slot {
+    box-shadow: none !important;
+}
+
 
 /* Media */
 
@@ -1172,9 +1181,6 @@ background-color: rgb(236 72 153);
 }
 
 @media (max-width:  1023.98px) {
-   .homeBanner .h1 {
-      font-size: 2.2rem;
-   }
    .howItWork--list li span {
        flex-basis: 50px;
        height: 50px;
@@ -1184,6 +1190,7 @@ background-color: rgb(236 72 153);
    } 
    .howItWork--list li {
        margin-bottom: .75rem;
+       font-size: 1.125rem;
    }
    .newsletterTitle {
        font-size: 2rem;
@@ -1262,7 +1269,7 @@ background-color: rgb(236 72 153);
       border-radius: 0 4px 4px 0;
   }
    .homeBanner .h1 {
-      font-size: 2.25rem;
+      font-size: 2.5rem;
    }
    .sectionTitle {
       font-size: 2rem !important;
@@ -1317,10 +1324,10 @@ background-color: rgb(236 72 153);
    .company-text-block {
        flex-basis: 100%;
        order: 3;
-       margin-top: 12px;
+       margin-top: .75rem;
        padding: 0;
        border-top: 1px solid #ddd;
-       padding-top: 5px;
+       padding-top: .75rem;
    }
    .company-img-block {
        flex-basis: calc(100% - 150px);
@@ -1359,7 +1366,11 @@ background-color: rgb(236 72 153);
       width: 100%;
    }
    .flex.filter-outer .v-select {
-      margin-left: 0px;}
+      margin-left: 0px;
+   }
+   .bannerForm .flex.filter-outer .v-select {
+      width:50%;
+   }
 }
 
 @media screen and ( max-width: 520px ){
