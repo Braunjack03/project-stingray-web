@@ -9,7 +9,7 @@
             <div class="relative max-w-6xl mx-auto h-0 pointer-events-none" aria-hidden="true">
               <PageIllustration />
             </div>
-                 <div class="verifyEmailText" v-if="currentHref && currentHref.includes('login') != true && currentHref.includes('register') != true && currentHref.includes('companies') != true && currentHref.includes('articles') == false && currentUrl != '/' && currentHref.includes('jobs') == false">
+                 <div class="verifyEmailText" v-if="currentHref && currentHref.includes('contact') != true && currentHref.includes('thankyou') != true  && currentHref.includes('login') != true && currentHref.includes('register') != true && currentHref.includes('companies') != true && currentHref.includes('articles') == false && currentUrl != '/' && currentHref.includes('jobs') == false">
                   <p v-if="isLoggedIn && isLoggedIn.is_email_verified == 0">Please verify your email address</p>
                 </div>
               <slot />
