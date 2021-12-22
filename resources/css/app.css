@@ -506,15 +506,14 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
     margin-bottom: 1.325rem;
     font-weight: 500;
 }
+.singlePost--title .company-title{
+    display: inline-block;
+    background: #f3f3f3;
+    padding: 12px 20px;
+    border-radius: 30px;
+}
 .singlePost--title .companyTitle--logo {
-    width: 50px;
-    height: 50px;
-    background: #fff;
-    box-shadow: 0 0 20px rgba(0,0,0,.2);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    margin-right: 1.225rem;
+    margin-right: .5rem;
 }
 .singlePost--title .companyTitle--logo img {
     margin: 0 auto;
@@ -1169,7 +1168,8 @@ background-color: rgb(236 72 153);
 
 /* Media */
 
-@media (max-width:1170px){
+
+@media (max-width:1263.98px){
    .aboutContent .applyBtn {
        top: auto !important;
        bottom: 20px !important;
@@ -1184,6 +1184,9 @@ background-color: rgb(236 72 153);
    .howItWork--list li span {
        flex-basis: 50px;
        height: 50px;
+   }
+   .jobsFilter .filter-opt {
+      width: 100%;
    }
    .howItWork--list li p {
       flex-basis: calc(100% - 60px);
