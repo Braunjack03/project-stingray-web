@@ -114,6 +114,10 @@
           if(!this.$v.$invalid) {
              let form = {email:this.email,message:this.message,name:this.name,subject:this.subject};
              this.$inertia.post('/contact', form);
+             this.subject = '';
+             this.email = '';
+             this.message = '';
+             this.name = '';
              this.$v.$reset()
           }
        },
