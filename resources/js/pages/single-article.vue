@@ -7,14 +7,14 @@
                     <v-col cols="12" md="9">
                         <div class="postBlock">
                             <div class="postBlock--content">
-                                <h3 class="postBlock--title text-center lg:text-left">{{data.title}}</h3>
-                                <p class="text-center lg:text-left">{{data.sub_title}}</p>
+                                <h3 class="postBlock--title text-center md:text-left">{{data.title}}</h3>
+                                <p class="text-center md:text-left">{{data.sub_title}}</p>
                                 <div class="postPersonal--detail justify-between mobileJustify">
                                     <div class="flex items-center">
                                         <img src="/images/news-author-01.jpg" alt="post-images">
                                         <p><a href="#">{{data.name}} </a> - {{new Date(data.created_at).toDateString().slice(4,10)+','+new Date(data.created_at).toDateString().slice(10)}}</p>
                                     </div>
-                                    <div class="mt-4 lg:mt-0">
+                                    <div class="mt-4 md:mt-0">
                                         <button class="text-white rounded-full" :class="'bg-'+tag.color+'-500'" v-for="tag in data.tags" :key="tag.id">
                                         {{tag.name}}
                                         </button>

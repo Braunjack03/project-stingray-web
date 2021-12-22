@@ -1,7 +1,7 @@
 <template>
   <Layout>
      <Head title="Contact Us" />
-        <section class="relative">
+        <section class="relative" data-app>
             <div class="max-w-6xl mx-auto px-4 sm:px-6">
                 <div class="pt-32 pb-12 md:pt-40 md:pb-20">
                 
@@ -16,6 +16,37 @@
                         {{ success.message }}
                     </div>
                     <v-form ref="form" @submit.prevent="submit">
+
+                        <div class="flex flex-wrap -mx-3 mb-4">
+                            <div class="w-full px-3">
+                            <label class="block text-gray-700 text-sm font-medium mb-1">Subject <span class="text-red-600">*</span></label>
+                                <v-row >
+                                <v-col
+                                class="d-flex"
+                                cols="12"
+                                >
+                                <v-select
+                                    v-model='subject'
+                                    :items="items"
+                                    label="Subject"
+                                    class="form-input input-field-outer w-full text-gray-700"
+                                    dense
+                                    solo
+                                ></v-select>
+                                </v-col>
+                                <div v-if="$v.subject.$error && !$v.subject.required"  class="text-red-500 text-sm">Subject is required</div>
+                            </v-row>
+                        </div>
+                        </div> 
+                        
+                         <div class="flex flex-wrap -mx-3 mb-4">
+                            <div class="w-full px-3">
+                                <label class="block text-gray-500 text-sm font-medium mb-1" for="email">Name <span class="text-red-600">*</span></label>
+                                <v-text-field v-model="name" :class="{ 'error--text': $v.name.$error }"  @input="$v.name.$touch()" @blur="$v.name.$touch()" class="form-input input-field-outer w-full text-gray-300" placeholder="Name" autocomplete required ></v-text-field>
+
+                                <div v-if="$v.name.$error && !$v.name.required"  class="text-red-500 text-sm">Name is required</div>
+                            </div>
+                        </div>
 
                         <div class="flex flex-wrap -mx-3 mb-4">
                             <div class="w-full px-3">
@@ -54,7 +85,9 @@
     mixins: [validationMixin],
      validations: {
       email: { required, email },
-      message: {required}
+      name: {required},
+      message: {required},
+      subject: {required}
     },
     components: {
       Head,
@@ -64,8 +97,11 @@
       success: Object,
     },
     data: () => ({
+        subject: '',
+        name:'',
         email:'',
         message:'',
+        items: ['Feedback', 'Question', 'Report a Bug', 'Claim Profile'],
     }),
     methods: {
       submit() {
