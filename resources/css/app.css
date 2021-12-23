@@ -88,11 +88,20 @@ html{
 
 .input-field-outer .v-input__slot {
    margin: 0;
-   padding: 0;
+   padding: 0 !important;
 }
 
 .input-field-outer .v-input__slot:before {
    display: none;
+}
+
+.input-field-outer .v-input__slot input, .input-field-outer .v-input__slot textarea {
+   padding: 0 1rem;
+}
+
+.v-text-field.v-text-field--solo:not(.v-text-field--solo-flat)>.v-input__control>.v-input__slot {
+   box-shadow: none !important;
+   padding: 0 1rem !important;
 }
 
 .form-avataar .v-icon.text--darken-2, 
@@ -886,6 +895,7 @@ button{
    max-width: 500px;
    left: 50%;
    transform: translateX(-50%);
+   z-index: 9;
 }
 .verifyEmailText.verifyclaimText {
    left: auto;

@@ -109,11 +109,9 @@
                             <v-col cols="12" md="12" class="pa-3 d-flex flex-column" v-for="data in job_posts.data" :key="data.id">
                                 <CustomCard :data="data" />
                             </v-col>
-                            <v-col cols="12" class="mt-5 text-center text-gray-700">
-                              <Link class="text-center underline" href="/jobs">View More {{data.name}} jobs</Link>
-                            </v-col>
 
                         </v-row>
+                        <pagination class="mt-5" :links="job_posts.links" />
                     </div>
                     <div v-else>
                         <v-row>
@@ -127,8 +125,8 @@
     
             <div class="companyJobList" v-if="articles.length > 0">
                 <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-4">
-                    <v-row class="items-center">
-                        <v-col cols="12" md="9" class="pa-3 d-flex flex-column">
+                    <v-row >
+                        <v-col cols="12" md="12" class="pa-3 d-flex flex-column">
                             <h3 class="post-title">News Articles Mentioning {{ data.name }}</h3>
                         </v-col>
                         <Article v-for="data in articles" :key="data.id" :data="data" />
