@@ -138,7 +138,7 @@ class HomeController extends Controller
                 )
                 ->withCount('job_posts')
                 ->orderBy('company_profiles.created_at', 'DESC')
-                ->paginate($this->paginationLimit);
+                ->paginate($this->paginationLimit)->onEachSide(1);
 
             $data = [];
             foreach ($company as $key => $comp) {
