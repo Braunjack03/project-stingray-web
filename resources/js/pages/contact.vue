@@ -19,7 +19,7 @@
                     <v-form ref="form" @submit.prevent="submit">
 
                         <div class="flex flex-wrap">
-                            <div class="w-full">
+                            <div class="w-full mb-3">
                             <label class="block text-gray-700 text-sm font-medium mb-1">Subject <span class="text-red-600">*</span></label>
                                 <v-row >
                                 <v-col
@@ -42,7 +42,7 @@
                         </div> 
                         
                          <div class="flex flex-wrap">
-                            <div class="w-full">
+                            <div class="w-full mb-3">
                                 <label class="block text-gray-700 text-sm font-medium mb-1" for="email">Name <span class="text-red-600">*</span></label>
                                 <v-text-field v-model="name" :class="{ 'error--text': $v.name.$error }"  @input="$v.name.$touch()" @blur="$v.name.$touch()" class="form-input input-field-outer w-full text-gray-300" placeholder="Name" autocomplete required ></v-text-field>
 
@@ -51,7 +51,7 @@
                         </div>
 
                         <div class="flex flex-wrap">
-                            <div class="w-full">
+                            <div class="w-full mb-3">
                                 <label class="block text-gray-700 text-sm font-medium mb-1" for="email">Email <span class="text-red-600">*</span></label>
                                 <v-text-field v-model="email" :class="{ 'error--text': $v.email.$error }"  @input="$v.email.$touch()" @blur="$v.email.$touch()" class="form-input input-field-outer w-full text-gray-300" placeholder="you@yourcompany.com" autocomplete required ></v-text-field>
 
@@ -61,7 +61,7 @@
                         </div>
 
                         <div class="flex flex-wrap">
-                            <div class="w-full">
+                            <div class="w-full mb-3">
                                 <label class="block text-gray-700 text-sm font-medium mb-1" for="email">Message <span class="text-red-600">*</span></label>
                                 <v-textarea v-model="message" :class="{ 'error--text': $v.message.$error }"  @input="$v.message.$touch()" @blur="$v.message.$touch()" class="form-input input-field-outer w-full text-gray-300" placeholder="Message" autocomplete required ></v-textarea>
 
@@ -69,7 +69,7 @@
                             </div>
                         </div>
                         <div class="flex flex-wrap mt-2">
-                            <div class="w-full">
+                            <div class="w-full mb-3">
                                 <v-btn class="btn text-white bg-purple-600 hover:bg-purple-700 w-full" @click="submit">Submit</v-btn>
                             </div>
                         </div>

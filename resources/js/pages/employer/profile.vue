@@ -20,7 +20,7 @@
                 <v-form ref="form"  lazy-validations class="form-outer-wrapper max-w-xl">
     
                     
-                    <div class="flex flex-wrap mb-4">
+                    <div class="flex flex-wrap mb-3">
                       <div class="w-full px-3 form-avataar">
                           <v-icon v-if="user.profile_image_src" color="gray darken-2" class="ml-auto" @click="removeImage()"> mdi-close-circle</v-icon>
                           <v-img
@@ -39,7 +39,7 @@
                     
                     <div v-if="errors.email" class="mt-2 error">{{ errors.email }}</div>
 
-                    <div class="flex flex-wrap mb-4">
+                    <div class="flex flex-wrap mb-3">
                         <div class="w-full px-3">
                           <label class="block text-gray-700 text-sm font-medium mb-1" for="email">Name <span class="text-red-600">*</span></label>
                            <v-text-field v-model="name" class="form-input input-field-outer w-full text-gray-700" placeholder="Enter Name" :class="{ 'error--text': $v.name.$error }"
@@ -49,7 +49,7 @@
                         </div>
                     </div>
 
-                    <div class="flex flex-wrap mb-4">
+                    <div class="flex flex-wrap mb-3">
                         <div class="w-full px-3">
                           <label class="block text-gray-700 text-sm font-medium mb-1" for="email">Current Job Title <span class="text-red-600">*</span></label>
                            <v-text-field v-model="current_job_title" class="form-input input-field-outer w-full text-gray-700" placeholder="Current Job Title" 
@@ -62,7 +62,7 @@
                         </div>
                     </div>
                     
-                     <div class="flex flex-wrap mb-4">
+                     <div class="flex flex-wrap mb-3">
                         <div class="w-full px-3">
                             <label class="block text-gray-700 text-sm font-medium mb-1" for="email">Short Bio </label>
                             <v-text-field v-model="short_bio" class="form-input input-field-outer w-full text-gray-700" placeholder="Short Bio" required></v-text-field>
@@ -72,7 +72,7 @@
 
                     <h3 class="text-2xl mt-2 mb-1 text-gray-700">Social Links</h3>  
 
-                    <div class="flex flex-wrap mb-4">
+                    <div class="flex flex-wrap mb-3">
                       <div class="w-full px-3">
                             <label class="block text-gray-700 text-sm font-medium mb-1" for="email">LinkedIn</label>
                             <v-text-field v-model="linkedin" class="form-input input-field-outer w-full text-gray-700" placeholder="LinkedIn" required></v-text-field>
@@ -80,19 +80,19 @@
                       </div>
                     </div>
 
-                    <div class="flex flex-wrap mt-6">
+                    <div class="flex flex-wrap mt-5">
                         <div class="w-full px-3">
                           <v-btn @click="submit()" class="btn text-white bg-purple-600 hover:bg-purple-700 w-full">Save Changes</v-btn>
                         </div>
                       </div> 
                       
-                    <div class="flex flex-wrap mt-6 text-center">
+                    <div class="flex flex-wrap mt-5 text-center">
                         <div class="w-full px-3">
                           <p class="text-center text-gray-700">Please fill the required field(s)</p>                        
                         </div>
                       </div> 
                 </v-form>
-                <div class="flex flex-wrap mt-6">
+                <div class="flex flex-wrap mt-5">
                         <div class="w-full px-3">
                  <h3 class="text-2xl mb-3 text-gray-700">Your Companies</h3>  
                   <ul id="example-1">                     
@@ -107,7 +107,7 @@
                 </div>
               </div>
                   
-              <div class="flex flex-wrap mt-6">
+              <div class="flex flex-wrap mt-5">
                 <div class="w-full px-3">
                   <Link v-if="(user.company_profile_count < 3)" href="/employer/create-company" color="text" class="btn text-white bg-purple-600 hover:bg-purple-700 mb-3 mr-4 w-full" >
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor"> <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" /> </svg> Create New Company Profile</Link>
