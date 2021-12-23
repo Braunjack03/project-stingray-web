@@ -21,7 +21,7 @@
               <div v-if="errors.message" class="text-red-500 text-sm mt-2">{{ errors.message }}</div>
 
               <v-form class="register-form form-outer-wrapper" @submit.prevent="submit" >
-                <div class="flex flex-wrap -mx-3 mb-4">
+                <div class="flex flex-wrap -mx-3 mb-3">
                   <div class="w-full px-3">
                     <label class="block text-gray-700 text-sm font-medium mb-1" for="email">Work Email <span class="text-red-600">*</span></label>
                     <v-text-field v-model="email" :class="{ 'error--text': $v.email.$error }"  @input="$v.email.$touch()" @blur="$v.email.$touch()" class="form-input input-field-outer w-full text-gray-700" placeholder="you@yourcompany.com" autocomplete required ></v-text-field>
@@ -30,7 +30,7 @@
                     <div v-if="$v.email.$error && !$v.email.email"  class="text-red-500 text-sm">Please Enter a valid Email</div>
                   </div>
                 </div>
-                <div class="flex flex-wrap -mx-3 mb-4">
+                <div class="flex flex-wrap -mx-3 mb-3">
                   <div class="w-full px-3">
                     <label class="block text-gray-700 text-sm font-medium mb-1" for="password">Password <span class="text-red-600">*</span></label>
                     <v-text-field type="password" v-model="password" :class="{ 'error--text': $v.password.$error }" class="form-input input-field-outer w-full text-gray-700" @input="$v.password.$touch()" @blur="$v.password.$touch()" placeholder="Password (at least 8 characters)" autocomplete required ></v-text-field>
@@ -39,7 +39,7 @@
                   </div>
                 </div>
 
-                <div class="flex flex-wrap -mx-3 mb-4">
+                <div class="flex flex-wrap -mx-3 mb-3">
                   <div class="w-full px-3 text-gray-700 radioColor">
 
                     <label class="block text-gray-700 text-sm font-medium mb-1" for="role">Your role: <span class="text-red-600">*</span></label>
@@ -60,7 +60,7 @@
                  <!--div class="text-sm text-gray-700 text-center">
                   I agree to be contacted by Open PRO about this offer as per the Open PRO <a class="underline text-gray-700 hover:text-gray-600 hover:no-underline transition duration-150 ease-in-out" href="#0">Privacy Policy</a>.
                 </div-->
-                <div class="flex flex-wrap -mx-3 mt-6">
+                <div class="flex flex-wrap -mx-3 mt-5">
                   <div class="w-full px-3">
                      <v-btn class="btn text-white bg-purple-600 hover:bg-purple-700 w-full" @click="submit">
                         Sign up
@@ -68,7 +68,7 @@
                   </div>
                 </div>
               </v-form>
-              <div class="text-gray-700 text-center mt-6">
+              <div class="text-gray-700 text-center mt-5">
                 Already Have Account? <Link href="/login" class="text-purple-600 hover:text-gray-600 transition duration-150 ease-in-out">Sign in</Link>
               </div>
             </div>
