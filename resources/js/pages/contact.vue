@@ -70,7 +70,7 @@
                         </div>
                         <div class="flex flex-wrap mt-2">
                             <div class="w-full mb-3">
-                                <v-btn class="btn text-white bg-purple-600 hover:bg-purple-700 w-full" @click="submit">Submit</v-btn>
+                                <v-btn class="btn text-white bg-purple-600 hover:bg-purple-700 w-full" @click="submit">Send</v-btn>
                             </div>
                         </div>
                     </v-form>
