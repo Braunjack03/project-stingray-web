@@ -317,7 +317,10 @@ class CompanyProfileController extends Controller
     public function showCompany(Request $request,$slug = ''){
 
         try{
-            $company = CompanyProfile::with('job_posts')->leftjoin('locations','company_profiles.location_id','locations.id')
+            $company = CompanyProfile::with(['job_posts','articles' => function ($query) {
+                $query->orderBy('articles.id','DESC');
+                $query->limit(3);
+            }])->leftjoin('locations','company_profiles.location_id','locations.id')
             //->leftjoin('users','company_profiles.user_id','=','users.id')
             ->select(
                 'company_profiles.id',
@@ -351,6 +354,7 @@ class CompanyProfileController extends Controller
                     $company->unclaimed = 0;
                 }
             }*/
+            
             $selected_industries = explode(',',$company['industry_ids']);
            
             $industries = CompanyType::whereIn('id', $selected_industries)->pluck('name')->toArray();
@@ -372,7 +376,7 @@ class CompanyProfileController extends Controller
 
             $job_posts_count = $job_posts_query->count();
 
-            $job_posts = $job_posts_query->paginate(5);
+            $job_posts = $job_posts_query->paginate(5)->onEachSide(1);
             /*$job_post_model = new JobPost();
             /*$job_posts1 = [];
             foreach($job_posts as $key => $job)
@@ -381,8 +385,8 @@ class CompanyProfileController extends Controller
                 $job_posts1[$key]['location_id'] = $job_post_model->getJobLocation($job['remotetype_id']);
                 $job_posts1[$key]['job_slug'] = $job['slug'];
             }*/
-            //dd($job_posts);
-            return Inertia::render('single-company',['data'=>$company,'job_posts_count'=>$job_posts_count,'job_posts'=>$job_posts,'industries',$industries]);
+           
+            return Inertia::render('single-company',['data'=>$company,'articles'=>$company->articles,'job_posts_count'=>$job_posts_count,'job_posts'=>$job_posts,'industries',$industries]);
 
         }catch (\Exception $e) {
             $message = $e->getMessage();
