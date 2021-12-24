@@ -15,7 +15,7 @@ class HomeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['home', 'jobs', 'companies', 'blog', 'hiring','contact','contactSubmit']]);
+        $this->middleware('auth', ['except' => ['home', 'jobs','contact','contactSubmit']]);
     }
     /**
      * Dashboard
@@ -54,11 +54,6 @@ class HomeController extends Controller
         return Inertia::render('home', ['count_job_posts' => $job_posts, 'locations' => $locations, 'companytypes' => $companytypes]);
     }
 
-    public function blog()
-    {
-        return Inertia::render('blog');
-    }
-
     public function jobs(Request $request)
     {
 
@@ -75,7 +70,6 @@ class HomeController extends Controller
                     'job_posts.slug as job_slug',
                     'job_posts.created_at'
                 )->when($request->q, function ($query, $term) {
-                    //echo $term;
                     if ($term != 'null') {
                         $query->where('job_posts.name', 'LIKE', '%' . $term . '%');
                         //$query->Orwhere('job_posts.content', 'LIKE', '%'.$term.'%');
@@ -92,67 +86,12 @@ class HomeController extends Controller
 
             $job_posts = $job_posts_query->paginate($this->paginationLimit)->onEachSide(1);
 
-            //dd($job_posts);
-            //->paginate($this->paginationLimit);
             $term_u = $request->q;
             if ($term_u == 'null' || $term_u == 'NaN') {
                 $term_u = '';
             }
-            //die('');
             $locations = Location::get();
             return Inertia::render('job_posts', ['job_posts' => $job_posts, 'job_posts_count' => $job_posts_count, 'loc_id' => $request->loc, 'location_id' => $request->loc, 'term' => $term_u, 'locations' => $locations]);
-        } catch (\Exception $e) {
-            $message = $e->getMessage();
-            return $this->sendErrorResponse('login', $message);
-        }
-    }
-
-    public function companies(Request $request)
-    {
-
-        try {
-            $company = CompanyProfile::leftjoin('locations', 'company_profiles.location_id', 'locations.id')
-                //->join('users','company_profiles.user_id','=','users.id')
-                ->select(
-                    'company_profiles.id',
-                    //'company_profiles.user_id',
-                    'company_profiles.name',
-                    'company_profiles.mission',
-                    'company_profiles.name',
-                    'locations.name as location',
-                    'company_profiles.local_employees',
-                    'company_profiles.global_employees',
-                    'company_profiles.year_founded',
-                    'company_profiles.website_url',
-                    'company_profiles.created_at',
-                    'company_profiles.industry_ids',
-                    'company_profiles.logo_image_url',
-                    'company_profiles.street_addr_1',
-                    'company_profiles.state_abbr as state',
-                    'company_profiles.city',
-                    'company_profiles.uuid',
-                    'company_profiles.unclaimed',
-                    'company_profiles.slug',
-                    'company_profiles.description',
-                    //'users.role',
-                )
-                ->withCount('job_posts')
-                ->orderBy('company_profiles.created_at', 'DESC')
-                ->paginate($this->paginationLimit)->onEachSide(1);
-
-            $data = [];
-            foreach ($company as $key => $comp) {
-                if (!str_starts_with($company[$key]['logo_image_url'], 'https://')) {
-                    $company[$key]['logo_image_url'] = ($comp['logo_image_url']) ? getBucketImageUrl($comp['uuid'], $comp['logo_image_url'], 'company') : '';
-                }
-
-                $selected_industries = explode(',', $comp['industry_ids']);
-
-                $industries = CompanyType::whereIn('id', $selected_industries)->pluck('name')->toArray();
-                $company[$key]['industry_types'] = implode(' | ', $industries);
-            }
-            $data = $company;
-            return Inertia::render('companies', ['data' => $data]);
         } catch (\Exception $e) {
             $message = $e->getMessage();
             return $this->sendErrorResponse('login', $message);

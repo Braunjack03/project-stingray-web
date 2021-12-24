@@ -66,7 +66,7 @@ Route::get('articles', [ArticleController::class, 'index'])->name('articles');
 
 Route::get('articles/{slug}', [ArticleController::class, 'show'])->name('article_details');
 
-Route::get('companies', [HomeController::class, 'companies'])->name('companies');
+Route::get('companies', [CompanyProfileController::class, 'companies'])->name('companies');
 
 Route::post('/search', [HomeController::class, 'home'])->name('search');
 

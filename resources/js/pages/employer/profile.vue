@@ -70,7 +70,7 @@
                       </div>
                     </div>
 
-                    <h3 class="text-2xl mt-2 mb-1 text-gray-700">Social Links</h3>  
+                    <h3 class="text-2xl mt-2 mb-1 text-gray-700 px-3">Social Links</h3>  
 
                     <div class="flex flex-wrap mb-3">
                       <div class="w-full px-3">
