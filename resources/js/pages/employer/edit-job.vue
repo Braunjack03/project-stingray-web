@@ -5,7 +5,7 @@
           <div class="max-w-6xl mx-auto px-4 sm:px-6">
             <div class="pt-32 pb-12 md:pt-40 md:pb-20">
 
-            <div class="max-w-3xl text-gray-700 mx-auto text-center pb-12 md:pb-16">
+            <div class="max-w-3xl text-gray-700 mx-auto text-center pb-10">
                 <h1 class="h1 mb-4" data-aos="fade-up">Update Job </h1>
                 <p>Job Information</p>
             </div>
@@ -19,7 +19,7 @@
                 </div>
                 <v-form ref="form"  >
                     
-                    <div class="flex flex-wrap mb-4">
+                    <div class="flex flex-wrap mb-3">
                         <div class="w-full px-3">
                           <label class="block text-gray-700 text-sm font-medium mb-1">Job Title <span class="text-red-600">*</span></label>
                           <v-text-field v-model="name" class="form-input input-field-outer w-full text-gray-700" placeholder="Job Title" :class="{ 'error--text': $v.name.$error }"
@@ -29,7 +29,7 @@
                         </div>
                     </div>   
 
-                    <div class="flex flex-wrap mb-4">
+                    <div class="flex flex-wrap mb-3">
                         <div class="w-full px-3">
                           <label class="block text-gray-700 text-sm font-medium mb-1">Location</label>
 
@@ -54,7 +54,7 @@
                      </div>
                     </div> 
 
-                    <div class="flex flex-wrap mb-4">
+                    <div class="flex flex-wrap mb-3">
                         <div class="w-full px-3">
                           <label class="block text-gray-700 text-sm font-medium mb-1">Job Category <span class="text-red-600">*</span></label>
                       <v-row >
@@ -80,7 +80,7 @@
                      </div>
                     </div> 
 
-                    <div class="flex flex-wrap mb-4">
+                    <div class="flex flex-wrap mb-3">
                         <div class="w-full px-3">
                           <label class="block text-gray-700 text-sm font-medium mb-1"> Job Application URL <span class="text-red-600">*</span></label>
                     <v-text-field v-model="apply_url" :class="{ 'error--text': $v.apply_url.$error }" class="form-input input-field-outer w-full text-gray-700" placeholder="https://example.com" required></v-text-field>
@@ -88,7 +88,7 @@
                      </div>
                     </div> 
 
-                    <div class="flex flex-wrap mb-4">
+                    <div class="flex flex-wrap mb-43">
                         <div class="w-full px-3">
                           <label class="block text-gray-700 text-sm font-medium mb-1">Job Description </label>
                       <tiptap-vuetify v-model="content" :extensions="extensions" class="form-input input-field-outer w-full text-gray-700" />
@@ -97,13 +97,13 @@
                     </div> 
 
 
-                     <div class="flex flex-wrap mt-6">
+                     <div class="flex flex-wrap mt-5">
                         <div class="w-full px-3">
                           <v-btn  @click="submit()" class="btn text-white bg-purple-600 hover:bg-purple-700 w-full">Update Changes</v-btn>
                         </div>
                       </div>
 
-                      <div class="flex flex-wrap mt-6 text-center">
+                      <div class="flex flex-wrap mt-5 text-center">
                         <div class="w-full px-3">
                           <p class="text-center text-gray-700">Please fill the required field(s)</p>                        
                         </div>

@@ -46,6 +46,7 @@ import PageIllustration from '../partials/PageIllustration.vue'
      props: { 
       user: Object,
       auth:Object,
+      success: Object,
     },
     data: function () {
       return {

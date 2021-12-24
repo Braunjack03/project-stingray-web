@@ -64,6 +64,8 @@ html{
    background-color: rgba(93, 93, 255, 1) !important;
    color: #FFF !important;
    height: 48px !important;
+   font-size: 1rem;
+   text-transform: inherit;
 }
 
 /* Form Field Style */
@@ -511,6 +513,7 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
     letter-spacing: normal;
     font-size: 1rem;
     box-shadow: none;
+    border-radius: 0.125rem;
 }
 .aboutContent .singlePost--title .company-title {
     color: var(--blueColor);
@@ -891,20 +894,17 @@ button{
 .verifyEmailText {
    display: block;
    position: absolute;
-   top: 90px;
+   top: 96px;
    color: #cb0000;
    width: 100%;
    text-align: center;
    max-width: 500px;
-   left: 50%;
-   transform: translateX(-50%);
+   right:1rem;
    z-index: 9;
 }
 .verifyEmailText.verifyclaimText {
-   left: auto;
    right: 1rem;
    top: 1rem;
-   transform: inherit;
 }
 
 /* Footer */
