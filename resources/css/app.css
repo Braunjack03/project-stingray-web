@@ -461,10 +461,10 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
 }
 
 .companyJobList .cardTags {
-    font-size: .75rem;
-    font-weight: 500;
-    color: var(--textColor);
-    margin-bottom: 0.2rem;
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: #444;
+    margin-bottom: 0.4rem;
 }
 
 .companyCard.job-card-wrap .v-card__title {
@@ -701,10 +701,11 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
    z-index: 2;
 }
 .jobsearchBtn {
-   margin-top: -8px;
+   margin-top: -8px;  
+   letter-spacing: normal !important;
 }
 .card-text-wrap {
-   width: calc(100% - 125px);
+   width: calc(100% - 115px);
    padding-right: 1rem;
 }
 
@@ -956,8 +957,7 @@ button{
     display: inline-block;
     padding: 0 20px;
     border-radius: 2px;
-    letter-spacing: 1px;
-   /* box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);*/
+    font-weight: 500;
 }
   
 /* Hiring Page */  
