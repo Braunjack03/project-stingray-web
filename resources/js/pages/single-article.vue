@@ -39,7 +39,7 @@
                         </div>
                     </v-col>
                 </v-row>
-                <v-row class="blogPost--block">
+                <v-row class="blogPost--block" v-if="articles.data">
                     <v-col cols="12">
                         <h2 class="articlesTitle">Companies Mentioned in the Article</h2>
                     </v-col>
