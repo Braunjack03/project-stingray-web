@@ -30,6 +30,10 @@ use App\Http\Controllers\ArticleController;
 
 Route::get('contact', [HomeController::class, 'contact']);
 
+Route::get('privacy', [HomeController::class, 'privacy']);
+
+Route::get('pricing', [HomeController::class, 'pricing']);
+
 Route::post('contact', [HomeController::class, 'contactSubmit'])->name('contact');
 
 Route::get('/dashboard', function() {
@@ -57,8 +61,6 @@ Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showRese
 Route::post('reset-password/{token}', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
  
 Route::get('/', [HomeController::class, 'home'])->name('home');
-
-Route::get('news', [HomeController::class, 'blog'])->name('blog');
 
 Route::get('jobs', [HomeController::class, 'jobs'])->name('jobs');
 

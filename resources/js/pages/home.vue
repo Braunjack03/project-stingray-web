@@ -42,7 +42,9 @@
         </section>
         <Process />
          <BrowseJobs :data="companytypes"/>
-        <Target />
+        <Target :articles="articles"/>
+
+        
         <!--Newsletter /-->
     </Layout>
 </template>
@@ -78,6 +80,7 @@ export default {
     props: {
         locations: Array,
         companytypes: Array || Object,
+        articles: Array,
     },
     data() {
         return {

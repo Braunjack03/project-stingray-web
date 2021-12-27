@@ -249,6 +249,8 @@ class JobPostController extends Controller
         }
     }
 
+        
+
     public function showJobPost($company = '', $slug = '')
     {
 
