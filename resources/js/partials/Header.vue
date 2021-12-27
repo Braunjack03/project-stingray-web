@@ -24,22 +24,22 @@
           <!-- Desktop sign in links -->
           <ul class="flex flex-grow justify-end flex-wrap items-center" >
             <li>
-              <Link href="/jobs"  class="font-bold text-white-900 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Jobs</Link>
+              <Link href="/jobs"  class="font-bold text-gray-300 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Jobs</Link>
             </li>
             <li>
-              <Link href="/companies" class="font-bold text-white-900 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Companies</Link>
+              <Link href="/companies" class="font-bold text-gray-300 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Companies</Link>
             </li>
             <li> 
-              <Link href="/articles" class="font-bold text-white-900 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">News</Link>
+              <Link href="/articles" class="font-bold text-gray-300 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">News</Link>
             </li> 
             <li>
-              <Link href="#"  class="btn-sm text-white bg-purple-600 hover:bg-purple-700 mx-4">Employers</Link>
+              <Link href="#"  class="btn-sm text-gray-300 bg-purple-600 hover:bg-purple-700 mx-4">Employers</Link>
             </li>
             <li v-if="!isLoggedIn">
-              <Link href="/register"  class="font-bold text-white-600 hover:text-purple-600 px-4 py-3 flex items-center transition duration-150 ease-in-out">Join</Link>
+              <Link href="/register"  class="font-bold text-gray-300 hover:text-purple-600 px-4 py-3 flex items-center transition duration-150 ease-in-out">Join</Link>
             </li>
             <li v-if="!isLoggedIn">
-              <Link href="/login" class="font-bold text-white-600 hover:text-purple-600 pl-4 py-3 flex items-center transition duration-150 ease-in-out">Sign In</Link>
+              <Link href="/login" class="font-bold text-gray-300 hover:text-purple-600 pl-4 py-3 flex items-center transition duration-150 ease-in-out">Sign In</Link>
             </li>
             <li v-if="isLoggedIn">
             <Dropdown :title="getUserEmail()" >
@@ -94,38 +94,38 @@
           <nav id="mobile-nav" ref="mobileNav" class="absolute top-full z-20 left-0 w-full px-4 sm:px-6 overflow-hidden transition-all duration-300 ease-in-out" :style="[ mobileNavOpen ? { maxHeight: $refs.mobileNav.scrollHeight + 'px', opacity: 1 } : { maxHeight: 0, opacity: .8 } ]">
             <ul class="bg-gray-800 px-4 py-2">
               <li>
-                <Link href="/jobs" class="flex text-white-900 font-medium hover:text-purple-600 py-2">Jobs</Link>
+                <Link href="/jobs" class="flex text-gray-300 font-medium hover:text-purple-600 py-2">Jobs</Link>
               </li>
               <li>
-                <Link href="/companies" class="flex text-white-900 font-medium hover:text-purple-600 py-2">Companies</Link>
+                <Link href="/companies" class="flex text-gray-300 font-medium hover:text-purple-600 py-2">Companies</Link>
               </li>
               <li>
-                <Link href="/articles" class="flex text-white-900 font-medium hover:text-purple-600 py-2">News</Link>
+                <Link href="/articles" class="flex text-gray-300 font-medium hover:text-purple-600 py-2">News</Link>
               </li>
               
               <!--li>
-                <Link v-if="isLoggedIn && isLoggedIn.role == 2" href="/dashboard" class="flex text-white-900 font-medium hover:text-purple-600 py-2">Dashboard</Link>
+                <Link v-if="isLoggedIn && isLoggedIn.role == 2" href="/dashboard" class="flex text-gray-300 font-medium hover:text-purple-600 py-2">Dashboard</Link>
               </li>
               <li>
-                <Link v-if="isLoggedIn && isLoggedIn.role == 1" href="/employer/dashboard" class="flex text-white-900 font-medium hover:text-purple-600 py-2">Dashboard</Link>
+                <Link v-if="isLoggedIn && isLoggedIn.role == 1" href="/employer/dashboard" class="flex text-gray-300 font-medium hover:text-purple-600 py-2">Dashboard</Link>
               </li-->
               <li>
-                <Link  v-if="isLoggedIn && isLoggedIn.role == 2" href="/profile" class="flex text-white-900 font-medium hover:text-purple-600 py-2">Profile ({{getUserEmail()}})</Link>
+                <Link  v-if="isLoggedIn && isLoggedIn.role == 2" href="/profile" class="flex text-gray-300 font-medium hover:text-purple-600 py-2">Profile ({{getUserEmail()}})</Link>
               </li>
               <li>
-                <Link v-if="isLoggedIn && isLoggedIn.role == 1" href="/employer/profile" class="flex text-white-900 font-medium hover:text-purple-600 py-2">Profile ({{getUserEmail()}}) </Link>
+                <Link v-if="isLoggedIn && isLoggedIn.role == 1" href="/employer/profile" class="flex text-gray-300 font-medium hover:text-purple-600 py-2">Profile ({{getUserEmail()}}) </Link>
               </li>
               <li>
-                <Link v-if="!isLoggedIn" href="/register" class="flex text-white-900 font-medium w-full hover:text-purple-600 py-2 justify-center">Join</Link>
+                <Link v-if="!isLoggedIn" href="/register" class="flex text-gray-300 font-medium w-full hover:text-purple-600 py-2 justify-center">Join</Link>
               </li>
               <li>
-                <Link v-if="!isLoggedIn" href="/login" class="flex text-white-900 font-medium w-full  hover:text-purple-600 py-2 justify-center">Sign In</Link>
+                <Link v-if="!isLoggedIn" href="/login" class="flex text-gray-300 font-medium w-full  hover:text-purple-600 py-2 justify-center">Sign In</Link>
               </li>
               <li>
-                <Link v-if="!isLoggedIn" href="#" class="font-medium w-full inline-flex items-center justify-center border border-transparent px-4 py-2 my-2 rounded-sm text-white bg-purple-600 hover:bg-purple-700 transition duration-150 ease-in-out">Employers</Link>
+                <Link v-if="!isLoggedIn" href="#" class="font-medium w-full inline-flex items-center justify-center border border-transparent px-4 py-2 my-2 rounded-sm text-gray-300 bg-purple-600 hover:bg-purple-700 transition duration-150 ease-in-out">Employers</Link>
               </li>
               <li>
-                <Link v-if="isLoggedIn" v-on:click="logout" href="/logout" class="font-medium w-full inline-flex items-center justify-center border border-transparent px-4 py-2 my-2 rounded-sm text-white bg-purple-600 hover:bg-purple-700 transition duration-150 ease-in-out">Sign Out</Link>
+                <Link v-if="isLoggedIn" v-on:click="logout" href="/logout" class="font-medium w-full inline-flex items-center justify-center border border-transparent px-4 py-2 my-2 rounded-sm text-gray-300 bg-purple-600 hover:bg-purple-700 transition duration-150 ease-in-out">Sign Out</Link>
               </li>
             </ul>
           </nav>  
