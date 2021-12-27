@@ -8,6 +8,7 @@ use App\Models\JobPost;
 use App\Models\Location;
 use App\Models\CompanyProfile;
 use App\Models\CompanyType;
+use App\Models\Article;
 use Inertia\Inertia;
 use Mail;
 
@@ -15,7 +16,7 @@ class HomeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['home', 'jobs','contact','contactSubmit']]);
+        $this->middleware('auth', ['except' => ['home', 'jobs','contact','contactSubmit','privacy','pricing']]);
     }
     /**
      * Dashboard
@@ -51,7 +52,9 @@ class HomeController extends Controller
         $job_posts = JobPost::count();
         $locations = Location::get();
         $companytypes = CompanyType::take(40)->get();
-        return Inertia::render('home', ['count_job_posts' => $job_posts, 'locations' => $locations, 'companytypes' => $companytypes]);
+        $latestarticles = Article::with('tags')->select('articles.*','users.id as author_id','users.name')->leftjoin('users','articles.author_id','users.id')->where('is_published',1)->orderBy('articles.id','DESC')->limit(3)->get();
+        //dd($latestarticles);
+        return Inertia::render('home', ['articles'=>$latestarticles,'count_job_posts' => $job_posts, 'locations' => $locations, 'companytypes' => $companytypes]);
     }
 
     public function jobs(Request $request)
@@ -104,7 +107,25 @@ class HomeController extends Controller
             return Inertia::render('contact');
         } catch (\Exception $e) {
             $message = $e->getMessage();
-            return $this->sendErrorResponse('login', $message);
+            return $this->sendErrorResponse('404', $message);
+        }
+    }
+
+    public function privacy(){
+        try {
+            return Inertia::render('privacy');
+        } catch (\Exception $e) {
+            $message = $e->getMessage();
+            return $this->sendErrorResponse('404', $message);
+        }
+    }
+
+    public function pricing(){
+        try {
+            return Inertia::render('pricing');
+        } catch (\Exception $e) {
+            $message = $e->getMessage();
+            return $this->sendErrorResponse('404', $message);
         }
     }
 
