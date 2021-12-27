@@ -63,6 +63,9 @@
               <h6 class="text-white font-medium mb-1">Get Involved</h6>
               <ul>
                 <li class="mb-1">
+                  <Link href="/pricing" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Pricing</Link>
+                </li>
+                <li class="mb-1">
                   <Link href="#" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Employers</Link>
                 </li>
                 <li class="mb-1">

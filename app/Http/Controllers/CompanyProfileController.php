@@ -427,8 +427,15 @@ class CompanyProfileController extends Controller
             $job_posts_count = $job_posts_query->count();
 
             $job_posts = $job_posts_query->paginate(5)->onEachSide(1);
-           
-            return Inertia::render('single-company',['data'=>$company,'articles'=>$company->articles,'job_posts_count'=>$job_posts_count,'job_posts'=>$job_posts,'industries',$industries]);
+
+            $articledata = [];
+            foreach($company->articles as $key => $article){
+                $articledata[] = $article;
+                $articledata[$key]['name'] =  User::where('id',$article['author_id'])->first()['name'];
+                //$articledata[$key][] = $article;
+            }
+           //dd($company->articles);
+            return Inertia::render('single-company',['data'=>$company,'articles'=>$articledata,'job_posts_count'=>$job_posts_count,'job_posts'=>$job_posts,'industries',$industries]);
 
         }catch (\Exception $e) {
             $message = $e->getMessage();
