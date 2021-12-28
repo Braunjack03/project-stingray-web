@@ -6,7 +6,7 @@
         <!-- Section header -->
         <div class="max-w-3xl mx-auto text-center pb-12">
           <h1 class="h1 mb-4 text-gray-700" data-aos="fade-up">Simple, transparent pricing</h1>
-          <p class="text-lg textColor pt-2" data-aos="fade-up" data-aos-delay="200">Get the Open PRO plan that fits your needs at a special introductory price.</p>
+          <p class="text-xl textColor pt-2" data-aos="fade-up" data-aos-delay="200">Get the Open PRO plan that fits your needs at a special introductory price.</p>
         </div>
 
         <!-- Pricing tables -->

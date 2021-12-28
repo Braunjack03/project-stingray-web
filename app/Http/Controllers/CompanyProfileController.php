@@ -450,8 +450,8 @@ class CompanyProfileController extends Controller
             ActivityLog::addToLog(__('activitylogs.company_profile_updated'),'company claimed');
             $user = CompanyProfile::leftjoin('users','company_profiles.user_id','=','users.id')
             ->select('company_profiles.name as company_name','users.name','users.email','company_profiles.slug as company_slug')
-            ->where('company_profiles.uuid',$id)->first();  
-       
+            ->where('company_profiles.uuid',$id)->first(); 
+
             Mail::send('emails.claimCompanyProfile',['user'=>$user], function($message){
                 $message->to(env('ADMIN_EMAIL'));
                 $message->subject(__('messages.profile_claimed'));

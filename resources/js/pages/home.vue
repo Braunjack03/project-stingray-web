@@ -1,6 +1,9 @@
 <template>
     <Layout>
-        <Head title="Made in Tampa" />
+        <Head>
+            <title>Made in Tampa</title>
+            <meta name="description" content="Made in Tampa">
+        </Head>
         <section data-app class="homeBanner">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 relative">
                 <div class="pt-32 pb-0 md:pt-50 md:pb-20">
