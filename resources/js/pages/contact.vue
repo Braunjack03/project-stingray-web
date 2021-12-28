@@ -29,7 +29,7 @@
 
                         <div class="flex flex-wrap">
                             <div class="w-full mb-3">
-                            <label class="block text-gray-700 text-sm font-medium mb-1">Subject <span class="text-red-600">*</span></label>
+                            <label class="block text-gray-700 text-lg font-medium mb-1">Subject <span class="text-red-600">*</span></label>
                                 <v-row >
                                 <v-col
                                 class="d-flex"
@@ -52,7 +52,7 @@
                         
                          <div class="flex flex-wrap">
                             <div class="w-full mb-3">
-                                <label class="block text-gray-700 text-sm font-medium mb-1" for="email">Name <span class="text-red-600">*</span></label>
+                                <label class="block text-gray-700 text-lg font-medium mb-1" for="email">Name <span class="text-red-600">*</span></label>
                                 <v-text-field v-model="name" :class="{ 'error--text': $v.name.$error }"  @input="$v.name.$touch()" @blur="$v.name.$touch()" class="form-input input-field-outer w-full text-gray-300" placeholder="Name" autocomplete required ></v-text-field>
 
                                 <div v-if="$v.name.$error && !$v.name.required"  class="text-red-500 text-sm">Name is required</div>
@@ -61,7 +61,7 @@
 
                         <div class="flex flex-wrap">
                             <div class="w-full mb-3">
-                                <label class="block text-gray-700 text-sm font-medium mb-1" for="email">Email <span class="text-red-600">*</span></label>
+                                <label class="block text-gray-700 text-lg font-medium mb-1" for="email">Email <span class="text-red-600">*</span></label>
                                 <v-text-field v-model="email" :class="{ 'error--text': $v.email.$error }"  @input="$v.email.$touch()" @blur="$v.email.$touch()" class="form-input input-field-outer w-full text-gray-300" placeholder="you@yourcompany.com" autocomplete required ></v-text-field>
 
                                 <div v-if="$v.email.$error && !$v.email.required"  class="text-red-500 text-sm">Email is required</div>
@@ -71,7 +71,7 @@
 
                         <div class="flex flex-wrap">
                             <div class="w-full mb-3">
-                                <label class="block text-gray-700 text-sm font-medium mb-1" for="email">Message <span class="text-red-600">*</span></label>
+                                <label class="block text-gray-700 text-lg font-medium mb-1" for="email">Message <span class="text-red-600">*</span></label>
                                 <v-textarea v-model="message" :class="{ 'error--text': $v.message.$error }"  @input="$v.message.$touch()" @blur="$v.message.$touch()" class="form-input input-field-outer w-full text-gray-300" placeholder="Message" autocomplete required ></v-textarea>
 
                                 <div v-if="$v.message.$error && !$v.message.required"  class="text-red-500 text-sm">Message is required</div>
