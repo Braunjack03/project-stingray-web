@@ -44,16 +44,16 @@
               <h6 class="text-white font-medium mb-1">Resources</h6>
               <ul>
                 <li class="mb-1">
-                  <Link href="#" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Provide Feedback</Link>
+                  <Link href="/contact" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Provide Feedback</Link>
                 </li>
                 <li class="mb-1">
-                  <Link href="#" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Report a Concern</Link>
+                  <Link href="/contact" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Report a Concern</Link>
                 </li>
                 <li class="mb-1">
-                  <Link href="#" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Browse Articles</Link>
+                  <Link href="/articles" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Browse Articles</Link>
                 </li>
                 <li class="mb-1">
-                  <Link href="#" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Browse Jobs</Link>
+                  <Link href="/jobs" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Browse Jobs</Link>
                 </li>
               </ul>
             </div>
@@ -123,7 +123,7 @@
           </ul>
 
           <!-- Copyrights note -->
-          <div class="text-gray-400 text-sm mr-4">&copy; 2021 Water Street Research. All rights reserved.</div>
+          <div class="text-gray-400 text-sm mr-4">&copy; 2021 Water Street Technologies. All rights reserved.</div>
 
         </div>
 
