@@ -1,6 +1,9 @@
 <template>
     <Layout>
-        <Head :title="'Companies | ' + (data.name) ? data.name : ''" />
+        <Head>
+            <title>Companies | {{data.name}}</title>
+            <meta name="description" :content="data.description">
+        </Head>
         <section class="relative companyProfile--outer" data-app>
             <div class="companyPageBanner">
                 <img src="/images/company-banner.jpg" alt="">

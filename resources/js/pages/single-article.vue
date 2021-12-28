@@ -1,6 +1,16 @@
 <template>
     <Layout>
-        <Head :title="'Articles'" />
+        <Head>
+            <title>Made in Tampa - {{data.title}}</title>
+            <meta name="description" :content="data.title">
+            <meta property="og:title" :content="data.title" />
+            <meta property="og:type" content="jobs" />
+            <meta property="og:url" :content="base_url+'/articles/'+data.slug" />
+            <meta property="og:image" :content="data.header_image" />
+            <meta property="og:description" :content="data.title">
+            <meta property="og:site_name" content="Made in Tampa">
+            <meta name="twitter:image:alt" content="Made in Tampa">
+        </Head>
         <section class="relative singleArticles--outer" data-app>
             <div class="max-w-6xl mx-auto px-4 sm:px-6 py-10 md:py-20 relative">
                 <v-row class="blogPost--block singlePage--articles justify-center mt-8">
@@ -39,7 +49,7 @@
                         </div>
                     </v-col>
                 </v-row>
-                <v-row class="blogPost--block" v-if="articles.data">
+                <v-row class="blogPost--block" v-if="articles && articles.data.length > 0">
                     <v-col cols="12">
                         <h2 class="articlesTitle">Companies Mentioned in the Article</h2>
                     </v-col>
@@ -67,6 +77,11 @@ export default {
         success: Object,
         data: Object,
         articles: Object,
+    },
+    data() {
+        return {
+            base_url: window.location.origin,
+        };
     },
 };
 </script>

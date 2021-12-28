@@ -8,7 +8,7 @@
               <!-- Page header -->
               <div class="max-w-3xl mx-auto text-center pb-9">
                 <h1 class="h1 text-gray-700">Welcome back!</h1>
-              </div>
+              </div> 
 
         <!-- Form -->
             <div class="max-w-sm mx-auto">
@@ -18,11 +18,15 @@
                 <div class="border-t border-gray-700 border-dotted flex-grow ml-3" aria-hidden="true"></div>
               </div>
               <v-form class="login-form form-outer-wrapper" @submit.prevent="submit" >
-                <div v-if="errors.message" class="text-red-500 text-sm font-bold text-center text-sm my-3">{{ errors.message }}</div>
-                <div v-if="success" class="text-green-500 text-sm font-bold text-center text-sm my-3">{{ success.message }}</div>
+                <!--div v-if="errors.message" class="text-red-500 text-sm font-bold text-center text-sm my-3">{{ errors.message }}</div>
+                <div v-if="success" class="text-green-500 text-sm font-bold text-center text-sm my-3">{{ success.message }}</div-->
+                
+                <Message :message="errors.message" :hide="0" :type="'error'" />
+                <Message :message="success.message" :hide="0" :type="'success'" />
+
                 <div class="flex flex-wrap -mx-3 mb-3">
                   <div class="w-full px-3">
-                    <label class="block text-gray-700 text-sm font-medium mb-1" for="email">Email</label>
+                    <label class="block text-gray-700 text-lg font-medium mb-1" for="email">Email</label>
                     <v-text-field v-model="email" :class="{ 'error--text': $v.email.$error }"  @input="$v.email.$touch()" @blur="$v.email.$touch()" class="form-input input-field-outer w-full text-gray-700" placeholder="you@yourcompany.com" autocomplete required ></v-text-field>
 
                     <div v-if="$v.email.$error && !$v.email.required"  class="text-red-500 text-sm">Email is required</div>
@@ -31,7 +35,7 @@
                 </div>
                 <div class="flex flex-wrap -mx-3 mb-3">
                   <div class="w-full px-3">
-                    <label class="block text-gray-700 text-sm font-medium mb-1" for="password">Password</label>
+                    <label class="block text-gray-700 text-lg font-medium mb-1" for="password">Password</label>
                     <v-text-field type="password" v-model="password" :class="{ 'error--text': $v.password.$error }" class="form-input input-field-outer w-full text-gray-700" @input="$v.password.$touch()" @blur="$v.password.$touch()" placeholder="Password (at least 8 characters)" autocomplete required ></v-text-field>
                     <div v-if="$v.password.$error && !$v.password.required" class="text-red-500 text-sm ">Password is required</div>  
                     <div v-if="password.trim().length > 0 && $v.password.$error && !$v.password.minLength" class="text-red-500 text-sm ">The password must be at least 8 characters.</div>
@@ -69,6 +73,7 @@ import { Head,Link } from '@inertiajs/inertia-vue'
 import Layout from './Layout'
 import { validationMixin } from 'vuelidate'
 import { required, email, minLength } from 'vuelidate/lib/validators'
+import Message from '../partials/Messages.vue';
 
 
   export default {
@@ -86,6 +91,7 @@ import { required, email, minLength } from 'vuelidate/lib/validators'
       Link,
       Head,
       Layout,
+      Message,
     },
      props: {
         errors: Object,

@@ -17,9 +17,7 @@
                         <h3 class="h3 text-gray-700">Current Job Posts</h3>
                         <br />
     
-                        <div v-if="$page.props.flash.message" class="text-green-500 text-center text-sm font-bold text-center text-sm my-4">
-                            {{ $page.props.flash.message }}
-                        </div>
+                        <Message :message="$page.props.flash.message" :hide="0" :type="'success'" />
     
                         <div v-if="job_posts.length > 0">
                             <v-row>
@@ -87,6 +85,7 @@
 import Layout from "../Layout";
 import { Head, Link } from "@inertiajs/inertia-vue";
 import JobPost from '../../components/JobPost.vue';
+import Message from '../../partials/Messages.vue';
 
 export default {
     components: {
@@ -94,6 +93,7 @@ export default {
         Layout,
         Link,
         'CustomCard': JobPost,
+        Message,
     },
     props: {
         errors: Object,

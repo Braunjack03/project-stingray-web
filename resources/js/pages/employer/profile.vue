@@ -11,12 +11,11 @@
            
               <div class="max-w-xl mx-auto">
 
-                  <div v-if="errors.message" class="text-red-500 text-center text-sm font-bold text-center text-sm my-3">{{ errors.message }}</div>
-                  <div v-if="success" class="text-green-500 text-center text-sm font-bold text-center text-sm my-3">{{ success.message }}</div>
+                   <Message :message="errors.message" :hide="0" :type="'error'" />
+                   <Message :message="success.message" :hide="0" :type="'success'" />
 
-                  <div v-if="$page.props.flash.message" class="text-green-500 text-center text-sm font-bold text-center text-sm my-3">
-                  {{ $page.props.flash.message }}
-                </div>
+                  <Message :message="$page.props.flash.message" :hide="0" :type="'success'" />
+                  
                 <v-form ref="form"  lazy-validations class="form-outer-wrapper max-w-xl">
     
                     
@@ -31,7 +30,7 @@
                     </div>
                     <div class="flex flex-wrap form-file-upload">
                       <div class="w-full px-3">
-                          <label class="block text-gray-700 text-sm font-medium mb-1">Profile Image (Recommended 500px x 500px) </label>
+                          <label class="block text-gray-700 text-lg font-medium mb-1">Profile Image (Recommended 500px x 500px) </label>
                           <v-file-input class="fileUpload form-input input-field-outer w-full text-gray-700" accept="image/*" v-model="profile_image"  ref="fileInput" @change="onFileChange" outlined dense></v-file-input>
                       </div>
                     </div>
@@ -41,7 +40,7 @@
 
                     <div class="flex flex-wrap mb-3">
                         <div class="w-full px-3">
-                          <label class="block text-gray-700 text-sm font-medium mb-1" for="email">Name <span class="text-red-600">*</span></label>
+                          <label class="block text-gray-700 text-lg font-medium mb-1" for="email">Name <span class="text-red-600">*</span></label>
                            <v-text-field v-model="name" class="form-input input-field-outer w-full text-gray-700" placeholder="Enter Name" :class="{ 'error--text': $v.name.$error }"
                               @input="$v.name.$touch()" 
                               @blur="$v.name.$touch()" required></v-text-field>
@@ -51,7 +50,7 @@
 
                     <div class="flex flex-wrap mb-3">
                         <div class="w-full px-3">
-                          <label class="block text-gray-700 text-sm font-medium mb-1" for="email">Current Job Title <span class="text-red-600">*</span></label>
+                          <label class="block text-gray-700 text-lg font-medium mb-1" for="email">Current Job Title <span class="text-red-600">*</span></label>
                            <v-text-field v-model="current_job_title" class="form-input input-field-outer w-full text-gray-700" placeholder="Current Job Title" 
                             :class="{ 'error--text': $v.current_job_title.$error }"
                             @input="$v.current_job_title.$touch()" 
@@ -64,7 +63,7 @@
                     
                      <div class="flex flex-wrap mb-3">
                         <div class="w-full px-3">
-                            <label class="block text-gray-700 text-sm font-medium mb-1" for="email">Short Bio </label>
+                            <label class="block text-gray-700 text-lg font-medium mb-1" for="email">Short Bio </label>
                             <v-text-field v-model="short_bio" class="form-input input-field-outer w-full text-gray-700" placeholder="Short Bio" required></v-text-field>
                             <div v-if="errors.short_bio" class="mt-2 error">{{ errors.short_bio }}</div>
                       </div>
@@ -74,7 +73,7 @@
 
                     <div class="flex flex-wrap mb-3">
                       <div class="w-full px-3">
-                            <label class="block text-gray-700 text-sm font-medium mb-1" for="email">LinkedIn</label>
+                            <label class="block text-gray-700 text-lg font-medium mb-1" for="email">LinkedIn</label>
                             <v-text-field v-model="linkedin" class="form-input input-field-outer w-full text-gray-700" placeholder="LinkedIn" required></v-text-field>
                             <div v-if="errors.linkedin" class="mt-2 error">{{ errors.linkedin }}</div>
                       </div>
@@ -123,7 +122,8 @@
   import Layout from '../Layout'
   import { Head,Link } from '@inertiajs/inertia-vue'
   import { validationMixin } from 'vuelidate'
-import { required} from 'vuelidate/lib/validators'
+  import { required} from 'vuelidate/lib/validators'
+  import Message from '../../partials/Messages.vue';
 
   export default {
       mixins: [validationMixin],
@@ -134,7 +134,8 @@ import { required} from 'vuelidate/lib/validators'
     components: {
       Head,
       Layout,
-      Link
+      Link,
+      Message
     },
     props: {
       errors : Object,  

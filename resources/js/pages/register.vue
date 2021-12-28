@@ -18,7 +18,8 @@
                 <div class="border-t border-gray-700 border-dotted flex-grow ml-3" aria-hidden="true"></div>
               </div>
 
-              <div v-if="errors.message" class="text-red-500 text-sm mt-2">{{ errors.message }}</div>
+              <Message :message="errors.message" :hide="0" :type="'error'" />
+              <Message :message="success.message" :hide="0" :type="'success'" />
 
               <v-form class="register-form form-outer-wrapper" @submit.prevent="submit" >
                 <div class="flex flex-wrap -mx-3 mb-3">
@@ -83,6 +84,7 @@ import { Head,Link } from '@inertiajs/inertia-vue'
 import Layout from './Layout'
 import { validationMixin } from 'vuelidate'
 import { required, email, minLength } from 'vuelidate/lib/validators'
+import Message from '../partials/Messages.vue';
 
 export default {
     name: 'SignUp',
@@ -94,9 +96,11 @@ export default {
     components: {
       Link,
       Head,
-      Layout
+      Layout,
+      Message,
     },
     props: {
+        success: Object,
         errors: Object,
     },
     data: () => ({
@@ -109,7 +113,6 @@ export default {
       submit() {
           this.$v.$touch()
           if(!this.$v.$invalid) {
-            console.log('submit');
              let form = {email:this.email,password:this.password,user_type:this.user_type};
              this.$inertia.post('/register', form);
           }
