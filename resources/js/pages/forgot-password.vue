@@ -17,7 +17,7 @@
                         <form class="forgot-password">
                             <div class="flex flex-wrap -mx-3 mb-4">
                                 <div class="w-full px-3">
-                                    <label class="block text-gray-700 text-sm font-medium mb-1" for="email">Email</label>
+                                    <label class="block text-gray-700 text-lg font-medium mb-1" for="email">Email</label>
                                     <input id="email" type="email" v-model="form.email" :rules="form.emailRules" class="form-input w-full text-gray-300" placeholder="you@yourcompany.com" required />
                                 </div>
                             </div>

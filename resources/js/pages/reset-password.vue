@@ -16,7 +16,7 @@
                    <form class="forgot-password">
                         <div class="flex flex-wrap -mx-3 mb-4">
                             <div class="w-full px-3">
-                            <label class="block text-gray-300 text-sm font-medium mb-1" for="password">Password <span class="text-red-600">*</span></label>
+                            <label class="block text-gray-300 text-lg font-medium mb-1" for="password">Password <span class="text-red-600">*</span></label>
 
                                 <input id="password" type="password" v-model="form.password" :rules="form.passwordRules" class="form-input w-full text-gray-300" placeholder="Password" autocomplete required />
 
@@ -25,7 +25,7 @@
                         </div>
                         <div class="flex flex-wrap -mx-3 mb-4">
                             <div class="w-full px-3">
-                            <label class="block text-gray-300 text-sm font-medium mb-1" for="password">Confirm Password <span class="text-red-600">*</span></label>
+                            <label class="block text-gray-300 text-lg font-medium mb-1" for="password">Confirm Password <span class="text-red-600">*</span></label>
 
                                 <input id="password" type="password" v-model="form.password_confirmation" :rules="form.cpasswordRules" class="form-input w-full text-gray-300" placeholder="Password" autocomplete required />
 
