@@ -33,8 +33,8 @@
                                                 </div>
                                             </div>
                                             <div class="button-outter flex">
-                                              <Link :href="'/employer/edit-job?id=' + data.uuid" class="editJobsBtn text-white bg-purple-600 hover:bg-purple-700 pl-8 pt-3 pb-3 pr-7">EDIT</Link>
-                                              <v-btn class="text-white bg-purple-600 hover:bg-purple-700" v-on:click="deletejob(data.uuid)" >Delete</v-btn>
+                                              <Link :href="'/employer/edit-job?id=' + data.uuid" class="editJobsBtn text-white bg-purple-600 hover:bg-purple-700 pl-8 pt-3 pb-3 pr-7 text-lg">Edit</Link>
+                                              <v-btn class="text-white bg-purple-600 hover:bg-purple-700 text-lg" v-on:click="deletejob(data.uuid)" >Delete</v-btn>
                                             </div>
                                         </v-card-text>
                                     </v-card>
