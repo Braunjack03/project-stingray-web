@@ -11,7 +11,7 @@
                     </div>
     
                     <div class="max-w-6xl mx-auto testJobs">
-                        <Link v-if="companies_count > 0 && job_posts_count < 3" :href="'/employer/create-job?c_id=' + company_details.uuid" color="text" class="btn text-white bg-purple-600 hover:bg-purple-700 mb-3">Add New Job Post</Link>
+                        <Link v-if="companies_count > 0 && job_posts_count < 3" :href="'/employer/create-job?c_id=' + company_details.uuid" color="text" class="text-lg btn text-white bg-purple-600 hover:bg-purple-700 mb-3">Add New Job Post</Link>
     
                         <br /><br /><br />
                         <h3 class="h3 text-gray-700">Current Job Posts</h3>
