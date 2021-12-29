@@ -96,11 +96,11 @@
                  <h3 class="text-2xl mb-3 text-gray-700">Your Companies</h3>  
                   <ul id="example-1">                     
                     <li v-for="company in companies" :key="company.id" class="flex flex-wrap justify-between">                     
-                      <span class="w-full text-lg mb-2 text-gray-700">{{ company.name }}</span>
-                      <Link :href="'/employer/edit-company?id='+company.uuid" color="text" class="manageBtn btn text-white bg-purple-600 hover:bg-purple-700 mb-3 mr-2" @click="edit()" > 
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor"> <path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z" /> </svg> Manage Profile</Link>
-                      <Link :href="'/employer/jobs?c_id='+company.uuid" color="text" class="manageBtn btn text-white bg-purple-600 hover:bg-purple-700 mb-3" > 
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor"> <path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z" /> </svg> Manage Jobs</Link>
+                      <span class="w-full text-lg mb-2 text-gray-700 text-lg">{{ company.name }}</span>
+                      <Link :href="'/employer/edit-company?id='+company.uuid" color="text" class="manageBtn btn text-white bg-purple-600 hover:bg-purple-700 mb-3 mr-2 text-lg" @click="edit()" > 
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1 text-lg" viewBox="0 0 20 20" fill="currentColor"> <path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z" /> </svg> Manage Profile</Link>
+                      <Link :href="'/employer/jobs?c_id='+company.uuid" color="text" class="manageBtn btn text-white bg-purple-600 hover:bg-purple-700 mb-3 text-lg" > 
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1 text-lg" viewBox="0 0 20 20" fill="currentColor"> <path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z" /> </svg> Manage Jobs</Link>
                     </li>
                   </ul>
                 </div>
