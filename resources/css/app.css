@@ -1223,7 +1223,8 @@ background-color: rgb(236 72 153);
     margin: 0px 0 1.25rem  1.125rem;
 }
 .contentPage a {
-    color: #33363a;  
+    color: #33363a;
+    word-break: break-all;  
 }
 
 /* Pricing Page */
