@@ -14,7 +14,7 @@
             <div class="max-w-sm mx-auto">
               <div class="flex items-center my-6">
                 <div class="border-t border-gray-700 border-dotted flex-grow mr-3" aria-hidden="true"></div>
-                <div class="text-gray-700">Sign in with your email</div>
+                <div class="text-gray-700 text-lg">Sign in with your email</div>
                 <div class="border-t border-gray-700 border-dotted flex-grow ml-3" aria-hidden="true"></div>
               </div>
               <v-form class="login-form form-outer-wrapper" @submit.prevent="submit" >

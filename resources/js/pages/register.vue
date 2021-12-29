@@ -14,7 +14,7 @@
             <div class="max-w-sm mx-auto">
               <div class="flex items-center my-6">
                 <div class="border-t border-gray-700 border-dotted flex-grow mr-3" aria-hidden="true"></div>
-                <div class="text-gray-700">Register with your email</div>
+                <div class="text-gray-700 text-lg">Register with your email</div>
                 <div class="border-t border-gray-700 border-dotted flex-grow ml-3" aria-hidden="true"></div>
               </div>
 

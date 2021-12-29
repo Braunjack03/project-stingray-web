@@ -200,6 +200,7 @@ ul.industries-list li {
 
 .radioColor .v-input__control label, .industries-list label {
    color: rgba(51, 54, 58, 1);
+   font-size: 1.125rem;
 }
 .register-form .radioColor .v-icon.v-icon {
    color: #a1a1a1;
