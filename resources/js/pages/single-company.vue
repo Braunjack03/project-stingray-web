@@ -104,7 +104,7 @@
                             <h3 class="post-title">Jobs at {{ data.name }}</h3>
                         </v-col>
                         <v-col cols="12" md="3" class="pa-3 d-flex flex-column text-right">
-                            <span class="text-gray-700">{{job_posts_count}} Positions</span>
+                            <span class="text-gray-700 text-lg">{{job_posts_count}} Positions</span>
                         </v-col>
                     </v-row>
                     <div v-if="job_posts.data.length > 0">
@@ -118,7 +118,7 @@
                     </div>
                     <div v-else>
                         <v-row>
-                            <v-col cols="12" class="mt-5 text-center text-gray-700">
+                            <v-col cols="12" class="mt-5 text-center text-gray-700 text-lg">
                                 {{ data.name }} has no jobs posted
                             </v-col>
                         </v-row>
