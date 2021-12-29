@@ -11,8 +11,8 @@
     
                     <div class="max-w-xl mx-auto">
     
-                        <div v-if="errors.message" class="text-red-500 text-sm font-bold text-center text-sm my-3">{{ errors.message }}</div>
-                        <div v-if="success" class="text-green-500 text-sm font-bold text-center text-sm my-3">{{ success.message }}</div>
+                       <Message :message="errors.message" :hide="0" :type="'error'" />
+                       <Message :message="success.message" :hide="0" :type="'success'" />
     
                         <v-form ref="form" >
     
@@ -37,7 +37,7 @@
                                     <label class="block text-gray-700 text-lg font-medium mb-1">Company Name <span class="text-red-600">*</span></label>
                                     <v-text-field v-model="name" :class="{ 'error--text': $v.name.$error }"  @input="$v.name.$touch()" 
                               @blur="$v.name.$touch()"  class="form-input input-field-outer w-full text-gray-700" placeholder="Company Name" required></v-text-field>
-                                    <div v-if="$v.name.$error && !$v.name.required"  class="text-red-500 text-sm">Company Name is required</div>
+                                    <div v-if="$v.name.$error && !$v.name.required"  class="text-red-500 text-lg">Company Name is required</div>
                                 </div>
                             </div>
     
@@ -46,7 +46,7 @@
                                     <label class="block text-gray-700 text-lg font-medium mb-1">Number of local employees</label>
                                     <v-text-field v-model="local_employees"  @input="$v.local_employees.$touch()" 
                               @blur="$v.local_employees.$touch()"  :class="{ 'error--text': $v.local_employees.$error }" class="form-input input-field-outer w-full text-gray-700" placeholder="Number of local employees" required></v-text-field>
-                                    <div v-if="$v.local_employees.$error && !$v.local_employees.required"  class="text-red-500 text-sm">Number of local employees</div>
+                                    <div v-if="$v.local_employees.$error && !$v.local_employees.required"  class="text-red-500 text-lg">Number of local employees</div>
 
                                 </div>
                             </div>
@@ -211,7 +211,7 @@
                             </div>
                             <div class="flex flex-wrap mt-5 text-center">
                                 <div class="w-full px-3">
-                                <p class="text-center text-gray-700">Please fill the required field(s)</p>                        
+                                <p class="text-center text-gray-700 text-lg">Please fill the required field(s)</p>                        
                                 </div>
                             </div> 
                         </v-form>
@@ -227,6 +227,8 @@ import Layout from '../Layout'
 import { Head } from '@inertiajs/inertia-vue'
 import { validationMixin } from 'vuelidate'
 import { required} from 'vuelidate/lib/validators'
+import Message from '../../partials/Messages.vue';
+
 export default {
      mixins: [validationMixin],
      validations: {
@@ -236,12 +238,13 @@ export default {
     components: {
         Head,
         Layout,
+        Message
     },
     props: {
         errors: Object,
         user: Object,
         success: Object,
-        industries: Object,
+        industries: Object || Array,
     },
     data (){
      return {
@@ -254,17 +257,6 @@ export default {
 
      }
   },
-    /*data: () => ({
-        industry: [],
-        items: ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'],
-        valid:true,
-        form: {
-            logo_image_url: '',
-            name: '',
-            logo_image_removed: 0,
-            state_abbr: '',
-        },
-    }),*/
     methods: {
         submit() {
             this.$v.$touch()

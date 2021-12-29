@@ -20,7 +20,7 @@
 
                                 <input id="password" type="password" v-model="form.password" :rules="form.passwordRules" class="form-input w-full text-gray-300" placeholder="Password" autocomplete required />
 
-                                <p v-if="errors.password" class="text-red-500 text-sm mt-2">{{ errors.password }}</p>
+                                <p v-if="errors.password" class="text-red-500 text-lg mt-2">{{ errors.password }}</p>
                             </div>
                         </div>
                         <div class="flex flex-wrap -mx-3 mb-4">

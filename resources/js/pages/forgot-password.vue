@@ -12,8 +12,8 @@
                     </div>
     
                     <div class="max-w-sm mx-auto">
-                        <div v-if="errors.message" class="text-red-500 text-sm mt-2">{{ errors.message }}</div>
-                        <div v-if="success" class="text-green-500 text-sm mt-2">{{ success.message }}</div>
+                        <div v-if="errors.message" class="text-red-500 text-lg mt-2">{{ errors.message }}</div>
+                        <div v-if="success" class="text-green-500 text-lg mt-2">{{ success.message }}</div>
                         <form class="forgot-password">
                             <div class="flex flex-wrap -mx-3 mb-4">
                                 <div class="w-full px-3">

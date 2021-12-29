@@ -29,7 +29,7 @@
                                                 <div class="card-outter">
                                                     <div class="text-subtitle-1" v-if="data.company_name">Company Name: {{data.company_name}}</div>
                                                     <div class="description">Location: {{ data.location_id }}</div>
-                                                    <div class="date">Published: {{ setDateFormat(data.created_on) }}</div>
+                                                    <div class="date text-lg">Published: {{ setDateFormat(data.created_on) }}</div>
                                                 </div>
                                             </div>
                                             <div class="button-outter flex">

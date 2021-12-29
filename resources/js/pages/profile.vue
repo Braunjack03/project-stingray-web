@@ -56,7 +56,7 @@
                         required
                       ></v-text-field>
     
-                      <div v-if="$v.name.$error && !$v.name.required"  class="text-red-500 text-sm">Name is required</div>
+                      <div v-if="$v.name.$error && !$v.name.required"  class="text-red-500 text-lg">Name is required</div>
                     </div>
                   </div>
     
@@ -77,7 +77,7 @@
                         outlined
                         required
                       ></v-text-field>
-                      <div v-if="$v.current_job_title.$error && !$v.current_job_title.required"  class="text-red-500 text-sm">Current Job Title is required</div>
+                      <div v-if="$v.current_job_title.$error && !$v.current_job_title.required"  class="text-red-500 text-lg">Current Job Title is required</div>
     
                     </div>
                   </div>
@@ -157,7 +157,7 @@
     
                             <div class="flex flex-wrap  mt-6 text-center">
                                 <div class="w-full px-3">
-                                    <p class="text-center text-gray-700">Please fill the required field(s)</p>
+                                    <p class="text-center text-lg text-gray-700">Please fill the required field(s)</p>
                                 </div>
                             </div>
                         </v-form>
