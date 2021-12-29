@@ -13,7 +13,7 @@
                 </div>
             <!-- Form -->
                 <div class="max-w-xl mx-auto">
-                    <!--div v-if="success" class="text-green-500 text-center text-sm mt-2">
+                    <!--div v-if="success" class="text-green-500 text-center text-lg mt-2">
                         {{ success.message }}
                     </div-->
 
@@ -44,7 +44,7 @@
                                     solo
                                     :class="{ 'error--text': $v.subject.$error }" 
                                 ></v-select>
-                                <div v-if="$v.subject.$error && !$v.subject.required"  class="text-red-500 text-sm">Subject is required</div>
+                                <div v-if="$v.subject.$error && !$v.subject.required"  class="text-red-500 text-lg">Subject is required</div>
                                 </v-col>
                             </v-row>
                         </div>
@@ -55,7 +55,7 @@
                                 <label class="block text-gray-700 text-lg font-medium mb-1" for="email">Name <span class="text-red-600">*</span></label>
                                 <v-text-field v-model="name" :class="{ 'error--text': $v.name.$error }"  @input="$v.name.$touch()" @blur="$v.name.$touch()" class="form-input input-field-outer w-full text-gray-300" placeholder="Name" autocomplete required ></v-text-field>
 
-                                <div v-if="$v.name.$error && !$v.name.required"  class="text-red-500 text-sm">Name is required</div>
+                                <div v-if="$v.name.$error && !$v.name.required"  class="text-red-500 text-lg">Name is required</div>
                             </div>
                         </div>
 
@@ -64,8 +64,8 @@
                                 <label class="block text-gray-700 text-lg font-medium mb-1" for="email">Email <span class="text-red-600">*</span></label>
                                 <v-text-field v-model="email" :class="{ 'error--text': $v.email.$error }"  @input="$v.email.$touch()" @blur="$v.email.$touch()" class="form-input input-field-outer w-full text-gray-300" placeholder="you@yourcompany.com" autocomplete required ></v-text-field>
 
-                                <div v-if="$v.email.$error && !$v.email.required"  class="text-red-500 text-sm">Email is required</div>
-                                <div v-if="$v.email.$error && !$v.email.email"  class="text-red-500 text-sm">Please Enter a valid Email</div>
+                                <div v-if="$v.email.$error && !$v.email.required"  class="text-red-500 text-lg">Email is required</div>
+                                <div v-if="$v.email.$error && !$v.email.email"  class="text-red-500 text-lg">Please Enter a valid Email</div>
                             </div>
                         </div>
 
@@ -74,7 +74,7 @@
                                 <label class="block text-gray-700 text-lg font-medium mb-1" for="email">Message <span class="text-red-600">*</span></label>
                                 <v-textarea v-model="message" :class="{ 'error--text': $v.message.$error }"  @input="$v.message.$touch()" @blur="$v.message.$touch()" class="form-input input-field-outer w-full text-gray-300" placeholder="Message" autocomplete required ></v-textarea>
 
-                                <div v-if="$v.message.$error && !$v.message.required"  class="text-red-500 text-sm">Message is required</div>
+                                <div v-if="$v.message.$error && !$v.message.required"  class="text-red-500 text-lg">Message is required</div>
                             </div>
                         </div>
                         <div class="flex flex-wrap mt-2">

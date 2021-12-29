@@ -11,8 +11,9 @@
 
               <div class="max-w-xl mx-auto">
 
-                <div v-if="errors.message" class="text-red-500 text-sm font-bold text-center text-sm my-3">{{ errors.message }}</div>
-                  <div v-if="success" class="text-green-500 text-sm font-bold text-center text-sm my-3">{{ success.message }}</div>
+               <Message :message="errors.message" :hide="0" :type="'error'" />
+               <Message :message="success.message" :hide="0" :type="'success'" />
+               
                 <v-form ref="form"  class="form-outer-wrapper max-w-xl">
 
                     <div class="flex flex-wrap mb-3">
@@ -40,7 +41,7 @@
                           <label class="block text-gray-700 text-lg font-medium mb-1">Company Name <span class="text-red-600">*</span></label>
                           <v-text-field v-model="name" :class="{ 'error--text': $v.name.$error }" @input="$v.name.$touch()" 
                               @blur="$v.name.$touch()" class="form-input input-field-outer w-full text-gray-700" placeholder="Company Name" required></v-text-field>
-                           <div v-if="$v.name.$error && !$v.name.required"  class="text-red-500 text-sm">Company Name is required</div>
+                           <div v-if="$v.name.$error && !$v.name.required"  class="text-red-500 text-lg">Company Name is required</div>
                         </div>
                     </div>   
 
@@ -49,7 +50,7 @@
                           <label class="block text-gray-700 text-lg font-medium mb-1">Number of local employees <span class="text-red-600">*</span></label>
                             <v-text-field v-model="local_employees" @input="$v.local_employees.$touch()" 
                               @blur="$v.local_employees.$touch()" :class="{ 'error--text': $v.local_employees.$error }" class="form-input input-field-outer w-full text-gray-700" placeholder="Number of local employees" required></v-text-field>
-                          <div v-if="$v.local_employees.$error && !$v.local_employees.required"  class="text-red-500 text-sm">Number of local employees</div>
+                          <div v-if="$v.local_employees.$error && !$v.local_employees.required"  class="text-red-500 text-lg">Number of local employees</div>
                       </div>
                     </div>   
                     
@@ -225,7 +226,7 @@
                       </div> 
                       <div class="flex flex-wrap mt-5 text-center">
                         <div class="w-full px-3">
-                          <p class="text-center text-gray-700">Please fill the required field(s)</p>                        
+                          <p class="text-center text-gray-700 text-lg">Please fill the required field(s)</p>                        
                         </div>
                       </div> 
 
@@ -241,6 +242,8 @@
   import { Head } from '@inertiajs/inertia-vue'
   import { validationMixin } from 'vuelidate'
   import { required} from 'vuelidate/lib/validators'
+  import Message from '../../partials/Messages.vue';
+
   export default {
      mixins: [validationMixin],
      validations: {
@@ -250,6 +253,7 @@
     components: {
       Head,
       Layout,
+      Message
     },
     props: {
       errors : Object,  

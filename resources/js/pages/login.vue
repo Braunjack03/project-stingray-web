@@ -29,36 +29,36 @@
                     <label class="block text-gray-700 text-lg font-medium mb-1" for="email">Email</label>
                     <v-text-field v-model="email" :class="{ 'error--text': $v.email.$error }"  @input="$v.email.$touch()" @blur="$v.email.$touch()" class="form-input input-field-outer w-full text-gray-700" placeholder="you@yourcompany.com" autocomplete required ></v-text-field>
 
-                    <div v-if="$v.email.$error && !$v.email.required"  class="text-red-500 text-sm">Email is required</div>
-                    <div v-if="email.trim().length > 0 && $v.email.$error && !$v.email.email"  class="text-red-500 text-sm">Please Enter a valid Email</div>
+                    <div v-if="$v.email.$error && !$v.email.required"  class="text-red-500 text-lg">Email is required</div>
+                    <div v-if="email.trim().length > 0 && $v.email.$error && !$v.email.email"  class="text-red-500 text-lg">Please Enter a valid Email</div>
                   </div>
                 </div>
                 <div class="flex flex-wrap -mx-3 mb-3">
                   <div class="w-full px-3">
                     <label class="block text-gray-700 text-lg font-medium mb-1" for="password">Password</label>
                     <v-text-field type="password" v-model="password" :class="{ 'error--text': $v.password.$error }" class="form-input input-field-outer w-full text-gray-700" @input="$v.password.$touch()" @blur="$v.password.$touch()" placeholder="Password (at least 8 characters)" autocomplete required ></v-text-field>
-                    <div v-if="$v.password.$error && !$v.password.required" class="text-red-500 text-sm ">Password is required</div>  
-                    <div v-if="password.trim().length > 0 && $v.password.$error && !$v.password.minLength" class="text-red-500 text-sm ">The password must be at least 8 characters.</div>
+                    <div v-if="$v.password.$error && !$v.password.required" class="text-red-500 text-lg ">Password is required</div>  
+                    <div v-if="password.trim().length > 0 && $v.password.$error && !$v.password.minLength" class="text-red-500 text-lg ">The password must be at least 8 characters.</div>
                   
                   </div>
                 </div>
                 <div class="flex flex-wrap -mx-3 mb-3">
                   <div class="w-full px-3">
                     <div class="flex justify-between">
-                      <Link href="/forgot-password" class="text-purple-600 hover:text-purple-600 transition duration-150 ease-in-out">Forgot Password?</Link>
+                      <Link href="/forgot-password" class="text-lg text-purple-600 hover:text-purple-600 transition duration-150 ease-in-out">Forgot Password?</Link>
                     </div>
                   </div>
                 </div>
                 <div class="flex flex-wrap -mx-3 mt-5">
                   <div class="w-full px-3">
-                      <v-btn class="btn text-white bg-purple-600 hover:bg-purple-700 w-full" @click="submit">
+                      <v-btn class="btn text-white bg-purple-600 hover:bg-purple-700 w-full text-lg" @click="submit">
                         Sign in
                       </v-btn>
                     <!--button  type="button" class="btn text-white bg-purple-600 hover:bg-purple-700 w-full" >Sign in</button-->
                   </div>
                 </div>
               </v-form>
-              <div class="text-gray-700 text-center mt-5">
+              <div class="text-gray-700 text-center text-lg mt-5">
                 Don’t you have an account? <Link href="/register" class="text-purple-600 hover:text-purple-600 transition duration-150 ease-in-out">Sign up</Link>
               </div>
             </div>
