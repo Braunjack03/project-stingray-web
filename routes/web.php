@@ -13,6 +13,7 @@ use App\Http\Controllers\JobSeekerProfileController;
 use App\Http\Controllers\EmployerProfileController;
 use App\Http\Controllers\CompanyProfileController;
 use App\Http\Controllers\JobPostController;
+use App\Http\Controllers\ArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +26,13 @@ use App\Http\Controllers\JobPostController;
 |
 */
 
+
+
 Route::get('contact', [HomeController::class, 'contact']);
+
+Route::get('privacy', [HomeController::class, 'privacy']);
+
+Route::get('pricing', [HomeController::class, 'pricing']);
 
 Route::post('contact', [HomeController::class, 'contactSubmit'])->name('contact');
 
@@ -53,24 +60,15 @@ Route::get('account/verify/{token}', [AuthController::class, 'verifyAccount'])->
 Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
 Route::post('reset-password/{token}', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
  
-/*Route::get('/', function() {
-
-    //$job_posts = JobPost::with('company_profile')->all();
-    #$job_posts = DB::table('job_posts')->join('company_profiles', 'company_profiles.id', '=', 'job_posts.company_profile_id')->get('content', 'job_posts.name', 'company_profiles.name');
-  
-});*/
-
 Route::get('/', [HomeController::class, 'home'])->name('home');
-
-Route::get('news', [HomeController::class, 'blog'])->name('blog');
-
-Route::get('articles', [HomeController::class, 'articles'])->name('articles');
-
-Route::get('article-details', [HomeController::class, 'articleDetail'])->name('article_details');
 
 Route::get('jobs', [HomeController::class, 'jobs'])->name('jobs');
 
-Route::get('companies', [HomeController::class, 'companies'])->name('companies');
+Route::get('articles', [ArticleController::class, 'index'])->name('articles');
+
+Route::get('articles/{slug}', [ArticleController::class, 'show'])->name('article_details');
+
+Route::get('companies', [CompanyProfileController::class, 'companies'])->name('companies');
 
 Route::post('/search', [HomeController::class, 'home'])->name('search');
 
@@ -135,3 +133,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function() {
     Route::get('job_seekers', [AdminController::class, 'job_seekers'])->name('admin.job_seekers');
 
 });
+
+Route::get('/{vue_capture?}', function () {
+    return Inertia::render('404');
+})->where('vue_capture', '[\/\w\.-]*');

@@ -13,18 +13,13 @@
                 <div class="pt-32 pb-12 md:pt-40 md:pb-20">
                     
                     <!-- Page header -->
-                    <div class="max-w-3xl mx-auto text-center pb-12 md:pb-16">
+                    <div class="max-w-3xl mx-auto text-center pb-9">
 
                         <h1 class="h1 mb-4 text-gray-700" data-aos="fade-up">Profile Settings</h1>
                     </div>
                     <!-- Form -->
-                      <div v-if="errors.message" class="text-red-500 text-sm font-bold text-center text-sm my-3">
-                            {{ errors.message }}
-                        </div>
-                        <!--v-alert v-if="success.message" dense type="success"> {{ success.message }}</v-alert-->
-                        <div v-if="success" class="text-green-500 font-bold text-center text-sm my-3">
-                  {{ success.message }}
-                </div>
+                      <Message :message="errors.message" :hide="0" :type="'error'" />
+                        <Message :message="success.message" :hide="0" :type="'success'" />
                     <div class="max-w-xl mx-auto">
                       
                         <v-form ref="form">
@@ -38,7 +33,7 @@
     
                             <div class="flex flex-wrap  form-file-upload">
                                 <div class="w-full px-3">
-                                    <label class="block text-gray-700 text-sm font-medium mb-1" for="email">Profile Image (Recommended 500px x 500px)
+                                    <label class="block text-gray-700 text-lg font-medium mb-1" for="email">Profile Image (Recommended 500px x 500px)
                       </label>
                                     <v-file-input v-model="profile_image" accept="image/*" ref="fileInput" class="fileUpload input-field-outer form-input w-full text-gray-700" @change="onFileChange" outlined dense></v-file-input>
                                 </div>
@@ -47,7 +42,7 @@
     
                             <div class="flex flex-wrap  mb-4">
                                 <div class="w-full px-3">
-                                    <label class="block text-gray-700 text-sm font-medium mb-1" for="email">Name <span class="text-red-600">*</span></label
+                                    <label class="block text-gray-700 text-lg font-medium mb-1" for="email">Name <span class="text-red-600">*</span></label
                       >
                      
                       <v-text-field
@@ -61,14 +56,14 @@
                         required
                       ></v-text-field>
     
-                      <div v-if="$v.name.$error && !$v.name.required"  class="text-red-500 text-sm">Name is required</div>
+                      <div v-if="$v.name.$error && !$v.name.required"  class="text-red-500 text-lg">Name is required</div>
                     </div>
                   </div>
     
                   <div class="flex flex-wrap  mb-4">
                     <div class="w-full px-3">
                       <label
-                        class="block text-gray-700 input-field-outer text-sm font-medium mb-1"
+                        class="block text-gray-700 input-field-outer text-lg font-medium mb-1"
                         for="current_job_title"
                         >Current Job Title <span class="text-red-600">*</span></label
                       >
@@ -82,7 +77,7 @@
                         outlined
                         required
                       ></v-text-field>
-                      <div v-if="$v.current_job_title.$error && !$v.current_job_title.required"  class="text-red-500 text-sm">Current Job Title is required</div>
+                      <div v-if="$v.current_job_title.$error && !$v.current_job_title.required"  class="text-red-500 text-lg">Current Job Title is required</div>
     
                     </div>
                   </div>
@@ -90,7 +85,7 @@
                   <div class="flex flex-wrap  mb-4">
                     <div class="w-full px-3">
                       <label
-                        class="block text-gray-700 text-sm font-medium mb-1"
+                        class="block text-gray-700 text-lg font-medium mb-1"
                         for="current_job_title"
                         >Short Bio
                       </label>
@@ -102,7 +97,7 @@
     
                             <div class="flex flex-wrap  mb-4">
                                 <div class="w-full px-3">
-                                    <label class="block text-gray-700 text-sm font-medium mb-1" for="current_job_title">LinkedIn
+                                    <label class="block text-gray-700 text-lg font-medium mb-1" for="current_job_title">LinkedIn
                       </label>
     
                                     <v-text-field v-model="linkedin" class="form-input w-full input-field-outer text-gray-700" placeholder="Linkedin" autocomplete></v-text-field>
@@ -114,7 +109,7 @@
     
                             <div class="flex flex-wrap  mb-4">
                                 <div class="w-full px-3">
-                                    <label class="block text-gray-700 input-field-outer text-sm font-medium mb-1" for="current_job_title">Github
+                                    <label class="block text-gray-700 input-field-outer text-lg font-medium mb-1" for="current_job_title">Github
                       </label>
                                     <v-text-field v-model="github" class="form-input input-field-outer w-full text-gray-700" placeholder="Github" autocomplete></v-text-field>
                                     <div v-if="errors.github" class="mt-2 error">{{ errors.github }}</div>
@@ -123,7 +118,7 @@
     
                             <div class="flex flex-wrap  mb-4">
                                 <div class="w-full px-3">
-                                    <label class="block text-gray-700 input-field-outer text-sm font-medium mb-1" for="current_job_title">Twitter
+                                    <label class="block text-gray-700 input-field-outer text-lg font-medium mb-1" for="current_job_title">Twitter
                       </label>
                                     <v-text-field v-model="twitter" class="form-input input-field-outer w-full text-gray-700" placeholder="Twitter" autocomplete></v-text-field>
                                     <div v-if="errors.twitter" class="mt-2 error">{{ errors.twitter }}</div>
@@ -143,7 +138,7 @@
     
                             <div class="flex flex-wrap  mb-4">
                                 <div class="w-full px-3  form-file-upload">
-                                    <label class="block text-gray-700 text-sm font-medium mb-1" for="current_job_title">Current Resume
+                                    <label class="block text-gray-700 text-lg font-medium mb-1" for="current_job_title">Current Resume
                       </label>
                                     <v-file-input outlined dense v-model="current_resume" class="form-input fileUpload w-full input-field-outer text-gray-700"></v-file-input>
                                     <div v-if="errors.current_resume" class="mt-2 error">
@@ -162,7 +157,7 @@
     
                             <div class="flex flex-wrap  mt-6 text-center">
                                 <div class="w-full px-3">
-                                    <p class="text-center text-gray-700">Please fill the required field(s)</p>
+                                    <p class="text-center text-lg text-gray-700">Please fill the required field(s)</p>
                                 </div>
                             </div>
                         </v-form>
@@ -178,6 +173,7 @@ import Layout from "./Layout";
 import { Head } from "@inertiajs/inertia-vue";
 import { validationMixin } from 'vuelidate'
 import { required } from 'vuelidate/lib/validators'
+ import Message from '../partials/Messages.vue';
 
 export default {
     mixins: [validationMixin],
@@ -188,6 +184,7 @@ export default {
     components: {
         Head,
         Layout,
+        Message
     },
     props: {
         errors: Object,

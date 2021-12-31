@@ -11,15 +11,13 @@
                     </div>
     
                     <div class="max-w-6xl mx-auto testJobs">
-                        <Link v-if="companies_count > 0 && job_posts_count < 3" :href="'/employer/create-job?c_id=' + company_details.uuid" color="text" class="btn text-white bg-purple-600 hover:bg-purple-700 mb-3">Add New Job Post</Link>
+                        <Link v-if="companies_count > 0 && job_posts_count < 3" :href="'/employer/create-job?c_id=' + company_details.uuid" color="text" class="text-lg btn text-white bg-purple-600 hover:bg-purple-700 mb-3">Add New Job Post</Link>
     
                         <br /><br /><br />
                         <h3 class="h3 text-gray-700">Current Job Posts</h3>
                         <br />
     
-                        <div v-if="$page.props.flash.message" class="text-green-500 text-center text-sm font-bold text-center text-sm my-4">
-                            {{ $page.props.flash.message }}
-                        </div>
+                        <Message :message="$page.props.flash.message" :hide="0" :type="'success'" />
     
                         <div v-if="job_posts.length > 0">
                             <v-row>
@@ -31,12 +29,12 @@
                                                 <div class="card-outter">
                                                     <div class="text-subtitle-1" v-if="data.company_name">Company Name: {{data.company_name}}</div>
                                                     <div class="description">Location: {{ data.location_id }}</div>
-                                                    <div class="date">Published: {{ setDateFormat(data.created_on) }}</div>
+                                                    <div class="date text-lg">Published: {{ setDateFormat(data.created_on) }}</div>
                                                 </div>
                                             </div>
                                             <div class="button-outter flex">
-                                              <Link :href="'/employer/edit-job?id=' + data.uuid" class="editJobsBtn text-white bg-purple-600 hover:bg-purple-700 pl-8 pt-3 pb-3 pr-7">EDIT</Link>
-                                              <v-btn class="text-white bg-purple-600 hover:bg-purple-700" v-on:click="deletejob(data.uuid)" >Delete</v-btn>
+                                              <Link :href="'/employer/edit-job?id=' + data.uuid" class="editJobsBtn text-white bg-purple-600 hover:bg-purple-700 pl-8 pt-3 pb-3 pr-7 text-lg">Edit</Link>
+                                              <v-btn class="text-white bg-purple-600 hover:bg-purple-700 text-lg" v-on:click="deletejob(data.uuid)" >Delete</v-btn>
                                             </div>
                                         </v-card-text>
                                     </v-card>
@@ -45,7 +43,7 @@
                         </div>
                         <div v-else>
                             <v-row>
-                                <v-col cols="12" class="mt-5 text-center text-gray-700">
+                                <v-col cols="12" class="mt-5 text-center text-gray-700 text-lg">
                                     No Job Found
                                 </v-col>
                             </v-row>
@@ -87,6 +85,7 @@
 import Layout from "../Layout";
 import { Head, Link } from "@inertiajs/inertia-vue";
 import JobPost from '../../components/JobPost.vue';
+import Message from '../../partials/Messages.vue';
 
 export default {
     components: {
@@ -94,6 +93,7 @@ export default {
         Layout,
         Link,
         'CustomCard': JobPost,
+        Message,
     },
     props: {
         errors: Object,

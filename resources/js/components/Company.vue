@@ -9,11 +9,11 @@
                 </div>
                 <div class="company-text-block">
                 <v-card-title class="p-0">{{data.name}}</v-card-title> 
-                <div class="text-subtitle-1"><span>{{data.industry_types}}</span></div>
-                <p class="description">{{data.mission}}</p>
+                <div class="text-subtitle-1" v-if="data.industry_types"><span>{{data.industry_types}}</span></div>
+                <p class="description">{{data.description.substring(0,250) | stripHTML}}</p>
                 </div>
                 <div class="company-jobs-block">
-                <Link :href="'/companies/'+data.slug" color="text" class="flex justify-center items-center">View {{data.job_posts.length}} Jobs 
+                <Link :href="'/companies/'+data.slug" color="text" class="flex justify-center items-center">View {{data.job_posts_count}} Jobs 
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
                     </svg>

@@ -249,6 +249,8 @@ class JobPostController extends Controller
         }
     }
 
+        
+
     public function showJobPost($company = '', $slug = '')
     {
 
@@ -264,11 +266,16 @@ class JobPostController extends Controller
                     'job_posts.created_at',
                     'job_posts.apply_url'
                 )->where('job_posts.slug', $slug)->first();
-            
-            return Inertia::render('single-job-post', ['data' => $job_post]);
+              
+            if($job_post != null && $job_post != '')
+            {
+                return Inertia::render('single-job-post', ['data' => $job_post]);
+            }else{
+                return $this->sendErrorResponse('404','');
+            }
         } catch (\Exception $e) {
             $message = $e->getMessage();
-            return $this->sendErrorResponse('single-job-post', $message);
+            return $this->sendErrorResponse('404', $message);
         }
     }
 
@@ -295,5 +302,53 @@ class JobPostController extends Controller
     protected function getRelatedSlugs($slug)
     {
         return JobPost::select('slug')->where('slug', 'like', $slug . '%')->get();
+    }
+
+
+
+    public function jobs(Request $request)
+    {
+
+        try {
+            $job_posts_query = JobPost::leftjoin('company_profiles', 'job_posts.company_profile_id', 'company_profiles.id')
+                ->leftjoin('locations', 'job_posts.location_id', 'locations.id')
+                ->select(
+                    'job_posts.name as name',
+                    'job_posts.content as content',
+                    'company_profiles.name as company_name',
+                    'job_posts.apply_url as apply_url',
+                    'company_profiles.slug as company_slug',
+                    'locations.name as location',
+                    'job_posts.slug as job_slug',
+                    'job_posts.created_at'
+                )->when($request->q, function ($query, $term) {
+                    //echo $term;
+                    if ($term != 'null') {
+                        $query->where('job_posts.name', 'LIKE', '%' . $term . '%');
+                        //$query->Orwhere('job_posts.content', 'LIKE', '%'.$term.'%');
+                    }
+                })->when($request->loc, function ($query, $term1) {
+
+                    if ($term1 != 'null' && $term1 != 'NaN') {
+                        $query->where('job_posts.location_id', $term1);
+                    }
+                })
+                ->orderBy('job_posts.created_at', 'DESC');
+
+            $job_posts_count = $job_posts_query->count();
+
+            $job_posts = $job_posts_query->paginate($this->paginationLimit)->onEachSide(1);
+
+            //dd($job_posts);
+            $term_u = $request->q;
+            if ($term_u == 'null' || $term_u == 'NaN') {
+                $term_u = '';
+            }
+            $locations = Location::get();
+            return Inertia::render('job_posts', ['job_posts' => $job_posts, 'job_posts_count' => $job_posts_count, 'loc_id' => $request->loc, 'location_id' => $request->loc, 'term' => $term_u, 'locations' => $locations]);
+        } catch (\Exception $e) {
+            $message = $e->getMessage();
+            return $this->sendErrorResponse('login', $message);
+        }
     }
 }

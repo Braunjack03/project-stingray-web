@@ -7,13 +7,13 @@
                   <div class="pt-10 pb-6 md:pb-12">
 
                      <div class="mx-auto text-center pt-10 pb-3">
-                        <div class="flex filter-outer">
+                        <div class="flex filter-outer jobsFilter">
                            <span class="searc-show-title">
                               Total Number of jobs: {{job_posts_count}}
                            </span>
                            <div class="filter-opt relative">
                            <input type="text" name="table_search" :class="{ 'error--text': $v.term.$error }" class="form-control float-right" placeholder="Search" v-model="term" @keydown.enter="submit">
-                           <div v-if="$v.term.$error && !$v.term.required"  class="text-red-500 text-sm jobserach-error">Search is required</div>
+                           <div v-if="$v.term.$error && !$v.term.required"  class="text-red-500 text-lg jobserach-error">Search is required</div>
                            <v-select
                            v-model="location_id"
                            item-text="name"
@@ -47,7 +47,7 @@
                   </div>  
                   <div v-else >
                       <v-row >
-                        <v-col cols="12" class="mt-5 text-center text-gray-700">
+                        <v-col cols="12" class="mt-5 text-center text-gray-700 text-lg">
                              No Job Found 
                         </v-col>
                       </v-row>  

@@ -27,5 +27,10 @@ class CompanyProfile extends Model
         return $this->hasMany(CompanyType::class,'id','industries_ids');
     }
 
+    public function articles()
+    {
+        return $this->belongsToMany(Article::class)->withTimestamps();
+    }
+
 
 }
