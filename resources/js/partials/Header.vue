@@ -6,7 +6,7 @@
             <div class="flex-shrink-0 mr-4">
                 <!-- Logo -->
                 <Link class="block" href="/" aria-label="Cruip">
-                    <img src="/images/made_in_tampa_logo.svg" width="200">
+                    <img src="/images/made_in_tampa_logo.png" width="200">
                 </Link>
             </div>
       
