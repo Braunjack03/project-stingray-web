@@ -1,5 +1,7 @@
 #!/bin/bash
 
+pwd
 . .env
 cp auth_example.json auth.json
 composer config http-basic.spark.laravel.com ${SPARK_USERNAME} ${SPARK_API_TOKEN}
+cat auth.json
