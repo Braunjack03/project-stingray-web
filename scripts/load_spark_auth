@@ -2,4 +2,4 @@
 
 
 . .env
-composer config http-basic.spark.laravel.com jason@madeintampa.io testtt
+composer config http-basic.spark.laravel.com ${SPARK_USERNAME} ${SPARK_API_TOKEN}
