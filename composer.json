@@ -15,7 +15,9 @@
         "laravel/legacy-factories": "^1.1",
         "laravel/tinker": "^2.5",
         "league/flysystem-aws-s3-v3": "^1.0",
-        "league/flysystem-cached-adapter": "^1.1"
+        "league/flysystem-cached-adapter": "^1.1",
+        "laravel/spark-stripe": "^1.0",
+        "mpociot/vat-calculator": "^2.5"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -61,6 +63,12 @@
         "preferred-install": "dist",
         "sort-packages": true
     },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://spark.laravel.com"
+        }
+    ],
     "minimum-stability": "dev",
     "prefer-stable": true
 }
