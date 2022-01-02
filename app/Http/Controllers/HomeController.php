@@ -16,7 +16,7 @@ class HomeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['home', 'jobs','contact','contactSubmit','privacy','pricing']]);
+        $this->middleware('auth', ['except' => ['home', 'jobs','contact','contactSubmit','privacy','pricing', 'terms']]);
     }
     /**
      * Dashboard
@@ -103,31 +103,31 @@ class HomeController extends Controller
 
     public function contact()
     {
-        try {
-            return Inertia::render('contact');
-        } catch (\Exception $e) {
-            $message = $e->getMessage();
-            return $this->sendErrorResponse('404', $message);
-        }
+        return $this->static_page('contact');
     }
 
     public function privacy(){
-        try {
-            return Inertia::render('privacy');
-        } catch (\Exception $e) {
-            $message = $e->getMessage();
-            return $this->sendErrorResponse('404', $message);
-        }
+        return $this->static_page('privacy');
     }
 
     public function pricing(){
+        return $this->static_page('pricing');
+    }
+
+    public function terms(){
+        return $this->static_page('terms');
+    }
+
+    private function static_page($name){
         try {
-            return Inertia::render('pricing');
+            return Inertia::render($name);
         } catch (\Exception $e) {
             $message = $e->getMessage();
             return $this->sendErrorResponse('404', $message);
         }
+
     }
+
 
     public function contactSubmit(Request $request)
     {

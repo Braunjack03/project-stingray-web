@@ -34,7 +34,7 @@
                   <Link href="/privacy" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Privacy Policy</Link>
                 </li>
                 <li class="mb-1">
-                  <Link href="#" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Terms of use</Link>
+                  <Link href="/terms" class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Terms of use</Link>
                 </li>
               </ul>
             </div>

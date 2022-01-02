@@ -27,6 +27,7 @@ use App\Http\Controllers\ArticleController;
 */
 
 
+Route::get('terms', [HomeController::class, 'terms']);
 
 Route::get('contact', [HomeController::class, 'contact']);
 
