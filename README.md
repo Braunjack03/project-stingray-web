@@ -10,6 +10,7 @@
 This is the primary Larvel web application for "Project Stingray".  Stingray is a jobboard, company profile, and news website focusing on technology jobs and start-ups in the Florida area. Addtional information about the project can be found in the [requirements](./REQUIREMENTS.md).
 
 The application stack is built on:
+- PHP 8.0
 - Laravel 8
 - Intertia.js
 - Vue2
@@ -33,7 +34,7 @@ Note: All commands are ran from the root of the project.
 6. Load default seed data for the various categories and types
     * ```bash scripts/run_seeds```
 7. For dev and QA load test data for job posts, companies, etc.  This will load approx 2000 jobs.
-    * ```php artisan db:seed```
+    * ```bash scripts/load_test_data```
 ## Development Process <a name = "dev_process"></a>
 - All work will be managed out of Github issues and Github projects
 - Code should be checked-in at least once a day
@@ -46,6 +47,8 @@ Note: All commands are ran from the root of the project.
 - We're using Intertia.js so we don't have to spend time developing an API layer
 - We'll write functional tests for important site features
 - We want to build as quickly as possible without compromising quality
+- Minimize code duplication keep things DRY (don't repeat yourself)
+
 ## Coding Standards <a name = "coding_standards"></a>
 One reason for selecting Laravel is because there are well established best practices on how to build web applications.  We should strive to follow convention as much as possible and avoid re-inventing the wheel. PHP standards documented in [PSR-12](https://www.php-fig.org/psr/psr-12/) will help keep our code clean.  
 
@@ -66,4 +69,3 @@ Right:
 ```https://examples.com/show_user?id=bf6b67e5-5b68-47df-985e-973516f52498```  
 Wrong:  
 ```https://examples.com/show_user?id=23```
-
