@@ -92,13 +92,26 @@ return [
 
             'plans' => [
                 [
-                    'name' => 'Standard',
-                    'short_description' => 'This is is the standard plan.',
-                    'monthly_id' => env('SPARK_STANDARD_MONTHLY_PLAN'),
-                    'yearly_id' => env('SPARK_STANDARD_YEARLY_PLAN'),
+                    'name' => 'Start-up Plan',
+                    'short_description' => 'This is is the start-up plan.',
+                    'monthly_id' => 'price_1KDUCtGQLMXk2pHtW55rjL9x',
+                    'yearly_id' => 'price_1KDUCtGQLMXk2pHtKXixwQgW',
                     'features' => [
-                        'Post up to 10 job openings',
-                        'Create an advanced company profile',
+                        '5 Job Slots',
+                        'Create a company profile',
+                    ],
+                    'archived' => false,
+                ],
+
+                [
+                    'name' => 'Growth Plan',
+                    'short_description' => 'This is is the growth plan.',
+                    'monthly_id' => 'price_1KDUEKGQLMXk2pHtffaul2fw',
+                    'yearly_id' => 'price_1KDUEKGQLMXk2pHtRZVUSowg',
+                    'features' => [
+                        '10 Job Slots',
+                        'Create a company profile',
+                        'Early access to new features'
                     ],
                     'archived' => false,
                 ],
