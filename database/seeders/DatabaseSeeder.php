@@ -34,9 +34,10 @@ class DatabaseSeeder extends Seeder
         print("Seeding articles.\n");
         $articles = Article::factory()->count(250)->create();
 
-        // Seed article / company_profiles many to many relationship
+        // Seed article / company_profiles many to many relationship and company types
         $this->call([
-            ArticleCompanyProfile::class
+            ArticleCompanyProfile::class,
+            CompanyProfileCompanyType::class
         ]);
     }
 }
