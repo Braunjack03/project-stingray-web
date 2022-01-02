@@ -12,4 +12,10 @@ class CompanyType extends Model
     protected $fillable = [
         'name','slug',
     ];
+
+    public function company_profiles()
+    {
+        return $this->belongsToMany(CompanyProfile::class)->withTimestamps();
+    }
+
 }

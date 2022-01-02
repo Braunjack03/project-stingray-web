@@ -13,7 +13,7 @@ class Tag extends Model
         'name','color'
     ];
 
-    public function tags()
+    public function articles()
     {
         return $this->belongsToMany(Article::class)->withTimestamps();
     }
