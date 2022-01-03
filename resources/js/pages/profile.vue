@@ -236,13 +236,6 @@ export default {
                 }
 
             }
-            /*this.$v.$touch();
-            if(this.user.name != '' && this.user.current_job_title != '')
-            {
-              this.$inertia.post("/profile", this.user);
-               this.$v.$reset()
-            }*/
-
         },
         removeImage() {
             this.user.profile_image_src = "";

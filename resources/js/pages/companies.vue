@@ -25,7 +25,6 @@
 </template>
 
 <script>
-//import Card from '../components/Card.vue';
 import CompanyList from '../components/Company.vue';
 import Layout from './Layout';
 import { Head,Link } from '@inertiajs/inertia-vue';

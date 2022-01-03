@@ -18,8 +18,6 @@
                 <div class="border-t border-gray-700 border-dotted flex-grow ml-3" aria-hidden="true"></div>
               </div>
               <v-form class="login-form form-outer-wrapper" @submit.prevent="submit" >
-                <!--div v-if="errors.message" class="text-red-500 text-sm font-bold text-center text-sm my-3">{{ errors.message }}</div>
-                <div v-if="success" class="text-green-500 text-sm font-bold text-center text-sm my-3">{{ success.message }}</div-->
                 
                 <Message :message="errors.message" :hide="0" :type="'error'" />
                 <Message :message="success.message" :hide="0" :type="'success'" />
@@ -54,7 +52,6 @@
                       <v-btn class="btn text-white bg-purple-600 hover:bg-purple-700 w-full text-lg" @click="submit">
                         Sign in
                       </v-btn>
-                    <!--button  type="button" class="btn text-white bg-purple-600 hover:bg-purple-700 w-full" >Sign in</button-->
                   </div>
                 </div>
               </v-form>

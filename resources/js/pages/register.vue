@@ -58,9 +58,6 @@
 
                   </div>
                 </div>
-                 <!--div class="text-sm text-gray-700 text-center">
-                  I agree to be contacted by Open PRO about this offer as per the Open PRO <a class="underline text-gray-700 hover:text-gray-600 hover:no-underline transition duration-150 ease-in-out" href="#0">Privacy Policy</a>.
-                </div-->
                 <div class="flex flex-wrap -mx-3 mt-5">
                   <div class="w-full px-3">
                      <v-btn class="text-lg btn text-white bg-purple-600 hover:bg-purple-700 w-full" @click="submit">

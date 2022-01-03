@@ -22,7 +22,7 @@
                                 <div class="postPersonal--detail justify-between mobileJustify">
                                     <div class="flex items-center">
                                         <img src="/images/news-author-01.jpg" alt="post-images">
-                                        <p><a href="#">{{data.author_name}} </a> - {{new Date(data.created_at).toDateString().slice(4,10)+','+new Date(data.created_at).toDateString().slice(10)}}</p>
+                                        <p><a href="#">{{data.author_name}} </a> - {{new Date(data.publish_date).toDateString().slice(4,10)+','+new Date(data.publish_date).toDateString().slice(10)}}</p>
                                     </div>
                                     <div class="mt-4 md:mt-0">
                                         <button class="text-white rounded-full" :class="'bg-'+tag.color+'-500'" v-for="tag in data.tags" :key="tag.id">

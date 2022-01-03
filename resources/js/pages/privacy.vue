@@ -1,5 +1,4 @@
 <template>
-    <div class="404-page">
         <Layout>
             <Head title="Privacy Policy" />
             <section data-app>
@@ -230,7 +229,6 @@
                 </div>
             </section>
         </Layout>
-    </div>
 </template>
 
 <script>

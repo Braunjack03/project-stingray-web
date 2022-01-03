@@ -13,18 +13,9 @@
                 </div>
             <!-- Form -->
                 <div class="max-w-xl mx-auto">
-                    <!--div v-if="success" class="text-green-500 text-center text-lg mt-2">
-                        {{ success.message }}
-                    </div-->
 
-                    <div v-if="success.message  && hide == 0" class="verifyEmailText" >
-                        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
-                            <span class="block sm:inline">{{success.message}}</span>
-                            <span class="absolute top-0 bottom-0 right-0 px-4 py-3" @click="hideMessage">
-                            <svg class="fill-current h-6 w-6 text-green -500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
-                            </span>
-                        </div>
-                    </div>
+                   <Message :message="errors.message" :hide="0" :type="'error'" />
+                     <Message :message="success.message" :hide="0" :type="'success'" />
                     <v-form ref="form" @submit.prevent="submit">
 
                         <div class="flex flex-wrap">
@@ -94,7 +85,8 @@
     import Layout from './Layout'
     import { Head } from '@inertiajs/inertia-vue'
     import { validationMixin } from 'vuelidate'
-    import { required, email, minLength } from 'vuelidate/lib/validators'
+    import { required, email } from 'vuelidate/lib/validators'
+    import Message from '../partials/Messages.vue';
   
   export default {
     mixins: [validationMixin],
@@ -107,6 +99,7 @@
     components: {
       Head,
       Layout,
+      Message
     },
     props: {
       success: Object,
@@ -123,7 +116,6 @@
     },
     methods: {
         hideMessage(){
-            console.log('here');
         this.hide = 1;
       },
       submit() {

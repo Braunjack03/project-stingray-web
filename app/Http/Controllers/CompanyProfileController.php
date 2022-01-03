@@ -84,7 +84,6 @@ class CompanyProfileController extends Controller
         
         if ($validator->fails()){
             $industries = CompanyType::pluck('name','id');
-            //$data['industry'] = explode(",",$data['industry']);
             $data = ['user'=>$data,'industries'=>$industries];
             return $this->sendCustomValidationErrorsWithData($redirect_page,$validator->errors(),$data);
         }else{

@@ -63,7 +63,7 @@ Route::post('reset-password/{token}', [ForgotPasswordController::class, 'submitR
  
 Route::get('/', [HomeController::class, 'home'])->name('home');
 
-Route::get('jobs', [HomeController::class, 'jobs'])->name('jobs');
+Route::get('jobs', [JobPostController::class, 'jobs'])->name('jobs');
 
 Route::get('articles', [ArticleController::class, 'index'])->name('articles');
 

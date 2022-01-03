@@ -43,11 +43,9 @@
     
     
         </section>
-        <Process />
-         <BrowseJobs :data="companytypes"/>
-        <Target :articles="articles"/>
-
-        
+        <CompaniesHiringNow />
+        <BrowseJobs :data="companytypes"/>
+        <LatestArticles :articles="articles"/>
         <!--Newsletter /-->
     </Layout>
 </template>
@@ -56,9 +54,8 @@
 import Layout from "./Layout";
 import { Head, Link } from "@inertiajs/inertia-vue";
 import Footer from "../partials/Footer.vue";
-import HeroHome from "../partials/HeroHome.vue";
-import Process from "./../partials/Process.vue";
-import Target from "./../partials/Target.vue";
+import CompaniesHiringNow from "../partials/CompaniesHiringNow.vue";
+import LatestArticles from "./../partials/LatestArticles.vue";
 //import Newsletter from './../partials/Newsletter.vue'
 import BrowseJobs from './../partials/BrowseJobs.vue'
 import { validationMixin } from 'vuelidate'
@@ -74,10 +71,8 @@ export default {
         Head,
         Layout,
         Footer,
-        HeroHome,
-        Process,
-        Target,
-        //Newsletter,
+        CompaniesHiringNow,
+        LatestArticles,
         BrowseJobs
     },
     props: {
