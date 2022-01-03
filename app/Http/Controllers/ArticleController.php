@@ -14,8 +14,12 @@ class ArticleController extends Controller
     public function index(){
 
         try{
+            // TODO order by publish_date not article id.
+            // TODO don't select * from articles
             $article = Article::with('tags')->select('articles.*','users.id as author_id','users.name')->leftjoin('users','articles.author_id','users.id')->where('is_published',1)->orderBy('articles.id','DESC')->first();
-        
+       
+            // TODO order by publish_date
+            // TODO don't do a select * from articles.  This sends all data to the frontend where it's publically visable.
             $latestarticles = Article::with('tags')->select('articles.*','users.id as author_id','users.name')->leftjoin('users','articles.author_id','users.id')->whereNotIn('articles.id', [$article->id])->where('is_published',1)->orderBy('articles.id','DESC')->paginate(9)->onEachSide(1);
             
             return Inertia::render('article',['latest'=>$article,'articles'=>$latestarticles]);
@@ -29,6 +33,7 @@ class ArticleController extends Controller
     public function show($slug = ''){
 
         try{
+            // Don't do a select * from articles
             $data = Article::with('tags')->select('articles.*','users.id as author_id','users.name')->leftjoin('users','articles.author_id','users.id')->where('is_published',1)->where('articles.slug',$slug)->first();
 
             $latestarticles = CompanyProfile::withCount('job_posts')->leftjoin('article_company_profile','company_profiles.id','=','article_company_profile.company_profile_id')->where('article_company_profile.article_id', $data->id)->paginate(3);
