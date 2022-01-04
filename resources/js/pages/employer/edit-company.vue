@@ -233,7 +233,7 @@ export default {
      mixins: [validationMixin],
      validations: {
       name: { required},
-      local_employees: {required},
+      local_employees: {required},  
     },
     components: {
         Head,
