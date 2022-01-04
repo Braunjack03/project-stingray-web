@@ -103,7 +103,7 @@ class JobPostController extends Controller
 
         $data = $request->all();
         $data['remotetype_id'] = 1;
-        if ($data['location_id'] != 8) {
+        if (isset($data['location_id']) && $data['location_id'] != 8) {
             $data['remotetype_id'] = 3;
         }
 

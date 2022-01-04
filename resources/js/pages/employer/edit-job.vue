@@ -27,7 +27,7 @@
 
                     <div class="flex flex-wrap mb-3">
                         <div class="w-full px-3">
-                          <label class="block text-gray-700 text-lg font-medium mb-1">Location</label>
+                          <label class="block text-gray-700 text-lg font-medium mb-1">Location <span class="text-red-600">*</span></label>
 
                      <v-row >
                       <v-col
@@ -40,12 +40,13 @@
                           item-value="id"
                           :items="locations"
                           label="Location"
+                          :class="{ 'error--text': $v.location_id.$error }"
                           class="form-input input-field-outer w-full text-gray-700"
                           dense
                           solo
                         ></v-select>
+                        <div v-if="$v.location_id.$error && !$v.location_id.required" class="text-red-500 text-lg">Location is required</div>
                       </v-col>
-                    <div v-if="errors.location_id" class="mt-2 error">{{ errors.location_id }}</div>
                     </v-row>   
                      </div>
                     </div> 
@@ -124,6 +125,7 @@ import Message from '../../partials/Messages.vue';
      mixins: [validationMixin],
      validations: {
       name: { required},
+      location_id: {required},
       job_cat_id: {required},
       apply_url: {required},
       content: {required}
