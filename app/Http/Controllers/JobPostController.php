@@ -314,10 +314,11 @@ class JobPostController extends Controller
                 ->leftjoin('locations', 'job_posts.location_id', 'locations.id')
                 ->select(
                     'job_posts.name as name',
-                    'job_posts.content as content',
                     'company_profiles.name as company_name',
                     'job_posts.apply_url as apply_url',
                     'company_profiles.slug as company_slug',
+                    'company_profiles.city',
+                    'company_profiles.state_abbr as state',    
                     'locations.name as location',
                     'job_posts.slug as job_slug',
                     'job_posts.created_at'
@@ -339,7 +340,6 @@ class JobPostController extends Controller
 
             $job_posts = $job_posts_query->paginate($this->paginationLimit)->onEachSide(1);
 
-            //dd($job_posts);
             $term_u = $request->q;
             if ($term_u == 'null' || $term_u == 'NaN') {
                 $term_u = '';

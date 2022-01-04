@@ -194,10 +194,7 @@ export default {
     apply_url: { required },
   },
   props: {
-    errors: {
-        type : Object,
-        default: '',
-    },
+    errors: Object,
     user: Object,
     success: Object,
     job_categories: Array,

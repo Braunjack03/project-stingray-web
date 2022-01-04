@@ -326,23 +326,6 @@ export default {
     hideMessage() {
       this.hide = 1;
     },
-    handleButton(page) {
-      console.log('here', page);
-      // if(!this.moreMsgFetched){
-      const newdata = this.$inertia.get(`${this.data.slug}?page=2`);
-      console.log('testing', newdata);
-      /* .then((response) => {
-                this.moreMessages = response.data;
-                this.messages = this.moreMessages.splice(0, 10);
-                this.moreMsgFetched = true;
-            }); */
-      this.page += 1;
-      // }
-      // if you want to replace the messages array every time with 10 more messages
-      // this.messages = nextMsgs
-      // if you wnt to add 10 more messages to messages array
-      // this.messages.push(nextMsgs);
-    },
 
   },
 };

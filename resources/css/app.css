@@ -700,6 +700,7 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
 .jobLocationLink {
    position: relative;
    z-index: 2;
+   transform: .2s all;
 }
 .jobsearchBtn {
    margin-top: -8px;  
@@ -1234,6 +1235,40 @@ background-color: rgb(236 72 153);
 blockquote {
     padding: 1.25rem 2.5rem;
 }
+
+.newJobStyle .job-card-wrap {
+    background: transparent;
+    border: 1px solid #999;
+    border-radius: 0 !important;
+}
+
+.newJobStyle .card-text-wrap {
+    width: calc(100% - 140px);
+    padding-right: 1rem;
+}
+
+.newJobStyle .viewJobsBtn {
+    padding: 2px 30px;
+    border: 1px solid #999;
+}
+
+.newJobStyle .job-card-wrap .v-card__title {
+    margin-bottom: 0.3rem;
+}
+
+.newJobStyle .job-card-wrap .text-subtitle-1 {
+    font-size: 1rem; 
+    padding: 0 0 .5rem 0px;
+}
+
+.newJobStyle .job-card-wrap:hover {
+    border-color: #3d3db7;
+}
+
+.newJobStyle .jobLocationLink:hover {
+    color: var(--blueColor);
+}
+
 
 /* Media */
 @media (min-width: 1224px) {
