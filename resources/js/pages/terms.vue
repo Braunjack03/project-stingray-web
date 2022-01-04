@@ -1,5 +1,4 @@
 <template>
-    <div class="404-page">
         <Layout>
             <Head title="Terms and Conditions" />
             <section data-app>
@@ -195,7 +194,6 @@
                 </div>
             </section>
         </Layout>
-    </div>
 </template>
 
 <script>
