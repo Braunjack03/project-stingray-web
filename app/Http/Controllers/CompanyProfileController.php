@@ -14,6 +14,7 @@ use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Redirect;
 use App\Models\ActivityLog;
+use App\Models\CompanyProfileCompanyType;
 use Session;
 use Mail; 
 
@@ -103,11 +104,7 @@ class CompanyProfileController extends Controller
                     $headerimage_name = time() . '_' . $headerimage->getClientOriginalName();
                     $featured_image = Storage::disk('s3Company')->putFileAs('company/'.$user_uuid, $headerimage,$headerimage_name);
                 }
-
-                if(isset($data['industry']))
-                {   
-                    $data['industry_ids'] = isset($data['industry']) ? implode(',',$data['industry']) : $data['industry'];
-                }
+              
                 $data['uuid'] = $user_uuid;    
                 $data['logo_image_url'] = $image_name;
                 $data['featured_image_url'] = $headerimage_name;
@@ -124,8 +121,18 @@ class CompanyProfileController extends Controller
 
                 $data['slug'] = $this->createCompanySlug($data['name']);
                 
-                CompanyProfile::create($data);
-               
+                $company_profile_id = CompanyProfile::create($data);
+
+                if(isset($data['industry']))
+                {   
+                    $industries = [];
+                    foreach($data['industry'] as $key => $industry){
+                        $industries[$key]['company_type_id'] = $industry;
+                        $industries[$key]['company_profile_id'] = $company_profile_id->id;
+                    }
+                    CompanyProfileCompanyType::insert($industries);
+                }
+                
                 ActivityLog::addToLog(__('activitylogs.company_profile_created'),'company created');
                 return Redirect::route('employer.profile')->with( ['message' => __('messages.company_profile_created')] );
                  
@@ -343,19 +350,20 @@ class CompanyProfileController extends Controller
                     //'users.role',
                 )
                 ->withCount('job_posts')
+                ->with(['company_types:name'])
                 ->orderBy('company_profiles.created_at', 'DESC')
                 ->paginate($this->paginationLimit)->onEachSide(1);
-
+             
             $data = [];
             foreach ($company as $key => $comp) {
                 if (!str_starts_with($company[$key]['logo_image_url'], 'https://')) {
                     $company[$key]['logo_image_url'] = ($comp['logo_image_url']) ? getBucketImageUrl($comp['uuid'], $comp['logo_image_url'], 'company') : '';
                 }
-
-                $selected_industries = explode(',', $comp['industry_ids']);
-
-                $industries = CompanyType::whereIn('id', $selected_industries)->pluck('name')->toArray();
-                $company[$key]['industry_types'] = implode(' | ', $industries);
+                if(isset($company) && isset($comp->company_types)){
+                    $collection = $comp->company_types;    
+                    $names = $collection->pluck("name")->toArray(); 
+                    $company[$key]['industry_types'] = implode(' | ',$names);
+                }    
             }
             $data = $company;
             return Inertia::render('companies', ['data' => $data]);
@@ -419,11 +427,10 @@ class CompanyProfileController extends Controller
             if(!str_starts_with($company['logo_image_url'], 'https://')){
                 $company['featured_image_url'] = ($company['featured_image_url']) ? getBucketImageUrl($company['uuid'],$company['featured_image_url'],'company') : '';
             }
-
-            $job_posts_query = JobPost::select('job_posts.*','locations.name as location','company_profiles.name as company_name','company_profiles.slug as company_slug','company_profiles.state_abbr as state','company_profiles.city')
+            $job_posts_query = JobPost::select('job_posts.name','job_posts.apply_url as apply_url','job_posts.created_at','job_posts.slug as job_slug','locations.name as location','company_profiles.name as company_name','company_profiles.slug as company_slug','company_profiles.state_abbr as state','company_profiles.city')
             ->leftjoin('company_profiles','job_posts.company_profile_id','company_profiles.id')
             ->leftjoin('locations','company_profiles.location_id','locations.id')
-            ->where('company_profile_id',$company['id'])->orderBy('id','DESC');
+            ->where('company_profile_id',$company['id'])->orderBy('job_posts.created_at','DESC');
 
             $job_posts_count = $job_posts_query->count();
 
@@ -433,7 +440,6 @@ class CompanyProfileController extends Controller
 
         }catch (\Exception $e) {
             $message = $e->getMessage();
-            echo $message; 
             return $this->sendErrorResponse('404',$message);
         }
     }
