@@ -58,7 +58,7 @@
             <li>
               <Link
                 href="#"
-                class="btn-sm text-gray-300 bg-purple-600 hover:bg-purple-700 mx-4"
+                class="btn-sm text-white bg-purple-600 hover:bg-purple-700 mx-4"
               >
                 Employers
               </Link>

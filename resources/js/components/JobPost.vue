@@ -1,5 +1,5 @@
 <template>
-  <v-card class="elevation-5 flex d-flex flex-column cardStyle">
+  <v-card class="elevation-5 flex d-flex flex-column cardStyle newJobStyle">
     <v-card-text class="job-card-wrap">
       <div class="card-text-wrap">
         <v-card-title>
@@ -24,7 +24,7 @@
             </Link>
           </div>
 
-          <div
+          <!--div
             v-if="data.location"
             class="text-subtitle-1 flex item-center"
           >
@@ -40,12 +40,12 @@
                 clip-rule="evenodd"
               />
             </svg> {{ data.location }}
-          </div>
+          </div-->
           <!--div class="description">
             {{ data.content.substring(0,250) | stripHTML }}
           </div-->
           <div class="date">
-            {{ timeDifference(new Date(data.created_at)) }} ago
+            Posted {{ timeDifference(new Date(data.created_at)) }} ago
           </div>
         </div>
       </div>

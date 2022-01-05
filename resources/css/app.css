@@ -77,6 +77,10 @@ html{
    display: none;
 }
 
+.v-text-field.v-text-field--enclosed .v-text-field__details, .v-text-field.v-text-field--enclosed:not(.v-text-field--rounded)>.v-input__control>.v-input__slot {
+    padding: 0 18px !important;
+}
+
 .input-field-outer.form-input{
    border: 0!important;
    padding: 0!important;
@@ -1238,7 +1242,7 @@ blockquote {
 
 .newJobStyle .job-card-wrap {
     background: transparent;
-    border: 1px solid #999;
+    border: 2px solid #727272;
     border-radius: 0 !important;
 }
 
@@ -1249,7 +1253,7 @@ blockquote {
 
 .newJobStyle .viewJobsBtn {
     padding: 2px 30px;
-    border: 1px solid #999;
+    border: 2px solid #727272;
 }
 
 .newJobStyle .job-card-wrap .v-card__title {
@@ -1257,12 +1261,13 @@ blockquote {
 }
 
 .newJobStyle .job-card-wrap .text-subtitle-1 {
-    font-size: 1rem; 
+    font-size: 1.125rem; 
     padding: 0 0 .5rem 0px;
 }
 
 .newJobStyle .job-card-wrap:hover {
-    border-color: #3d3db7;
+    border-color: #262626;
+    background-color: #fff !important;
 }
 
 .newJobStyle .jobLocationLink:hover {
@@ -1555,5 +1560,15 @@ blockquote {
    .errorMsg-baaner.forLocation-error {
       left: 0;
       top:130px;
+   }
+}
+
+@media (max-width:  400px) {
+   .verifyEmailText > div {
+       padding-right: 24px;
+       font-size: .8rem;
+   }
+   .verifyEmailText > div span:nth-child(2) {
+       padding-inline: 0;
    }
 }

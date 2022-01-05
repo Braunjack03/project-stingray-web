@@ -368,7 +368,10 @@ class CompanyProfileController extends Controller
     public function showCompany(Request $request,$slug = ''){
 
         try{
-            $company = CompanyProfile::with(['job_posts','articles' => function ($query) {
+            $company = CompanyProfile::with(['company_types:name','articles' => function ($query) {
+                $query->select('articles.id','articles.slug','articles.header_image','articles.title','articles.content','articles.publish_date','users.id as author_id','users.name as author_name');
+                $query->leftjoin('users','articles.author_id','users.id');
+                $query->where('is_published',1);
                 $query->orderBy('articles.id','DESC');
                 $query->limit(3);
             }])->leftjoin('locations','company_profiles.location_id','locations.id')
@@ -386,7 +389,6 @@ class CompanyProfileController extends Controller
                 'company_profiles.year_founded',
                 'company_profiles.website_url',
                 'company_profiles.created_at',
-                'company_profiles.industry_ids',
                 'company_profiles.logo_image_url',
                 'company_profiles.featured_image_url',
                 'company_profiles.state_abbr as state',
@@ -396,6 +398,7 @@ class CompanyProfileController extends Controller
                 'company_profiles.slug',
             )
             ->where('company_profiles.slug',$slug)->first();
+            
             /*if(Auth::check())
             {
                 if($company->user_id == Auth::id()) 
@@ -403,12 +406,11 @@ class CompanyProfileController extends Controller
                     $company->unclaimed = 0;
                 }
             }*/
-            
-            $selected_industries = explode(',',$company['industry_ids']);
-           
-            $industries = CompanyType::whereIn('id', $selected_industries)->pluck('name')->toArray();
-            $company['industry_types'] = implode(' - ',$industries);
-            
+            if(isset($company) && isset($company->company_types)){
+                $collection = $company->company_types;    
+                $names = $collection->pluck("name")->toArray(); 
+                $company['industry_types'] = implode(' | ',$names);
+            }    
             // If we don't have a url then assume it's in the S3 bucket
             if(!str_starts_with($company['logo_image_url'], 'https://')){
                 $company['logo_image_url'] = ($company['logo_image_url']) ? getBucketImageUrl($company['uuid'],$company['logo_image_url'],'company') : '';
@@ -418,7 +420,7 @@ class CompanyProfileController extends Controller
                 $company['featured_image_url'] = ($company['featured_image_url']) ? getBucketImageUrl($company['uuid'],$company['featured_image_url'],'company') : '';
             }
 
-            $job_posts_query = JobPost::select('job_posts.*','locations.name as location','company_profiles.name as company_name','company_profiles.slug as company_slug')
+            $job_posts_query = JobPost::select('job_posts.*','locations.name as location','company_profiles.name as company_name','company_profiles.slug as company_slug','company_profiles.state_abbr as state','company_profiles.city')
             ->leftjoin('company_profiles','job_posts.company_profile_id','company_profiles.id')
             ->leftjoin('locations','company_profiles.location_id','locations.id')
             ->where('company_profile_id',$company['id'])->orderBy('id','DESC');
@@ -427,17 +429,11 @@ class CompanyProfileController extends Controller
 
             $job_posts = $job_posts_query->paginate(5)->onEachSide(1);
 
-            $articledata = [];
-            foreach($company->articles as $key => $article){
-                $articledata[] = $article;
-                $articledata[$key]['name'] =  User::where('id',$article['author_id'])->first()['name'];
-                //$articledata[$key][] = $article;
-            }
-           //dd($company->articles);
-            return Inertia::render('single-company',['data'=>$company,'articles'=>$articledata,'job_posts_count'=>$job_posts_count,'job_posts'=>$job_posts,'industries',$industries]);
+            return Inertia::render('single-company',['data'=>$company,'articles'=>$company->articles,'job_posts_count'=>$job_posts_count,'job_posts'=>$job_posts]);
 
         }catch (\Exception $e) {
             $message = $e->getMessage();
+            echo $message; 
             return $this->sendErrorResponse('404',$message);
         }
     }
