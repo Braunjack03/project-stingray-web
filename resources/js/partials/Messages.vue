@@ -55,7 +55,7 @@ export default {
       type: String,
       default: '',
     },
-    messageType: {
+    type: {
       type: String,
       default: '',
     },
