@@ -287,7 +287,7 @@
 
 <script>
 import { Link, Head } from '@inertiajs/inertia-vue';
-import CompanyJobPost from '../components/CompanyJobPost.vue';
+import JobPost from '../components/JobPost.vue';
 import Article from '../components/Article.vue';
 import Pagination from '../components/CompanyPagination.vue';
 import Layout from './Layout.vue';
@@ -296,7 +296,7 @@ export default {
   components: {
     Link,
     Layout,
-    CustomCard: CompanyJobPost,
+    CustomCard: JobPost,
     Article,
     Pagination,
     Head,
