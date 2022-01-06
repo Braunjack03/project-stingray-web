@@ -438,7 +438,7 @@ class CompanyProfileController extends Controller
                 $company['logo_image_url'] = ($company['logo_image_url']) ? getBucketImageUrl($company['uuid'],$company['logo_image_url'],'company') : '';
             }
 
-            if(!str_starts_with($company['logo_image_url'], 'https://')){
+            if(!str_starts_with($company['featured_image_url'], 'https://')){
                 $company['featured_image_url'] = ($company['featured_image_url']) ? getBucketImageUrl($company['uuid'],$company['featured_image_url'],'company') : '';
             }
             $job_posts_query = JobPost::select('job_posts.name','job_posts.apply_url as apply_url','job_posts.created_at','job_posts.slug as job_slug','locations.name as location','company_profiles.name as company_name','company_profiles.slug as company_slug','company_profiles.state_abbr as state','company_profiles.city')
@@ -449,6 +449,8 @@ class CompanyProfileController extends Controller
             $job_posts_count = $job_posts_query->count();
 
             $job_posts = $job_posts_query->paginate(5)->onEachSide(1);
+
+            dd($company);
 
             return Inertia::render('single-company',['data'=>$company,'articles'=>$company->articles,'job_posts_count'=>$job_posts_count,'job_posts'=>$job_posts]);
 
