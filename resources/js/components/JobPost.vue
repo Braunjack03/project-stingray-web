@@ -1,5 +1,5 @@
 <template>
-  <v-card class="elevation-5 flex d-flex flex-column cardStyle newJobStyle">
+  <v-card class="elevation-5 flex d-flex flex-column cardStyle jobComponent">
     <v-card-text class="job-card-wrap">
       <div class="card-text-wrap">
         <v-card-title>
@@ -52,7 +52,7 @@
       <div class="button-outter">
         <Link
           :href="'/jobs/'+data.company_slug+'/'+data.job_slug"
-          class="hover:text-white hover:bg-purple-700 ml-3 viewJobsBtn"
+          class="bg-purple-600 text-white hover:bg-purple-700 ml-3 viewJobsBtn"
         >
           View Job
         </Link>

@@ -151,23 +151,19 @@ class CompanyProfileController extends Controller
         }
 
         try{
-            $user = CompanyProfile::where('uuid',$request->all()['id'])->first();
+            $user = CompanyProfile::with('company_types')->where('uuid',$request->all()['id'])->first();
             if($user)
             {
-                if(!empty($user->industry_ids))
-                {
-                    $user->industry_ids = explode(",",$user->industry_ids);
-                }else{
-                    $user->industry_ids = [];
-
-                }
-                
+                if(isset($user) && isset($user->company_types)){
+                    $collection = $user->company_types;    
+                    $names = $collection->pluck("id")->toArray(); 
+                } 
                 $user->logo_image_src = ($user->logo_image_url) ? getBucketImageUrl($request->all()['id'],$user->logo_image_url,'company') : '';
                 $user->featured_image_src = ($user->featured_image_url) ? getBucketImageUrl($request->all()['id'],$user->featured_image_url,'company') : '';
 
             }
             $industries = CompanyType::pluck('name','id');
-            $data = ['user'=>$user,'industries'=>$industries];
+            $data = ['user'=>$user,'industries'=>$industries,'industryTest'=>$names];
             return $this->sendResponseWithData('employer/edit-company','',$data);
         }catch (\Exception $e) {
             $message = $e->getMessage();
@@ -187,9 +183,9 @@ class CompanyProfileController extends Controller
             return $this->sendErrorResponse('login',__('messages.unauthorized'));
         }
 
-        $requested_data = $request->except(['logo_image_src','featured_image_url']);
+        $requested_data = $request->except(['logo_image_src','featured_image_url','industry']);
     
-        $user = CompanyProfile::where('uuid',$request->all()['id'])->first();
+        $user = CompanyProfile::with('company_types')->where('uuid',$request->all()['id'])->first();
         $user_uuid = $request->all()['id'];
         $redirect_page = $request->path();
        
@@ -202,7 +198,7 @@ class CompanyProfileController extends Controller
             'website_url' => isset($requested_data['website_url']) ? $requested_data['website_url'] : '',
             'mission' => isset($requested_data['mission']) ? $requested_data['mission'] : '',
             'description' => isset($requested_data['description']) ? $requested_data['description'] : '',
-            'industry_ids' => (isset($requested_data['industry_ids']) && is_array($requested_data['industry_ids'])) ? implode(',',$requested_data['industry_ids']) : $requested_data['industry_ids'],
+            'industry' => isset($requested_data['industry']) ? $requested_data['industry'] : '',
             'street_addr_1' => isset($requested_data['street_addr_1']) ? $requested_data['street_addr_1'] : '',
             'street_addr_2' => isset($requested_data['street_addr_2']) ? $requested_data['street_addr_2'] : '',
             'city' => isset($requested_data['city']) ? $requested_data['city'] : '',
@@ -230,8 +226,14 @@ class CompanyProfileController extends Controller
         
         if ($validator->fails()){
             $industries = CompanyType::pluck('name','id');
-            $data['industry_ids'] = explode(",",$data['industry_ids']);
-            $user_data = ['user'=>$data,'industries'=>$industries];
+            if(isset($user) && isset($user->company_types)){
+                $collection = $user->company_types;    
+                $names = $collection->pluck("id")->toArray(); 
+            } 
+            $data['logo_image_src'] = ($user->logo_image_url) ? getBucketImageUrl($user_uuid,$user->logo_image_url,'company') : '';
+            $data['featured_image_src'] = ($user->featured_image_url) ? getBucketImageUrl($user_uuid,$user->featured_image_url,'company') : '';
+
+            $user_data = ['user'=>$data,'industries'=>$industries,'industryTest'=>$names];
             return $this->sendCustomValidationErrorsWithData($redirect_page,$validator->errors(),$user_data);
         }else{
             try{
@@ -257,7 +259,6 @@ class CompanyProfileController extends Controller
                     'website_url' => $data['website_url'],
                     'mission' => $data['mission'],
                     'description' => $data['description'],
-                    'industry_ids' =>  ltrim($data['industry_ids'], ','),
                     'street_addr_1' => $data['street_addr_1'],
                     'street_addr_2' => $data['street_addr_2'],
                     'city' => $data['city'],
@@ -284,7 +285,20 @@ class CompanyProfileController extends Controller
                     unset($data['featured_image_url']);
                 }
 
-                $user = CompanyProfile::where('uuid',$requested_data['id'])->update($profile_data);
+                $company = CompanyProfile::where('uuid',$requested_data['id']);
+                $company->update($profile_data);
+                $companyDetails = $company->first();
+                if($request->input('industry'))
+                {   
+                    $industries = [];
+                    foreach($request->input('industry') as $key => $industry){
+                        $industries[$key]['company_type_id'] = $industry;
+                        $industries[$key]['company_profile_id'] = $companyDetails->id;
+                    }
+                    CompanyProfileCompanyType::where('company_profile_id',$companyDetails->id)->delete();
+                    CompanyProfileCompanyType::insert($industries);
+                }
+
                 ActivityLog::addToLog(__('activitylogs.company_profile_updated'),'company updated');
                 return redirect()->route('employer.profile')->with(['message' => __('messages.company_profile_updated')]);
      
