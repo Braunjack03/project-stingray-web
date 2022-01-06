@@ -8,6 +8,7 @@
         "hot": "mix watch --hot",
         "prod": "npm run production",
         "production": "mix --production",
+        "eslint": "./node_modules/.bin/eslint resources/js/ --ext .js,.vue"
     },
     "devDependencies": {
         "@mdi/font": "^5.9.55",
@@ -16,6 +17,11 @@
         "axios": "^0.21.4",
         "bootstrap": "^4.6.0",
         "deepmerge": "^4.2.2",
+        "eslint": "^8.6.0",
+        "eslint-config-airbnb-base": "^15.0.0",
+        "eslint-loader": "^4.0.2",
+        "eslint-plugin-import": "^2.25.4",
+        "eslint-plugin-vue": "^8.2.0",
         "jquery": "^3.6",
         "laravel-mix": "^6.0.34",
         "lodash": "^4.17.19",
@@ -37,7 +43,6 @@
         "aos": "^2.3.4",
         "tiptap-vuetify": "^2.24.0",
         "vue": "^2.6.14",
-        "vue-quill-editor": "^3.0.6",
         "vue-resource": "^1.5.3",
         "vue-router": "^3.5.2",
         "vuelidate": "^0.7.6",
