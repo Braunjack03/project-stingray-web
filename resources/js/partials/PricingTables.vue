@@ -272,7 +272,7 @@ export default {
   name: 'PricingTables',
   data() {
     return {
-      value: true,
+      value: false,
       priceOutput: {
         plan1: {
           false: ['$', '0', '/month'],
