@@ -2,7 +2,6 @@
   <Layout>
     <Head>
       <title>Made in Tampa - {{ data.title }}</title>
-      <MetaTags  />
     </Head>
     <section
       class="relative singleArticles--outer"
@@ -94,13 +93,11 @@
 import { Head } from '@inertiajs/inertia-vue';
 import Company from '../components/Company.vue';
 import Layout from './Layout.vue';
-import MetaTags from '../partials/MetaTags.vue';
 
 export default {
   components: {
     Layout,
     CustomCard: Company,
-    MetaTags,
     Head,
   },
   props: {
