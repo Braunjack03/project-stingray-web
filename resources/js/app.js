@@ -34,7 +34,7 @@ createInertiaApp({
       vuetify
     }).$mount(el)
   },
-})
+});
 
 Vue.use(TiptapVuetifyPlugin, {
   // the next line is important! You need to provide the Vuetify Object to this place.
