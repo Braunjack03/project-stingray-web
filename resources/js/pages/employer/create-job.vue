@@ -135,17 +135,17 @@
               <div class="flex flex-wrap mb-3 textEditor">
                 <div class="w-full px-3">
                   <label class="block text-gray-700 text-lg font-medium mb-1">Job Description </label>
-                  <!--tiptap-vuetify
+                  <tiptap-vuetify
                     v-model="content"
                     :extensions="extensions"
                     class="form-input input-field-outer w-full text-gray-700"
                     placeholder="Write something …"
-                  /-->
-                  <quill-editor
+                  />
+                  <!--quill-editor
                     v-model="content"
                     :content="content"
                     :options="editorOption"
-                  />
+                  /-->
                 </div>
               </div>
 
