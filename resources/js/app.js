@@ -2,11 +2,11 @@ import Vue from 'vue'
 
 import { createInertiaApp } from '@inertiajs/inertia-vue';
 import { TiptapVuetifyPlugin } from 'tiptap-vuetify';
-import VueQuillEditor from 'vue-quill-editor';
+//import VueQuillEditor from 'vue-quill-editor';
 
-import 'quill/dist/quill.core.css' // import styles
-import 'quill/dist/quill.snow.css' // for snow theme
-import 'quill/dist/quill.bubble.css' // for bubble theme
+//import 'quill/dist/quill.core.css' // import styles
+//import 'quill/dist/quill.snow.css' // for snow theme
+//import 'quill/dist/quill.bubble.css' // for bubble theme
 
 import vuetify from './vuetify';
 
@@ -24,7 +24,7 @@ import Vuelidate from 'vuelidate';
 
 Vue.use(Vuelidate);
 
-Vue.use(VueQuillEditor, /* { default global options } */);
+//Vue.use(VueQuillEditor, /* { default global options } */);
 
 createInertiaApp({
   resolve: name => require(`./pages/${name}`),
