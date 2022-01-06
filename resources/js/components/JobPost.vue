@@ -18,7 +18,7 @@
           >
             <Link
               class="jobLocationLink"
-              :href="'companies/'+data.company_slug"
+              :href="data.company_slug"
             >
               {{ data.company_name }} - <span v-if="data.city"> {{ data.city }} </span><span v-if="data.state">, {{ data.state }}</span>
             </Link>
