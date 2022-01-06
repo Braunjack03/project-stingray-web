@@ -3,7 +3,7 @@
      <Head title="Contact Us" />
         <section class="relative contactUs--outer" data-app>
             <div class="max-w-6xl mx-auto px-4 sm:px-6">
-                <div class="pt-32 pb-12 md:pt-40 md:pb-20">
+                <div class="pt-36 pb-12 md:pt-40 md:pb-20">
                 
   
                     <!-- Page header -->

@@ -3,7 +3,7 @@
     <Head :title="'Job List | '+ data.company_name" />
     <section class="relative singlePost--outer" data-app>
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
-            <div class="pt-32 pb-12 md:pt-32 md:pb-20 aboutContent">
+            <div class="pt-36 pb-12 md:pt-32 md:pb-20 aboutContent">
                 <v-row>
                   <v-col cols="12" sm="12" lg="8">
                     <div class="singlePost--title mb-5">
