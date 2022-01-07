@@ -28,7 +28,7 @@ class ArticleController extends Controller
             ->whereNotIn('articles.id', [$article->id])
             ->where('is_published',1)
             ->with('tags')
-            ->orderBy('articles.publish_date','DESC')->paginate(9)->onEachSide(1);
+            ->orderBy('articles.publish_date','DESC')->paginate(9)->onEachSide(0);
             
             return Inertia::render('article',['latest'=>$article,'articles'=>$latestarticles]);
 
