@@ -338,7 +338,7 @@ class JobPostController extends Controller
 
             $job_posts_count = $job_posts_query->count();
 
-            $job_posts = $job_posts_query->paginate($this->paginationLimit)->onEachSide(1);
+            $job_posts = $job_posts_query->paginate($this->paginationLimit)->onEachSide(0);
 
             $term_u = $request->q;
             if ($term_u == 'null' || $term_u == 'NaN') {

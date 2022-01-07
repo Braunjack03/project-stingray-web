@@ -450,7 +450,7 @@ class CompanyProfileController extends Controller
 
             $job_posts_count = $job_posts_query->count();
 
-            $job_posts = $job_posts_query->paginate(5)->onEachSide(1);
+            $job_posts = $job_posts_query->paginate(5)->onEachSide(0);
 
             return Inertia::render('single-company',['data'=>$company,'articles'=>$company->articles,'job_posts_count'=>$job_posts_count,'job_posts'=>$job_posts]);
 
