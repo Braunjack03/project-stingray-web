@@ -366,7 +366,7 @@ class CompanyProfileController extends Controller
                 ->withCount('job_posts')
                 ->with(['company_types:name'])
                 ->orderBy('company_profiles.created_at', 'DESC')
-                ->paginate($this->paginationLimit)->onEachSide(0);
+                ->paginate($this->paginationLimit)->onEachSide(0); 
             //dd($company);    
              
             $data = [];
