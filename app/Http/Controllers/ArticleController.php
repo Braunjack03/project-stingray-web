@@ -42,7 +42,7 @@ class ArticleController extends Controller
 
         try{
             // Don't do a select * from articles
-            $data = Article::select('articles.id','articles.sub_title','articles.slug','articles.header_image','articles.title','articles.content','articles.publish_date'
+            $data = Article::select('articles.id as article_id','articles.sub_title','articles.slug','articles.header_image','articles.title','articles.content','articles.publish_date'
             ,'users.id as author_id','users.name as author_name')->leftjoin('users','articles.author_id','users.id')
             ->with('tags')
             ->where('is_published',1)->where('articles.slug',$slug)->first();
