@@ -1,6 +1,5 @@
 <template>
     <Layout>
-        <Head title="Sign Up" />
         <section class="relative">
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
           <div class="pt-36 pb-12 md:pt-40 md:pb-20">
@@ -84,7 +83,10 @@ import { required, email, minLength } from 'vuelidate/lib/validators'
 import Message from '../partials/Messages.vue';
 
 export default {
-    name: 'SignUp',
+    metaInfo: {
+        title: 'SignUp',
+        titleTemplate: '%s | Made in Tampa'
+    },
     mixins: [validationMixin],
      validations: {
       email: { required, email },
