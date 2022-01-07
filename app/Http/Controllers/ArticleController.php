@@ -42,13 +42,13 @@ class ArticleController extends Controller
 
         try{
             // Don't do a select * from articles
-            $data = Article::select('articles.id as article_id','articles.sub_title','articles.slug','articles.header_image','articles.title','articles.content','articles.publish_date'
+            $data = Article::select('articles.id','articles.sub_title','articles.slug','articles.header_image','articles.title','articles.content','articles.publish_date'
             ,'users.id as author_id','users.name as author_name')->leftjoin('users','articles.author_id','users.id')
             ->with('tags')
             ->where('is_published',1)->where('articles.slug',$slug)->first();
 
             $companies = CompanyProfile::select('company_profiles.name','company_profiles.logo_image_url','company_profiles.uuid','company_profiles.description','company_profiles.slug','company_profiles.city','company_profiles.state_abbr as state')
-            ->leftjoin('article_company_profile','company_profiles.id','=','article_company_profile.company_profile_id')->where('article_company_profile.article_id', $data->article_id)->withCount('job_posts')->paginate(3);
+            ->leftjoin('article_company_profile','company_profiles.id','=','article_company_profile.company_profile_id')->where('article_company_profile.article_id', $data->id)->withCount('job_posts')->paginate(3);
             
             $companies_data = [];
             foreach ($companies as $key => $comp) {
