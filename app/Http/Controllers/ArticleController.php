@@ -23,7 +23,7 @@ class ArticleController extends Controller
 
             // TODO order by publish_date
             // TODO don't do a select * from articles.  This sends all data to the frontend where it's publically visable.
-            $latestarticles = Article::select('articles.slug','articles.header_image','articles.title','articles.content','articles.publish_date','users.id as author_id','users.name  as author_name')
+            $latestarticles = Article::select('articles.id','articles.slug','articles.header_image','articles.title','articles.content','articles.publish_date','users.id as author_id','users.name  as author_name')
             ->leftjoin('users','articles.author_id','users.id')
             ->whereNotIn('articles.id', [$article->id])
             ->where('is_published',1)
