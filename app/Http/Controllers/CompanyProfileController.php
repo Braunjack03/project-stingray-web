@@ -366,7 +366,8 @@ class CompanyProfileController extends Controller
                 ->withCount('job_posts')
                 ->with(['company_types:name'])
                 ->orderBy('company_profiles.created_at', 'DESC')
-                ->paginate($this->paginationLimit)->onEachSide(1);
+                ->paginate($this->paginationLimit)->onEachSide(0); 
+            //dd($company);    
              
             $data = [];
             foreach ($company as $key => $comp) {
@@ -390,13 +391,7 @@ class CompanyProfileController extends Controller
     public function showCompany(Request $request,$slug = ''){
 
         try{
-            $company = CompanyProfile::with(['company_types:name','articles' => function ($query) {
-                $query->select('articles.id','articles.slug','articles.header_image','articles.title','articles.content','articles.publish_date','users.id as author_id','users.name as author_name');
-                $query->leftjoin('users','articles.author_id','users.id');
-                $query->where('is_published',1);
-                $query->orderBy('articles.id','DESC');
-                $query->limit(3);
-            }])->leftjoin('locations','company_profiles.location_id','locations.id')
+            $company = CompanyProfile::leftjoin('locations','company_profiles.location_id','locations.id')
             ->leftjoin('users','company_profiles.user_id','=','users.id')
             ->select(
                 'company_profiles.id',
@@ -418,7 +413,14 @@ class CompanyProfileController extends Controller
                 'company_profiles.uuid',
                 'company_profiles.unclaimed',
                 'company_profiles.slug',
-            )
+            )->
+            with(['company_types:name','articles' => function ($query) {
+                $query->select('articles.id','articles.slug','articles.header_image','articles.title','articles.content','articles.publish_date','users.id as author_id','users.name as author_name');
+                $query->leftjoin('users','articles.author_id','users.id');
+                $query->where('is_published',1);
+                $query->orderBy('articles.id','DESC');
+                $query->limit(3);
+            }])
             ->where('company_profiles.slug',$slug)->first();
             
             /*if(Auth::check())
