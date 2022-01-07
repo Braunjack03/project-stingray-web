@@ -1,6 +1,5 @@
 <template>
    <Layout>
-      <Head title="Articles" /> 
             <section data-app>
                <div class="max-w-6xl mx-auto px-4 sm:px-6 py-10 md:py-20 relative">
                   <v-row>
@@ -58,6 +57,14 @@ import { validationMixin } from 'vuelidate'
 import { required} from 'vuelidate/lib/validators'
 
 export default {
+   name: "ArticleItems",
+   metaInfo: {
+      title: "News",
+      titleTemplate: "%s - Made in Tampa",
+      meta: [
+         { name: 'description', content: 'Made in Tampa News' },
+      ]
+   },
      mixins: [validationMixin],
      validations: {
       term: { required },
