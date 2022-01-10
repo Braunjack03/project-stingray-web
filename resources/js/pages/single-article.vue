@@ -81,7 +81,7 @@ export default {
   name: "ArticleItem",
    metaInfo: {
     title: "Article",
-    titleTemplate: "%s - Made in Tampa",
+    titleTemplate: "Made in Tampa - %s",
   },
   // child
   metaInfo() {

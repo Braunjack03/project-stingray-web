@@ -202,6 +202,16 @@ ul.industries-list li {
     margin-bottom: 10px;
 }
 
+.industries-list.companyIndustry__list {
+    height: 210px;
+    overflow-y: auto;
+    margin: 0 0 10px;
+}
+
+.companyIndustry__list.industries-list li {
+    max-width: 50%;
+}
+
 .radioColor .v-input__control label, .industries-list label {
    color: rgba(51, 54, 58, 1);
    font-size: 1.125rem;
@@ -1270,7 +1280,7 @@ blockquote {
     background-color: #fff !important;
 }
 
-.newJobStyle .jobLocationLink:hover {
+.jobComponent .text-subtitle-1:hover {
     color: var(--blueColor);
 }
 
@@ -1603,4 +1613,7 @@ blockquote {
    .verifyEmailText > div span:first-child {
        font-size: .8rem;
    }
+   .companyIndustry__list.industries-list li {
+        max-width: 100%;
+    }
 }
