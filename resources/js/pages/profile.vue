@@ -10,7 +10,7 @@
         <section class="relative">
 
             <div class="max-w-6xl mx-auto px-4 sm:px-6">
-                <div class="pt-32 pb-12 md:pt-40 md:pb-20">
+                <div class="pt-36 pb-12 md:pt-40 md:pb-20">
                     
                     <!-- Page header -->
                     <div class="max-w-3xl mx-auto text-center pb-9">
@@ -236,13 +236,6 @@ export default {
                 }
 
             }
-            /*this.$v.$touch();
-            if(this.user.name != '' && this.user.current_job_title != '')
-            {
-              this.$inertia.post("/profile", this.user);
-               this.$v.$reset()
-            }*/
-
         },
         removeImage() {
             this.user.profile_image_src = "";

@@ -14,6 +14,7 @@ use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Redirect;
 use App\Models\ActivityLog;
+use App\Models\CompanyProfileCompanyType;
 use Session;
 use Mail; 
 
@@ -84,7 +85,6 @@ class CompanyProfileController extends Controller
         
         if ($validator->fails()){
             $industries = CompanyType::pluck('name','id');
-            //$data['industry'] = explode(",",$data['industry']);
             $data = ['user'=>$data,'industries'=>$industries];
             return $this->sendCustomValidationErrorsWithData($redirect_page,$validator->errors(),$data);
         }else{
@@ -104,11 +104,7 @@ class CompanyProfileController extends Controller
                     $headerimage_name = time() . '_' . $headerimage->getClientOriginalName();
                     $featured_image = Storage::disk('s3Company')->putFileAs('company/'.$user_uuid, $headerimage,$headerimage_name);
                 }
-
-                if(isset($data['industry']))
-                {   
-                    $data['industry_ids'] = isset($data['industry']) ? implode(',',$data['industry']) : $data['industry'];
-                }
+              
                 $data['uuid'] = $user_uuid;    
                 $data['logo_image_url'] = $image_name;
                 $data['featured_image_url'] = $headerimage_name;
@@ -125,8 +121,18 @@ class CompanyProfileController extends Controller
 
                 $data['slug'] = $this->createCompanySlug($data['name']);
                 
-                CompanyProfile::create($data);
-               
+                $company_profile_id = CompanyProfile::create($data);
+
+                if(isset($data['industry']))
+                {   
+                    $industries = [];
+                    foreach($data['industry'] as $key => $industry){
+                        $industries[$key]['company_type_id'] = $industry;
+                        $industries[$key]['company_profile_id'] = $company_profile_id->id;
+                    }
+                    CompanyProfileCompanyType::insert($industries);
+                }
+                
                 ActivityLog::addToLog(__('activitylogs.company_profile_created'),'company created');
                 return Redirect::route('employer.profile')->with( ['message' => __('messages.company_profile_created')] );
                  
@@ -145,23 +151,19 @@ class CompanyProfileController extends Controller
         }
 
         try{
-            $user = CompanyProfile::where('uuid',$request->all()['id'])->first();
+            $user = CompanyProfile::with('company_types')->where('uuid',$request->all()['id'])->first();
             if($user)
             {
-                if(!empty($user->industry_ids))
-                {
-                    $user->industry_ids = explode(",",$user->industry_ids);
-                }else{
-                    $user->industry_ids = [];
-
-                }
-                
+                if(isset($user) && isset($user->company_types)){
+                    $collection = $user->company_types;    
+                    $names = $collection->pluck("id")->toArray(); 
+                } 
                 $user->logo_image_src = ($user->logo_image_url) ? getBucketImageUrl($request->all()['id'],$user->logo_image_url,'company') : '';
                 $user->featured_image_src = ($user->featured_image_url) ? getBucketImageUrl($request->all()['id'],$user->featured_image_url,'company') : '';
 
             }
             $industries = CompanyType::pluck('name','id');
-            $data = ['user'=>$user,'industries'=>$industries];
+            $data = ['user'=>$user,'industries'=>$industries,'industryTest'=>$names];
             return $this->sendResponseWithData('employer/edit-company','',$data);
         }catch (\Exception $e) {
             $message = $e->getMessage();
@@ -181,9 +183,9 @@ class CompanyProfileController extends Controller
             return $this->sendErrorResponse('login',__('messages.unauthorized'));
         }
 
-        $requested_data = $request->except(['logo_image_src','featured_image_url']);
+        $requested_data = $request->except(['logo_image_src','featured_image_url','industry']);
     
-        $user = CompanyProfile::where('uuid',$request->all()['id'])->first();
+        $user = CompanyProfile::with('company_types')->where('uuid',$request->all()['id'])->first();
         $user_uuid = $request->all()['id'];
         $redirect_page = $request->path();
        
@@ -196,7 +198,7 @@ class CompanyProfileController extends Controller
             'website_url' => isset($requested_data['website_url']) ? $requested_data['website_url'] : '',
             'mission' => isset($requested_data['mission']) ? $requested_data['mission'] : '',
             'description' => isset($requested_data['description']) ? $requested_data['description'] : '',
-            'industry_ids' => (isset($requested_data['industry_ids']) && is_array($requested_data['industry_ids'])) ? implode(',',$requested_data['industry_ids']) : $requested_data['industry_ids'],
+            'industry' => isset($requested_data['industry']) ? $requested_data['industry'] : '',
             'street_addr_1' => isset($requested_data['street_addr_1']) ? $requested_data['street_addr_1'] : '',
             'street_addr_2' => isset($requested_data['street_addr_2']) ? $requested_data['street_addr_2'] : '',
             'city' => isset($requested_data['city']) ? $requested_data['city'] : '',
@@ -224,8 +226,14 @@ class CompanyProfileController extends Controller
         
         if ($validator->fails()){
             $industries = CompanyType::pluck('name','id');
-            $data['industry_ids'] = explode(",",$data['industry_ids']);
-            $user_data = ['user'=>$data,'industries'=>$industries];
+            if(isset($user) && isset($user->company_types)){
+                $collection = $user->company_types;    
+                $names = $collection->pluck("id")->toArray(); 
+            } 
+            $data['logo_image_src'] = ($user->logo_image_url) ? getBucketImageUrl($user_uuid,$user->logo_image_url,'company') : '';
+            $data['featured_image_src'] = ($user->featured_image_url) ? getBucketImageUrl($user_uuid,$user->featured_image_url,'company') : '';
+
+            $user_data = ['user'=>$data,'industries'=>$industries,'industryTest'=>$names];
             return $this->sendCustomValidationErrorsWithData($redirect_page,$validator->errors(),$user_data);
         }else{
             try{
@@ -251,7 +259,6 @@ class CompanyProfileController extends Controller
                     'website_url' => $data['website_url'],
                     'mission' => $data['mission'],
                     'description' => $data['description'],
-                    'industry_ids' =>  ltrim($data['industry_ids'], ','),
                     'street_addr_1' => $data['street_addr_1'],
                     'street_addr_2' => $data['street_addr_2'],
                     'city' => $data['city'],
@@ -278,7 +285,20 @@ class CompanyProfileController extends Controller
                     unset($data['featured_image_url']);
                 }
 
-                $user = CompanyProfile::where('uuid',$requested_data['id'])->update($profile_data);
+                $company = CompanyProfile::where('uuid',$requested_data['id']);
+                $company->update($profile_data);
+                $companyDetails = $company->first();
+                if($request->input('industry'))
+                {   
+                    $industries = [];
+                    foreach($request->input('industry') as $key => $industry){
+                        $industries[$key]['company_type_id'] = $industry;
+                        $industries[$key]['company_profile_id'] = $companyDetails->id;
+                    }
+                    CompanyProfileCompanyType::where('company_profile_id',$companyDetails->id)->delete();
+                    CompanyProfileCompanyType::insert($industries);
+                }
+
                 ActivityLog::addToLog(__('activitylogs.company_profile_updated'),'company updated');
                 return redirect()->route('employer.profile')->with(['message' => __('messages.company_profile_updated')]);
      
@@ -344,19 +364,21 @@ class CompanyProfileController extends Controller
                     //'users.role',
                 )
                 ->withCount('job_posts')
+                ->with(['company_types:name'])
                 ->orderBy('company_profiles.created_at', 'DESC')
-                ->paginate($this->paginationLimit)->onEachSide(1);
-
+                ->paginate($this->paginationLimit)->onEachSide(0); 
+            //dd($company);    
+             
             $data = [];
             foreach ($company as $key => $comp) {
                 if (!str_starts_with($company[$key]['logo_image_url'], 'https://')) {
                     $company[$key]['logo_image_url'] = ($comp['logo_image_url']) ? getBucketImageUrl($comp['uuid'], $comp['logo_image_url'], 'company') : '';
                 }
-
-                $selected_industries = explode(',', $comp['industry_ids']);
-
-                $industries = CompanyType::whereIn('id', $selected_industries)->pluck('name')->toArray();
-                $company[$key]['industry_types'] = implode(' | ', $industries);
+                if(isset($company) && isset($comp->company_types)){
+                    $collection = $comp->company_types;    
+                    $names = $collection->pluck("name")->toArray(); 
+                    $company[$key]['industry_types'] = implode(' | ',$names);
+                }    
             }
             $data = $company;
             return Inertia::render('companies', ['data' => $data]);
@@ -369,10 +391,7 @@ class CompanyProfileController extends Controller
     public function showCompany(Request $request,$slug = ''){
 
         try{
-            $company = CompanyProfile::with(['job_posts','articles' => function ($query) {
-                $query->orderBy('articles.id','DESC');
-                $query->limit(3);
-            }])->leftjoin('locations','company_profiles.location_id','locations.id')
+            $company = CompanyProfile::leftjoin('locations','company_profiles.location_id','locations.id')
             ->leftjoin('users','company_profiles.user_id','=','users.id')
             ->select(
                 'company_profiles.id',
@@ -387,7 +406,6 @@ class CompanyProfileController extends Controller
                 'company_profiles.year_founded',
                 'company_profiles.website_url',
                 'company_profiles.created_at',
-                'company_profiles.industry_ids',
                 'company_profiles.logo_image_url',
                 'company_profiles.featured_image_url',
                 'company_profiles.state_abbr as state',
@@ -395,8 +413,16 @@ class CompanyProfileController extends Controller
                 'company_profiles.uuid',
                 'company_profiles.unclaimed',
                 'company_profiles.slug',
-            )
+            )->
+            with(['company_types:name','articles' => function ($query) {
+                $query->select('articles.id','articles.slug','articles.header_image','articles.title','articles.content','articles.publish_date','users.id as author_id','users.name as author_name');
+                $query->leftjoin('users','articles.author_id','users.id');
+                $query->where('is_published',1);
+                $query->orderBy('articles.id','DESC');
+                $query->limit(3);
+            }])
             ->where('company_profiles.slug',$slug)->first();
+            
             /*if(Auth::check())
             {
                 if($company->user_id == Auth::id()) 
@@ -404,38 +430,29 @@ class CompanyProfileController extends Controller
                     $company->unclaimed = 0;
                 }
             }*/
-            
-            $selected_industries = explode(',',$company['industry_ids']);
-           
-            $industries = CompanyType::whereIn('id', $selected_industries)->pluck('name')->toArray();
-            $company['industry_types'] = implode(' - ',$industries);
-            
+            if(isset($company) && isset($company->company_types)){
+                $collection = $company->company_types;    
+                $names = $collection->pluck("name")->toArray(); 
+                $company['industry_types'] = implode(' | ',$names);
+            }    
             // If we don't have a url then assume it's in the S3 bucket
             if(!str_starts_with($company['logo_image_url'], 'https://')){
                 $company['logo_image_url'] = ($company['logo_image_url']) ? getBucketImageUrl($company['uuid'],$company['logo_image_url'],'company') : '';
             }
 
-            if(!str_starts_with($company['logo_image_url'], 'https://')){
+            if(!str_starts_with($company['featured_image_url'], 'https://')){
                 $company['featured_image_url'] = ($company['featured_image_url']) ? getBucketImageUrl($company['uuid'],$company['featured_image_url'],'company') : '';
             }
-
-            $job_posts_query = JobPost::select('job_posts.*','locations.name as location','company_profiles.name as company_name','company_profiles.slug as company_slug')
+            $job_posts_query = JobPost::select('job_posts.name','job_posts.apply_url as apply_url','job_posts.created_at','job_posts.slug as job_slug','locations.name as location','company_profiles.name as company_name','company_profiles.slug as company_slug','company_profiles.state_abbr as state','company_profiles.city')
             ->leftjoin('company_profiles','job_posts.company_profile_id','company_profiles.id')
             ->leftjoin('locations','company_profiles.location_id','locations.id')
-            ->where('company_profile_id',$company['id'])->orderBy('id','DESC');
+            ->where('company_profile_id',$company['id'])->orderBy('job_posts.created_at','DESC');
 
             $job_posts_count = $job_posts_query->count();
 
-            $job_posts = $job_posts_query->paginate(5)->onEachSide(1);
+            $job_posts = $job_posts_query->paginate(5)->onEachSide(0);
 
-            $articledata = [];
-            foreach($company->articles as $key => $article){
-                $articledata[] = $article;
-                $articledata[$key]['name'] =  User::where('id',$article['author_id'])->first()['name'];
-                //$articledata[$key][] = $article;
-            }
-           //dd($company->articles);
-            return Inertia::render('single-company',['data'=>$company,'articles'=>$articledata,'job_posts_count'=>$job_posts_count,'job_posts'=>$job_posts,'industries',$industries]);
+            return Inertia::render('single-company',['data'=>$company,'articles'=>$company->articles,'job_posts_count'=>$job_posts_count,'job_posts'=>$job_posts]);
 
         }catch (\Exception $e) {
             $message = $e->getMessage();

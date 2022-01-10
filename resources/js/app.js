@@ -1,9 +1,11 @@
-import Vue from 'vue'
+import Vue from 'vue';
 
-import { createInertiaApp } from '@inertiajs/inertia-vue'
+import { createInertiaApp } from '@inertiajs/inertia-vue';
 import { TiptapVuetifyPlugin } from 'tiptap-vuetify';
-
+import Vuelidate from 'vuelidate';
 import vuetify from './vuetify';
+import VueMeta from 'vue-meta'
+
 
 import '../css/style.scss';
 import '../css/additional-styles/theme.scss';
@@ -15,30 +17,33 @@ import '@mdi/font/css/materialdesignicons.css';
 // don't forget to import CSS styles
 import 'tiptap-vuetify/dist/main.css';
 
-import Vuelidate from 'vuelidate'
-
-Vue.use(Vuelidate)
+Vue.use(Vuelidate);
 
 createInertiaApp({
-  resolve: name => require(`./pages/${name}`),
+  resolve: (name) => require(`./pages/${name}`),
   setup({ el, app, props }) {
     new Vue({
-      render: h => h(app, props),
-      vuetify
-    }).$mount(el)
+      render: (h) => h(app, props),
+      vuetify,
+    }).$mount(el);
   },
-})
+});
 
 Vue.use(TiptapVuetifyPlugin, {
   // the next line is important! You need to provide the Vuetify Object to this place.
   vuetify, // same as "vuetify: vuetify"
   // optional, default to 'md' (default vuetify icons before v2.0.0)
-  iconsGroup: 'mdi'
+  iconsGroup: 'mdi',
+});
+
+Vue.use(VueMeta, {
+  // optional pluginOptions
+  refreshOnceOnNavigation: true
 })
 
-Vue.filter('stripHTML', function (value) {
-  const div = document.createElement('div')
-  div.innerHTML = value
-  const text = div.textContent || div.innerText || ''
-  return text
+Vue.filter('stripHTML', (value) => {
+  const div = document.createElement('div');
+  div.innerHTML = value;
+  const text = div.textContent || div.innerText || '';
+  return text;
 });

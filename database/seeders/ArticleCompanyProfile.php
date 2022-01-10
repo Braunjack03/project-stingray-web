@@ -21,12 +21,12 @@ class ArticleCompanyProfile extends Seeder
 
         Article::all()->each(function (Article $article) {
             $company_profiles = CompanyProfile::inRandomOrder()->take(random_int(0,5))->get()->pluck('id');
-            $article->company_profiles()->sync($company_profiles);
+            $article->company_profiles()->syncWithoutDetaching($company_profiles);
         });
 
         Article::all()->each(function (Article $article) {
             $tags = Tag::inRandomOrder()->take(random_int(0,3))->get()->pluck('id');
-            $article->tags()->sync($tags);
+            $article->tags()->syncWithoutDetaching($tags);
         });
 
 

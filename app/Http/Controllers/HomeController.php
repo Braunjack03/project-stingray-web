@@ -16,7 +16,7 @@ class HomeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['home', 'jobs','contact','contactSubmit','privacy','pricing']]);
+        $this->middleware('auth', ['except' => ['home', 'jobs','contact','contactSubmit','privacy','pricing', 'terms']]);
     }
     /**
      * Dashboard
@@ -50,83 +50,43 @@ class HomeController extends Controller
     public function home()
     {
         $job_posts = JobPost::count();
-        $locations = Location::get();
-        $companytypes = CompanyType::take(40)->get();
-        $latestarticles = Article::with('tags')->select('articles.*','users.id as author_id','users.name')->leftjoin('users','articles.author_id','users.id')->where('is_published',1)->orderBy('articles.id','DESC')->limit(3)->get();
-        //dd($latestarticles);
+        $locations = Location::select('id','name')->get();
+        $companytypes = CompanyType::select('id','name')->take(40)->get();
+        
+        $latestarticles = Article::select('articles.id','articles.slug','articles.header_image','articles.title','articles.content','articles.publish_date','users.id as author_id','users.name  as author_name')
+        ->leftjoin('users','articles.author_id','users.id')
+        ->where('is_published',1)
+        ->with('tags')
+        ->orderBy('articles.publish_date','DESC')->limit(3)->get();
+        
         return Inertia::render('home', ['articles'=>$latestarticles,'count_job_posts' => $job_posts, 'locations' => $locations, 'companytypes' => $companytypes]);
     }
-
-    public function jobs(Request $request)
-    {
-
-        try {
-            $job_posts_query = JobPost::leftjoin('company_profiles', 'job_posts.company_profile_id', 'company_profiles.id')
-                ->leftjoin('locations', 'job_posts.location_id', 'locations.id')
-                ->select(
-                    'job_posts.name as name',
-                    'job_posts.content as content',
-                    'company_profiles.name as company_name',
-                    'job_posts.apply_url as apply_url',
-                    'company_profiles.slug as company_slug',
-                    'locations.name as location',
-                    'job_posts.slug as job_slug',
-                    'job_posts.created_at'
-                )->when($request->q, function ($query, $term) {
-                    if ($term != 'null') {
-                        $query->where('job_posts.name', 'LIKE', '%' . $term . '%');
-                        //$query->Orwhere('job_posts.content', 'LIKE', '%'.$term.'%');
-                    }
-                })->when($request->loc, function ($query, $term1) {
-
-                    if ($term1 != 'null' && $term1 != 'NaN') {
-                        $query->where('job_posts.location_id', $term1);
-                    }
-                })
-                ->orderBy('job_posts.created_at', 'DESC');
-
-            $job_posts_count = $job_posts_query->count();
-
-            $job_posts = $job_posts_query->paginate($this->paginationLimit)->onEachSide(1);
-
-            $term_u = $request->q;
-            if ($term_u == 'null' || $term_u == 'NaN') {
-                $term_u = '';
-            }
-            $locations = Location::get();
-            return Inertia::render('job_posts', ['job_posts' => $job_posts, 'job_posts_count' => $job_posts_count, 'loc_id' => $request->loc, 'location_id' => $request->loc, 'term' => $term_u, 'locations' => $locations]);
-        } catch (\Exception $e) {
-            $message = $e->getMessage();
-            return $this->sendErrorResponse('login', $message);
-        }
-    }
-
+    
     public function contact()
     {
-        try {
-            return Inertia::render('contact');
-        } catch (\Exception $e) {
-            $message = $e->getMessage();
-            return $this->sendErrorResponse('404', $message);
-        }
+        return $this->static_page('contact');
     }
 
     public function privacy(){
-        try {
-            return Inertia::render('privacy');
-        } catch (\Exception $e) {
-            $message = $e->getMessage();
-            return $this->sendErrorResponse('404', $message);
-        }
+        return $this->static_page('privacy');
     }
 
     public function pricing(){
+        return $this->static_page('pricing');
+    }
+
+    public function terms(){
+        return $this->static_page('terms');
+    }
+
+    private function static_page($name){
         try {
-            return Inertia::render('pricing');
+            return Inertia::render($name);
         } catch (\Exception $e) {
             $message = $e->getMessage();
             return $this->sendErrorResponse('404', $message);
         }
+
     }
 
     public function contactSubmit(Request $request)

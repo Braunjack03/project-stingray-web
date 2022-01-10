@@ -1,6 +1,5 @@
 <template>
    <Layout>
-      <Head title="Companies Hiring the Tampa Bay" />
               <section data-app>
                <div class="max-w-6xl mx-auto px-4 sm:px-6 py-10 md:py-20 relative">
                   <div class="pt-16 pb-6 md:pb-12 company-page-title">
@@ -25,22 +24,27 @@
 </template>
 
 <script>
-//import Card from '../components/Card.vue';
 import CompanyList from '../components/Company.vue';
 import Layout from './Layout';
-import { Head,Link } from '@inertiajs/inertia-vue';
+import {Link } from '@inertiajs/inertia-vue';
 import Pagination from '../components/CompanyPagination.vue';
 import Footer from '../partials/Footer.vue';
 import { validationMixin } from 'vuelidate'
 import { required} from 'vuelidate/lib/validators'
 
 export default {
+   name: "Companies",
+   metaInfo: {
+      title: "Companies Hiring the Tampa Bay",
+      meta: [
+         { name: 'description', content: 'Companies Hiring the Tampa Bay' },
+      ]
+   },
      mixins: [validationMixin],
      validations: {
       term: { required },
     },
    components: {
-      Head,
       Layout,
       'CustomCard': CompanyList,
       Pagination,

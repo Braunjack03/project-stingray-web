@@ -3,7 +3,7 @@
     <Head title="Edit Job" />
     <section class="relative" data-app> 
           <div class="max-w-6xl mx-auto px-4 sm:px-6">
-            <div class="pt-32 pb-12 md:pt-40 md:pb-20">
+            <div class="pt-36 pb-12 md:pt-40 md:pb-20">
 
             <div class="max-w-3xl text-gray-700 mx-auto text-center pb-10">
                 <h1 class="h1 mb-4" data-aos="fade-up">Update Job </h1>
@@ -27,7 +27,7 @@
 
                     <div class="flex flex-wrap mb-3">
                         <div class="w-full px-3">
-                          <label class="block text-gray-700 text-lg font-medium mb-1">Location</label>
+                          <label class="block text-gray-700 text-lg font-medium mb-1">Location <span class="text-red-600">*</span></label>
 
                      <v-row >
                       <v-col
@@ -40,12 +40,13 @@
                           item-value="id"
                           :items="locations"
                           label="Location"
+                          :class="{ 'error--text': $v.location_id.$error }"
                           class="form-input input-field-outer w-full text-gray-700"
                           dense
                           solo
                         ></v-select>
+                        <div v-if="$v.location_id.$error && !$v.location_id.required" class="text-red-500 text-lg">Location is required</div>
                       </v-col>
-                    <div v-if="errors.location_id" class="mt-2 error">{{ errors.location_id }}</div>
                     </v-row>   
                      </div>
                     </div> 
@@ -88,6 +89,12 @@
                         <div class="w-full px-3">
                           <label class="block text-gray-700 text-lg font-medium mb-1">Job Description </label>
                       <tiptap-vuetify v-model="content" :extensions="extensions" class="form-input input-field-outer w-full text-gray-700" />
+                      <!--quill-editor
+                        v-model="content"
+                        :content="content"
+                        :options="editorOption"
+                        class="form-input input-field-outer w-full text-gray-700"
+                      /-->
 
                      </div>
                     </div> 
@@ -124,6 +131,7 @@ import Message from '../../partials/Messages.vue';
      mixins: [validationMixin],
      validations: {
       name: { required},
+      location_id: {required},
       job_cat_id: {required},
       apply_url: {required},
       content: {required}

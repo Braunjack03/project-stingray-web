@@ -1,6 +1,5 @@
 <template>
    <Layout>
-      <Head title="Articles" /> 
             <section data-app>
                <div class="max-w-6xl mx-auto px-4 sm:px-6 py-10 md:py-20 relative">
                   <v-row>
@@ -30,7 +29,7 @@
                                <p>{{latest.content.substring(0,255) | stripHTML}}</p>
                                <div class="postPersonal--detail">
                                   <img src="/images/news-author-01.jpg" alt="post-images">
-                                  <p><a href="#">{{latest.name}} </a> - {{new Date(latest.created_at).toDateString().slice(4,10)+','+new Date(latest.created_at).toDateString().slice(10)}} </p>
+                                  <p><a href="#">{{latest.author_name}} </a> - {{new Date(latest.publish_date).toDateString().slice(4,10)+','+new Date(latest.publish_date).toDateString().slice(10)}} </p>
                                </div>
                            </div>
                         </div>
@@ -49,7 +48,6 @@
 </template>
 
 <script>
-//import Card from '../components/Card.vue';
 import Article from '../components/Article.vue';
 import Layout from './Layout';
 import { Head,Link } from '@inertiajs/inertia-vue';
@@ -59,6 +57,14 @@ import { validationMixin } from 'vuelidate'
 import { required} from 'vuelidate/lib/validators'
 
 export default {
+   name: "ArticleItems",
+   metaInfo: {
+      title: "News",
+      titleTemplate: "%s - Made in Tampa",
+      meta: [
+         { name: 'description', content: 'Made in Tampa News' },
+      ]
+   },
      mixins: [validationMixin],
      validations: {
       term: { required },

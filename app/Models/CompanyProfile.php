@@ -22,9 +22,9 @@ class CompanyProfile extends Model
         return $this->hasMany(JobPost::class);
     }
 
-    public function companytypes()
+    public function company_types()
     {
-        return $this->hasMany(CompanyType::class,'id','industries_ids');
+        return $this->belongsToMany(CompanyType::class)->withTimestamps();
     }
 
     public function articles()

@@ -49,12 +49,12 @@ class CompanyTypeSeeder extends Seeder
                         'Fitness',
                         'Food',
                         'Gaming',
-                        'GreenTech',
                         'Government',
                         'Hardware',
                         'HealthTech',
                         'HR Tech',
                         'Incubator',
+                        'Investment',
                         'Insurance',
                         'Intelligence',
                         'IT Services',
@@ -83,7 +83,8 @@ class CompanyTypeSeeder extends Seeder
                         'Sports',
                         'Transportation',
                         'Travel',
-                        'Tourism'
+                        'Tourism',
+                        'Web3'
         ];
 
         foreach($company_types as $type){

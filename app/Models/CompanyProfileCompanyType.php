@@ -5,17 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Tag extends Model
+class CompanyProfileCompanyType extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name','color'
-    ];
+    protected $table = 'company_profile_company_type';
 
-    public function articles()
-    {
-        return $this->belongsToMany(Article::class)->withTimestamps();
-    }
+    protected $fillable = [
+        'company_profile_id','company_type_id',
+    ];
 
 }
