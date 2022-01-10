@@ -319,6 +319,10 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
    font-size: .8rem;
    font-weight: 500;
 }
+.custom-pagination div a:focus {
+    background: inherit !important;
+    color: inherit !important;
+}
 .custom-pagination div:first-child a, .custom-pagination div:last-child a {
    width: auto;
    padding: 0px 14px;
@@ -1563,6 +1567,7 @@ blockquote {
 
        display: block;
    }
+   
 }
 
 @media (max-width: 479px) {
