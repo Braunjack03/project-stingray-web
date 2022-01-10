@@ -8,6 +8,7 @@ use App\Models\JobPost;
 use App\Models\JobCat;
 use App\Models\Location;
 use App\Models\CompanyProfile;
+use App\Models\Subscription;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Auth;
@@ -37,16 +38,22 @@ class JobPostController extends Controller
         try {
             $user = Auth::user();
             $companies = CompanyProfile::where('uuid', $request->all()['c_id']);
+            //get plan id
+            $planId = Subscription::where(['user_id'=>$user->id])->first();
+            $getPlanName = [];
+            if(!empty($planId)){
+                $getPlanName = getPlanName($planId['stripe_plan']);
+            }
             $job_posts = JobPost::select('locations.name as location_id', 'job_posts.created_at as created_on', 'job_posts.name', 'job_posts.uuid')->join('locations', 'job_posts.location_id', '=', 'locations.id')->where('job_posts.company_profile_id', $companies->first()['id'])->orderBy('job_posts.id', 'DESC')->get()->toArray();
             $job_posts_count = JobPost::where('company_profile_id', $companies->first()['id'])->count();
 
             $companies = CompanyProfile::where('uuid', $request->all()['c_id']);
-            $job_post_counts = JobPost::where('company_profile_id', $companies->first()['id'])->count();
             //dd($job_posts);
             $response = ['status' => $this->successStatus, 'message' => '', 'responseCode' => $this->successResponse];
             $respones_array = [
                 'success' => $response,
                 'companies_count' => $companies->count(),
+                'plan_name' => $getPlanName,
                 'job_posts_count' => $job_posts_count,
                 'company_details' => $companies->first(),
                 'job_posts' => json_decode(json_encode($job_posts), true),

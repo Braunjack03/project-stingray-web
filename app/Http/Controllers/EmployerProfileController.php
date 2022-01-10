@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\EmployerProfile;
 use App\Models\CompanyProfile;
 use App\Models\ActivityLog;
+use App\Models\JobPost;
+use App\Models\Subscription;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Auth;
@@ -34,8 +36,16 @@ class EmployerProfileController extends Controller
 
         try{
             $user = Auth::user();
+
             $user_profile = EmployerProfile::where('user_id',$user->id)->first();
+            //get plan id
+            $planId = Subscription::where(['user_id'=>$user->id])->first();
+            $getPlanName = [];
+            if(!empty($planId)){
+                $getPlanName = getPlanName($planId['stripe_plan']);
+            }
             $company_profiles = CompanyProfile::where('user_id',$user->id)->get()->toArray();
+            $job_post_counts = JobPost::where('company_profile_id', $company_profiles[0]['id'])->count();
             if($user_profile)
             {
                 $data = [
@@ -60,6 +70,8 @@ class EmployerProfileController extends Controller
             $respones_array = [
                 'success' => $response,
                 'user' => $data,
+                'plan_name' => $getPlanName,
+                'job_posts_count' => $job_post_counts,
                 'companies' => json_decode(json_encode($company_profiles), true),
             ];
             

@@ -49,6 +49,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'trial_ends_at' => 'datetime',
     ];
 
-    protected $appends = [ 'is_email_verified' ];
+    //protected $appends = [ 'is_email_verified' ];
 
 }

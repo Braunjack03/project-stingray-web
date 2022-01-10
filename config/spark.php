@@ -93,7 +93,7 @@ return [
             'plans' => [
                 [
                     'name' => 'Start-up Plan',
-                    'short_description' => 'This is is the start-up plan.',
+                    'short_description' => 'This is the start-up plan.',
                     'monthly_id' => 'price_1KDUCtGQLMXk2pHtW55rjL9x',
                     'yearly_id' => 'price_1KDUCtGQLMXk2pHtKXixwQgW',
                     'features' => [
@@ -105,7 +105,7 @@ return [
 
                 [
                     'name' => 'Growth Plan',
-                    'short_description' => 'This is is the growth plan.',
+                    'short_description' => 'This is the growth plan.',
                     'monthly_id' => 'price_1KDUEKGQLMXk2pHtffaul2fw',
                     'yearly_id' => 'price_1KDUEKGQLMXk2pHtRZVUSowg',
                     'features' => [

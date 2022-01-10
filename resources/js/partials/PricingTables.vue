@@ -68,7 +68,12 @@
                 </li>
               </ul>
               <div class="border border-gray-700 p-3 mt-6">
-                <a class="btn-sm text-white bg-purple-600 hover:bg-purple-700 w-full" href="#0">Start free trial</a>
+                <span v-if="!isLoggedIn">
+                  <a class="btn-sm text-white bg-purple-600 hover:bg-purple-700 w-full" href="/login">Start free trial</a>
+                </span>
+                <span v-if="isLoggedIn">
+                  <a class="btn-sm text-white bg-purple-600 hover:bg-purple-700 w-full" href="/billing">Start free trial</a>
+                </span>
               </div>
             </div>
 
@@ -120,7 +125,12 @@
                 </li>
               </ul>
               <div class="border border-gray-700 p-3 mt-6">
-                <a class="btn-sm text-white bg-purple-600 hover:bg-purple-700 w-full" href="#0">Start free trial</a>
+                <span v-if="!isLoggedIn">
+                  <a class="btn-sm text-white bg-purple-600 hover:bg-purple-700 w-full" href="/login">Start free trial</a>
+                </span>
+                <span v-if="isLoggedIn">
+                  <a class="btn-sm text-white bg-purple-600 hover:bg-purple-700 w-full" href="/billing">Start free trial</a>
+                </span>
               </div>
             </div>
 
@@ -175,7 +185,12 @@
                 </li>
               </ul>
               <div class="border border-gray-700 p-3 mt-6">
-                <a class="btn-sm text-white bg-purple-600 hover:bg-purple-700 w-full" href="#0">Start free trial</a>
+                <span v-if="!isLoggedIn">
+                  <a class="btn-sm text-white bg-purple-600 hover:bg-purple-700 w-full" href="/login">Start free trial</a>
+                </span>
+                <span v-if="isLoggedIn">
+                  <a class="btn-sm text-white bg-purple-600 hover:bg-purple-700 w-full" href="/billing">Start free trial</a>
+                </span>
               </div>
             </div>
 
@@ -199,21 +214,26 @@
 <script>
 export default {
   name: 'PricingTables',
+  computed: {
+      isLoggedIn() {
+        return this.$page.props.auth.user;
+      },
+    },
   data: function () {
     return {
       value: true,
       priceOutput: {
         plan1: {
-          false: ['$', '55', '/mo'],
-          true: ['$', '49', '/mo']
+          false: ['$', '0', '/mo'],
+          true: ['$', '0', '/mo']
         },
         plan2: {
-          false: ['$', '85', '/mo'],
-          true: ['$', '79', '/mo']
+          false: ['$', '195', '/mo'],
+          true: ['$', '1990', '/mo']
         },
         plan3: {
-          false: ['$', '135', '/mo'],
-          true: ['$', '129', '/mo']
+          false: ['$', '495', '/mo'],
+          true: ['$', '4750', '/mo']
         }        
       }
     }

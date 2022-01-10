@@ -14,6 +14,7 @@ use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Redirect;
 use App\Models\ActivityLog;
+use App\Models\Subscription;
 use Session;
 use Mail; 
 
@@ -147,7 +148,15 @@ class CompanyProfileController extends Controller
         try{
             $user = CompanyProfile::where('uuid',$request->all()['id'])->first();
             if($user)
-            {
+            {   
+                //get plan id
+                $planId = Subscription::where(['user_id'=>$user->user_id])->first();
+                $getPlanName = [];
+                if(!empty($planId)){
+                    $getPlanName = getPlanName($planId['stripe_plan']);
+                }
+                $job_posts_count = JobPost::where('company_profile_id', $user['id'])->count();
+               
                 if(!empty($user->industry_ids))
                 {
                     $user->industry_ids = explode(",",$user->industry_ids);
@@ -159,9 +168,11 @@ class CompanyProfileController extends Controller
                 $user->logo_image_src = ($user->logo_image_url) ? getBucketImageUrl($request->all()['id'],$user->logo_image_url,'company') : '';
                 $user->featured_image_src = ($user->featured_image_url) ? getBucketImageUrl($request->all()['id'],$user->featured_image_url,'company') : '';
 
+            }else{
+                redirect('/employer/create-company');
             }
             $industries = CompanyType::pluck('name','id');
-            $data = ['user'=>$user,'industries'=>$industries];
+            $data = ['user'=>$user,'industries'=>$industries,'plan_name'=>$getPlanName,'job_posts_count' => $job_posts_count];
             return $this->sendResponseWithData('employer/edit-company','',$data);
         }catch (\Exception $e) {
             $message = $e->getMessage();

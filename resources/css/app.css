@@ -715,7 +715,7 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
 }
 
 .testJobs .card-text-wrap {
-   width: calc(100% - 190px);
+   width: calc(100% - 170px);
 }
 
 .testJobs .button-outter .editJobsBtn {
@@ -1235,6 +1235,24 @@ blockquote {
     padding: 1.25rem 2.5rem;
 }
 
+
+
+/* Setting Links */
+.settingLinks li {
+    margin: 0 0 10px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+.settingLinks li a {
+    display: block;
+    margin: 0;
+}
+
+.settingLinks  li a.upgrade-link {
+    display: inline;
+    margin: 0;
+}
+
 /* Media */
 @media (min-width: 1224px) {
    header.homePage ul li a:hover {
@@ -1447,6 +1465,12 @@ blockquote {
    }
    .singlePage--articles .postBlock--content .postBlock--title {
        font-size: 2.5rem;
+   }
+}
+
+@media (max-width:599px){
+   .settingLinks li a {
+      margin: 16px 0 0;
    }
 }
   
