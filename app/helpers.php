@@ -11,7 +11,7 @@
         }
     }
 
-   	function getPlanName($subscriptionId){
+   	function getPlanName($subscriptionId,$ends_at){
    		$paymentArr = [];
    		$info =  config('spark.billables');
    		if($info){
@@ -23,6 +23,10 @@
    					$slot = str_replace(" Job Slots","",$features);
    				}
    			}
+   		}
+   		if($ends_at != NULL){
+   			$plan_name = "Free Plan";
+   			$slot = "2";
    		}
    		$paymentArr = ["name"=>$plan_name,"slot"=>$slot];
 		return $paymentArr;
