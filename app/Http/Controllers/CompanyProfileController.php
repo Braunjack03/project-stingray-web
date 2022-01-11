@@ -151,11 +151,19 @@ class CompanyProfileController extends Controller
             {   
                 //get plan id
                 $planId = Subscription::where(['user_id'=>$user->user_id])->first();
-                $getPlanName = [];
-                if(!empty($planId)){
-                    $getPlanName = getPlanName($planId['stripe_plan']);
-                }
                 $job_posts_count = JobPost::where('company_profile_id', $user['id'])->count();
+                if(!empty($planId)){
+                    $getPlanName = getPlanName($planId['stripe_plan'],$planId['ends_at']);
+                    $total = $job_posts_count - $getPlanName['slot'];
+                    if($total > 0){
+                        for($i = 0;$i<$total;$i++){
+                            JobPost::where(["company_profile_id"=>$user['id']])->orderBy("id","ASC")->limit(1)->delete();
+                        }
+                        $job_posts_count = $job_posts_count - $total;
+                    }
+                }else{
+                  $getPlanName = ["name"=>"Free Plan","slot"=>"2"];  
+                }
                
                 if(!empty($user->industry_ids))
                 {

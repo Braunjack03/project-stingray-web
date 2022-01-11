@@ -108,8 +108,8 @@
 
                     <div class="flex flex-wrap mb-3">
                         <div class="w-full px-3">
-                          <label class="block text-gray-700 text-lg font-medium mb-1">Company Industry (select up to 3)</label>
-                            <ul class="industries-list">
+                          <label class="block text-gray-700 text-lg font-medium mb-4">Company Industry (select up to 3)</label>
+                            <ul class="industries-list comanyIndustry__list">
                               <li v-for="(item, index) in industries" :key="index">
                                 <label>
                                   <input

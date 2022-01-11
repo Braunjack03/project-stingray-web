@@ -25,7 +25,11 @@ class EmployerController extends Controller
         {
             return $this->sendErrorResponse('login',__('messages.unauthorized'));
         }
-
+        if(isset($_SERVER['HTTP_REFERER'])){
+            if(strpos($_SERVER['HTTP_REFERER'], "billing") !== false){
+               return redirect()->route('employer.profile');
+            }
+        }
         try{
             $user = Auth::user();
             return Inertia::render('employer/dashboard', [

@@ -8,7 +8,7 @@
                     <v-row>
                        <v-col cols="12" md="3" sm="4">
                         <div class="pb-8">
-                            <h1 class="h1 mb-4 text-gray-700" data-aos="fade-up">Made in <br> Tampa <br> Settings </h1>
+                            <h2 class="h2 mb-4 text-gray-700" data-aos="fade-up">Made in <br> Tampa <br> Settings </h2>
                         </div>
                         <ul class="settingLinks">
                             <li v-if="plan_name.name" class="no-underline text-lg text-gray-700">
@@ -30,7 +30,7 @@
                        </v-col>
 
                        <v-col cols="12" md="9" sm="8" class="pl-3 md:pl-8">
-                            <div class="pb-5 sm:pb-16 pt-0 sm:pt-16">
+                            <div class="pb-5 sm:pb-10 pt-0 sm:pt-11">
                                 <h1 class="h1 mb-4 text-gray-700" data-aos="fade-up">{{ company_details.name }} Job Posts</h1>
                             </div>
                             <div class="testJobs">

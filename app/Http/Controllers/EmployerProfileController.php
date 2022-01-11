@@ -40,12 +40,24 @@ class EmployerProfileController extends Controller
             $user_profile = EmployerProfile::where('user_id',$user->id)->first();
             //get plan id
             $planId = Subscription::where(['user_id'=>$user->id])->first();
-            $getPlanName = [];
-            if(!empty($planId)){
-                $getPlanName = getPlanName($planId['stripe_plan']);
-            }
             $company_profiles = CompanyProfile::where('user_id',$user->id)->get()->toArray();
-            $job_post_counts = JobPost::where('company_profile_id', $company_profiles[0]['id'])->count();
+            $job_post_counts = 0;
+            if($company_profiles){
+                $job_post_counts = JobPost::where('company_profile_id', $company_profiles[0]['id'])->count();
+            }
+           
+            if(!empty($planId)){
+                $getPlanName = getPlanName($planId['stripe_plan'],$planId['ends_at']);
+                $total = $job_post_counts - $getPlanName['slot'];
+                if($total > 0){
+                    for($i = 0;$i<$total;$i++){
+                        JobPost::where(["company_profile_id"=>$company_profiles[0]['id']])->orderBy("id","ASC")->limit(1)->delete();
+                    }
+                    $job_post_counts = $job_post_counts - $total;
+                }
+            }else{
+              $getPlanName = ["name"=>"Free Plan","slot"=>"2"];  
+            }
             if($user_profile)
             {
                 $data = [

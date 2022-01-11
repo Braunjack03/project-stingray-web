@@ -198,6 +198,15 @@ ul.industries-list li {
     margin-bottom: 10px;
 }
 
+.industries-list.comanyIndustry__list {
+   height: 210px;
+   overflow-y: auto;
+}
+
+.industries-list.comanyIndustry__list li {
+   max-width: 50%;
+}
+
 .radioColor .v-input__control label, .industries-list label {
    color: rgba(51, 54, 58, 1);
    font-size: 1.125rem;
@@ -1527,6 +1536,9 @@ blockquote {
    .conpanymainDetail {
        padding-left: 0;
        flex-basis: 100%;
+   }
+   .industries-list.comanyIndustry__list li {
+      max-width: 100%;
    }
 }
 

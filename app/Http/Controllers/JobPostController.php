@@ -40,13 +40,21 @@ class JobPostController extends Controller
             $companies = CompanyProfile::where('uuid', $request->all()['c_id']);
             //get plan id
             $planId = Subscription::where(['user_id'=>$user->id])->first();
-            $getPlanName = [];
-            if(!empty($planId)){
-                $getPlanName = getPlanName($planId['stripe_plan']);
-            }
             $job_posts = JobPost::select('locations.name as location_id', 'job_posts.created_at as created_on', 'job_posts.name', 'job_posts.uuid')->join('locations', 'job_posts.location_id', '=', 'locations.id')->where('job_posts.company_profile_id', $companies->first()['id'])->orderBy('job_posts.id', 'DESC')->get()->toArray();
             $job_posts_count = JobPost::where('company_profile_id', $companies->first()['id'])->count();
-
+            if(!empty($planId)){
+                $getPlanName = getPlanName($planId['stripe_plan'],$planId['ends_at']);
+                $total = $job_posts_count - $getPlanName['slot'];
+                if($total > 0){
+                    for($i = 0;$i<$total;$i++){
+                        JobPost::where(["company_profile_id"=>$companies[0]['id']])->orderBy("id","ASC")->limit(1)->delete();
+                    }
+                    $job_posts_count = $job_posts_count - $total;
+                } 
+            }else{
+              $getPlanName = ["name"=>"Free Plan","slot"=>"2"];  
+            }
+           
             $companies = CompanyProfile::where('uuid', $request->all()['c_id']);
             //dd($job_posts);
             $response = ['status' => $this->successStatus, 'message' => '', 'responseCode' => $this->successResponse];

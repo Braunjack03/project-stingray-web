@@ -8,7 +8,7 @@
              <v-row>
                <v-col cols="12" md="3" sm="4">
                 <div class="pb-8">
-                    <h1 class="h1 mb-4 text-gray-700" data-aos="fade-up">Made in <br> Tampa <br> Settings </h1>
+                    <h2 class="h2 mb-4 text-gray-700" data-aos="fade-up">Made in <br> Tampa <br> Settings </h2>
                 </div>
                 <ul class="settingLinks">
                    <li v-if="plan_name.name" class="no-underline text-lg text-gray-700">
@@ -18,7 +18,7 @@
                       <a href="/employer/profile" class="no-underline text-lg text-purple-700">Your Profile</a>
                     </li>
                     <li v-if="(user.company_profile_count == 1)">
-                      <a :href="'/employer/edit-company?id='+companies[0].uuid" class="no-underline text-lg text-gray-700">Company Profile</a>
+                      <a :href="'/employer/edit-company?id='+companies[0].uuid" class="no-underline text-lg text-gray-700 hover:text-purple-600">Company Profile</a>
                     </li>
                     <li v-if="(user.company_profile_count < 1)">
                       <a href="/employer/create-company" class="no-underline text-lg text-gray-700 hover:text-purple-600">Company Profile</a>
@@ -33,7 +33,7 @@
                </v-col>
 
                <v-col cols="12" md="9" sm="8" class="pl-3 md:pl-8">
-                  <div class="pb-0 sm:pb-16 pt-0 sm:pt-16">
+                  <div class="pb-0 sm:pb-10 pt-0 sm:pt-11">
                       <h1 class="h1 mb-4 text-gray-700" data-aos="fade-up">Profile Settings </h1>
                   </div>
                  
@@ -97,7 +97,7 @@
                             </div>
                           </div>
 
-                          <h3 class="text-2xl mt-2 mb-1 text-gray-700 px-3">Social Links</h3>  
+                          <h3 class="text-2xl mt-2 mb-1 text-gray-700">Social Links</h3>  
 
                           <div class="flex flex-wrap mb-3">
                             <div class="w-full">

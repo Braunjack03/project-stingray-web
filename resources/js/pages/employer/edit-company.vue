@@ -8,14 +8,14 @@
                     <v-row>
                        <v-col cols="12" md="3" sm="4">
                         <div class="pb-8">
-                            <h1 class="h1 mb-4 text-gray-700" data-aos="fade-up">Made in <br> Tampa <br> Settings </h1>
+                            <h2 class="h2 mb-4 text-gray-700" data-aos="fade-up">Made in <br> Tampa <br> Settings </h2>
                         </div>
                         <ul class="settingLinks">
                            <li v-if="plan_name.name" class="no-underline text-lg text-gray-700">
                                 Subscribed to the {{plan_name.name}} Using {{job_posts_count}}/{{plan_name.slot}} job slots (<a class="upgrade-link text-purple-600" href="/billing">upgrade</a>)
                               </li>
                             <li>
-                              <a href="/employer/profile" class="no-underline text-lg text-gray-700">Your Profile</a>
+                              <a href="/employer/profile" class="no-underline text-lg text-gray-700 hover:text-purple-600">Your Profile</a>
                             </li>
                             <li>
                               <a :href="'/employer/edit-company?id='+user.uuid" class="no-underline text-lg text-purple-700">Company Profile</a>
@@ -29,7 +29,7 @@
                        </v-col>
 
                        <v-col cols="12" md="9" sm="8" class="pl-3 md:pl-8">
-                            <div class="pb-0 sm:pb-16 pt-0 sm:pt-16">
+                            <div class="pb-0 sm:pb-10 pt-0 sm:pt-11">
                                 <h1 class="h1 mb-4 text-gray-700" data-aos="fade-up">Company Profile</h1>
                             </div>
 
@@ -130,8 +130,8 @@
             
                                     <div class="flex flex-wrap mb-3">
                                         <div class="w-full">
-                                            <label class="block text-gray-700 text-lg font-medium mb-1">Company Industry (select up to 3)  </label>
-                                            <ul class="industries-list">
+                                            <label class="block text-gray-700 text-lg font-medium mb-4">Company Industry (select up to 3)  </label>
+                                            <ul class="industries-list comanyIndustry__list">
                                                 <li v-for="(item, index) in industries" :key="index">
                                                     <label>
                                       <input
@@ -147,7 +147,7 @@
                                         </div>
                                     </div>
             
-                                    <h3 class="text-2xl mt-2 mb-1 ml-3 text-gray-700">Local Address</h3>
+                                    <h3 class="text-2xl mt-2 mb-1 text-gray-700">Local Address</h3>
             
                                     <div class="flex flex-wrap mb-3">
                                         <div class="w-full">
@@ -193,7 +193,7 @@
                                         </div>
                                     </div>
             
-                                    <h3 class="text-2xl mt-2 mb-1 ml-3 text-gray-700">Social</h3>
+                                    <h3 class="text-2xl mt-2 mb-1 text-gray-700">Social</h3>
             
                                     <div class="flex flex-wrap mb-3">
                                         <div class="w-full">
