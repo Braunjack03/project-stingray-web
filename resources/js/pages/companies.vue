@@ -36,10 +36,34 @@ export default {
    name: "Companies",
    metaInfo: {
       title: "Companies Hiring the Tampa Bay",
-      meta: [
-         { name: 'description', content: 'Companies Hiring the Tampa Bay' },
-      ]
    },
+  // child
+  metaInfo() {
+    return {
+      meta: [
+        {  
+          name: 'description',
+          content: 'Companies Hiring the Tampa Bay',
+        },
+        {  
+          property: 'og:title',
+          content: 'Companies Hiring the Tampa Bay',
+        },
+        {  
+          property: 'og:url',
+          content: this.base_url+'/companies/',
+        },
+        {  
+          property: 'og:description',
+          content: 'Companies Hiring the Tampa Bay',
+        },
+        {  
+          property: 'og:site_name',
+          content: 'Made in Tampa',
+        },
+      ]
+    }
+  },
      mixins: [validationMixin],
      validations: {
       term: { required },
@@ -61,6 +85,7 @@ export default {
     data () {
       return {
         location_id: '',
+        base_url: window.location.origin,
       }
     },
 }
