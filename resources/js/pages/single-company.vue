@@ -1,12 +1,5 @@
 <template>
   <Layout>
-    <Head>
-      <title>Companies | {{ data.name }}</title>
-      <meta
-        name="description"
-        :content="data.description"
-      >
-    </Head>
     <section
       class="relative companyProfile--outer"
       data-app
@@ -293,6 +286,50 @@ import Pagination from '../components/CompanyPagination.vue';
 import Layout from './Layout.vue';
 
 export default {
+  name: "Company",
+   metaInfo: {
+    title: "Companies",
+    titleTemplate: "Made in Tampa Companies - %s",
+  },
+  // child
+  metaInfo() {
+    return {
+      meta: [
+        {  
+          name: 'description',
+          content: this.data.description.replace(/<[^>]*>?/gm, ''),
+        },
+        {  
+          property: 'og:title',
+          content: this.data.name,
+        },
+        {  
+          property: 'og:type',
+          content: 'company',
+        },
+        {  
+          property: 'og:image',
+          content: this.data.logo_image_url,
+        },
+        {  
+          property: 'og:url',
+          content: this.base_url+'/companies/'+this.data.slug,
+        },
+        {  
+          property: 'twitter:card',
+          content: this.data.logo_image_url,
+        },
+        {  
+          name: 'og:description',
+          content: this.data.description.replace(/<[^>]*>?/gm, ''),
+        },
+        {  
+          name: 'og:site_name',
+          content: 'Made in Tampa',
+        },
+      ]
+    }
+  },
   components: {
     Link,
     Layout,
@@ -315,6 +352,7 @@ export default {
     tab: null,
     page: 1,
     hide: 0,
+    base_url: window.location.origin,
   }),
   mounted() {
     this.tab = this.selected;

@@ -67,6 +67,33 @@ export default {
             { name: 'description', content: 'Made in Tampa' },
         ]
     },
+  // child
+  metaInfo() {
+    return {
+      meta: [
+        {  
+          name: 'description',
+          content: 'Made in Tampa',
+        },
+        {  
+          property: 'og:title',
+          content: 'Made in Tampa',
+        },
+        {  
+          property: 'og:url',
+          content: this.base_url,
+        },
+        {  
+          property: 'og:description',
+          content: 'Made in Tampa',
+        },
+        {  
+          property: 'og:site_name',
+          content: 'Made in Tampa',
+        },
+      ]
+    }
+  },
     mixins: [validationMixin],
     validations: {
         term: { required },
@@ -88,6 +115,7 @@ export default {
         return {
             location_id: "",
             term: "",
+            base_url: window.location.origin,
         };
     },
     methods: {
