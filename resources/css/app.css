@@ -1284,7 +1284,7 @@ blockquote {
     background-color: #fff !important;
 }
 
-.jobComponent .text-subtitle-1:hover {
+.jobComponent .text-subtitle-1 .jobLocationLink:hover {
     color: var(--blueColor);
 }
 
