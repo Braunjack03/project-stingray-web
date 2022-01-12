@@ -338,30 +338,12 @@ class CompanyProfileController extends Controller
     {
 
         try {
-            $company = CompanyProfile::leftjoin('locations', 'company_profiles.location_id', 'locations.id')
-                ->leftjoin('users','company_profiles.user_id','=','users.id')
-                ->select(
+            $company = CompanyProfile::select(
                     'company_profiles.id',
-                    //'company_profiles.user_id',
                     'company_profiles.name',
-                    'company_profiles.mission',
-                    'company_profiles.name',
-                    'locations.name as location',
-                    'company_profiles.local_employees',
-                    'company_profiles.global_employees',
-                    'company_profiles.year_founded',
-                    'company_profiles.website_url',
-                    'company_profiles.created_at',
-                    'company_profiles.industry_ids',
                     'company_profiles.logo_image_url',
-                    'company_profiles.street_addr_1',
-                    'company_profiles.state_abbr as state',
-                    'company_profiles.city',
                     'company_profiles.uuid',
-                    'company_profiles.unclaimed',
                     'company_profiles.slug',
-                    'company_profiles.description',
-                    //'users.role',
                 )
                 ->withCount('job_posts')
                 ->with(['company_types:name'])
