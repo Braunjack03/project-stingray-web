@@ -3,7 +3,7 @@
     <Head title="Employer Profile" />
     <section class="relative">
           <div class="max-w-6xl mx-auto px-4 sm:px-6">
-            <div class="pt-32 pb-12 md:pt-40 md:pb-20">
+            <div class="pt-36 pb-12 md:pt-40 md:pb-20">
 
              <v-row>
                <v-col cols="12" md="3" sm="4">
@@ -36,9 +36,7 @@
                   <div class="pb-0 sm:pb-10 pt-0 sm:pt-11">
                       <h1 class="h1 mb-4 text-gray-700" data-aos="fade-up">Profile Settings </h1>
                   </div>
-                 
                     <div class="max-w-2xl">
-
                          <Message :message="errors.message" :hide="0" :type="'error'" />
                          <Message :message="success.message" :hide="0" :type="'success'" />
 
@@ -62,9 +60,6 @@
                                 <v-file-input class="fileUpload form-input input-field-outer w-full text-gray-700" accept="image/*" v-model="profile_image"  ref="fileInput" @change="onFileChange" outlined dense></v-file-input>
                             </div>
                           </div>
-
-                          
-                          <div v-if="errors.email" class="mt-2 error">{{ errors.email }}</div>
 
                           <div class="flex flex-wrap mb-3">
                               <div class="w-full">
@@ -160,13 +155,13 @@
       errors : Object,  
       user: Object,
       success: Object,
-      plan_name: Array,
       companies : Array,
       job_posts_count: Number,
+      plan_name: Array && Object,
     },
     data (){
      return {
-        name: this.user.name,
+        name: ((this.user) ? this.user.name : ''),
         profile_image: this.user.profile_image,
         current_job_title: this.user.current_job_title,
         short_bio: this.user.short_bio,
@@ -186,7 +181,6 @@
                   linkedin: this.linkedin,
                   profile_image_removed: this.profile_image_removed,
                 };
-                console.log('form',form);
               this.$inertia.post("/employer/profile", form);
           }
        },

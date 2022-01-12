@@ -127,7 +127,7 @@ export default {
         job_posts: Array,
         companies_count: Number,
         company_details: Object,
-        plan_name: Array,
+        plan_name: Array && Object,
         job_posts_count: Number,
     },
     data: () => ({

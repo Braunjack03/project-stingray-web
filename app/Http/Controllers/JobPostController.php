@@ -19,7 +19,7 @@ class JobPostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['showJobPost']]);
+        $this->middleware('auth', ['except' => ['showJobPost','jobs']]);
     }
 
     /**
@@ -89,7 +89,7 @@ class JobPostController extends Controller
         try {
             $user = Auth::user();
             $job_categories = JobCat::get();
-            $locations = Location::orderBy('id', 'desc')->get();
+            $locations = Location::select('id','name')->orderBy('id', 'desc')->get();
 
             $uuid = $request->all()['c_id'];
 
@@ -118,7 +118,7 @@ class JobPostController extends Controller
 
         $data = $request->all();
         $data['remotetype_id'] = 1;
-        if ($data['location_id'] != 8) {
+        if (isset($data['location_id']) && $data['location_id'] != 8) {
             $data['remotetype_id'] = 3;
         }
 
@@ -146,7 +146,7 @@ class JobPostController extends Controller
 
         if ($validator->fails()) {
             $job_categories = JobCat::get();
-            $locations = Location::get();
+            $locations = Location::select('id','name')->get();
             $data = ['user' => $data, 'job_categories' => $job_categories, 'locations' => $locations];
             return $this->sendJobValidationErrorsWithData($redirect_page, $validator->errors(), $data);
         } else {
@@ -181,7 +181,7 @@ class JobPostController extends Controller
             $job_data = JobPost::where('uuid', $request->all()['id'])->first();
             $job_data->remotetype_id = ($job_data->remotetype_id == 1) ? true : false;
             $job_categories = JobCat::get();
-            $locations = Location::get();
+            $locations = Location::select('id','name')->get();
             return Inertia::render('employer/edit-job', ['user' => $job_data, 'job_categories' => $job_categories, 'locations' => $locations]);
         } catch (\Exception $e) {
             $message = $e->getMessage();
@@ -226,7 +226,7 @@ class JobPostController extends Controller
 
         if ($validator->fails()) {
             $job_categories = JobCat::get();
-            $locations = Location::get();
+            $locations = Location::select('id','name')->get();
             $data = ['user' => $request->all(), 'job_categories' => $job_categories, 'locations' => $locations];
             return $this->sendJobValidationErrorsWithData($redirect_page, $validator->errors(), $data);
         } else {
@@ -306,7 +306,7 @@ class JobPostController extends Controller
             return $slug;
         }
         // Just append numbers like a savage until we find not used.
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 50; $i++) {
             $newSlug = $slug . '-' . $i;
             if (!$allSlugs->contains('slug', $newSlug)) {
                 return $newSlug;
@@ -329,10 +329,11 @@ class JobPostController extends Controller
                 ->leftjoin('locations', 'job_posts.location_id', 'locations.id')
                 ->select(
                     'job_posts.name as name',
-                    'job_posts.content as content',
                     'company_profiles.name as company_name',
                     'job_posts.apply_url as apply_url',
                     'company_profiles.slug as company_slug',
+                    'company_profiles.city',
+                    'company_profiles.state_abbr as state',    
                     'locations.name as location',
                     'job_posts.slug as job_slug',
                     'job_posts.created_at'
@@ -352,14 +353,14 @@ class JobPostController extends Controller
 
             $job_posts_count = $job_posts_query->count();
 
-            $job_posts = $job_posts_query->paginate($this->paginationLimit)->onEachSide(1);
+            $job_posts = $job_posts_query->paginate($this->paginationLimit)->onEachSide(0);
 
-            //dd($job_posts);
             $term_u = $request->q;
             if ($term_u == 'null' || $term_u == 'NaN') {
                 $term_u = '';
             }
-            $locations = Location::get();
+            $locations = Location::select('id','name')->get();
+            
             return Inertia::render('job_posts', ['job_posts' => $job_posts, 'job_posts_count' => $job_posts_count, 'loc_id' => $request->loc, 'location_id' => $request->loc, 'term' => $term_u, 'locations' => $locations]);
         } catch (\Exception $e) {
             $message = $e->getMessage();

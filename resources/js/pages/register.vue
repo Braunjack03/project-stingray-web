@@ -1,9 +1,8 @@
 <template>
     <Layout>
-        <Head title="Sign Up" />
         <section class="relative">
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
-          <div class="pt-32 pb-12 md:pt-40 md:pb-20">
+          <div class="pt-36 pb-12 md:pt-40 md:pb-20">
 
             <!-- Page header -->
             <div class="max-w-3xl mx-auto text-center pb-9">
@@ -24,7 +23,7 @@
               <v-form class="register-form form-outer-wrapper" @submit.prevent="submit" >
                 <div class="flex flex-wrap -mx-3 mb-3">
                   <div class="w-full px-3">
-                    <label class="block text-gray-700 text-lg font-medium mb-1" for="email">Work Email <span class="text-red-600">*</span></label>
+                    <label class="block text-gray-700 text-lg font-medium mb-1" for="email">Email <span class="text-red-600">*</span></label>
                     <v-text-field v-model="email" :class="{ 'error--text': $v.email.$error }"  @input="$v.email.$touch()" @blur="$v.email.$touch()" class="form-input input-field-outer w-full text-gray-700" placeholder="you@yourcompany.com" autocomplete required ></v-text-field>
 
                     <div v-if="$v.email.$error && !$v.email.required"  class="text-red-500 text-lg">Email is required</div>
@@ -58,9 +57,6 @@
 
                   </div>
                 </div>
-                 <!--div class="text-sm text-gray-700 text-center">
-                  I agree to be contacted by Open PRO about this offer as per the Open PRO <a class="underline text-gray-700 hover:text-gray-600 hover:no-underline transition duration-150 ease-in-out" href="#0">Privacy Policy</a>.
-                </div-->
                 <div class="flex flex-wrap -mx-3 mt-5">
                   <div class="w-full px-3">
                      <v-btn class="text-lg btn text-white bg-purple-600 hover:bg-purple-700 w-full" @click="submit">
@@ -87,7 +83,10 @@ import { required, email, minLength } from 'vuelidate/lib/validators'
 import Message from '../partials/Messages.vue';
 
 export default {
-    name: 'SignUp',
+    metaInfo: {
+        title: 'SignUp',
+        titleTemplate: '%s | Made in Tampa'
+    },
     mixins: [validationMixin],
      validations: {
       email: { required, email },

@@ -87,6 +87,7 @@ class CompanyProfileFactory extends Factory
 
     private function getRandomLogo()
     {
+        /*
         $logos = [
             "after-effects-cc.svg",
             "amalie-motor-oil.svg",
@@ -104,7 +105,29 @@ class CompanyProfileFactory extends Factory
             "zema_logo_vector_final.svg",
         ];
 
+        */
+
+        $logos = [
+            'test logo (10).png',  
+            'test logo (13).png',  
+            'test logo (16).png', 
+            'test logo (3).png',  
+            'test logo (6).png',  
+            'test logo (9).png',
+            'test logo (11).png',
+            'test logo (14).png',  
+            'test logo (1).png',   
+            'test logo (4).png',  
+            'test logo (7).png',
+            'test logo.png',
+            'test logo (12).png',  
+            'test logo (15).png',  
+            'test logo (2).png',
+            'test logo (5).png', 
+            'test logo (8).png',
+        ];
+
         $rand_logo = $logos[rand(0, count($logos) - 1)];
-        return 'https://ik.imagekit.io/stingray/test_logos/tr:w-300,h-300,fo-auto/' . $rand_logo;
+        return 'https://ik.imagekit.io/stingray/test_logos2/tr:w-300,h-300,fo-auto/' . $rand_logo;
     }
 }
