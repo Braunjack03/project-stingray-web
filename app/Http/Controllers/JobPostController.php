@@ -198,7 +198,9 @@ class JobPostController extends Controller
             $locations = Location::select('id','name')->get();
              //get plan id
             $planId = Subscription::where(['user_id'=>$job_data['user_id']])->first();
-            $job_posts_count = JobPost::where('company_profile_id', $job_data['user_id'])->count();
+            $CompanyProfile = CompanyProfile::where(['id'=>$job_data['company_profile_id']])->first();
+            $job_data['company_profile_uuid'] = $CompanyProfile['uuid'];
+            $job_posts_count = JobPost::where('company_profile_id', $job_data['company_profile_id'])->count();
             if(!empty($planId)){
                 $getPlanName = getPlanName($planId['stripe_plan'],$planId['ends_at']);
                 $total = $job_posts_count - $getPlanName['slot'];
