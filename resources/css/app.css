@@ -58,6 +58,27 @@ html{
    margin-bottom: 20px!important;
 }
 
+ul.industries-list {
+    display: flex;
+    flex-flow: wrap;
+}
+
+ul.industries-list li {
+    max-width: 25%;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.industries-list.companyIndustry__list {
+    height: 210px;
+    overflow-y: auto;
+    margin: 0 0 10px;
+}
+
+.companyIndustry__list.industries-list li {
+    max-width: 50%;
+}
+
 .theme--light.v-input, .theme--light.v-input input, .theme--light.v-input textarea {
     /*color: rgba(197, 210, 220,1) !important;*/
     color: rgb(85 89 95) !important;
