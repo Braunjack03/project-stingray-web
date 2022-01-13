@@ -19,11 +19,8 @@
                     <li>
                       <a href="/employer/profile" class="no-underline text-lg text-gray-700 hover:text-purple-600">Your Profile</a>
                     </li>
-                    <li >
-                      <a :href="'/employer/edit-company?id='+user.uuid" class="no-underline text-lg text-purple-700">Company Profile</a>
-                    </li>
-                    <li >
-                      <a :href="'/employer/jobs?c_id='+user.uuid" class="no-underline text-lg text-gray-700 hover:text-purple-600">Job Posts</a>
+                    <li>
+                      <a href="/employer/create-company" class="no-underline text-lg text-purple-700">Company Profile</a>
                     </li>
                     <li>
                       <a href="/billing" class="no-underline text-lg text-gray-700 hover:text-purple-600">Subscription</a>
