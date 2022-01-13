@@ -58,28 +58,6 @@ html{
    margin-bottom: 20px!important;
 }
 
-ul.industries-list {
-    display: flex;
-    flex-flow: wrap;
-}
-
-ul.industries-list li {
-    max-width: 25%;
-    width: 100%;
-    margin-bottom: 10px;
-}
-
-.industries-list.companyIndustry__list {
-    height: 210px;
-    overflow-y: auto;
-    margin: 0 0 10px;
-}
-
-.companyIndustry__list.industries-list li {
-    max-width: 50%;
-}
-
-
 .theme--light.v-input, .theme--light.v-input input, .theme--light.v-input textarea {
     /*color: rgba(197, 210, 220,1) !important;*/
     color: rgb(85 89 95) !important;
@@ -1005,11 +983,10 @@ button{
 }
   
 /* Hiring Page */  
-.job-card-wrap.company-card-wrap {
-    padding: 1rem 1rem!important;
-}
 .company-img-block {
     flex-basis: 150px;
+    border: 1px solid #ddd;
+    border-radius: 50%;
 }
 .company-img-block img {
     border-radius: 50%;
@@ -1017,7 +994,7 @@ button{
     aspect-ratio: 1/1;
 }
 .company-text-block {
-    flex-basis: calc(100% - 300px);
+    flex-basis: calc(100% - 310px);
     padding: 0 1.5rem;
 }
 .company-text-block .text-subtitle-1 span:not(:last-child) {
@@ -1037,17 +1014,16 @@ button{
 }
 .company-jobs-block {
     flex-basis: 150px;
+    text-align: right;
 }
 .company-jobs-block a {
     background: var(--blueColor);
     color: #fff;
-    padding: .5rem .875rem;
-    width: calc(100% + 1rem);
-    font-size: .75rem;
-    margin-bottom: .8rem;
-    margin-left: 1rem;
+    padding: .8rem 1rem;
+    font-size: .875rem;
+    margin-left: 0;
     font-weight: 600;
-    text-transform: uppercase;
+    border-radius: 2px;
 }
 .company-location {
    border-left: 1px solid #ccc;
@@ -1077,6 +1053,23 @@ button{
 .flex.filter-outer .v-select {
    margin-left:1.25rem ;
    width:250px;
+}
+
+.job-card-wrap .company-text-block .v-card__title {
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 2;
+    transition: .3s all;
+}
+
+.job-card-wrap .company-text-block .v-card__title:hover {
+   color: var(--blueColor);
+}
+
+.job-card-wrap .company-text-block .text-subtitle-1 {
+    font-size: 1.125rem;
+    margin: 0;
+    padding: 0;
 }
 
 .bannerForm .filter-outer .v-select {
@@ -1275,26 +1268,6 @@ blockquote {
     padding: 1.25rem 2.5rem;
 }
 
-
-
-
-/* Setting Links */
-.settingLinks li {
-    margin: 0 0 10px;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
-}
-.settingLinks li a {
-    display: block;
-    margin: 0;
-}
-
-.settingLinks  li a.upgrade-link {
-    display: inline;
-    margin: 0;
-}
-
-
 .newJobStyle .job-card-wrap {
     background: transparent;
     border: 2px solid #727272;
@@ -1358,6 +1331,22 @@ blockquote {
     margin: 0 !important;
 }
 
+/* Setting Links */
+.settingLinks li {
+    margin: 0 0 10px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+.settingLinks li a {
+    display: block;
+    margin: 0;
+}
+
+.settingLinks  li a.upgrade-link {
+    display: inline;
+    margin: 0;
+}
+
 /* Media */
 @media (min-width: 1224px) {
    header.homePage ul li a:hover {
@@ -1398,7 +1387,7 @@ blockquote {
        flex-basis: 100px;
    }
    .company-text-block {
-       flex-basis: calc(100% - 250px);
+       flex-basis: calc(100% - 260px);
    }
    .company-img-block .v-responsive {
       max-width: 100px;
@@ -1524,6 +1513,14 @@ blockquote {
        padding-right: 36px;
        padding-left: 10px;
    }
+   .company-text-block {
+       flex-basis: calc(100% - 110px);
+       padding-right: 0;
+   }
+   .company-jobs-block {
+       flex-basis: 100%;
+       margin: 20px 0;
+   }
 }
 
 @media (max-width:640px){
@@ -1542,29 +1539,6 @@ blockquote {
    .job-card-wrap.company-card-wrap {
        align-items: flex-start;
    }
-   .company-text-block {
-       flex-basis: 100%;
-       order: 3;
-       margin-top: .75rem;
-       padding: 0;
-       border-top: 1px solid #ddd;
-       padding-top: .75rem;
-   }
-   .company-img-block {
-       flex-basis: calc(100% - 150px);
-   }
-   .company-img-block img {
-       border-radius: 50%;
-       -o-object-fit: cover;
-       object-fit: cover;
-       aspect-ratio: 1/1;
-       width: 100px;
-       height: 100px;
-   }
-   .company-jobs-block {
-       flex-basis: 150px;
-       order: 2;
-   }
    .company-page-title .h3 {
        font-size: 1.5rem;
    }
@@ -1572,13 +1546,12 @@ blockquote {
        font-size: 2.5rem;
    }
 }
-
+  
 @media (max-width:599px){
    .settingLinks li a {
       margin: 16px 0 0;
    }
 }
-  
 @media (max-width:575px){
    .card-text-wrap {
       width: calc(100% - 0px);
@@ -1597,6 +1570,19 @@ blockquote {
    }
    .bannerForm .flex.filter-outer .v-select {
       width:50%;
+   }
+   .jobComponent .viewJobsBtn {
+       margin-left: 0;
+   }
+   .company-text-block {
+       flex-basis: 100%;
+       padding: 20px 0 0;
+   }
+   .job-card-wrap .company-text-block .v-card__title {
+       margin-bottom: 6px;
+   }
+   .company-jobs-block {
+       text-align: left;
    }
 }
 
@@ -1633,9 +1619,6 @@ blockquote {
    .conpanymainDetail {
        padding-left: 0;
        flex-basis: 100%;
-   }
-   .industries-list.comanyIndustry__list li {
-      max-width: 100%;
    }
 }
 
