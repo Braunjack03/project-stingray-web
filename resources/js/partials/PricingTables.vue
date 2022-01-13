@@ -221,7 +221,7 @@ export default {
     },
   data: function () {
     return {
-      value: true,
+      value: false,
       priceOutput: {
         plan1: {
           false: ['$', '0', '/mo'],
