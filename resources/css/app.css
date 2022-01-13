@@ -1585,7 +1585,6 @@ blockquote {
        text-align: left;
    }
 }
-
 @media screen and ( max-width: 520px ){
 
    li.page-item {
