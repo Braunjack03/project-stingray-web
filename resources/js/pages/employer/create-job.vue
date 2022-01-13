@@ -206,6 +206,8 @@ export default {
     job_categories: Array,
     locations: Array,
     company_uuid: String,
+    job_posts_count: Number,
+    plan_name: Array && Object,
   },
   data() {
     return {

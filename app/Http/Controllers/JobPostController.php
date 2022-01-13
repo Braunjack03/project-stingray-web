@@ -182,7 +182,24 @@ class JobPostController extends Controller
             $job_data->remotetype_id = ($job_data->remotetype_id == 1) ? true : false;
             $job_categories = JobCat::get();
             $locations = Location::select('id','name')->get();
-            return Inertia::render('employer/edit-job', ['user' => $job_data, 'job_categories' => $job_categories, 'locations' => $locations]);
+             //get plan id
+            $planId = Subscription::where(['user_id'=>$job_data['user_id']])->first();
+            $job_posts_count = JobPost::where('company_profile_id', $job_data['user_id'])->count();
+            if(!empty($planId)){
+                $getPlanName = getPlanName($planId['stripe_plan'],$planId['ends_at']);
+                $total = $job_posts_count - $getPlanName['slot'];
+                if($total > 0){
+                    for($i = 0;$i<$total;$i++){
+                        JobPost::where(["company_profile_id"=>$user['id']])->orderBy("id","ASC")->limit(1)->delete();
+                    }
+                    $job_posts_count = $job_posts_count - $total;
+                }
+            }else{
+              $getPlanName = ["name"=>"Free Plan","slot"=>"2"];  
+            }
+
+
+            return Inertia::render('employer/edit-job', ['user' => $job_data, 'job_categories' => $job_categories, 'locations' => $locations,'plan_name'=>$getPlanName,'job_posts_count' => $job_posts_count]);
         } catch (\Exception $e) {
             $message = $e->getMessage();
             return $this->sendErrorResponse('login', $message);

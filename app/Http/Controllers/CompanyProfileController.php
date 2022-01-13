@@ -41,7 +41,14 @@ class CompanyProfileController extends Controller
         try{
             $user = Auth::user();
             $industries = CompanyType::pluck('name','id');
-            return Inertia::render('employer/create-company',['industries'=>$industries]);
+            $planId = Subscription::where(['user_id'=>$user->user_id])->first();
+            $job_posts_count = 0;
+            if(!empty($planId)){
+                $getPlanName = getPlanName($planId['stripe_plan'],$planId['ends_at']);
+            }else{
+              $getPlanName = ["name"=>"Free Plan","slot"=>"2"];  
+            }
+            return Inertia::render('employer/create-company',['industries'=>$industries,'plan_name'=>$getPlanName,'job_posts_count' => $job_posts_count]);
         }catch (\Exception $e) {
             $message = $e->getMessage();
             return $this->sendErrorResponse('login',$message);
