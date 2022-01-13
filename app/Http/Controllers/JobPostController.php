@@ -90,10 +90,24 @@ class JobPostController extends Controller
             $user = Auth::user();
             $job_categories = JobCat::get();
             $locations = Location::select('id','name')->orderBy('id', 'desc')->get();
-
             $uuid = $request->all()['c_id'];
+            $CompanyProfile = CompanyProfile::where(['uuid'=>$uuid])->first();
+            $planId = Subscription::where(['user_id'=>$user->id])->first();
+            $job_posts_count = JobPost::where('company_profile_id',$CompanyProfile['id'])->count();
+            if(!empty($planId)){
+                $getPlanName = getPlanName($planId['stripe_plan'],$planId['ends_at']);
 
-            return Inertia::render('employer/create-job', ['job_categories' => $job_categories, 'locations' => $locations, 'company_uuid' => $uuid]);
+                $total = $job_posts_count - $getPlanName['slot'];
+                if($total > 0){
+                    for($i = 0;$i<$total;$i++){
+                        JobPost::where(["company_profile_id"=>$user['id']])->orderBy("id","ASC")->limit(1)->delete();
+                    }
+                    $job_posts_count = $job_posts_count - $total;
+                }
+            }else{
+              $getPlanName = ["name"=>"Free Plan","slot"=>"2"];  
+            }
+            return Inertia::render('employer/create-job', ['job_categories' => $job_categories, 'locations' => $locations, 'company_uuid' => $uuid,'plan_name'=>$getPlanName,'job_posts_count' => $job_posts_count]);
         } catch (\Exception $e) {
             $message = $e->getMessage();
             return $this->sendErrorResponse('login', $message);
