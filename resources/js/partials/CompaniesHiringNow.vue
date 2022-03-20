@@ -59,7 +59,7 @@ start-ups to crypto and Web
             <div class="mb-5 porcessIocn">
               <img src="images/process03.svg" width="30" />
             </div>
-            <h4 class="mb-2 h4 darkColor">Get Exclusive Workplace Stats</h4>
+            <h4 class="mb-2 h4 darkColor">Get Workplace Stats</h4>
             <p class="text-lg text-center textColor">
                 Gain access to reporting that
 offers a thorough description
