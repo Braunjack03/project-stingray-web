@@ -199,7 +199,7 @@ more.
 
           <!-- Copyrights note -->
           <div class="mr-4 text-sm text-gray-400">
-            &copy; 2021 Water Street Technologies. All rights reserved.
+            &copy; {{ new Date().getFullYear() }} Water Street Technologies. All rights reserved.
           </div>
         </div>
       </div>

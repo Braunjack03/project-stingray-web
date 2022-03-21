@@ -39,7 +39,7 @@ work opportunities.
             <div class="mb-5 porcessIocn">
               <img src="images/process02.svg" width="30" />
             </div>
-            <h4 class="mb-2 h4 darkColor">Join an Innovative Community</h4>
+            <h4 class="mb-2 h4 darkColor">Join a Local Community</h4>
             <p class="text-lg text-center textColor">
               Connect with experimental
 and creative thought leaders
