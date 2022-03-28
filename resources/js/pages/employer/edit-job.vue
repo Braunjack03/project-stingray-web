@@ -3,14 +3,41 @@
     <Head title="Edit Job" />
     <section class="relative" data-app> 
           <div class="max-w-6xl mx-auto px-4 sm:px-6">
-            <div class="pt-36 pb-12 md:pt-40 md:pb-20">
+           
+            <div class="pt-32 pb-12 md:pt-40 md:pb-20">
+            <v-row>
+            
+            <v-col cols="12" md="3" sm="4">
+                <div class="pb-8">
+                    <h2 class="h2 mb-4 text-gray-700" data-aos="fade-up">Made in <br> Tampa <br> Settings </h2>
+                </div>
+                <ul class="settingLinks">
+                   <li v-if="plan_name.name" class="no-underline text-lg text-gray-700">
+                        Subscribed to the {{plan_name.name}} Using {{job_posts_count}}/{{plan_name.slot}} job slots (<a class="upgrade-link text-purple-600" href="/billing">upgrade</a>)
+                      </li>
+                    <li>
+                      <a href="/employer/profile" class="no-underline text-lg text-gray-700 hover:text-purple-600">Your Profile</a>
+                    </li>
+                    <li >
+                      <a :href="'/employer/edit-company?id='+user.company_profile_uuid" class="no-underline text-lg text-gray-700 hover:text-purple-600">Company Profile</a>
+                    </li>
+                    <li >
+                      <a :href="'/employer/jobs?c_id='+user.company_profile_uuid" class="no-underline text-lg text-purple-700">Job Posts</a>
+                    </li>
+                    <li>
+                      <a href="/billing" class="no-underline text-lg text-gray-700 hover:text-purple-600">Subscription</a>
+                    </li>
+                </ul>
+               </v-col>
 
-            <div class="max-w-3xl text-gray-700 mx-auto text-center pb-10">
-                <h1 class="h1 mb-4" data-aos="fade-up">Update Job </h1>
-                <p class="text-lg">Job Information</p>
-            </div>
+               <v-col cols="12" md="9" sm="8" class="pl-3 md:pl-8">
+                  <div class="pb-0 sm:pb-10 pt-0 sm:pt-11">
+                      <h1 class="h1 mb-4 text-gray-700" data-aos="fade-up">Update Job </h1>
+                  </div>
+                    <div class="max-w-2xl">
 
-            <div class="max-w-xl mx-auto">
+
+            
                 <Message :message="errors.message" :hide="0" :type="'error'" />
                 <Message :message="success.message" :hide="0" :type="'success'" />
                 <v-form ref="form"  >
@@ -113,6 +140,8 @@
                       </div> 
                 </v-form>
              </div>
+              </v-col>
+        </v-row>
              </div>
             </div>
     </section>
@@ -148,6 +177,8 @@ import Message from '../../partials/Messages.vue';
       success: Object,
       job_categories: Array,
       locations : Array,
+      job_posts_count: Number,
+      plan_name: Array && Object,
     },
      data (){
      return {

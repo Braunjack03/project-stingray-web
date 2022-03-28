@@ -58,6 +58,27 @@ html{
    margin-bottom: 20px!important;
 }
 
+ul.industries-list {
+    display: flex;
+    flex-flow: wrap;
+}
+
+ul.industries-list li {
+    max-width: 25%;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.industries-list.companyIndustry__list {
+    height: 210px;
+    overflow-y: auto;
+    margin: 0 0 10px;
+}
+
+.companyIndustry__list.industries-list li {
+    max-width: 50%;
+}
+
 .theme--light.v-input, .theme--light.v-input input, .theme--light.v-input textarea {
     /*color: rgba(197, 210, 220,1) !important;*/
     color: rgb(85 89 95) !important;
@@ -202,14 +223,13 @@ ul.industries-list li {
     margin-bottom: 10px;
 }
 
-.industries-list.companyIndustry__list {
-    height: 210px;
-    overflow-y: auto;
-    margin: 0 0 10px;
+.industries-list.comanyIndustry__list {
+   height: 210px;
+   overflow-y: auto;
 }
 
-.companyIndustry__list.industries-list li {
-    max-width: 50%;
+.industries-list.comanyIndustry__list li {
+   max-width: 50%;
 }
 
 .radioColor .v-input__control label, .industries-list label {
@@ -734,7 +754,7 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"]{
 }
 
 .testJobs .card-text-wrap {
-   width: calc(100% - 190px);
+   width: calc(100% - 170px);
 }
 
 .testJobs .button-outter .editJobsBtn {
@@ -1332,6 +1352,21 @@ blockquote {
     margin: 0 !important;
 }
 
+/* Setting Links */
+.settingLinks li {
+    margin: 0 0 10px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+.settingLinks li a {
+    display: block;
+    margin: 0;
+}
+
+.settingLinks  li a.upgrade-link {
+    display: inline;
+    margin: 0;
+}
 
 /* Media */
 @media (min-width: 1224px) {
@@ -1533,6 +1568,11 @@ blockquote {
    }
 }
   
+@media (max-width:599px){
+   .settingLinks li a {
+      margin: 16px 0 0;
+   }
+}
 @media (max-width:575px){
    .card-text-wrap {
       width: calc(100% - 0px);
@@ -1566,7 +1606,6 @@ blockquote {
        text-align: left;
    }
 }
-
 @media screen and ( max-width: 520px ){
 
    li.page-item {

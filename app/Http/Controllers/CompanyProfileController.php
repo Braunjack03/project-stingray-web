@@ -14,6 +14,7 @@ use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Redirect;
 use App\Models\ActivityLog;
+use App\Models\Subscription;
 use App\Models\CompanyProfileCompanyType;
 use Session;
 use Mail; 
@@ -40,7 +41,14 @@ class CompanyProfileController extends Controller
         try{
             $user = Auth::user();
             $industries = CompanyType::pluck('name','id');
-            return Inertia::render('employer/create-company',['industries'=>$industries]);
+            $planId = Subscription::where(['user_id'=>$user->user_id])->first();
+            $job_posts_count = 0;
+            if(!empty($planId)){
+                $getPlanName = getPlanName($planId['stripe_plan'],$planId['ends_at']);
+            }else{
+              $getPlanName = ["name"=>"Free Plan","slot"=>"2"];  
+            }
+            return Inertia::render('employer/create-company',['industries'=>$industries,'plan_name'=>$getPlanName,'job_posts_count' => $job_posts_count]);
         }catch (\Exception $e) {
             $message = $e->getMessage();
             return $this->sendErrorResponse('login',$message);
@@ -153,17 +161,36 @@ class CompanyProfileController extends Controller
         try{
             $user = CompanyProfile::with('company_types')->where('uuid',$request->all()['id'])->first();
             if($user)
-            {
+            {   
+                //get plan id
+                $planId = Subscription::where(['user_id'=>$user->user_id])->first();
+                $job_posts_count = JobPost::where('company_profile_id', $user['id'])->count();
+                if(!empty($planId)){
+                    $getPlanName = getPlanName($planId['stripe_plan'],$planId['ends_at']);
+                    $total = $job_posts_count - $getPlanName['slot'];
+                    if($total > 0){
+                        for($i = 0;$i<$total;$i++){
+                            JobPost::where(["company_profile_id"=>$user['id']])->orderBy("id","ASC")->limit(1)->delete();
+                        }
+                        $job_posts_count = $job_posts_count - $total;
+                    }
+                }else{
+                  $getPlanName = ["name"=>"Free Plan","slot"=>"2"];  
+                }
+               
                 if(isset($user) && isset($user->company_types)){
                     $collection = $user->company_types;    
                     $names = $collection->pluck("id")->toArray(); 
                 } 
+                
                 $user->logo_image_src = ($user->logo_image_url) ? getBucketImageUrl($request->all()['id'],$user->logo_image_url,'company') : '';
                 $user->featured_image_src = ($user->featured_image_url) ? getBucketImageUrl($request->all()['id'],$user->featured_image_url,'company') : '';
 
+            }else{
+                redirect('/employer/create-company');
             }
             $industries = CompanyType::pluck('name','id');
-            $data = ['user'=>$user,'industries'=>$industries,'industryTest'=>$names];
+            $data = ['user'=>$user,'industries'=>$industries,'plan_name'=>$getPlanName,'job_posts_count' => $job_posts_count,'industryTest'=>$names];
             return $this->sendResponseWithData('employer/edit-company','',$data);
         }catch (\Exception $e) {
             $message = $e->getMessage();
@@ -300,7 +327,47 @@ class CompanyProfileController extends Controller
                 }
 
                 ActivityLog::addToLog(__('activitylogs.company_profile_updated'),'company updated');
-                return redirect()->route('employer.profile')->with(['message' => __('messages.company_profile_updated')]);
+
+                $user = CompanyProfile::with('company_types')->where('uuid',$requested_data['id'])->first();
+                if($user)
+                {   
+                    //get plan id
+                    $planId = Subscription::where(['user_id'=>$user->user_id])->first();
+                    $job_posts_count = JobPost::where('company_profile_id', $user['id'])->count();
+                    if(!empty($planId)){
+                        $getPlanName = getPlanName($planId['stripe_plan'],$planId['ends_at']);
+                        $total = $job_posts_count - $getPlanName['slot'];
+                        if($total > 0){
+                            for($i = 0;$i<$total;$i++){
+                                JobPost::where(["company_profile_id"=>$user['id']])->orderBy("id","ASC")->limit(1)->delete();
+                            }
+                            $job_posts_count = $job_posts_count - $total;
+                        }
+                    }else{
+                    $getPlanName = ["name"=>"Free Plan","slot"=>"2"];  
+                    }
+                
+                    if(isset($user) && isset($user->company_types)){
+                        $collection = $user->company_types;    
+                        $names = $collection->pluck("id")->toArray(); 
+                    } 
+                    
+                    $user->logo_image_src = ($user->logo_image_url) ? getBucketImageUrl($requested_data['id'],$user->logo_image_url,'company') : '';
+                    $user->featured_image_src = ($user->featured_image_url) ? getBucketImageUrl($requested_data['id'],$user->featured_image_url,'company') : '';
+
+                }
+
+                $industries = CompanyType::pluck('name','id');
+                $data = [
+                    'success'=>['status' => $this->successStatus,'message' => __('messages.company_profile_updated'),'responseCode'=> $this->successResponse],
+                    'user'=>$user,
+                    'industries'=>$industries,
+                    'plan_name'=>$getPlanName,
+                    'job_posts_count' => $job_posts_count,
+                    'industryTest'=>$names
+                ];
+                return $this->sendResponseWithData('employer/edit-company',__('messages.company_profile_updated'),$data);
+            //return redirect()->route('edit.company',['id'=>$requested_data['id']])->with(['message' => __('messages.company_profile_updated')]);
      
             }catch (\Exception $e) {
                 $message = $e->getMessage();

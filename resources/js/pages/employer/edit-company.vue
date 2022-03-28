@@ -7,15 +7,36 @@
     >
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
         <div class="pt-32 pb-12 md:pt-40 md:pb-20">
-          <div class="max-w-3xl mx-auto text-center pb-10">
-            <h1
-              class="h1 mb-4 text-gray-700"
-              data-aos="fade-up"
-            >
-            </h1>
-          </div>
+          <v-row>
+               <v-col cols="12" md="3" sm="4">
+                <div class="pb-8">
+                    <h2 class="h2 mb-4 text-gray-700" data-aos="fade-up">Made in <br> Tampa <br> Settings </h2>
+                </div>
+                <ul class="settingLinks">
+                   <li v-if="plan_name.name" class="no-underline text-lg text-gray-700">
+                        Subscribed to the {{plan_name.name}} Using {{job_posts_count}}/{{plan_name.slot}} job slots (<a class="upgrade-link text-purple-600" href="/billing">upgrade</a>)
+                      </li>
+                    <li>
+                      <a href="/employer/profile" class="no-underline text-lg text-gray-700 hover:text-purple-600">Your Profile</a>
+                    </li>
+                    <li >
+                      <a :href="'/employer/edit-company?id='+user.uuid" class="no-underline text-lg text-purple-700">Company Profile</a>
+                    </li>
+                    <li >
+                      <a :href="'/employer/jobs?c_id='+user.uuid" class="no-underline text-lg text-gray-700 hover:text-purple-600">Job Posts</a>
+                    </li>
+                    <li>
+                      <a href="/billing" class="no-underline text-lg text-gray-700 hover:text-purple-600">Subscription</a>
+                    </li>
+                </ul>
+               </v-col>
 
-          <div class="max-w-xl mx-auto">
+               <v-col cols="12" md="9" sm="8" class="pl-3 md:pl-8">
+                  <div class="pb-0 sm:pb-10 pt-0 sm:pt-11">
+                      <h1 class="h1 mb-4 text-gray-700" data-aos="fade-up">Edit Company </h1>
+                  </div>
+                    <div class="max-w-2xl">
+
             <Message
               :message="errors.message"
               :hide="0"
@@ -26,6 +47,8 @@
               :hide="0"
               :type="'success'"
             />
+
+            <Message :message="$page.props.flash.message" :hide="0" :type="'success'" />
 
             <v-form ref="form">
               <div class="flex flex-wrap mb-3">
@@ -432,7 +455,10 @@
                 </div>
               </div>
             </v-form>
+            
           </div>
+          </v-col>
+             </v-row>
         </div>
       </div>
     </section>
@@ -463,6 +489,8 @@ export default {
     success: Object,
     industries: Object || Array,
     industryTest: Array,
+    job_posts_count: Number,
+    plan_name: Array && Object,
   },
   data() {
     return {

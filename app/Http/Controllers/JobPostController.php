@@ -8,6 +8,7 @@ use App\Models\JobPost;
 use App\Models\JobCat;
 use App\Models\Location;
 use App\Models\CompanyProfile;
+use App\Models\Subscription;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Auth;
@@ -37,16 +38,30 @@ class JobPostController extends Controller
         try {
             $user = Auth::user();
             $companies = CompanyProfile::where('uuid', $request->all()['c_id']);
+            //get plan id
+            $planId = Subscription::where(['user_id'=>$user->id])->first();
             $job_posts = JobPost::select('locations.name as location_id', 'job_posts.created_at as created_on', 'job_posts.name', 'job_posts.uuid')->join('locations', 'job_posts.location_id', '=', 'locations.id')->where('job_posts.company_profile_id', $companies->first()['id'])->orderBy('job_posts.id', 'DESC')->get()->toArray();
             $job_posts_count = JobPost::where('company_profile_id', $companies->first()['id'])->count();
-
+            if(!empty($planId)){
+                $getPlanName = getPlanName($planId['stripe_plan'],$planId['ends_at']);
+                $total = $job_posts_count - $getPlanName['slot'];
+                if($total > 0){
+                    for($i = 0;$i<$total;$i++){
+                        JobPost::where(["company_profile_id"=>$companies[0]['id']])->orderBy("id","ASC")->limit(1)->delete();
+                    }
+                    $job_posts_count = $job_posts_count - $total;
+                } 
+            }else{
+              $getPlanName = ["name"=>"Free Plan","slot"=>"2"];  
+            }
+           
             $companies = CompanyProfile::where('uuid', $request->all()['c_id']);
-            $job_post_counts = JobPost::where('company_profile_id', $companies->first()['id'])->count();
             //dd($job_posts);
             $response = ['status' => $this->successStatus, 'message' => '', 'responseCode' => $this->successResponse];
             $respones_array = [
                 'success' => $response,
                 'companies_count' => $companies->count(),
+                'plan_name' => $getPlanName,
                 'job_posts_count' => $job_posts_count,
                 'company_details' => $companies->first(),
                 'job_posts' => json_decode(json_encode($job_posts), true),
@@ -75,10 +90,24 @@ class JobPostController extends Controller
             $user = Auth::user();
             $job_categories = JobCat::get();
             $locations = Location::select('id','name')->orderBy('id', 'desc')->get();
-
             $uuid = $request->all()['c_id'];
+            $CompanyProfile = CompanyProfile::where(['uuid'=>$uuid])->first();
+            $planId = Subscription::where(['user_id'=>$user->id])->first();
+            $job_posts_count = JobPost::where('company_profile_id',$CompanyProfile['id'])->count();
+            if(!empty($planId)){
+                $getPlanName = getPlanName($planId['stripe_plan'],$planId['ends_at']);
 
-            return Inertia::render('employer/create-job', ['job_categories' => $job_categories, 'locations' => $locations, 'company_uuid' => $uuid]);
+                $total = $job_posts_count - $getPlanName['slot'];
+                if($total > 0){
+                    for($i = 0;$i<$total;$i++){
+                        JobPost::where(["company_profile_id"=>$user['id']])->orderBy("id","ASC")->limit(1)->delete();
+                    }
+                    $job_posts_count = $job_posts_count - $total;
+                }
+            }else{
+              $getPlanName = ["name"=>"Free Plan","slot"=>"2"];  
+            }
+            return Inertia::render('employer/create-job', ['job_categories' => $job_categories, 'locations' => $locations, 'company_uuid' => $uuid,'plan_name'=>$getPlanName,'job_posts_count' => $job_posts_count]);
         } catch (\Exception $e) {
             $message = $e->getMessage();
             return $this->sendErrorResponse('login', $message);
@@ -167,7 +196,26 @@ class JobPostController extends Controller
             $job_data->remotetype_id = ($job_data->remotetype_id == 1) ? true : false;
             $job_categories = JobCat::get();
             $locations = Location::select('id','name')->get();
-            return Inertia::render('employer/edit-job', ['user' => $job_data, 'job_categories' => $job_categories, 'locations' => $locations]);
+             //get plan id
+            $planId = Subscription::where(['user_id'=>$job_data['user_id']])->first();
+            $CompanyProfile = CompanyProfile::where(['id'=>$job_data['company_profile_id']])->first();
+            $job_data['company_profile_uuid'] = $CompanyProfile['uuid'];
+            $job_posts_count = JobPost::where('company_profile_id', $job_data['company_profile_id'])->count();
+            if(!empty($planId)){
+                $getPlanName = getPlanName($planId['stripe_plan'],$planId['ends_at']);
+                $total = $job_posts_count - $getPlanName['slot'];
+                if($total > 0){
+                    for($i = 0;$i<$total;$i++){
+                        JobPost::where(["company_profile_id"=>$user['id']])->orderBy("id","ASC")->limit(1)->delete();
+                    }
+                    $job_posts_count = $job_posts_count - $total;
+                }
+            }else{
+              $getPlanName = ["name"=>"Free Plan","slot"=>"2"];  
+            }
+
+
+            return Inertia::render('employer/edit-job', ['user' => $job_data, 'job_categories' => $job_categories, 'locations' => $locations,'plan_name'=>$getPlanName,'job_posts_count' => $job_posts_count]);
         } catch (\Exception $e) {
             $message = $e->getMessage();
             return $this->sendErrorResponse('login', $message);
@@ -345,6 +393,7 @@ class JobPostController extends Controller
                 $term_u = '';
             }
             $locations = Location::select('id','name')->get();
+            
             return Inertia::render('job_posts', ['job_posts' => $job_posts, 'job_posts_count' => $job_posts_count, 'loc_id' => $request->loc, 'location_id' => $request->loc, 'term' => $term_u, 'locations' => $locations]);
         } catch (\Exception $e) {
             $message = $e->getMessage();

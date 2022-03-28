@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 //\Carbon\Carbon::setToStringFormat('d-m-Y');
 
 
 class JobPost extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
         'name','user_id','slug','company_profile_id','uuid','apply_url', 'content','job_cat_id','location_id','remotetype_id',

@@ -54,6 +54,7 @@
 </template>
 
 <script>
+//import Card from '../components/Card.vue';
 import JobPost from '../components/JobPost.vue';
 import Layout from './Layout';
 import { Head,Link } from '@inertiajs/inertia-vue';

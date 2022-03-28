@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\EmployerProfile;
 use App\Models\CompanyProfile;
 use App\Models\ActivityLog;
+use App\Models\JobPost;
+use App\Models\Subscription;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Auth;
@@ -34,8 +36,28 @@ class EmployerProfileController extends Controller
 
         try{
             $user = Auth::user();
+
             $user_profile = EmployerProfile::where('user_id',$user->id)->first();
+            //get plan id
+            $planId = Subscription::where(['user_id'=>$user->id])->first();
             $company_profiles = CompanyProfile::where('user_id',$user->id)->get()->toArray();
+            $job_post_counts = 0;
+            if($company_profiles){
+                $job_post_counts = JobPost::where('company_profile_id', $company_profiles[0]['id'])->count();
+            }
+           
+            if(!empty($planId)){
+                $getPlanName = getPlanName($planId['stripe_plan'],$planId['ends_at']);
+                $total = $job_post_counts - $getPlanName['slot'];
+                if($total > 0){
+                    for($i = 0;$i<$total;$i++){
+                        JobPost::where(["company_profile_id"=>$company_profiles[0]['id']])->orderBy("id","ASC")->limit(1)->delete();
+                    }
+                    $job_post_counts = $job_post_counts - $total;
+                }
+            }else{
+              $getPlanName = ["name"=>"Free Plan","slot"=>"2"];  
+            }
             if($user_profile)
             {
                 $data = [
@@ -60,6 +82,8 @@ class EmployerProfileController extends Controller
             $respones_array = [
                 'success' => $response,
                 'user' => $data,
+                'plan_name' => $getPlanName,
+                'job_posts_count' => $job_post_counts,
                 'companies' => json_decode(json_encode($company_profiles), true),
             ];
             
@@ -156,8 +180,28 @@ class EmployerProfileController extends Controller
                     } 
                 }
                 
+                
                 $user_profile_data =  EmployerProfile::where('user_id',$user_id)->first(); 
-                $company_profiles = CompanyProfile::where('user_id',$user_id)->get()->toArray();   
+                $company_profiles = CompanyProfile::where('user_id',$user_id)->get()->toArray();  
+              
+                $planId = Subscription::where(['user_id'=>$user_id])->first();
+                $job_post_counts = 0;
+                if($company_profiles){
+                    $job_post_counts = JobPost::where('company_profile_id', $company_profiles[0]['id'])->count();
+                }
+            
+                if(!empty($planId)){
+                    $getPlanName = getPlanName($planId['stripe_plan'],$planId['ends_at']);
+                    $total = $job_post_counts - $getPlanName['slot'];
+                    if($total > 0){
+                        for($i = 0;$i<$total;$i++){
+                            JobPost::where(["company_profile_id"=>$company_profiles[0]['id']])->orderBy("id","ASC")->limit(1)->delete();
+                        }
+                        $job_post_counts = $job_post_counts - $total;
+                    }
+                }else{
+                $getPlanName = ["name"=>"Free Plan","slot"=>"2"];  
+                }
                 $user_data = [
                         'name' => $data['name'],
                         'current_job_title' => $user_profile_data['current_job_title'],
@@ -167,10 +211,11 @@ class EmployerProfileController extends Controller
                         'company_profile_count' => count($company_profiles),
                 ];
                 ActivityLog::addToLog(__('activitylogs.employer_profile_updated'),'employer profile update');
-                $response = ['status' => $this->successStatus,'message' => __('messages.user_profile_updated'),'responseCode'=> $this->successResponse];
                 $respones_array = [
-                    'success' => $response,
+                    'success' => ['status' => $this->successStatus,'message' => __('messages.user_profile_updated'),'responseCode'=> $this->successResponse],
                     'user' => $user_data,
+                    'plan_name' => $getPlanName,
+                    'job_posts_count' => $job_post_counts,
                     'companies' => json_decode(json_encode($company_profiles), true),
                 ];
                 return $this->sendResponseWithData($redirect_page,__('messages.user_profile_updated'),$respones_array);                 
