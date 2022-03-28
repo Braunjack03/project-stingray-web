@@ -60,7 +60,7 @@
                 href="#"
                 class="mx-4 text-white bg-purple-600 btn-sm hover:bg-purple-700"
               >
-                Employers
+                For Employers
               </Link>
             </li>
             <li v-if="!isLoggedIn">

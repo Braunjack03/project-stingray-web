@@ -1,11 +1,12 @@
 <template>
     <Layout>
+         <Head title="Made in Tampa" />
         <section data-app class="homeBanner">
             <div class="relative max-w-6xl px-4 mx-auto sm:px-6">
                 <div class="pt-32 pb-0 md:pt-50 md:pb-20">
                     <div class="max-w-3xl pb-12 mx-auto text-center md:pb-16">
                         <h1 class="mt-0 text-white h1 md:mt-20 " data-aos="fade-up">
-                            Your Source for Tampa Bay For Tech Jobs and News
+                            Your Source for Tampa Bay Tech Jobs and News
                         </h1>
     
                         <div class="pb-6 md:pb-12 bannerForm">
@@ -20,7 +21,7 @@
                                         <div v-if="$v.term.$error && !$v.term.required" class="text-sm text-red-500 errorMsg-baaner">Looking for a job is required</div>
                                         <v-select v-model="location_id" item-text="name" item-value="id" :items="locations" label="Location" solo></v-select>
                                         <!--div v-if="$v.location_id.$error && !$v.location_id.required"  class="text-sm text-red-500 errorMsg-baaner forLocation-error">Location is required</div-->
-                                        <v-btn class="w-full text-white bg-purple-600  btn hover:bg-purple-700" @click="submit">
+                                        <v-btn class="w-full text-white bg-purple-600 btn hover:bg-purple-700" @click="submit">
                                             Search
                                         </v-btn>
                                     </div>
@@ -55,39 +56,13 @@ import { required } from 'vuelidate/lib/validators'
 export default {
     name: 'Home',
     metaInfo: {
-        title: 'Made in Tampa',
-        titleTemplate: 'Made in Tampa',
-        meta: [
-            { name: 'description', content: 'Made in Tampa' },
-        ]
-    },
-  // child
-  metaInfo() {
-    return {
+      title: "Home",
+      titleTemplate: "%s - Made in Tampa",
       meta: [
-        {  
-          name: 'description',
-          content: 'Made in Tampa',
-        },
-        {  
-          property: 'og:title',
-          content: 'Made in Tampa',
-        },
-        {  
-          property: 'og:url',
-          content: this.base_url,
-        },
-        {  
-          property: 'og:description',
-          content: 'Made in Tampa',
-        },
-        {  
-          property: 'og:site_name',
-          content: 'Made in Tampa',
-        },
+         { name: 'description', content: 'Companies Hiring in the Tampa Bay' },
       ]
-    }
-  },
+   },
+
     mixins: [validationMixin],
     validations: {
         term: { required },
