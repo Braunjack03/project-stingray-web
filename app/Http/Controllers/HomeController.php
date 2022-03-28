@@ -16,7 +16,7 @@ class HomeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['home', 'jobs','contact','contactSubmit','privacy','pricing', 'terms']]);
+        $this->middleware('auth', ['except' => ['home', 'jobs','contact','contactSubmit','privacy','pricing', 'terms', 'for_employers', 'about_us']]);
     }
     /**
      * Dashboard
@@ -67,8 +67,16 @@ class HomeController extends Controller
         return $this->static_page('contact');
     }
 
+    public function about_us(){
+        return $this->static_page('about_us');
+    }
+
     public function privacy(){
         return $this->static_page('privacy');
+    }
+
+    public function for_employers(){
+        return $this->static_page('for_employers');
     }
 
     public function pricing(){

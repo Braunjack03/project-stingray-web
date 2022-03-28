@@ -57,7 +57,7 @@
             </li>
             <li>
               <Link
-                href="#"
+                href="/for_employers"
                 class="mx-4 text-white bg-purple-600 btn-sm hover:bg-purple-700"
               >
                 For Employers

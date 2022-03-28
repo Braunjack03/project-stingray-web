@@ -33,6 +33,10 @@ Route::get('contact', [HomeController::class, 'contact']);
 
 Route::get('privacy', [HomeController::class, 'privacy']);
 
+Route::get('for_employers', [HomeController::class, 'for_employers']);
+
+Route::get('about_us', [HomeController::class, 'about_us']);
+
 Route::get('pricing', [HomeController::class, 'pricing']);
 
 Route::post('contact', [HomeController::class, 'contactSubmit'])->name('contact');

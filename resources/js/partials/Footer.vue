@@ -36,7 +36,7 @@ more.
               <ul>
                 <li class="mb-1">
                   <Link
-                    href="#"
+                    href="/about_us"
                     class="text-gray-400 transition duration-150 ease-in-out hover:text-gray-100"
                   >
                     About Us
@@ -126,15 +126,15 @@ more.
                 </li>
                 <li class="mb-1">
                   <Link
-                    href="#"
+                    href="/for_employers"
                     class="text-gray-400 transition duration-150 ease-in-out hover:text-gray-100"
                   >
-                    Employers
+                    For Employers
                   </Link>
                 </li>
                 <li class="mb-1">
                   <Link
-                    href="#"
+                    href="/contact"
                     class="text-gray-400 transition duration-150 ease-in-out hover:text-gray-100"
                   >
                     Partnerships
