@@ -11,35 +11,68 @@
             </h1>
           </div>
           <div class="contentPage">
-<p>Recruiting the right candidate is getting tougher all of the time.  The U.S. now has more job openings than any time in history</p>
+            <p>
+              Recruiting the right candidate is getting tougher all of the time.
+              The U.S. now has more job openings than any time in history
+            </p>
 
-<p>The best candidates have their pick of companies to work for.</p>
+            <p>The best candidates have their pick of companies to work for.</p>
 
-<p>Candidates are becoming more sophisticated and they want to know details about a company before even talking to a recruiter.   They want to know details of not only base compensation, but bonuses, PTO, and your remote work policy.</p>
+            <p>
+              Candidates are becoming more sophisticated and they want to know
+              details about a company before even talking to a recruiter. They
+              want to know details of not only base compensation, but bonuses,
+              PTO, and your remote work policy.
+            </p>
 
-<p>The Tampa Bay job market is particularly ferocious as new companies move into the area on an almost daily basis.</p>
+            <p>
+              The Tampa Bay job market is particularly ferocious as new
+              companies move into the area on an almost daily basis.
+            </p>
 
-<p>Candidates come to you.</p>
+            <p>Candidates come to you.</p>
 
-<p>Made in Tampa makes it easy for you the employer to highlight your organization's culture and benefits.  Our rapidly evolving company profiles let you tell the story of your organization in a way that easily attract qualified candidates. </p>
+            <p>
+              Made in Tampa makes it easy for you the employer to highlight your
+              organization's culture and benefits. Our rapidly evolving company
+              profiles let you tell the story of your organization in a way that
+              easily attract qualified candidates.
+            </p>
 
+            <p>We have years of experience building recruiting technology</p>
 
-<p>We have years of experience building recruiting technology</p>
+            <p>
+              The team that created Made in Tampa, spent several years at one of
+              the industries top HR technology companies building talent
+              acquisition software. We know how to leverage technology to save
+              recruiters time and reduce mean time to fill. That means you get
+              butts in seats faster and easier.
+            </p>
 
-<p>The team that created Made in Tampa, spent several years at one of the industries top HR technology companies building talent acquisition software.  We know how to leverage technology to save recruiters time and reduce mean time to fill.  That means you  get butts in seats faster and easier. </p>
+            <p>
+              You can expect the platform to grow and evolve quickly in the
+              coming months.
+            </p>
 
-<p>You can expect the platform to grow and evolve quickly in the coming months. </p>
+            <p>
+              We have advanced capabilities on the roadmap that will use AI/ML
+              technology to intelligently and automatically match candidates to
+              your job reqs.
+            </p>
 
-<p>We have advanced capabilities on the roadmap that will use AI/ML technology to intelligently and automatically match candidates to your job reqs.</p>
+            <p>
+              Our affordable subscription plans start at less than $20/mth.
+              That's not much more than a couple of Starbuck's coffees. For
+              larger organizations with advanced hiring needs we can quickly
+              scale with you.
+            </p>
 
-<p>Our affordable subscription plans start at less than $20/mth.   That's not much more than a couple of Starbuck's coffees.   For larger organizations with advanced hiring needs we can quickly scale with you.</p>
-
-                <Link
-                href="/pricing"
-                class="bg-purple-600 rounded-none btn-sm hover:bg-purple-700"
-              >
-               Subscribe Today 
-              </Link>
+            <Link
+              href="/pricing"
+              class="bg-purple-600 rounded-none btn-sm hover:bg-purple-700"
+            >
+              Join Today
+            </Link>
           </div>
         </div>
       </div>
