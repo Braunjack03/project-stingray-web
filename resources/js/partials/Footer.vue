@@ -182,7 +182,7 @@ more.
 
             <li class="ml-4">
               <Link
-                href="#"
+                href="https://linkedin.com/company/made-in-tampa"
                 class="flex items-center justify-center text-purple-600 transition duration-150 ease-in-out rounded-full footerIcon--bg hover:text-gray-100 hover:bg-purple-600"
                 aria-label="Linkedin"
               >
