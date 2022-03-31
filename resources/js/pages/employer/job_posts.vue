@@ -2,42 +2,42 @@
     <Layout>
         <Head title="Job Posts" />
         <section class="relative">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="max-w-6xl px-4 mx-auto sm:px-6">
                 <div class="pt-32 pb-12 md:pt-40 md:pb-20">
 
                     <v-row>
                        <v-col cols="12" md="3" sm="4">
                         <div class="pb-8">
-                            <h2 class="h2 mb-4 text-gray-700" data-aos="fade-up">Made in <br> Tampa <br> Settings </h2>
+                                                <h3 class="mb-4 text-gray-700 h3" data-aos="fade-up">Employer <br> Settings</h3>
                         </div>
                         <ul class="settingLinks">
-                            <li v-if="plan_name.name" class="no-underline text-lg text-gray-700">
-                              Subscribed to the {{plan_name.name}} Using {{job_posts_count}}/{{plan_name.slot}} job slots (<a class="upgrade-link text-purple-600" href="/billing">upgrade</a>)
+                            <li v-if="plan_name.name" class="text-lg text-gray-700 no-underline">
+                              Subscribed to the {{plan_name.name}} Using {{job_posts_count}}/{{plan_name.slot}} job slots (<a class="text-purple-600 upgrade-link" href="/billing">upgrade</a>)
                             </li>
                             <li>
-                              <a href="/employer/profile" class="no-underline text-lg text-gray-700 hover:text-purple-600">Your Profile</a>
+                              <a href="/employer/profile" class="text-lg text-gray-700 no-underline hover:text-purple-600">Your Profile</a>
                             </li>
                             <li>
-                              <a :href="'/employer/edit-company?id='+company_details.uuid" class="no-underline text-lg text-gray-700 hover:text-purple-600">Company Profile</a>
+                              <a :href="'/employer/edit-company?id='+company_details.uuid" class="text-lg text-gray-700 no-underline hover:text-purple-600">Company Profile</a>
                             </li>
                             <li>
-                              <a :href="'/employer/jobs?c_id='+company_details.uuid" class="no-underline text-lg text-purple-700">Job Posts</a>
+                              <a :href="'/employer/jobs?c_id='+company_details.uuid" class="text-lg text-purple-700 no-underline">Job Posts</a>
                             </li>
                             <li>
-                              <a href="/billing" class="no-underline text-lg text-gray-700 hover:text-purple-600">Subscription</a>
+                              <a href="/billing" class="text-lg text-gray-700 no-underline hover:text-purple-600">Subscription</a>
                             </li>
                         </ul>
                        </v-col>
 
                        <v-col cols="12" md="9" sm="8" class="pl-3 md:pl-8">
-                            <div class="pb-5 sm:pb-10 pt-0 sm:pt-11">
-                                <h1 class="h1 mb-4 text-gray-700" data-aos="fade-up">{{ company_details.name }} Job Posts</h1>
+                            <div class="pt-0 pb-5 sm:pb-10 sm:pt-11">
+                                <h1 class="mb-4 text-gray-700 h1" data-aos="fade-up">Job Posts</h1>
                             </div>
                             <div class="testJobs">
-                                <Link v-if="companies_count > 0 && job_posts_count < plan_name.slot" :href="'/employer/create-job?c_id=' + company_details.uuid" color="text" class="text-lg btn text-white bg-purple-600 hover:bg-purple-700 mb-3">Add New Job Post</Link>
+                                <Link v-if="companies_count > 0 && job_posts_count < plan_name.slot" :href="'/employer/create-job?c_id=' + company_details.uuid" color="text" class="mb-3 text-lg text-white bg-purple-600 btn hover:bg-purple-700">Add New Job Post</Link>
             
                                 <br /><br /><br />
-                                <h3 class="h3 text-gray-700">Current Job Posts</h3>
+                                <h3 class="text-gray-700 h3">Current Job Posts</h3>
                                 <br />
             
                                 <Message :message="$page.props.flash.message" :hide="0" :type="'success'" />
@@ -45,19 +45,19 @@
                                 <div v-if="job_posts.length > 0">
                                     <v-row>
                                         <v-col cols="12" md="12" class="pa-3 d-flex flex-column" v-for="data in job_posts" :key="data.id">
-                                            <v-card class="elevation-5 flex d-flex flex-column cardStyle">
+                                            <v-card class="flex elevation-5 d-flex flex-column cardStyle">
                                                 <v-card-text class="job-card-wrap">
                                                     <div class="card-text-wrap">
                                                         <v-card-title>{{data.name}}</v-card-title>
                                                         <div class="card-outter">
                                                             <div class="text-subtitle-1" v-if="data.company_name">Company Name: {{data.company_name}}</div>
                                                             <div class="description">Location: {{ data.location_id }}</div>
-                                                            <div class="date text-lg">Published: {{ setDateFormat(data.created_on) }}</div>
+                                                            <div class="text-lg date">Published: {{ setDateFormat(data.created_on) }}</div>
                                                         </div>
                                                     </div>
-                                                    <div class="button-outter flex">
-                                                      <Link :href="'/employer/edit-job?id=' + data.uuid" class="editJobsBtn text-white bg-purple-600 hover:bg-purple-700 pl-8 pt-3 pb-3 pr-7 text-lg">Edit</Link>
-                                                      <v-btn class="text-white bg-purple-600 hover:bg-purple-700 text-lg" v-on:click="deletejob(data.uuid)" >Delete</v-btn>
+                                                    <div class="flex button-outter">
+                                                      <Link :href="'/employer/edit-job?id=' + data.uuid" class="pt-3 pb-3 pl-8 text-lg text-white bg-purple-600 editJobsBtn hover:bg-purple-700 pr-7">Edit</Link>
+                                                      <v-btn class="text-lg text-white bg-purple-600 hover:bg-purple-700" v-on:click="deletejob(data.uuid)" >Delete</v-btn>
                                                     </div>
                                                 </v-card-text>
                                             </v-card>
@@ -66,7 +66,7 @@
                                 </div>
                                 <div v-else>
                                     <v-row>
-                                        <v-col cols="12" class="mt-5 text-center text-gray-700 text-lg">
+                                        <v-col cols="12" class="mt-5 text-lg text-center text-gray-700">
                                             No Job Found
                                         </v-col>
                                     </v-row>
@@ -75,10 +75,10 @@
                                 <!--ul v-if="job_posts" id="example-1">
                                     <li v-for="company in job_posts" :key="company.id">
                                         <v-row no-gutters class="mt-5">
-                                            <div class="col-sm-12 col-md-12 col-8 bg-white rounded-xl shadow-md overflow-hidden mt-5">
+                                            <div class="mt-5 overflow-hidden bg-white shadow-md col-sm-12 col-md-12 col-8 rounded-xl">
                                                 <div class="">
                                                     <v-col cols="12">
-                                                        <h3 class="uppercase tracking-wide text-xl text-indigo-500 font-semibold">
+                                                        <h3 class="text-xl font-semibold tracking-wide text-indigo-500 uppercase">
                                                             {{ company.name }}
                                                         </h3>
                                                         <p class="mt-2 text-gray-800">
@@ -89,7 +89,7 @@
                                                         </p>
                                                     </v-col>
                                                     <v-col cols="12 flex">
-                                                        <Link :href="'/employer/edit-job?id=' + company.uuid" class="mr-4 btn text-purple-600 hover:text-purple-800 custom-link">EDIT</Link>
+                                                        <Link :href="'/employer/edit-job?id=' + company.uuid" class="mr-4 text-purple-600 btn hover:text-purple-800 custom-link">EDIT</Link>
                                                         <v-btn class="mr-4 text-purple-600 hover:text-purple-800 custom-link" v-on:click="deletejob(company.uuid)" color="#3f51b5" plain link>Delete</v-btn>
                                                     </v-col>
                                                 </div>

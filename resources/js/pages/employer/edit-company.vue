@@ -1,39 +1,39 @@
 <template>
   <Layout>
-    <Head title="Edit Company" />
+    <Head title="Company Profile" />
     <section
       class="relative"
       data-app
     >
-      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="max-w-6xl px-4 mx-auto sm:px-6">
         <div class="pt-32 pb-12 md:pt-40 md:pb-20">
           <v-row>
                <v-col cols="12" md="3" sm="4">
                 <div class="pb-8">
-                    <h2 class="h2 mb-4 text-gray-700" data-aos="fade-up">Made in <br> Tampa <br> Settings </h2>
+                    <h3 class="mb-4 text-gray-700 h3" data-aos="fade-up">Employer <br> Settings</h3>
                 </div>
                 <ul class="settingLinks">
-                   <li v-if="plan_name.name" class="no-underline text-lg text-gray-700">
-                        Subscribed to the {{plan_name.name}} Using {{job_posts_count}}/{{plan_name.slot}} job slots (<a class="upgrade-link text-purple-600" href="/billing">upgrade</a>)
+                   <li v-if="plan_name.name" class="text-lg text-gray-700 no-underline">
+                        Subscribed to the {{plan_name.name}} Using {{job_posts_count}}/{{plan_name.slot}} job slots (<a class="text-purple-600 upgrade-link" href="/billing">upgrade</a>)
                       </li>
                     <li>
-                      <a href="/employer/profile" class="no-underline text-lg text-gray-700 hover:text-purple-600">Your Profile</a>
+                      <a href="/employer/profile" class="text-lg text-gray-700 no-underline hover:text-purple-600">Your Profile</a>
                     </li>
                     <li >
-                      <a :href="'/employer/edit-company?id='+user.uuid" class="no-underline text-lg text-purple-700">Company Profile</a>
+                      <a :href="'/employer/edit-company?id='+user.uuid" class="text-lg text-purple-700 no-underline">Company Profile</a>
                     </li>
                     <li >
-                      <a :href="'/employer/jobs?c_id='+user.uuid" class="no-underline text-lg text-gray-700 hover:text-purple-600">Job Posts</a>
+                      <a :href="'/employer/jobs?c_id='+user.uuid" class="text-lg text-gray-700 no-underline hover:text-purple-600">Job Posts</a>
                     </li>
                     <li>
-                      <a href="/billing" class="no-underline text-lg text-gray-700 hover:text-purple-600">Subscription</a>
+                      <a href="/billing" class="text-lg text-gray-700 no-underline hover:text-purple-600">Subscription</a>
                     </li>
                 </ul>
                </v-col>
 
                <v-col cols="12" md="9" sm="8" class="pl-3 md:pl-8">
-                  <div class="pb-0 sm:pb-10 pt-0 sm:pt-11">
-                      <h1 class="h1 mb-4 text-gray-700" data-aos="fade-up">Edit Company </h1>
+                  <div class="pt-0 pb-0 sm:pb-10 sm:pt-11">
+                      <h1 class="mb-4 text-gray-700 h1" data-aos="fade-up">Company Profile</h1>
                   </div>
                     <div class="max-w-2xl">
 
@@ -71,10 +71,10 @@
 
               <div class="flex flex-wrap mb-3">
                 <div class="w-full px-3 form-file-upload">
-                  <label class="block text-gray-700 text-lg font-medium mb-1">Company Logo (Recommended 500px x 500px) </label>
+                  <label class="block mb-1 text-lg font-medium text-gray-700">Company Logo (Recommended 500px x 500px) </label>
                   <v-file-input
                     v-model="user.logo_image_url"
-                    class="fileUpload form-input input-field-outer w-full text-gray-700"
+                    class="w-full text-gray-700 fileUpload form-input input-field-outer"
                     accept="image/*"
                     outlined
                     dense
@@ -85,11 +85,11 @@
 
               <div class="flex flex-wrap mb-3">
                 <div class="w-full px-3">
-                  <label class="block text-gray-700 text-lg font-medium mb-1">Company Name <span class="text-red-600">*</span></label>
+                  <label class="block mb-1 text-lg font-medium text-gray-700">Company Name <span class="text-red-600">*</span></label>
                   <v-text-field
                     v-model="name"
                     :class="{ 'error--text': $v.name.$error }"
-                    class="form-input input-field-outer w-full text-gray-700"
+                    class="w-full text-gray-700 form-input input-field-outer"
                     placeholder="Company Name"
                     required
                     @input="$v.name.$touch()"
@@ -97,7 +97,7 @@
                   />
                   <div
                     v-if="$v.name.$error && !$v.name.required"
-                    class="text-red-500 text-lg"
+                    class="text-lg text-red-500"
                   >
                     Company Name is required
                   </div>
@@ -106,11 +106,11 @@
 
               <div class="flex flex-wrap mb-3">
                 <div class="w-full px-3">
-                  <label class="block text-gray-700 text-lg font-medium mb-1">Number of local employees</label>
+                  <label class="block mb-1 text-lg font-medium text-gray-700">Number of local employees</label>
                   <v-text-field
                     v-model="local_employees"
                     :class="{ 'error--text': $v.local_employees.$error }"
-                    class="form-input input-field-outer w-full text-gray-700"
+                    class="w-full text-gray-700 form-input input-field-outer"
                     placeholder="Number of local employees"
                     required
                     @input="$v.local_employees.$touch()"
@@ -118,7 +118,7 @@
                   />
                   <div
                     v-if="$v.local_employees.$error && !$v.local_employees.required"
-                    class="text-red-500 text-lg"
+                    class="text-lg text-red-500"
                   >
                     Number of local employees
                   </div>
@@ -127,10 +127,10 @@
 
               <div class="flex flex-wrap mb-3">
                 <div class="w-full px-3">
-                  <label class="block text-gray-700 text-lg font-medium mb-1">Number of global employees</label>
+                  <label class="block mb-1 text-lg font-medium text-gray-700">Number of global employees</label>
                   <v-text-field
                     v-model="user.global_employees"
-                    class="form-input input-field-outer w-full text-gray-700"
+                    class="w-full text-gray-700 form-input input-field-outer"
                     placeholder="Number of global employees"
                     required
                   />
@@ -145,10 +145,10 @@
 
               <div class="flex flex-wrap mb-3">
                 <div class="w-full px-3">
-                  <label class="block text-gray-700 text-lg font-medium mb-1">Company Website</label>
+                  <label class="block mb-1 text-lg font-medium text-gray-700">Company Website</label>
                   <v-text-field
                     v-model="user.website_url"
-                    class="form-input input-field-outer w-full text-gray-700"
+                    class="w-full text-gray-700 form-input input-field-outer"
                     placeholder="https://example.com"
                     required
                   />
@@ -182,10 +182,10 @@
 
               <div class="flex flex-wrap mb-3">
                 <div class="w-full px-3 form-file-upload">
-                  <label class="block text-gray-700 text-lg font-medium mb-1">Header Image (Recommended 500px x 500px) </label>
+                  <label class="block mb-1 text-lg font-medium text-gray-700">Header Image (Recommended 500px x 500px) </label>
                   <v-file-input
                     v-model="user.featured_image_url"
-                    class="fileUpload form-input input-field-outer w-full text-gray-700"
+                    class="w-full text-gray-700 fileUpload form-input input-field-outer"
                     accept="image/*"
                     outlined
                     dense
@@ -196,10 +196,10 @@
 
               <div class="flex flex-wrap mb-3">
                 <div class="w-full px-3">
-                  <label class="block text-gray-700 text-lg font-medium mb-1">Company Mission</label>
+                  <label class="block mb-1 text-lg font-medium text-gray-700">Company Mission</label>
                   <v-text-field
                     v-model="user.mission"
-                    class="form-input input-field-outer w-full text-gray-700"
+                    class="w-full text-gray-700 form-input input-field-outer"
                     placeholder="Company Mission"
                     required
                   />
@@ -214,11 +214,11 @@
 
               <div class="flex flex-wrap mb-3">
                 <div class="w-full px-3">
-                  <label class="block text-gray-700 text-lg font-medium mb-1">Company Description</label>
+                  <label class="block mb-1 text-lg font-medium text-gray-700">Company Description</label>
                   <v-textarea
                     v-model="user.description"
                     rows="2"
-                    class="form-input input-field-outer w-full text-gray-700"
+                    class="w-full text-gray-700 form-input input-field-outer"
                     placeholder="Company Description"
                   />
                   <div
@@ -232,7 +232,7 @@
 
               <div class="flex flex-wrap mb-3">
                 <div class="w-full px-3">
-                  <label class="block text-gray-700 text-lg font-medium mb-1">Company Industry (select up to 3)  </label>
+                  <label class="block mb-1 text-lg font-medium text-gray-700">Company Industry (select up to 3)  </label>
                   <ul class="industries-list companyIndustry__list">
                     <li
                       v-for="(item, index) in industries"
@@ -260,16 +260,16 @@
                 </div>
               </div>
 
-              <h3 class="text-2xl mt-2 mb-1 ml-3 text-gray-700">
+              <h3 class="mt-2 mb-1 ml-3 text-2xl text-gray-700">
                 Local Address
               </h3>
 
               <div class="flex flex-wrap mb-3">
                 <div class="w-full px-3">
-                  <label class="block text-gray-700 text-lg font-medium mb-1">Address</label>
+                  <label class="block mb-1 text-lg font-medium text-gray-700">Address</label>
                   <v-text-field
                     v-model="user.street_addr_1"
-                    class="form-input input-field-outer w-full text-gray-700"
+                    class="w-full text-gray-700 form-input input-field-outer"
                     placeholder="Address"
                     required
                   />
@@ -284,10 +284,10 @@
 
               <div class="flex flex-wrap mb-3">
                 <div class="w-full px-3">
-                  <label class="block text-gray-700 text-lg font-medium mb-1">Address 2</label>
+                  <label class="block mb-1 text-lg font-medium text-gray-700">Address 2</label>
                   <v-text-field
                     v-model="user.street_addr_2"
-                    class="form-input input-field-outer w-full text-gray-700"
+                    class="w-full text-gray-700 form-input input-field-outer"
                     placeholder="Address 2"
                     required
                   />
@@ -302,10 +302,10 @@
 
               <div class="flex flex-wrap mb-3">
                 <div class="w-full px-3">
-                  <label class="block text-gray-700 text-lg font-medium mb-1">City </label>
+                  <label class="block mb-1 text-lg font-medium text-gray-700">City </label>
                   <v-text-field
                     v-model="user.city"
-                    class="form-input input-field-outer w-full text-gray-700"
+                    class="w-full text-gray-700 form-input input-field-outer"
                     placeholder="City"
                     required
                   />
@@ -320,7 +320,7 @@
 
               <div class="flex flex-wrap mb-3">
                 <div class="w-full px-3">
-                  <label class="block text-gray-700 text-lg font-medium mb-1">State </label>
+                  <label class="block mb-1 text-lg font-medium text-gray-700">State </label>
                   <v-row>
                     <v-col
                       class="d-flex"
@@ -330,7 +330,7 @@
                         v-model="user.state_abbr"
                         :items="items"
                         label="State"
-                        class="form-input input-field-outer w-full text-gray-700"
+                        class="w-full text-gray-700 form-input input-field-outer"
                         dense
                         solo
                       />
@@ -347,10 +347,10 @@
 
               <div class="flex flex-wrap mb-3">
                 <div class="w-full px-3">
-                  <label class="block text-gray-700 text-lg font-medium mb-1">Zipcode </label>
+                  <label class="block mb-1 text-lg font-medium text-gray-700">Zipcode </label>
                   <v-text-field
                     v-model="user.postcode"
-                    class="form-input input-field-outer w-full text-gray-700"
+                    class="w-full text-gray-700 form-input input-field-outer"
                     placeholder="Zipcode"
                     required
                   />
@@ -363,16 +363,16 @@
                 </div>
               </div>
 
-              <h3 class="text-2xl mt-2 mb-1 ml-3 text-gray-700 px-3">
+              <h3 class="px-3 mt-2 mb-1 ml-3 text-2xl text-gray-700">
                 Social
               </h3>
 
               <div class="flex flex-wrap mb-3">
                 <div class="w-full px-3">
-                  <label class="block text-gray-700 text-lg font-medium mb-1">LinkedIn</label>
+                  <label class="block mb-1 text-lg font-medium text-gray-700">LinkedIn</label>
                   <v-text-field
                     v-model="user.linkedin_user"
-                    class="form-input input-field-outer w-full text-gray-700"
+                    class="w-full text-gray-700 form-input input-field-outer"
                     placeholder="LinkedIn"
                   />
                   <div
@@ -386,10 +386,10 @@
 
               <div class="flex flex-wrap mb-3">
                 <div class="w-full px-3">
-                  <label class="block text-gray-700 text-lg font-medium mb-1">Facebook</label>
+                  <label class="block mb-1 text-lg font-medium text-gray-700">Facebook</label>
                   <v-text-field
                     v-model="user.facebook_user"
-                    class="form-input input-field-outer w-full text-gray-700"
+                    class="w-full text-gray-700 form-input input-field-outer"
                     placeholder="Facebook"
                   />
                   <div
@@ -403,10 +403,10 @@
 
               <div class="flex flex-wrap mb-3">
                 <div class="w-full px-3">
-                  <label class="block text-gray-700 text-lg font-medium mb-1">Twitter</label>
+                  <label class="block mb-1 text-lg font-medium text-gray-700">Twitter</label>
                   <v-text-field
                     v-model="user.twitter_user"
-                    class="form-input input-field-outer w-full text-gray-700"
+                    class="w-full text-gray-700 form-input input-field-outer"
                     placeholder="Twitter"
                   />
                   <div
@@ -420,10 +420,10 @@
 
               <div class="flex flex-wrap mb-3">
                 <div class="w-full px-3">
-                  <label class="block text-gray-700 text-lg font-medium mb-1">Instagram</label>
+                  <label class="block mb-1 text-lg font-medium text-gray-700">Instagram</label>
                   <v-text-field
                     v-model="user.instagram_user"
-                    class="form-input input-field-outer w-full text-gray-700"
+                    class="w-full text-gray-700 form-input input-field-outer"
                     placeholder="Instagram"
                   >
                     >
@@ -440,7 +440,7 @@
               <div class="flex flex-wrap mt-5">
                 <div class="w-full px-3">
                   <v-btn
-                    class="btn text-white bg-purple-600 hover:bg-purple-700 w-full"
+                    class="w-full text-white bg-purple-600 btn hover:bg-purple-700"
                     @click="submit()"
                   >
                     Update Changes
@@ -449,7 +449,7 @@
               </div>
               <div class="flex flex-wrap mt-5 text-center">
                 <div class="w-full px-3">
-                  <p class="text-center text-gray-700 text-lg">
+                  <p class="text-lg text-center text-gray-700">
                     Please fill the required field(s)
                   </p>
                 </div>

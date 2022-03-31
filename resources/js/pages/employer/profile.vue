@@ -7,11 +7,7 @@
           <v-row>
             <v-col cols="12" md="3" sm="4">
               <div class="pb-8">
-                <h2 class="mb-4 text-gray-700 h2" data-aos="fade-up">
-                  Made in <br />
-                  Tampa <br />
-                  Settings
-                </h2>
+                                      <h3 class="mb-4 text-gray-700 h3" data-aos="fade-up">Employer <br> Settings</h3>
               </div>
               <ul class="settingLinks">
                 <li
@@ -66,7 +62,7 @@
             <v-col cols="12" md="9" sm="8" class="pl-3 md:pl-8">
               <div class="pt-0 pb-0 sm:pb-10 sm:pt-11">
                 <h1 class="mb-4 text-gray-700 h1" data-aos="fade-up">
-                  Employer Profile Settings
+                  Your Profile
                 </h1>
               </div>
               <div class="max-w-2xl">
