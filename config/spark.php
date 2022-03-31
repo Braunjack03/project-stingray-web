@@ -42,10 +42,10 @@ return [
     |
     */
 
-    // 'brand' =>  [
-    //     'logo' => realpath(__DIR__.'/../public/svg/billing-logo.svg'),
+    //'brand' =>  [
+    //     'logo' => realpath(__DIR__.'/../public/images/made_in_tampa_logo.svg'),
     //     'color' => 'bg-gray-800',
-    // ],
+    //],
 
     /*
     |--------------------------------------------------------------------------
@@ -91,11 +91,27 @@ return [
             'default_interval' => 'monthly',
 
             'plans' => [
+
+
+                [
+                    'name' => 'Seed Plan',
+                    'short_description' => 'This is the start-up plan.',
+                    'monthly_id' => env('SEED_MTH'),
+                    'yearly_id' => env('SEED_YR'),
+                    'features' => [
+                        '2 Job Slots',
+                        'Create a company profile',
+                    ],
+                    'archived' => false,
+                ],
+
+
+
                 [
                     'name' => 'Start-up Plan',
                     'short_description' => 'This is the start-up plan.',
-                    'monthly_id' => 'price_1KDUCtGQLMXk2pHtW55rjL9x',
-                    'yearly_id' => 'price_1KDUCtGQLMXk2pHtKXixwQgW',
+                    'monthly_id' => env('STARTUP_MTH'),
+                    'yearly_id' => env('STARTUP_YR'),
                     'features' => [
                         '5 Job Slots',
                         'Create a company profile',
@@ -106,8 +122,8 @@ return [
                 [
                     'name' => 'Growth Plan',
                     'short_description' => 'This is the growth plan.',
-                    'monthly_id' => 'price_1KDUEKGQLMXk2pHtffaul2fw',
-                    'yearly_id' => 'price_1KDUEKGQLMXk2pHtRZVUSowg',
+                    'monthly_id' => env('GROWTH_MTH'),
+                    'yearly_id' => env('GROWTH_YR'),
                     'features' => [
                         '10 Job Slots',
                         'Create a company profile',

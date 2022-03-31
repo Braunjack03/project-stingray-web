@@ -15,7 +15,7 @@
                     <!-- Page header -->
                     <div class="max-w-3xl mx-auto text-center pb-9">
 
-                        <h1 class="mb-4 text-gray-700 h1" data-aos="fade-up">Profile Settings</h1>
+                        <h1 class="mb-4 text-gray-700 h1" data-aos="fade-up">Job Seeker Profile Settings</h1>
                     </div>
                     <!-- Form -->
                       <Message :message="errors.message" :hide="0" :type="'error'" />
