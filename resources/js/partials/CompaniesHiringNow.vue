@@ -5,8 +5,7 @@
         <!-- Section header -->
         <div class="max-w-3xl pb-6 mx-auto text-center md:pb-10">
           <h2 class="mb-4 h2 darkColor sectionTitle">
-            Get a comprehensive look inside innovative Tampa Bay companies hiring
-            now
+            Get to know the leading-edge Tampa Bay companies hiring now
           </h2>
         </div>
 
@@ -19,7 +18,7 @@
             <div class="mb-5 porcessIocn">
               <img src="images/process01.svg" width="30" />
             </div>
-            <h4 class="mb-2 h4 darkColor">Find a Working Lifestyle</h4>
+            <h4 class="mb-2 h4 darkColor">Love Your Job</h4>
             <p class="text-lg text-center textColor">
                 Access job search tools to
 help you easily find the
@@ -59,7 +58,7 @@ start-ups to crypto and Web
             <div class="mb-5 porcessIocn">
               <img src="images/process03.svg" width="30" />
             </div>
-            <h4 class="mb-2 h4 darkColor">Get Workplace Stats</h4>
+            <h4 class="mb-2 h4 darkColor">Peek Inside</h4>
             <p class="text-lg text-center textColor">
                 Gain access to reporting that
 offers a thorough description

@@ -19,7 +19,7 @@
                   class="pb-8 mb-4 text-center h2 darkColor md:pb-16 sectionTitle"
                   data-aos="fade-up"
                 >
-                Access the Latest Tampa Bay Tech News 
+                Stay in the Know with the Latest Tampa Bay Area Tech News 
                 </h2>
               </div>
               <v-row>
