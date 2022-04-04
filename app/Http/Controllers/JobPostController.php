@@ -52,7 +52,7 @@ class JobPostController extends Controller
                     $job_posts_count = $job_posts_count - $total;
                 } 
             }else{
-              $getPlanName = ["name"=>"Free Plan","slot"=>"2"];  
+              $getPlanName = ["name"=>"Free Plan","slot"=>"0"];  
             }
            
             $companies = CompanyProfile::where('uuid', $request->all()['c_id']);
@@ -105,7 +105,7 @@ class JobPostController extends Controller
                     $job_posts_count = $job_posts_count - $total;
                 }
             }else{
-              $getPlanName = ["name"=>"Free Plan","slot"=>"2"];  
+              $getPlanName = ["name"=>"Free Plan","slot"=>"0"];  
             }
             return Inertia::render('employer/create-job', ['job_categories' => $job_categories, 'locations' => $locations, 'company_uuid' => $uuid,'plan_name'=>$getPlanName,'job_posts_count' => $job_posts_count]);
         } catch (\Exception $e) {
@@ -211,7 +211,7 @@ class JobPostController extends Controller
                     $job_posts_count = $job_posts_count - $total;
                 }
             }else{
-              $getPlanName = ["name"=>"Free Plan","slot"=>"2"];  
+              $getPlanName = ["name"=>"Free Plan","slot"=>"0"];  
             }
 
 

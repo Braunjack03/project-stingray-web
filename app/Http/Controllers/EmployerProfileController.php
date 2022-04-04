@@ -56,7 +56,7 @@ class EmployerProfileController extends Controller
                     $job_post_counts = $job_post_counts - $total;
                 }
             }else{
-              $getPlanName = ["name"=>"Free Plan","slot"=>"2"];  
+              $getPlanName = ["name"=>"Free Plan","slot"=>"0"];  
             }
             if($user_profile)
             {
@@ -200,7 +200,7 @@ class EmployerProfileController extends Controller
                         $job_post_counts = $job_post_counts - $total;
                     }
                 }else{
-                $getPlanName = ["name"=>"Free Plan","slot"=>"2"];  
+                $getPlanName = ["name"=>"Free Plan","slot"=>"0"];  
                 }
                 $user_data = [
                         'name' => $data['name'],

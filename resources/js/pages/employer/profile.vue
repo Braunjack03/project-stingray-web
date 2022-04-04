@@ -42,7 +42,7 @@
                     >Company Profile</a
                   >
                 </li>
-                <li v-if="user.company_profile_count == 1">
+                <li v-if="user.company_profile_count == 1 && plan_name.name != 'Free Plan' && plan_name.slot != 0">
                   <a
                     :href="'/employer/jobs?c_id=' + companies[0].uuid"
                     class="text-lg text-gray-700 no-underline  hover:text-purple-600"

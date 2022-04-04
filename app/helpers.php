@@ -26,7 +26,7 @@
    		}
    		if($ends_at != NULL){
    			$plan_name = "Free Plan";
-   			$slot = "2";
+   			$slot = "0";
    		}
    		$paymentArr = ["name"=>$plan_name,"slot"=>$slot];
 		return $paymentArr;
