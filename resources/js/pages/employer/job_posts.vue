@@ -195,14 +195,14 @@ export default {
         },
     },
     mounted(){
-    if(this.companies_count > 0){
+    if(this.companies_count <= 0){
         this.$swal.fire({
-        text: "Please Complete your company profile before posting a job.",
+        text: "Please complete your company profile before posting a job.",
         icon: 'warning',
         showCancelButton: true,
         showCancelButton: false,
         showConfirmButton: false,
-        allowOutsideClick: false
+        allowOutsideClick: true
         });
       }
     },
