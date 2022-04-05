@@ -20,8 +20,8 @@
                             <li>
                               <a :href="'/employer/edit-company?id='+company_details.uuid" class="text-lg text-gray-700 no-underline hover:text-purple-600">Company Profile</a>
                             </li>
-                            <li>
-                              <a :href="'/employer/jobs?c_id='+company_details.uuid" class="text-lg text-purple-700 no-underline">Job Posts</a>
+                            <li v-if="plan_name.name != 'Free Plan' && plan_name.slot != 0">
+                              <a :href="'/employer/jobs?c_id='+company_details.uuid" class="text-lg text-purple-700 no-underline"> Job Posts</a>
                             </li>
                             <li>
                               <a href="/billing" class="text-lg text-gray-700 no-underline hover:text-purple-600">Subscription</a>

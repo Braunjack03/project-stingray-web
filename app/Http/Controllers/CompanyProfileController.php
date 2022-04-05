@@ -175,7 +175,7 @@ class CompanyProfileController extends Controller
                         $job_posts_count = $job_posts_count - $total;
                     }
                 }else{
-                  $getPlanName = ["name"=>"Free Plan","slot"=>"2"];  
+                  $getPlanName = ["name"=>"Free Plan","slot"=>"0"];  
                 }
                
                 if(isset($user) && isset($user->company_types)){
