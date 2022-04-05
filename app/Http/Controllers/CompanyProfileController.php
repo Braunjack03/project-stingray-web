@@ -46,7 +46,7 @@ class CompanyProfileController extends Controller
             if(!empty($planId)){
                 $getPlanName = getPlanName($planId['stripe_plan'],$planId['ends_at']);
             }else{
-              $getPlanName = ["name"=>"Free Plan","slot"=>"2"];  
+              $getPlanName = ["name"=>"Free Plan","slot"=>"0"];  
             }
             return Inertia::render('employer/create-company',['industries'=>$industries,'plan_name'=>$getPlanName,'job_posts_count' => $job_posts_count]);
         }catch (\Exception $e) {
