@@ -504,7 +504,7 @@ class CompanyProfileController extends Controller
             $is_company_belong_to = 0;
             if(Auth::user() != null){
                 $is_user_company = CompanyProfile::where(['user_id' => Auth::user()->id,'slug' => $slug])->first();
-                if($is_user_company != 0){
+                if($is_user_company != null){
                     $is_company_belong_to = 1;
                 }
             }
