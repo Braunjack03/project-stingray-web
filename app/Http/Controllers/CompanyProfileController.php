@@ -500,8 +500,15 @@ class CompanyProfileController extends Controller
             $job_posts_count = $job_posts_query->count();
 
             $job_posts = $job_posts_query->paginate(5)->onEachSide(0);
-
-            return Inertia::render('single-company',['data'=>$company,'articles'=>$company->articles,'job_posts_count'=>$job_posts_count,'job_posts'=>$job_posts]);
+            /* if company belong to loggedin user */
+            $is_company_belong_to = 0;
+            if(Auth::user() != null){
+                $is_user_company = CompanyProfile::where(['user_id' => Auth::user()->id,'slug' => $slug])->first();
+                if($is_user_company->count() > 0){
+                    $is_company_belong_to = 1;
+                }
+            }
+            return Inertia::render('single-company',['data'=>$company,'articles'=>$company->articles,'job_posts_count'=>$job_posts_count,'job_posts'=>$job_posts,'is_company_belong_to' => $is_company_belong_to]);
 
         }catch (\Exception $e) {
             $message = $e->getMessage();

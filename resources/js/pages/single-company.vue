@@ -14,7 +14,7 @@
             <h2 class="post-title mb-0 text-gray-700">
               {{ data.name }}
               <v-btn
-                v-if="data.unclaimed == 1"
+                v-if="data.unclaimed == 1 && is_company_belong_to == 0"
                 class="link-text"
                 text
                 @click="claimProfile(data.uuid)"
@@ -346,6 +346,7 @@ export default {
     articles: Array || Object,
     selected: String,
     job_posts_count: Number,
+    is_company_belong_to: Number,
   },
   data: () => ({
     message: '',
