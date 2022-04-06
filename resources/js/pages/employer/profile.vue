@@ -42,7 +42,7 @@
                     >Company Profile</a
                   >
                 </li>
-                <li>
+                <li v-if="companies[0]">
                   <a
                     :href="'/employer/jobs?c_id=' + companies[0].uuid"
                     class="text-lg text-gray-700 no-underline  hover:text-purple-600"
