@@ -9,23 +9,7 @@
         <div class="pt-32 pb-12 md:pt-40 md:pb-20">
           <v-row>
                <v-col cols="12" md="3" sm="4">
-                <div class="pb-8">
-                                        <h3 class="mb-4 text-gray-700 h3" data-aos="fade-up">Employer <br> Settings</h3>
-                </div>
-                <ul class="settingLinks">
-                   <li v-if="plan_name.name" class="text-lg text-gray-700 no-underline">
-                        Subscribed to the {{plan_name.name}} Using {{job_posts_count}}/{{plan_name.slot}} job slots (<a class="text-purple-600 upgrade-link" href="/billing">upgrade</a>)
-                      </li>
-                    <li>
-                      <a href="/employer/profile" class="text-lg text-gray-700 no-underline hover:text-purple-600">Your Profile</a>
-                    </li>
-                    <li>
-                      <a href="/employer/create-company" class="text-lg text-purple-700 no-underline">Company Profile</a>
-                    </li>
-                    <li>
-                      <a href="/billing" class="text-lg text-gray-700 no-underline hover:text-purple-600">Subscription</a>
-                    </li>
-                </ul>
+                  <Sidebar :companies="user" :plan="plan_name" :job_posts_count="job_posts_count"/>
                </v-col>
 
                <v-col cols="12" md="9" sm="8" class="pl-3 md:pl-8">
@@ -459,12 +443,14 @@ import { validationMixin } from 'vuelidate';
 import { required } from 'vuelidate/lib/validators';
 import Layout from '../Layout';
 import Message from '../../partials/Messages.vue';
+import Sidebar from '../../partials/Sidebar.vue';
 
 export default {
   components: {
     Head,
     Layout,
     Message,
+    Sidebar
   },
   mixins: [validationMixin],
   validations: {
@@ -488,6 +474,11 @@ export default {
       items: ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'],
 
     };
+  },
+  computed: {
+    isLoggedIn() {
+      return this.$page.props.auth.user;
+    },
   },
   /* data: () => ({
         industry:[],
