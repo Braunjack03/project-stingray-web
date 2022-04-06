@@ -8,7 +8,7 @@
                     <v-row>
     
                         <v-col cols="12" md="3" sm="4">
-                            <Sidebar :companies="user.company_profile_uuid" :plan="plan_name" :job_posts_count="job_posts_count" />
+                            <Sidebar :company_uuid="user.company_profile_uuid" :plan="plan_name" :job_posts_count="job_posts_count" />
                         </v-col>
     
                         <v-col cols="12" md="9" sm="8" class="pl-3 md:pl-8">

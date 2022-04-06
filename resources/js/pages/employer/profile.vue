@@ -6,7 +6,7 @@
         <div class="pb-12 pt-36 md:pt-40 md:pb-20">
           <v-row>
             <v-col cols="12" md="3" sm="4">
-                <Sidebar :companies="companies[0].uuid" :plan="plan_name" :job_posts_count="job_posts_count"/>
+                <Sidebar :company_uuid="(companies.length > 0) ? companies[0].uuid : ''" :plan="plan_name" :job_posts_count="job_posts_count"/>
             </v-col>
 
             <v-col cols="12" md="9" sm="8" class="pl-3 md:pl-8">
