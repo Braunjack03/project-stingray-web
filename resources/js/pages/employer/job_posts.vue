@@ -36,6 +36,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="flex button-outter">
+                                                        <Link :href="'/jobs/'+company_details.slug+'/'+data.slug" class="pt-3 pb-3 pl-2 text-lg text-white bg-purple-600 editJobsBtn hover:bg-purple-700 pr-7">View</Link>
                                                         <Link :href="'/employer/edit-job?id=' + data.uuid" class="pt-3 pb-3 pl-8 text-lg text-white bg-purple-600 editJobsBtn hover:bg-purple-700 pr-7">Edit</Link>
                                                         <v-btn class="text-lg text-white bg-purple-600 hover:bg-purple-700" v-on:click="deletejob(data.uuid)">Delete</v-btn>
                                                     </div>
