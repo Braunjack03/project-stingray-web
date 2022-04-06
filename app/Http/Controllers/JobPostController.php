@@ -317,7 +317,7 @@ class JobPostController extends Controller
               
             if($job_post != null && $job_post != '')
             {
-                return Inertia::render('single-job-post', ['data' => $job_post]);
+                return Inertia::render('single-job-post', ['data' => $job_post,'is_authenticated' => Auth::check()]);
             }else{
                 return $this->sendErrorResponse('404','');
             }
