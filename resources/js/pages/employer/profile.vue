@@ -6,57 +6,7 @@
         <div class="pb-12 pt-36 md:pt-40 md:pb-20">
           <v-row>
             <v-col cols="12" md="3" sm="4">
-              <div class="pb-8">
-                                      <h3 class="mb-4 text-gray-700 h3" data-aos="fade-up">Employer <br> Settings</h3>
-              </div>
-              <ul class="settingLinks">
-                <li
-                  v-if="plan_name.name"
-                  class="text-lg text-gray-700 no-underline"
-                >
-                  Subscribed to the {{ plan_name.name }} Using
-                  {{ job_posts_count }}/{{ plan_name.slot }} job slots (<a
-                    class="text-purple-600 upgrade-link"
-                    href="/billing"
-                    >upgrade</a
-                  >)
-                </li>
-                <li>
-                  <a
-                    href="/employer/profile"
-                    class="text-lg text-purple-700 no-underline"
-                    >Your Profile</a
-                  >
-                </li>
-                <li v-if="user.company_profile_count == 1">
-                  <a
-                    :href="'/employer/edit-company?id=' + companies[0].uuid"
-                    class="text-lg text-gray-700 no-underline  hover:text-purple-600"
-                    >Company Profile</a
-                  >
-                </li>
-                <li v-if="user.company_profile_count < 1">
-                  <a
-                    href="/employer/create-company"
-                    class="text-lg text-gray-700 no-underline  hover:text-purple-600"
-                    >Company Profile</a
-                  >
-                </li>
-                <li v-if="companies[0]">
-                  <a
-                    :href="'/employer/jobs?c_id=' + companies[0].uuid"
-                    class="text-lg text-gray-700 no-underline  hover:text-purple-600"
-                    >Job Posts</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="/billing"
-                    class="text-lg text-gray-700 no-underline  hover:text-purple-600"
-                    >Subscription</a
-                  >
-                </li>
-              </ul>
+                <Sidebar :companies="companies[0].uuid" :plan="plan_name" :job_posts_count="job_posts_count"/>
             </v-col>
 
             <v-col cols="12" md="9" sm="8" class="pl-3 md:pl-8">
@@ -248,6 +198,7 @@ import { Head, Link } from "@inertiajs/inertia-vue";
 import { validationMixin } from "vuelidate";
 import { required } from "vuelidate/lib/validators";
 import Message from "../../partials/Messages.vue";
+import Sidebar from "../../partials/Sidebar.vue";
 
 export default {
   mixins: [validationMixin],
@@ -260,6 +211,7 @@ export default {
     Layout,
     Link,
     Message,
+    Sidebar
   },
   props: {
     errors: Object,
@@ -301,6 +253,12 @@ export default {
     onFileChange(e) {
       this.user.profile_image_src = URL.createObjectURL(this.profile_image);
     },
+    showJobPopup(){
+         this.$swal.fire({
+          text: "Please complete your company profile before posting a job.",
+          icon: 'warning',
+        });
+    }
   },
 };
 </script>
