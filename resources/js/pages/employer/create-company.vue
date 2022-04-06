@@ -446,6 +446,11 @@ import Message from '../../partials/Messages.vue';
 import Sidebar from '../../partials/Sidebar.vue';
 
 export default {
+  name: 'Create Company',
+  metaInfo: {
+    title: 'Create Company',
+    titleTemplate: '%s | Made in Tampa'
+  },
   components: {
     Head,
     Layout,

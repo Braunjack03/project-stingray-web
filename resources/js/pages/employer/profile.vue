@@ -201,6 +201,11 @@ import Message from "../../partials/Messages.vue";
 import Sidebar from "../../partials/Sidebar.vue";
 
 export default {
+    name: 'Employer Profile',
+    metaInfo: {
+        title: 'Employer Profile',
+        titleTemplate: '%s | Made in Tampa'
+    },
   mixins: [validationMixin],
   validations: {
     name: { required },
