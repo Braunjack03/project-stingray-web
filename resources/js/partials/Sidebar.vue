@@ -5,7 +5,7 @@
         </div>
         <ul class="settingLinks">
             <li v-if="plan" class="text-lg text-gray-700 no-underline">
-                Subscribed to the {{ plan.name }} Using {{ job_posts_count }}/{{ plan.slot }} job slots (<Link class="text-purple-600 upgrade-link" href="/billing">upgrade</Link
+                Subscribed to the {{ plan.name }} Using {{ job_posts_count }}/{{ plan.slot }} job slots (<a class="text-purple-600 upgrade-link" href="/billing">upgrade</a
                       >)
                     </li>
                     <li>
