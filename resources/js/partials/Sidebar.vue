@@ -20,7 +20,7 @@
                       <Link
                         :href="'/employer/edit-company?id=' + company_uuid"
                         class="text-lg teay-700xt-gr no-underline hover:text-purple-600"
-                        :class="(currentUrl == '/employer/create-company') ? 'text-purple-700' : 'text-gray-700'"
+                        :class="(currentUrl == '/employer/edit-company') ? 'text-purple-700' : 'text-gray-700'"
                         >Company Profile</Link
                       >
                     </li>

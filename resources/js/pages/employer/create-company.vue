@@ -231,11 +231,11 @@
                       </label>
                     </li>
                   </ul>
-                  <div
-                    v-if="errors.industry"
-                    class="mt-2 error"
+                    <div
+                    v-if="$v.industry.$error && !$v.industry.required"
+                    class="text-lg text-red-500"
                   >
-                    {{ errors.industry }}
+                    Please Select at least one Company Industry
                   </div>
                 </div>
               </div>
@@ -461,6 +461,7 @@ export default {
   validations: {
     name: { required },
     local_employees: { required },
+    industry: {required},
   },
   props: {
     errors: Object,
