@@ -4,10 +4,9 @@
         <section class="relative">
             <div class="max-w-6xl px-4 mx-auto sm:px-6">
                 <div class="pt-32 pb-12 md:pt-40 md:pb-20">
-    
                     <v-row>
                         <v-col cols="12" md="3" sm="4">
-                            <Sidebar :companies="company_details.uuid" :plan="plan_name" :job_posts_count="job_posts_count" />
+                            <Sidebar :company_uuid="company_details.uuid" :plan="plan_name" :job_posts_count="job_posts_count" />
                         </v-col>
     
                         <v-col cols="12" md="9" sm="8" class="pl-3 md:pl-8">

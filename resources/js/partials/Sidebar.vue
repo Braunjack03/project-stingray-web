@@ -11,7 +11,8 @@
                     <li>
                       <Link
                         href="/employer/profile"
-                        class="text-lg text-gray-700 no-underline"
+                        class="text-lg no-underline"
+                        :class="(currentUrl == '/employer/profile') ? 'text-purple-700' : 'text-gray-700'"
                         >Your Profile</Link
                       >
                     </li>

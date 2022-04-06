@@ -10,7 +10,7 @@
             <v-row>
             
             <v-col cols="12" md="3" sm="4">
-                <Sidebar :companies="company_uuid" :plan="plan_name" :job_posts_count="job_posts_count"/>
+                <Sidebar :company_uuid="company_uuid" :plan="plan_name" :job_posts_count="job_posts_count"/>
                </v-col>
 
                <v-col cols="12" md="9" sm="8" class="pl-3 md:pl-8">
