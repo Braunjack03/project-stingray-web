@@ -198,9 +198,10 @@
                   <label class="block mb-1 text-lg font-medium text-gray-700">Company Description</label>
                   <v-textarea
                     v-model="user.description"
-                    rows="2"
+                    rows="4"
                     class="w-full text-gray-700 form-input input-field-outer"
                     placeholder="Company Description"
+                    required
                   />
                   <div
                     v-if="errors.description"
