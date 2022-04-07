@@ -1594,6 +1594,37 @@ blockquote {
     margin-inline-end: 0px !important;
 }
 
+
+/* add-html-props */
+
+.add-html-props h1 {
+    font-size: 2.5rem;
+}
+
+.add-html-props h2 {
+    font-size: 2.25rem;
+}
+
+.add-html-props h3 {
+    font-size: 1.875rem;
+}
+
+.add-html-props h4 {
+    font-size: 1.5rem;
+}
+
+.add-html-props h5 {
+    font-size: 1.25rem;
+}
+
+.add-html-props h6 {
+    font-size: 1rem;
+}
+
+.add-html-props p {
+    font-size: 1rem;
+}
+
 .add-html-props span {
     font-size: 1rem;
 }
@@ -1623,7 +1654,7 @@ blockquote {
     }
 }
 
-@media (max-width : 1023.98px) {
+@media (max-width: 1023.98px) {
     .howItWork--list li span {
         flex-basis: 50px;
         height: 50px;
@@ -1702,7 +1733,7 @@ blockquote {
     }
 }
 
-@media (max-width : 767px) {
+@media (max-width: 767px) {
     .bannerForm .filter-opt .form-control,
     .bannerForm .filter-opt .form-control.locationField,
     .bannerForm .v-select {
@@ -1879,7 +1910,7 @@ blockquote {
     }
 }
 
-@media (max-width : 451px) {
+@media (max-width: 451px) {
     .bannerForm .filter-opt .form-control,
     .bannerForm .filter-opt .form-control.locationField {
         width: 100%;
@@ -1898,7 +1929,7 @@ blockquote {
     }
 }
 
-@media (max-width : 400px) {
+@media (max-width: 400px) {
     .verifyEmailText>div {
         padding-right: 24px;
         font-size: .8rem;
