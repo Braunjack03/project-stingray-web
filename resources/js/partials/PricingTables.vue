@@ -13,7 +13,7 @@
             data-aos-delay="200"
           >
             Get the Made in Tampa plan that fits your needs at a special
-            introductory price and let candidates come to you.
+            introductory price... and let qualified candidates come to you.
           </p>
         </div>
 
@@ -45,7 +45,7 @@
           </div>
 
           <div
-            class="grid items-start max-w-sm gap-8 mx-auto  lg:grid-cols-3 lg:gap-6 lg:max-w-none"
+            class="grid items-start max-w-sm gap-8 mx-auto lg:grid-cols-3 lg:gap-6 lg:max-w-none"
           >
             <!-- Pricing table 1 -->
             <div
@@ -121,14 +121,14 @@
               <div class="p-3 mt-6 border border-gray-700">
                 <span v-if="!isLoggedIn">
                   <a
-                    class="w-full text-white bg-purple-600  btn-sm hover:bg-purple-700"
+                    class="w-full text-white bg-purple-600 btn-sm hover:bg-purple-700"
                     href="/login"
                     >Join Today</a
                   >
                 </span>
                 <span v-if="isLoggedIn">
                   <a
-                    class="w-full text-white bg-purple-600  btn-sm hover:bg-purple-700"
+                    class="w-full text-white bg-purple-600 btn-sm hover:bg-purple-700"
                     href="/billing"
                     >Subscribe Now</a
                   >
@@ -231,14 +231,14 @@
               <div class="p-3 mt-6 border border-gray-700">
                 <span v-if="!isLoggedIn">
                   <a
-                    class="w-full text-white bg-purple-600  btn-sm hover:bg-purple-700"
+                    class="w-full text-white bg-purple-600 btn-sm hover:bg-purple-700"
                     href="/login"
                     >Join Today</a
                   >
                 </span>
                 <span v-if="isLoggedIn">
                   <a
-                    class="w-full text-white bg-purple-600  btn-sm hover:bg-purple-700"
+                    class="w-full text-white bg-purple-600 btn-sm hover:bg-purple-700"
                     href="/billing"
                     >Subscribe Now</a
                   >
@@ -346,14 +346,14 @@
               <div class="p-3 mt-6 border border-gray-700">
                 <span v-if="!isLoggedIn">
                   <a
-                    class="w-full text-white bg-purple-600  btn-sm hover:bg-purple-700"
+                    class="w-full text-white bg-purple-600 btn-sm hover:bg-purple-700"
                     href="/login"
                     >Join Today</a
                   >
                 </span>
                 <span v-if="isLoggedIn">
                   <a
-                    class="w-full text-white bg-purple-600  btn-sm hover:bg-purple-700"
+                    class="w-full text-white bg-purple-600 btn-sm hover:bg-purple-700"
                     href="/billing"
                     >Subscribe Now</a
                   >
@@ -364,10 +364,10 @@
 
           <!-- Bottom infobox -->
           <div
-            class="flex flex-col items-center justify-between mt-12  lg:flex-row lg:mt-6 lg:py-8 lg:border-t lg:border-b lg:border-gray-700"
+            class="flex flex-col items-center justify-between mt-12 lg:flex-row lg:mt-6 lg:py-8 lg:border-t lg:border-b lg:border-gray-700"
           >
             <div
-              class="mb-4 text-lg font-medium text-center text-gray-700  lg:text-left lg:mb-0"
+              class="mb-4 text-lg font-medium text-center text-gray-700 lg:text-left lg:mb-0"
             >
               Expecting more than 1000 Active End Users?
             </div>
