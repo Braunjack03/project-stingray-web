@@ -16,7 +16,7 @@
         "laravel/tinker": "^2.5",
         "league/flysystem-aws-s3-v3": "^1.0",
         "league/flysystem-cached-adapter": "^1.1",
-        "laravel/spark-stripe": "^1.2",
+        "laravel/spark-stripe": "^1.2.6",
         "mpociot/vat-calculator": "^2.5"
     },
     "require-dev": {
