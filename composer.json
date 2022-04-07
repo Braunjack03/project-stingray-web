@@ -13,11 +13,12 @@
         "inertiajs/inertia-laravel": "^0.5.1",
         "laravel/framework": "^8.40",
         "laravel/legacy-factories": "^1.1",
+        "laravel/spark-stripe": "^1.2.6",
         "laravel/tinker": "^2.5",
         "league/flysystem-aws-s3-v3": "^1.0",
         "league/flysystem-cached-adapter": "^1.1",
-        "laravel/spark-stripe": "^1.2.6",
-        "mpociot/vat-calculator": "^2.5"
+        "mpociot/vat-calculator": "^2.5",
+        "spatie/yaml-front-matter": "^2.0",
     },
     "require-dev": {
         "facade/ignition": "^2.5",
