@@ -168,9 +168,10 @@ class JobPostController extends Controller
                 unset($data['c_id']);
                 $data['slug'] = $this->createJobPostSlug($data['name']);
                 JobPost::create($data);
-
+                $slug = $data['slug'];
+                $company_slug = CompanyProfile::where('id', $company_id)->first()['slug'];
                 ActivityLog::addToLog(__('activitylogs.job_created'), 'job created');
-                return redirect('employer/jobs?c_id=' . $company_id)->with(['message' => __('messages.job_created')]);
+                return redirect('employer/jobs?c_id=' . $company_id)->with(['message' => __('messages.job_created')." <a class='toster-anchor' href=/jobs/".$company_slug."/".$slug.">View Job Post</a>"]);
             } catch (\Exception $e) {
                 $message = $e->getMessage();
                 return $this->sendErrorResponse($redirect_page, $message);
@@ -266,12 +267,13 @@ class JobPostController extends Controller
             try {
                 $job = JobPost::where('uuid', $job_uuid);
                 $data['slug'] = $this->createJobPostSlug($data['name']);
+                $slug = $data['slug'];
                 $job->update($data);
                 $job_data = JobPost::where('uuid', $job_uuid)->first();
                 $company_profile_id = CompanyProfile::select('uuid')->where('id', $job_data->company_profile_id)->first()['uuid'];
-
+                $company_slug = CompanyProfile::where('id', $job_data->company_profile_id)->first()['slug'];
                 ActivityLog::addToLog(__('activitylogs.job_updated'), 'job updated');
-                return redirect('employer/jobs?c_id=' . $company_profile_id)->with(['message' => __('messages.job_updated')]);
+                return redirect('employer/jobs?c_id=' . $company_profile_id)->with(['message' => __('messages.job_updated')." <a class='toster-anchor' href=/jobs/".$company_slug."/".$slug.">View Job Post</a>"]);
             } catch (\Exception $e) {
                 $message = $e->getMessage();
                 return $this->sendErrorResponse('employer/jobs', $message);

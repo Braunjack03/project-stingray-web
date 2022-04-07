@@ -1594,6 +1594,15 @@ blockquote {
     margin-inline-end: 0px !important;
 }
 
+.add-html-props span {
+    font-size: 1rem;
+}
+
+.toster-anchor {
+    text-decoration: underline;
+    font-size: 1.250rem;
+}
+
 
 /* Media */
 
