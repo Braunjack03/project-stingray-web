@@ -500,7 +500,7 @@ class CompanyProfileController extends Controller
             }
             $job_posts_query = JobPost::select('job_posts.name','job_posts.apply_url as apply_url','job_posts.created_at','job_posts.slug as job_slug','locations.name as location','company_profiles.name as company_name','company_profiles.slug as company_slug','company_profiles.state_abbr as state','company_profiles.city')
             ->leftjoin('company_profiles','job_posts.company_profile_id','company_profiles.id')
-            ->leftjoin('locations','company_profiles.location_id','locations.id')
+            ->leftjoin('locations','job_posts.location_id','locations.id')
             ->where('company_profile_id',$company['id'])->orderBy('job_posts.created_at','DESC');
 
             $job_posts_count = $job_posts_query->count();
