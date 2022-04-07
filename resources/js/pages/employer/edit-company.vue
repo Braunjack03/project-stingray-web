@@ -195,7 +195,7 @@
 
               <div class="flex flex-wrap mb-3">
                 <div class="w-full px-3">
-                  <label class="block mb-1 text-lg font-medium text-gray-700">Company Description</label>
+                  <label class="block mb-1 text-lg font-medium text-gray-700">Company Description<span class="text-red-600">*</span></label>
                   <v-textarea
                     v-model="user.description"
                     rows="4"
@@ -215,29 +215,12 @@
               <div class="flex flex-wrap mb-3">
                 <div class="w-full px-3">
                   <label class="block mb-1 text-lg font-medium text-gray-700">Company Industry (select up to 3)  </label>
-                  <ul class="industries-list companyIndustry__list">
-                    <li
-                      v-for="(item, index) in industries"
-                      :key="index"
-                      :value="item"
-                    >
-                      <label>
-                        <input
-                          :id="'test_'+index"
-                          v-model="industry"
-                          type="checkbox"
-                          :value="index"
-                          :label="item"
-                          :disabled="industry.length > 2 && industry.indexOf(index) === -1"
-                        > {{ item }}
-                      </label>
-                    </li>
-                  </ul>
-                   <div
-                    v-if="$v.industry.$error && !$v.industry.required"
-                    class="text-lg text-red-500"
+                
+                  <div
+                    v-if="errors.industry"
+                    class="mt-2 error"
                   >
-                    Please Select at least one Company Industry
+                    {{ errors.industry }}
                   </div>
                 </div>
               </div>
@@ -466,7 +449,6 @@ export default {
   validations: {
     name: { required },
     local_employees: { required },
-    industry:{required}
   },
   props: {
     errors: Object,
