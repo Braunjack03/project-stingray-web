@@ -32,7 +32,7 @@
       >
         <span class="block sm:inline text-lg" v-html="message"></span>
         <span
-          class="absolute top-0 bottom-0 right-0 px-4 py-3"
+          class="absolute top-0 bottom-0 right-0 px-2 py-3"
           @click="hideMessage"
         >
           <svg

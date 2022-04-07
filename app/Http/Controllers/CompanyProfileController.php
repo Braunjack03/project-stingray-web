@@ -371,7 +371,8 @@ class CompanyProfileController extends Controller
                     'job_posts_count' => $job_posts_count,
                     'industryTest'=>$names
                 ];
-                return $this->sendResponseWithData('employer/edit-company',__('messages.company_profile_updated'),$data);
+                //return $this->sendResponseWithData('employer/edit-company',__('messages.company_profile_updated'),$data);
+                return redirect('employer/edit-company?id=' . $user->uuid)->with(['message' => __('messages.company_profile_updated')." <a class='toster-anchor' href=/companies/".$user->slug.">View Profile</a>"]);
             //return redirect()->route('edit.company',['id'=>$requested_data['id']])->with(['message' => __('messages.company_profile_updated')]);
      
             }catch (\Exception $e) {
