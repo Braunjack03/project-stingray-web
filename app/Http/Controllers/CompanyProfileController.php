@@ -82,10 +82,12 @@ class CompanyProfileController extends Controller
         $messages = [
             'max' => 'The company logo must not be greater than 1 MB',
             'name.required' => 'Company name is required',
+            'description.required' => 'Company description is required',
         ]; 
       
         $validator = Validator::make($data, [
             'name' => 'required',
+            'description' => 'required',
             'local_employees' => 'nullable|numeric',
             'global_employees' => 'nullable|numeric',
             'logo_image_url' => 'nullable|mimes:jpeg,png,jpg,gif|max:1000',

@@ -196,12 +196,13 @@
 
               <div class="flex flex-wrap mb-3">
                 <div class="w-full px-3">
-                  <label class="block mb-1 text-lg font-medium text-gray-700">Company Description</label>
+                  <label class="block mb-1 text-lg font-medium text-gray-700">Company Description<span class="text-red-600">*</span></label>
                   <v-textarea
                     v-model="user.description"
-                    rows="2"
+                    rows="4"
                     class="w-full text-gray-700 form-input input-field-outer"
                     placeholder="Company Description"
+                    required
                   />
                   <div
                     v-if="errors.description"
