@@ -283,6 +283,13 @@ class CompanyProfileController extends Controller
                     $featured_image = Storage::disk('s3Company')->putFileAs('company/'.$user_uuid, $headerimage,$headerimage_name);
                 }
                 
+                if(isset($user) && $user->name != $data['name']){
+                    $updated_slug = $this->createCompanySlug($data['name']);
+                }else{
+                    $updated_slug = $user->slug;
+                }
+
+                
                 $profile_data = [
                     "name"=>$data['name'],
                     'user_id' => $data['user_id'],
@@ -302,7 +309,7 @@ class CompanyProfileController extends Controller
                     'instagram_user' => $data['instagram_user'],
                     'logo_image_url' => $image_name,
                     'featured_image_url' => $headerimage_name,
-                    'slug' => $this->createCompanySlug($data['name']),
+                    'slug' => $updated_slug,
                 ];
                 
               

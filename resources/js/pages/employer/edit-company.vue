@@ -102,7 +102,13 @@
                     v-if="$v.local_employees.$error && !$v.local_employees.required"
                     class="text-lg text-red-500"
                   >
-                    Number of local employees
+                    Number of local employees is required
+                  </div>
+                  <div
+                    v-if="$v.local_employees.$error && !$v.local_employees.numeric"
+                    class="text-lg text-red-500"
+                  >
+                    Number of local employees should be numeric
                   </div>
                 </div>
               </div>
@@ -449,7 +455,7 @@
 <script>
 import { Head } from '@inertiajs/inertia-vue';
 import { validationMixin } from 'vuelidate';
-import { required } from 'vuelidate/lib/validators';
+import { required,numeric } from 'vuelidate/lib/validators';
 import Layout from '../Layout.vue';
 import Message from '../../partials/Messages.vue';
 import Sidebar from '../../partials/Sidebar.vue';
@@ -464,7 +470,7 @@ export default {
   mixins: [validationMixin],
   validations: {
     name: { required },
-    local_employees: { required },
+    local_employees: { required,numeric },
   },
   props: {
     errors: Object,

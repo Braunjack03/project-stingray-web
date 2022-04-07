@@ -266,7 +266,14 @@ class JobPostController extends Controller
         } else {
             try {
                 $job = JobPost::where('uuid', $job_uuid);
-                $data['slug'] = $this->createJobPostSlug($data['name']);
+                //$data['slug'] = $this->createJobPostSlug($data['name']);
+                $jobData = $job->first();
+                if(isset($jobData) && $jobData->name != $data['name']){
+                    $data['slug'] = $this->createJobPostSlug($data['name']);
+                }else{
+                    $data['slug'] = $jobData->slug;
+                }
+
                 $slug = $data['slug'];
                 $job->update($data);
                 $job_data = JobPost::where('uuid', $job_uuid)->first();
