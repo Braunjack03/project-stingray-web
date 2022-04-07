@@ -15,8 +15,9 @@
                <v-col cols="12" md="9" sm="8" class="pl-3 md:pl-8">
                   <div class="pt-0 pb-0 sm:pb-10 sm:pt-11">
                       <h1 class="mb-4 text-gray-700 h1" data-aos="fade-up">Company Profile</h1>
+                  <a style="color:#000;" class='text-lg teay-700xt-gr no-underline hover:text-purple-600' :href="'/companies/' + user.slug"> View Profile</a>
                   </div>
-                    <div class="max-w-2xl">
+                  <div class="max-w-2xl">
 
             <Message
               :message="errors.message"
@@ -215,7 +216,22 @@
               <div class="flex flex-wrap mb-3">
                 <div class="w-full px-3">
                   <label class="block mb-1 text-lg font-medium text-gray-700">Company Industry (select up to 3)  </label>
-                
+                  <ul class="industries-list companyIndustry__list">
+                    <li
+                      v-for="(item, index) in industries"
+                      :key="index"
+                    >  
+                      <label>
+                        <input
+                          v-model="industry"
+                          type="checkbox"
+                          :value="index"
+                          :disabled="industry.length > 2 && industry.indexOf(index) === -1"
+                          number
+                        > {{ item }}
+                      </label>
+                    </li>
+                  </ul>
                   <div
                     v-if="errors.industry"
                     class="mt-2 error"
