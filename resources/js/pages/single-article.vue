@@ -4,22 +4,22 @@
       <title>Made in Tampa - {{ data.title }}</title>
     </Head>
     <section class="relative singleArticles--outer" data-app>
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 py-10 md:py-20 relative">
-        <v-row class="blogPost--block singlePage--articles justify-center mt-8">
+      <div class="relative max-w-6xl px-4 py-10 mx-auto sm:px-6 md:py-20">
+        <v-row class="justify-center mt-8 blogPost--block singlePage--articles">
           <v-col cols="12" md="9">
             <div class="postBlock">
               <div class="postBlock--content">
-                <h3 class="postBlock--title text-center md:text-left">
+                <h3 class="text-center postBlock--title md:text-left">
                   {{ data.title }}
                 </h3>
                 <p class="text-center md:text-left">
                   {{ data.sub_title }}
                 </p>
-                <div class="postPersonal--detail justify-between mobileJustify">
+                <div class="justify-between postPersonal--detail mobileJustify">
                   <div class="flex items-center">
-                    <img src="/images/news-author-01.jpg" alt="post-images" />
+                    <img src="/images/news-author-01.png" alt="post-images" />
                     <p>
-                      <a href="#">{{ data.author_name }} </a> -
+                      {{ data.author_name }} -
                       {{
                         new Date(data.publish_date).toDateString().slice(4, 10) +
                         "," +
@@ -54,7 +54,7 @@
           </v-col>
         </v-row>
 
-        <v-row class="blogPost--block mb-0 md:mb-6 singlePage--content justify-center">
+        <v-row class="justify-center mb-0 blogPost--block md:mb-6 singlePage--content">
           <v-col cols="12" md="9">
             <div class="postBlock--content">
               <p><span v-html="data.content" /></p>

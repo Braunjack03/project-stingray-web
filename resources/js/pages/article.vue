@@ -1,16 +1,16 @@
 <template>
    <Layout>
             <section data-app>
-               <div class="max-w-6xl mx-auto px-4 sm:px-6 py-10 md:py-20 relative">
+               <div class="relative max-w-6xl px-4 py-10 mx-auto sm:px-6 md:py-20">
                   <v-row>
                      <v-col cols="12" md="8">
                         <div class="pt-16 pb-2 md:pb-8 company-page-title">
-                           <h1 class="h1 text-gray-700 text-center md:text-left">The Latest Tampa Bay Technology and Start-up News</h1>
+                           <h1 class="text-center text-gray-700 h1 md:text-left">The Latest Tampa Bay Technology and Start-up News</h1>
                         </div>
                      </v-col>
                   </v-row>
 
-                  <v-row class="blogPost--block blogPostTop--block mb-0 md:mb-6 items-center">
+                  <v-row class="items-center mb-0 blogPost--block blogPostTop--block md:mb-6">
                      <v-col cols="12" md="6">
                         <div class="postBlock">
                            <div class="postBlock--img">
@@ -28,7 +28,7 @@
                                <h3 class="postBlock--title"><Link :href="'/articles/'+latest.slug">{{latest.title}}</Link></h3>
                                <p>{{latest.content.substring(0,255) | stripHTML}}</p>
                                <div class="postPersonal--detail">
-                                  <img src="/images/news-author-01.jpg" alt="post-images">
+                                  <img src="/images/news-author-01.png" alt="post-images">
                                   <p><a href="#">{{latest.author_name}} </a> - {{new Date(latest.publish_date).toDateString().slice(4,10)+','+new Date(latest.publish_date).toDateString().slice(10)}} </p>
                                </div>
                            </div>
