@@ -37,7 +37,7 @@
                                     <v-text-field type="password" v-model="password" :class="{ 'error--text': $v.password.$error }" class="form-input input-field-outer w-full text-gray-700" @input="$v.password.$touch()" @blur="$v.password.$touch()" placeholder="Password (at least 8 characters)"
                                         autocomplete required></v-text-field>
                                     <div v-if="$v.password.$error && !$v.password.required" class="text-red-500 text-lg ">Password is required</div>
-                                    <div v-if="password.trim().length > 0 && $v.password.$error && !$v.password.minLength" class="text-red-500 text-lg ">The password must be at least 8 characters.</div>
+                                    <!-- <div v-if="password.trim().length > 0 && $v.password.$error && !$v.password.minLength" class="text-red-500 text-lg ">The password must be at least 8 characters.</div> -->
     
                                 </div>
                             </div>
@@ -85,7 +85,7 @@ export default {
     mixins: [validationMixin],
     validations: {
         email: { required, email },
-        password: { required, minLength: minLength(8) }
+        password: { required }
     },
     computed: {
         isLoggedIn() {

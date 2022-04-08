@@ -5,7 +5,7 @@
             <div class="max-w-6xl px-4 mx-auto sm:px-6">
                 <div class="pt-32 pb-12 md:pt-40 md:pb-20">
                     <v-row>
-                        <v-col cols="12" md="3" sm="4">
+                        <v-col cols="12" md="3" sm="4" class="sm:pt-16">
                             <Sidebar :company_uuid="company_details.uuid" :plan="plan_name" :job_posts_count="job_posts_count" />
                         </v-col>
     
@@ -14,7 +14,7 @@
                                 <h1 class="mb-4 text-gray-700 h1" data-aos="fade-up">Job Posts</h1>
                             </div>
                             <div class="testJobs">
-                                <Link v-if="companies_count > 0 && job_posts_count < plan_name.slot" :href="'/employer/create-job?c_id=' + company_details.uuid" color="text" class="mb-3 text-lg text-white bg-purple-600 btn hover:bg-purple-700">Add New Job Post</Link>
+                                <Link  :href="'/employer/create-job?c_id=' + company_details.uuid" color="text" class="mb-3 text-lg text-white bg-purple-600 btn hover:bg-purple-700">Add New Job Post</Link>
     
                                 <br /><br /><br />
                                 <h3 class="text-gray-700 h3">Current Job Posts</h3>
