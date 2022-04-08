@@ -168,9 +168,17 @@ class JobPostController extends Controller
             try {
                 unset($data['c_id']);
                 $data['slug'] = $this->createJobPostSlug($data['name']);
+                
                 JobPost::create($data);
                 $slug = $data['slug'];
-                $company_slug = CompanyProfile::where('id', $company_profile->id)->first()['slug'];
+  
+                $company_data = CompanyProfile::where('id', $company_id)->first();
+                if($company_data){
+                    $company_slug = $company_data['slug'];
+                }else{
+                    $company_slug = '';
+                }
+               
                 ActivityLog::addToLog(__('activitylogs.job_created'), 'job created');
                 return redirect('employer/jobs?c_id=' . $company_id)->with(['message' => __('messages.job_created')." <a class='toster-anchor' href=/jobs/".$company_slug."/".$slug.">View Job Post</a>"]);
             } catch (\Exception $e) {

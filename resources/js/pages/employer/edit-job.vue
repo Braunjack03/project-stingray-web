@@ -142,7 +142,6 @@ export default {
             extensions: [
                 History,
                 Blockquote,
-                Link,
                 Underline,
                 Strike,
                 Italic,
@@ -154,7 +153,6 @@ export default {
                     }
                 }],
                 Bold,
-                Code,
                 HorizontalRule,
                 Paragraph,
                 HardBreak
@@ -174,7 +172,6 @@ export default {
                     remotetype_id: this.remotetype_id,
                 };
 
-                console.log('test', form);
                 this.$inertia.post('/employer/edit-job?id=' + this.user.uuid, form);
             }
         },
