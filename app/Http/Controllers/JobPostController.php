@@ -151,7 +151,7 @@ class JobPostController extends Controller
             'apply_url.required' => 'The Job Application URL field is required.',
         ];
 
-        $validator = Validator::make($data, [
+        $validator = Validator::make($data, [ 
             'name' => 'required',
             'location_id' => 'required',
             'job_cat_id' => 'required',

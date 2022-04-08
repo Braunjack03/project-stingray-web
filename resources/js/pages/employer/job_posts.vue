@@ -20,7 +20,7 @@
                                 <h3 class="text-gray-700 h3">Current Job Posts</h3>
                                 <br />
     
-                                <Message :message="$page.props.flash.message" :hide="0" :type="'success'" />
+                                <Message :message="$page.props.flash.message" @hide="1" :hide="hide" :type="'success'" />
     
                                 <div v-if="job_posts.length > 0">
                                     <v-row>
@@ -52,31 +52,6 @@
                                         </v-col>
                                     </v-row>
                                 </div>
-                                <!--ul v-if="job_posts" id="example-1">
-                                        <li v-for="company in job_posts" :key="company.id">
-                                            <v-row no-gutters class="mt-5">
-                                                <div class="mt-5 overflow-hidden bg-white shadow-md col-sm-12 col-md-12 col-8 rounded-xl">
-                                                    <div class="">
-                                                        <v-col cols="12">
-                                                            <h3 class="text-xl font-semibold tracking-wide text-indigo-500 uppercase">
-                                                                {{ company.name }}
-                                                            </h3>
-                                                            <p class="mt-2 text-gray-800">
-                                                                Location: {{ company.location_id }}
-                                                            </p>
-                                                            <p class="mt-2 text-gray-800">
-                                                                Published: {{ setDateFormat(company.created_on) }}
-                                                            </p>
-                                                        </v-col>
-                                                        <v-col cols="12 flex">
-                                                            <Link :href="'/employer/edit-job?id=' + company.uuid" class="mr-4 text-purple-600 btn hover:text-purple-800 custom-link">EDIT</Link>
-                                                            <v-btn class="mr-4 text-purple-600 hover:text-purple-800 custom-link" v-on:click="deletejob(company.uuid)" color="#3f51b5" plain link>Delete</v-btn>
-                                                        </v-col>
-                                                    </div>
-                                                </div>
-                                            </v-row>
-                                        </li>
-                                    </ul-->
                             </div>
                         </v-col>
                     </v-row>
@@ -116,6 +91,7 @@ export default {
         message: "",
         showCreate: false,
         valid: true,
+        hide:0,
         form: {
             profile_image: "",
             current_job_title: "",
@@ -148,10 +124,6 @@ export default {
                     this.$inertia.get("/employer/delete-job/?id=" + id);
                 }
             })
-
-            /*if (confirm("Do you really want to delete?")) {
-                
-            }*/
             return false;
         },
         removeImage() {
