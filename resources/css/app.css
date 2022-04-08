@@ -422,6 +422,7 @@ body .theme--light.v-btn.v-btn--disabled.v-btn--has-bg[type="button"] {
     height: 170px;
     width: 170px;
     box-shadow: 0px 0 25px rgb(0, 0, 0, 0.1);
+    background-color: #fff;
 }
 
 .companyDetail .v-responsive__sizer {
@@ -1073,6 +1074,12 @@ button {
     transform: translateX(-50%);
 }
 
+.verifyEmailLength.verifyEmailText {
+    width: auto;
+    max-width: inherit;
+    white-space: nowrap;
+}
+
 .verifyEmailText.verifyclaimText {
     top: 1rem;
 }
@@ -1641,6 +1648,9 @@ blockquote {
     header.homePage ul li a:hover {
         color: #fff;
     }
+    header.homePage ul li ul li a:hover {
+        color: rgba(93, 93, 255, var(--tw-text-opacity));
+    }
 }
 
 @media (max-width:1263.98px) {
@@ -1811,6 +1821,11 @@ blockquote {
     .company-jobs-block {
         flex-basis: 100%;
         margin: 20px 0;
+    }
+    .verifyEmailLength.verifyEmailText {
+        white-space: normal;
+        max-width: 600px;
+        width: 100%;
     }
 }
 

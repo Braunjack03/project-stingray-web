@@ -5,7 +5,7 @@
       <div class="max-w-6xl px-4 mx-auto sm:px-6">
         <div class="pb-12 pt-36 md:pt-40 md:pb-20">
           <v-row>
-            <v-col cols="12" md="3" sm="4">
+            <v-col cols="12" md="3" sm="4" class="sm:pt-16">
                 <Sidebar :company_uuid="(companies.length > 0) ? companies[0].uuid : ''" :plan="plan_name" :job_posts_count="job_posts_count"/>
             </v-col>
 

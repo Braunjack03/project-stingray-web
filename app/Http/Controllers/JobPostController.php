@@ -131,6 +131,7 @@ class JobPostController extends Controller
         $request->request->add(['user_id' => $user_id, 'uuid' => $job_uuid]);
 
         $data = $request->all();
+        
         $data['remotetype_id'] = 1;
         if (isset($data['location_id']) && $data['location_id'] != 8) {
             $data['remotetype_id'] = 3;
@@ -169,7 +170,7 @@ class JobPostController extends Controller
                 $data['slug'] = $this->createJobPostSlug($data['name']);
                 JobPost::create($data);
                 $slug = $data['slug'];
-                $company_slug = CompanyProfile::where('id', $company_id)->first()['slug'];
+                $company_slug = CompanyProfile::where('id', $company_profile->id)->first()['slug'];
                 ActivityLog::addToLog(__('activitylogs.job_created'), 'job created');
                 return redirect('employer/jobs?c_id=' . $company_id)->with(['message' => __('messages.job_created')." <a class='toster-anchor' href=/jobs/".$company_slug."/".$slug.">View Job Post</a>"]);
             } catch (\Exception $e) {

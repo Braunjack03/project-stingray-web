@@ -7,7 +7,7 @@
                 <div class="pt-32 pb-12 md:pt-40 md:pb-20">
                     <v-row>
     
-                        <v-col cols="12" md="3" sm="4">
+                        <v-col cols="12" md="3" sm="4" class="sm:pt-16">
                             <Sidebar :company_uuid="user.company_profile_uuid" :plan="plan_name" :job_posts_count="job_posts_count" />
                         </v-col>
     

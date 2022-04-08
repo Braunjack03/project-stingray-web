@@ -5,7 +5,7 @@
             <div class="max-w-6xl px-4 mx-auto sm:px-6">
                 <div class="pt-32 pb-12 md:pt-40 md:pb-20">
                     <v-row>
-                        <v-col cols="12" md="3" sm="4">
+                        <v-col cols="12" md="3" sm="4" class="sm:pt-16">
                             <Sidebar :company_uuid="(user) ? user.uuid : ''" :plan="plan_name" :job_posts_count="job_posts_count" />
                         </v-col>
     
@@ -22,19 +22,25 @@
                                 <Message :message="$page.props.flash.message" v-on:hide="hideMessage" :hide="hide" :type="'success'" />
     
                                 <v-form ref="form">
-                                    <div class="flex flex-wrap mb-3">
+                                    <!-- <div class="flex flex-wrap mb-3">
                                         <div class="w-full px-3 form-avataar">
                                             <v-icon v-if="user.logo_image_src" color="gray darken-2" class="ml-auto" @click="removeImage()">
                                                 mdi-close-circle
                                             </v-icon>
                                             <v-img :src="user.logo_image_src" max-height="150" max-width="250" />
                                         </div>
-                                    </div>
+                                    </div> -->
     
-                                    <div class="flex flex-wrap mb-3">
+                                    <div class="flex flex-nowrap mb-3">
                                         <div class="w-full px-3 form-file-upload">
                                             <label class="block mb-1 text-lg font-medium text-gray-700">Company Logo (Recommended 500px x 500px) </label>
                                             <v-file-input v-model="logo_image_url" class="w-full text-gray-700 fileUpload form-input input-field-outer" accept="image/*" outlined dense @change="onFileChange" />
+                                        </div>
+                                        <div v-if="user.logo_image_src" class="w-full px-3 form-avataar">
+                                            <v-icon v-if="user.logo_image_src" color="gray darken-2" class="ml-auto" @click="removeImage()">
+                                                mdi-close-circle
+                                            </v-icon>
+                                            <v-img :src="user.logo_image_src" max-height="150" max-width="250" />
                                         </div>
                                     </div>
     
@@ -79,7 +85,7 @@
                                         </div>
                                     </div>
     
-                                    <div class="flex flex-wrap mb-3">
+                                    <!-- <div class="flex flex-wrap mb-3">
                                         <div class="w-full px-3 form-avataar">
                                             <v-icon v-if="user.featured_image_src" color="gray darken-2" class="ml-auto" @click="removeHeaderImage()">
                                                 mdi-close-circle
@@ -87,12 +93,19 @@
     
                                             <v-img :src="user.featured_image_src" max-height="150" max-width="250" />
                                         </div>
-                                    </div>
+                                    </div> -->
     
                                     <div class="flex flex-wrap mb-3">
                                         <div class="w-full px-3 form-file-upload">
                                             <label class="block mb-1 text-lg font-medium text-gray-700">Header Image (Recommended 500px x 500px) </label>
                                             <v-file-input v-model="featured_image_url" class="w-full text-gray-700 fileUpload form-input input-field-outer" accept="image/*" outlined dense @change="onHeaderFileChange" />
+                                        </div>
+                                        <div v-if="user.featured_image_src" class="w-full px-3 form-avataar">
+                                            <v-icon v-if="user.featured_image_src" color="gray darken-2" class="ml-auto" @click="removeHeaderImage()">
+                                                mdi-close-circle
+                                            </v-icon>
+    
+                                            <v-img :src="user.featured_image_src" max-height="150" max-width="250" />
                                         </div>
                                     </div>
     
