@@ -20,7 +20,7 @@
                                 <h3 class="text-gray-700 h3">Current Job Posts</h3>
                                 <br />
     
-                                <Message :message="$page.props.flash.message" @hide="1" :hide="hide" :type="'success'" />
+                                <Message :message="$page.props.flash.message" v-on:hide="hideMessage" :hide="hide" :type="'success'" />
     
                                 <div v-if="job_posts.length > 0">
                                     <v-row>
@@ -148,6 +148,9 @@ export default {
 
             return date;
         },
+        hideMessage(){
+            this.hide = 1;
+        }
     },
     mounted(){
     if(this.companies_count <= 0){
