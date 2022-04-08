@@ -18,8 +18,8 @@
                         <h1 class="mb-4 text-gray-700 h1" data-aos="fade-up">Job Seeker Profile Settings</h1>
                     </div>
                     <!-- Form -->
-                      <Message :message="errors.message" :hide="0" :type="'error'" />
-                        <Message :message="success.message" :hide="0" :type="'success'" />
+                      <Message :message="errors.message"  v-on:hide="hideMessage" :hide="hide" :type="'error'" />
+                        <Message :message="success.message"  v-on:hide="hideMessage" :hide="hide" :type="'success'" />
                     <div class="max-w-xl mx-auto">
                       
                         <v-form ref="form">
@@ -201,7 +201,7 @@ export default {
     data() {
         return {
             name: this.user.name,
-            profile_image: this.user.profile_image,
+            profile_image:this.user.profile_image,
             current_job_title: this.user.current_job_title,
             short_bio: this.user.short_bio,
             github: this.user.github,
@@ -210,6 +210,7 @@ export default {
             current_resume:this.user.current_resume,
             profile_image_removed: 0,
             current_resume_removed: 0,
+            hide:0, 
             overlay: false,
         }
     },
@@ -218,6 +219,9 @@ export default {
         validate() {
             this.$refs.form.validate();
             return true;
+        },
+        hideMessage() {
+            this.hide = 1;
         },
         submit() {
             this.$v.$touch()
@@ -237,6 +241,7 @@ export default {
                     current_resume_removed: this.current_resume_removed,
                 };
                 console.log('form', form);
+                this.hide = 0;
                 this.$inertia.post("/profile", form);
                 if(this.success && this.success.status == 1){
                   this.overlay = false;
@@ -245,7 +250,8 @@ export default {
             }
         },
         removeImage() {
-            this.user.profile_image_src = "";
+            this.user.profile_image_src = '';
+            this.profile_image = '';
             this.profile_image_removed = 1;
         },
         removeResume() {
