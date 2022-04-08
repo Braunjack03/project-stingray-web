@@ -83,15 +83,13 @@ class LoadArticle extends Command
             $post->tags()->syncWithoutDetaching($tag);
         }
 
-
-
         foreach($slugs as $c){
             $company_profile = CompanyProfile::where('slug', $c)->first();
             $post->company_profiles()->syncWithoutDetaching($company_profile);
         }
 
-        //var_dump($post);
-        
+        print("Article Uploaded");
+
         return 0;
     }
 

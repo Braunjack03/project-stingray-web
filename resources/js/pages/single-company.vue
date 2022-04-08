@@ -9,9 +9,9 @@
           src="/images/company-banner.jpg"
           alt=""
         >
-        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="max-w-6xl px-4 mx-auto sm:px-6">
           <div class="companyDetail--title">
-            <h2 class="post-title mb-0 text-gray-700">
+            <h2 class="mb-0 text-gray-700 post-title">
               {{ data.name }}
               <v-btn
                 v-if="data.unclaimed == 1 && is_company_belong_to == 0"
@@ -22,7 +22,7 @@
                 (Claim this Profile)
               </v-btn>
             </h2>
-            <p class="types-title mt-0">
+            <p class="mt-0 types-title">
               {{ data.industry_types }}
             </p>
           </div>
@@ -34,7 +34,7 @@
         class="verifyEmailText verifyclaimText"
       >
         <div
-          class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
+          class="relative px-4 py-3 text-green-700 bg-green-100 border border-green-400 rounded"
           role="alert"
         >
           <span class="block sm:inline">{{ $page.props.flash.message }}</span>
@@ -43,7 +43,7 @@
             @click="hideMessage"
           >
             <svg
-              class="fill-current h-6 w-6 text-green-500"
+              class="w-6 h-6 text-green-500 fill-current"
               role="button"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
@@ -53,10 +53,10 @@
       </div>
 
       <div class="companyDetailOuter">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="max-w-6xl px-4 mx-auto sm:px-6">
           <div class="companyDetail">
             <div class="companyLogo">
-              <v-img :src="(data.logo_image_url) ? data.logo_image_url : '/images/default-logo2.png'" />
+              <v-img :src="(data.logo_image_url) ? data.logo_image_url : '/images/default-company-logo.svg'" />
             </div>
             <div class="conpanymainDetail">
               <v-row class="mt-0">
@@ -65,10 +65,10 @@
                   sm="6"
                   md="4"
                 >
-                  <div class="extra-info flex flex-wrap">
+                  <div class="flex flex-wrap extra-info">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="h-4 w-4 mr-1"
+                      class="w-4 h-4 mr-1"
                       viewBox="0 0 20 20"
                       fill="#5d5dff"
                     >
@@ -91,10 +91,10 @@
                   md="4"
                 >
                   <div class="extra-info">
-                    <div class="employeesDetails flex flex-wrap">
+                    <div class="flex flex-wrap employeesDetails">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        class="h-4 w-4 mr-1"
+                        class="w-4 h-4 mr-1"
                         viewBox="0 0 20 20"
                         fill="#5d5dff"
                       >
@@ -105,10 +105,10 @@
                         />
                       </svg> Local Employees: <strong>{{ data.local_employees }}</strong>
                     </div>
-                    <div class="employeesDetails flex flex-wrap">
+                    <div class="flex flex-wrap employeesDetails">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        class="h-4 w-4 mr-1"
+                        class="w-4 h-4 mr-1"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="#5d5dff"
@@ -136,11 +136,11 @@
                   <a
                     :href="data.website_url"
                     target="_blank"
-                    class="background-transparent flex flex-wrap viewSite items-center"
+                    class="flex flex-wrap items-center background-transparent viewSite"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="h-4 w-4 mr-1"
+                      class="w-4 h-4 mr-1"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="#5d5dff"
@@ -160,7 +160,7 @@
         </div>
       </div>
 
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 companyAbout">
+      <div class="max-w-6xl px-4 mx-auto sm:px-6 companyAbout">
         <v-row>
           <v-col
             cols="12"
@@ -190,7 +190,7 @@
       </div>
 
       <div class="companyJobList">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-4">
+        <div class="max-w-6xl px-4 pt-4 mx-auto sm:px-6">
           <v-row class="items-center">
             <v-col
               cols="12"
@@ -204,9 +204,9 @@
             <v-col
               cols="12"
               md="3"
-              class="pa-3 d-flex flex-column text-right"
+              class="text-right pa-3 d-flex flex-column"
             >
-              <span class="text-gray-700 text-lg">{{ job_posts_count }} Positions</span>
+              <span class="text-lg text-gray-700">{{ job_posts_count }} Positions</span>
             </v-col>
           </v-row>
           <div v-if="job_posts.data.length > 0">
@@ -230,7 +230,7 @@
             <v-row>
               <v-col
                 cols="12"
-                class="mt-5 text-center text-gray-700 text-lg"
+                class="mt-5 text-lg text-center text-gray-700"
               >
                 {{ data.name }} has no jobs posted
               </v-col>
@@ -243,7 +243,7 @@
         v-if="articles.length > 0"
         class="companyJobList"
       >
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-4">
+        <div class="max-w-6xl px-4 pt-4 mx-auto sm:px-6">
           <v-row>
             <v-col
               cols="12"

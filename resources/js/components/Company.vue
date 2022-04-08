@@ -1,10 +1,10 @@
 <template>
     <v-col cols="12" md="12" class="pa-3 d-flex flex-column">
-        <v-card class="elevation-5 flex d-flex flex-column cardStyle">
+        <v-card class="flex elevation-5 d-flex flex-column cardStyle">
             <v-card-text class="job-card-wrap company-card-wrap">   
                 <div class="company-img-block">
                   <v-img
-                    :src="(data.logo_image_url) ? data.logo_image_url : '/images/default-logo2.png'"
+                    :src="(data.logo_image_url) ? data.logo_image_url : '/images/default-company-logo.svg'"
                   ></v-img>
                 </div>
                 <div class="company-text-block">
@@ -14,7 +14,7 @@
                 </div>
                 <div class="company-jobs-block">
                 <Link :href="'/companies/'+data.slug" color="text" class="">View {{data.job_posts_count}} Jobs 
-                    <!-- <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                    <!-- <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
                     </svg> -->
                 </Link>

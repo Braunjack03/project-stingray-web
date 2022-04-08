@@ -19,7 +19,8 @@
                   class="pb-8 mb-4 text-center h2 darkColor md:pb-16 sectionTitle"
                   data-aos="fade-up"
                 >
-                Be the First to Know About Tampa Tech News
+                Tampa Bay Tech News Delivered Fresh to You
+
                 </h2>
               </div>
               <v-row>

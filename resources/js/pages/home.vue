@@ -6,7 +6,7 @@
                 <div class="pt-32 pb-0 md:pt-50 md:pb-20">
                     <div class="max-w-3xl pb-12 mx-auto text-center md:pb-16">
                         <h1 class="mt-0 text-white h1 md:mt-20 " data-aos="fade-up">
-                            Tampa Bay's Best Source for Tech News and Jobs
+                            Your Source for Tampa Bay Tech News and Jobs 
                         </h1>
     
                         <div class="pb-6 md:pb-12 bannerForm">
