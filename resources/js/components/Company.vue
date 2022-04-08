@@ -4,7 +4,7 @@
             <v-card-text class="job-card-wrap company-card-wrap">   
                 <div class="company-img-block">
                   <v-img
-                    :src="(data.logo_image_url) ? data.logo_image_url : '/images/default-logo.png'"
+                    :src="(data.logo_image_url) ? data.logo_image_url : '/images/default-logo2.png'"
                   ></v-img>
                 </div>
                 <div class="company-text-block">
