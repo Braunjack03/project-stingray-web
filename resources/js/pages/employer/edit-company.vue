@@ -88,7 +88,7 @@
 
               <div class="flex flex-wrap mb-3">
                 <div class="w-full px-3">
-                  <label class="block mb-1 text-lg font-medium text-gray-700">Number of local employees</label>
+                  <label class="block mb-1 text-lg font-medium text-gray-700">Number of local employees <span class="text-red-600">*</span></label>
                   <v-text-field
                     v-model="local_employees"
                     :class="{ 'error--text': $v.local_employees.$error }"
@@ -140,12 +140,6 @@
                     placeholder="https://example.com"
                     required
                   />
-                  <div
-                    v-if="errors.website_url"
-                    class="mt-2 error"
-                  >
-                    {{ errors.website_url }}
-                  </div>
                 </div>
               </div>
 
@@ -191,12 +185,6 @@
                     placeholder="Company Mission"
                     required
                   />
-                  <div
-                    v-if="errors.mission"
-                    class="mt-2 error"
-                  >
-                    {{ errors.mission }}
-                  </div>
                 </div>
               </div>
 
@@ -204,24 +192,23 @@
                 <div class="w-full px-3">
                   <label class="block mb-1 text-lg font-medium text-gray-700">Company Description<span class="text-red-600">*</span></label>
                   <v-textarea
-                    v-model="user.description"
+                    v-model="description"
                     rows="4"
                     class="w-full text-gray-700 form-input input-field-outer"
                     placeholder="Company Description"
-                    required
                   />
                   <div
-                    v-if="errors.description"
-                    class="mt-2 error"
+                    v-if="$v.description.$error && !$v.description.required"
+                    class="text-lg text-red-500"
                   >
-                    {{ errors.description }}
+                    Company Description is required
                   </div>
                 </div>
               </div>
 
               <div class="flex flex-wrap mb-3">
                 <div class="w-full px-3">
-                  <label class="block mb-1 text-lg font-medium text-gray-700">Company Industry (select up to 3)  </label>
+                  <label class="bdescription: this.description,lock mb-1 text-lg font-medium text-gray-700">Company Industry (select up to 3) <span class="text-red-600">*</span></label>
                   <ul class="industries-list companyIndustry__list">
                     <li
                       v-for="(item, index) in industries"
@@ -238,11 +225,11 @@
                       </label>
                     </li>
                   </ul>
-                  <div
-                    v-if="errors.industry"
-                    class="mt-2 error"
+                   <div
+                    v-if="$v.industry.$error && !$v.industry.required"
+                    class="text-lg text-red-500"
                   >
-                    {{ errors.industry }}
+                    Please Selectdescription: this.description, at least one Company Industry
                   </div>
                 </div>
               </div>
@@ -260,12 +247,6 @@
                     placeholder="Address"
                     required
                   />
-                  <div
-                    v-if="errors.street_addr_1"
-                    class="mt-2 error"
-                  >
-                    {{ errors.street_addr_1 }}
-                  </div>
                 </div>
               </div>
 
@@ -274,7 +255,7 @@
                   <label class="block mb-1 text-lg font-medium text-gray-700">Address 2</label>
                   <v-text-field
                     v-model="user.street_addr_2"
-                    class="w-full text-gray-700 form-input input-field-outer"
+                    class="w-fulldescription: this.description, text-gray-700 form-input input-field-outer"
                     placeholder="Address 2"
                     required
                   />
@@ -348,7 +329,7 @@
                     {{ errors.postcode }}
                   </div>
                 </div>
-              </div>
+              </div>description: this.description,
 
               <h3 class="px-3 mt-2 mb-1 ml-3 text-2xl text-gray-700">
                 Social
@@ -471,6 +452,8 @@ export default {
   validations: {
     name: { required },
     local_employees: { required,numeric },
+    industry: { required },
+    description: {required},
   },
   props: {
     errors: Object,
@@ -485,6 +468,7 @@ export default {
     return {
       name: this.user.name,
       local_employees: this.user.local_employees,
+      description:this.user.description,
       logo_image_removed: 0,
       featured_image_removed: 0,
       industry: this.industryTest.map(x => `${x}`),
@@ -504,7 +488,7 @@ export default {
           website_url: this.user.website_url,
           featured_image_url: this.user.featured_image_url,
           mission: this.user.mission,
-          description: this.user.description,
+          description: this.description,
           industry: this.industry,
           street_addr_1: this.user.street_addr_1,
           street_addr_2: this.user.street_addr_2,
