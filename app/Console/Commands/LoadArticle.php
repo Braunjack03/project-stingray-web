@@ -7,6 +7,7 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 use Illuminate\Support\Str;
 use App\Models\Article;
 use App\Models\CompanyProfile;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Tag;
 
 
@@ -47,30 +48,47 @@ class LoadArticle extends Command
 
         $object = YamlFrontMatter::parse(file_get_contents($article));
 
-        $this->find_keywords($object->body());
+        $companies = $this->find_keywords($object->body());
+        $u_companies = array_unique($companies[0]);
+        $slugs = str_replace(["{{","}}"], "", $u_companies);
 
+        $body =  $object->body();
+        foreach($slugs as $c){
+            $company_profile = CompanyProfile::where('slug', $c)->first();
+            $name = $company_profile->name;
+            $com = "{{{$c}}}";
+            $body = str_replace($com, "<a class=\"underline\" href=\"/companies/$c\">$name</a>", $body);
+        }
 
         $post = new Article;
+
         $post->title = $object->title;
         $post->sub_title = $object->sub_title;
-        $post->header_image = "https://ik.imagekit.io/stingray/article/test/" . $object->header_image;
+
+        $header_image = Storage::disk('s3Company')->putFileAs('article/images/', __DIR__."/../../../articles/images/".$object->header_image, $object->header_image);
+        $post->header_image = "https://ik.imagekit.io/stingray/article/images/" . $object->header_image;
         $post->slug = Str::of($object->title." ".rand(0, 100))->slug('-');
-        $post->content = $object->body();
+        $post->content = $body;
+
+        
         $post->author_id = $object->author_id;
         $post->is_published = 1;
         $post->created_at = now();
         $post->publish_date = now();
         $post->save();
 
-        $post_id = $post->id;
+        foreach($object->tags as $tag_name){
 
-        #$company_profiles = CompanyProfile::inRandomOrder()->take(random_int(0,5))->get()->pluck('id');
-        $company_profile = CompanyProfile::where('id', 1)->first();
-        $post->company_profiles()->syncWithoutDetaching($company_profile);
-
-
+            $tag = Tag::where('name', $tag_name)->first(); 
+            $post->tags()->syncWithoutDetaching($tag);
+        }
 
 
+
+        foreach($slugs as $c){
+            $company_profile = CompanyProfile::where('slug', $c)->first();
+            $post->company_profiles()->syncWithoutDetaching($company_profile);
+        }
 
         //var_dump($post);
         
@@ -81,6 +99,7 @@ class LoadArticle extends Command
         $pattern = '/{{.*}}/';
         if(preg_match_all($pattern, $text, $matches)) {
             print_r($matches);
+            return $matches;
         }
 
     }
