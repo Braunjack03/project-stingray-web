@@ -11,7 +11,7 @@
         <span class="block sm:inline text-lg">{{ message }}</span>
         <span
           class="absolute top-0 bottom-0 right-0 px-4 py-3"
-          @click="hideMessage(1)"
+          @click="hideMessage"
         >
           <svg
             class="fill-current h-6 w-6 text-red -500"
@@ -65,10 +65,8 @@ export default {
     },
   },
   methods: {
-    hideMessage(hide) {
-      console.log('testing');
-      //this.$emit('hide',hide);
-      this.hide = hide;
+    hideMessage() {
+      this.$emit('hide',1);
     },
   },
 };

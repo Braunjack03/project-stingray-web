@@ -17,11 +17,8 @@
               </div>
               <div class="max-w-2xl">
                 <Message :message="errors.message" :hide="0" :type="'error'" />
-                <Message
-                  :message="success.message"
-                  :hide="0"
-                  :type="'success'"
-                />
+
+                <Message :message="success.message" v-on:hide="hideMessage" :hide="hide" :type="'success'" />
 
                 <Message
                   :message="$page.props.flash.message"
@@ -201,7 +198,7 @@ import Message from "../../partials/Messages.vue";
 import Sidebar from "../../partials/Sidebar.vue";
 
 export default {
-    name: 'Employer Profile',
+    name: 'EmployerProfile',
     metaInfo: {
         title: 'Employer Profile',
         titleTemplate: '%s | Made in Tampa'
@@ -234,6 +231,7 @@ export default {
       short_bio: this.user.short_bio,
       linkedin: this.user.linkedin,
       profile_image_removed: 0,
+      hide:0,
     };
   },
   methods: {
@@ -248,8 +246,12 @@ export default {
           linkedin: this.linkedin,
           profile_image_removed: this.profile_image_removed,
         };
+        this.hide = 0;
         this.$inertia.post("/employer/profile", form);
       }
+    },
+    hideMessage() {
+        this.hide = 1;
     },
     removeImage() {
       this.user.profile_image_src = "";
