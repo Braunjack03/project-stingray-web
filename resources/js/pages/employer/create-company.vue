@@ -204,17 +204,17 @@
                 <div class="w-full px-3">
                   <label class="block mb-1 text-lg font-medium text-gray-700">Company Description<span class="text-red-600">*</span></label>
                   <v-textarea
-                    v-model="user.description"
+                    v-model="description"
                     rows="4"
                     class="w-full text-gray-700 form-input input-field-outer"
                     placeholder="Company Description"
                     required
                   />
-                  <div
-                    v-if="errors.description"
-                    class="mt-2 error"
+                   <div
+                    v-if="$v.description.$error && !$v.description.required"
+                    class="text-lg text-red-500"
                   >
-                    {{ errors.description }}
+                    Company Description is required
                   </div>
                 </div>
               </div>
@@ -469,6 +469,7 @@ export default {
     name: { required },
     local_employees: { required, numeric },
     industry: {required},
+     description: {required},
   },
   props: {
     errors: Object,
@@ -483,6 +484,7 @@ export default {
       name: this.user.name,
       local_employees: this.user.local_employees,
       logo_image_removed: 0,
+      description: this.user.description,
       industry: [],
       items: ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'],
 
@@ -521,7 +523,7 @@ export default {
           website_url: this.user.website_url,
           featured_image_url: this.user.featured_image_url,
           mission: this.user.mission,
-          description: this.user.description,
+          description: this.description,
           industry: this.industry,
           street_addr_1: this.user.street_addr_1,
           street_addr_2: this.user.street_addr_2,
