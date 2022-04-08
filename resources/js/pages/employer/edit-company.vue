@@ -95,7 +95,7 @@
                                         </div>
                                     </div> -->
     
-                                    <div class="flex flex-wrap mb-3">
+                                    <div class="flex flex-nowrap mb-3">
                                         <div class="w-full px-3 form-file-upload">
                                             <label class="block mb-1 text-lg font-medium text-gray-700">Header Image (Recommended 500px x 500px) </label>
                                             <v-file-input v-model="featured_image_url" class="w-full text-gray-700 fileUpload form-input input-field-outer" accept="image/*" outlined dense @change="onHeaderFileChange" />
