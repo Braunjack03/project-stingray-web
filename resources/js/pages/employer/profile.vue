@@ -27,7 +27,7 @@
                 />
 
                 <v-form ref="form" lazy-validations class="form-outer-wrapper">
-                  <div class="flex flex-wrap mb-3">
+                  <!-- <div class="flex flex-wrap mb-3">
                     <div class="w-full form-avataar">
                       <v-icon
                         v-if="user.profile_image_src"
@@ -43,8 +43,8 @@
                         max-width="250"
                       ></v-img>
                     </div>
-                  </div>
-                  <div class="flex flex-wrap form-file-upload">
+                  </div> -->
+                  <div class="flex flex-nowrap form-file-upload">
                     <div class="w-full">
                       <label
                         class="block mb-1 text-lg font-medium text-gray-700"
@@ -59,6 +59,21 @@
                         outlined
                         dense
                       ></v-file-input>
+                    </div>
+                     <div v-if="user.profile_image_src" class="w-full form-avataar">
+                      <v-icon
+                        v-if="user.profile_image_src"
+                        color="gray darken-2"
+                        class="ml-auto"
+                        @click="removeImage()"
+                      >
+                        mdi-close-circle</v-icon
+                      >
+                      <v-img
+                        :src="user.profile_image_src"
+                        max-height="150"
+                        max-width="250"
+                      ></v-img>
                     </div>
                   </div>
 

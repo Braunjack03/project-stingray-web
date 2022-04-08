@@ -56,7 +56,7 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
           <div class="companyDetail">
             <div class="companyLogo">
-              <v-img :src="(data.logo_image_url) ? data.logo_image_url : '/images/default-logo.png'" />
+              <v-img :src="(data.logo_image_url) ? data.logo_image_url : '/images/default-logo2.png'" />
             </div>
             <div class="conpanymainDetail">
               <v-row class="mt-0">
