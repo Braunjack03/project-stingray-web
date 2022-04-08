@@ -17,8 +17,6 @@
                             </div>
                             <div class="max-w-2xl">
     
-    
-    
                                 <Message :message="errors.message" :hide="0" :type="'error'" />
                                 <Message :message="success.message" :hide="0" :type="'success'" />
                                 <v-form ref="form">
@@ -62,6 +60,9 @@
                                             <label class="block text-gray-700 text-lg font-medium mb-1"> Job Application URL <span class="text-red-600">*</span></label>
                                             <v-text-field v-model="apply_url" :class="{ 'error--text': $v.apply_url.$error }" class="form-input input-field-outer w-full text-gray-700" placeholder="https://example.com" required></v-text-field>
                                             <div v-if="$v.apply_url.$error && !$v.apply_url.required" class="text-red-500 text-lg">Job Application URL is required</div>
+                                            <div v-if="$v.apply_url.$error && !$v.apply_url.url" class="text-lg text-red-500">
+                                                Please Enter a valid Job Application URL
+                                            </div>
                                         </div>
                                     </div>
     
@@ -69,12 +70,6 @@
                                         <div class="w-full px-3">
                                             <label class="block text-gray-700 text-lg font-medium mb-1">Job Description </label>
                                             <tiptap-vuetify v-model="content" :extensions="extensions" class="form-input input-field-outer w-full text-gray-700" />
-                                            <!--quill-editor
-                            v-model="content"
-                            :content="content"
-                            :options="editorOption"
-                            class="form-input input-field-outer w-full text-gray-700"
-                          /-->
     
                                         </div>
                                     </div>
@@ -106,7 +101,7 @@ import Layout from '../Layout'
 import { Head } from '@inertiajs/inertia-vue'
 import { TiptapVuetify, Heading, Bold, Italic, Strike, Underline, Code, Paragraph, BulletList, OrderedList, ListItem, Link, Blockquote, HardBreak, HorizontalRule, History } from 'tiptap-vuetify'
 import { validationMixin } from 'vuelidate'
-import { required } from 'vuelidate/lib/validators'
+import { required, url } from 'vuelidate/lib/validators'
 import Message from '../../partials/Messages.vue';
 import Sidebar from "../../partials/Sidebar.vue";
 
@@ -117,7 +112,7 @@ export default {
         name: { required },
         location_id: { required },
         job_cat_id: { required },
-        apply_url: { required },
+        apply_url: { required, url },
         content: { required }
     },
     components: {

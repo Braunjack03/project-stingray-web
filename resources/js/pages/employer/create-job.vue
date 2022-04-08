@@ -127,6 +127,12 @@
                   >
                     Job Application URL is required
                   </div>
+                   <div
+                    v-if="$v.apply_url.$error && !$v.apply_url.url"
+                    class="text-lg text-red-500"
+                  >
+                    Please Enter a valid Job Application URL
+                  </div>
                 </div>
               </div>
 
@@ -181,7 +187,7 @@ import {
   TiptapVuetify, Heading, Bold, Italic, Strike, Underline, Code, Paragraph, BulletList, OrderedList, ListItem, Link, Blockquote, HardBreak, HorizontalRule, History
 } from 'tiptap-vuetify';
 import { validationMixin } from 'vuelidate';
-import { required } from 'vuelidate/lib/validators';
+import { required, url } from 'vuelidate/lib/validators';
 import Layout from '../Layout.vue';
 import Message from '../../partials/Messages.vue';
 import Sidebar from '../../partials/Sidebar.vue';
@@ -199,7 +205,7 @@ export default {
     name: { required },
     location_id: { required },
     job_cat_id: { required },
-    apply_url: { required },
+    apply_url: { required,url },
   },
   props: {
     errors: Object,

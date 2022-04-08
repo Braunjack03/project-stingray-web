@@ -183,7 +183,7 @@
                     v-model="user.mission"
                     class="w-full text-gray-700 form-input input-field-outer"
                     placeholder="Company Mission"
-                    required
+                    requiredAerospace
                   />
                 </div>
               </div>
@@ -208,7 +208,7 @@
 
               <div class="flex flex-wrap mb-3">
                 <div class="w-full px-3">
-                  <label class="bdescription: this.description,lock mb-1 text-lg font-medium text-gray-700">Company Industry (select up to 3) <span class="text-red-600">*</span></label>
+                  <label class="block mb-1 text-lg font-medium text-gray-700">Company Industry (select up to 3) <span class="text-red-600">*</span></label>
                   <ul class="industries-list companyIndustry__list">
                     <li
                       v-for="(item, index) in industries"
@@ -229,7 +229,7 @@
                     v-if="$v.industry.$error && !$v.industry.required"
                     class="text-lg text-red-500"
                   >
-                    Please Selectdescription: this.description, at least one Company Industry
+                    Please Select at least one Company Industry
                   </div>
                 </div>
               </div>
@@ -255,7 +255,7 @@
                   <label class="block mb-1 text-lg font-medium text-gray-700">Address 2</label>
                   <v-text-field
                     v-model="user.street_addr_2"
-                    class="w-fulldescription: this.description, text-gray-700 form-input input-field-outer"
+                    class="w-full text-gray-700 form-input input-field-outer"
                     placeholder="Address 2"
                     required
                   />
@@ -329,7 +329,7 @@
                     {{ errors.postcode }}
                   </div>
                 </div>
-              </div>description: this.description,
+              </div>
 
               <h3 class="px-3 mt-2 mb-1 ml-3 text-2xl text-gray-700">
                 Social
