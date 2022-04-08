@@ -32,5 +32,10 @@ class CompanyProfile extends Model
         return $this->belongsToMany(Article::class)->withTimestamps();
     }
 
+    public function benefit_cats()
+    {
+        return $this->belongsToMany(BenefitCat::class)->withTimestamps();
+    }
+
 
 }
