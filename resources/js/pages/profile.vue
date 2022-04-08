@@ -34,10 +34,11 @@
                             <div class="flex flex-nowrap form-file-upload">
                                 <div class="w-full px-3">
                                     <label class="block mb-1 text-lg font-medium text-gray-700" for="email">Profile Image (Recommended 500px x 500px)
-                      </label>
+                                    </label>
                                     <v-file-input v-model="profile_image" accept="image/*" ref="fileInput" class="w-full text-gray-700 fileUpload input-field-outer form-input" @change="onFileChange" outlined dense></v-file-input>
                                 </div>
-                                 <div class="w-full px-3 form-avataar">
+                                
+                                 <div v-if="user.profile_image_src" class="w-full px-3 form-avataar">
                                     <v-icon v-if="user.profile_image_src" color="gray darken-2" class="ml-auto" @click="removeImage()">
                                         mdi-close-circle</v-icon>
                                     <v-img :src="user.profile_image_src" max-height="150" max-width="250"></v-img>
