@@ -135,7 +135,6 @@
                   </div>
                 </div>
               </div>
-
               <div class="flex flex-wrap mb-3 textEditor">
                 <div class="w-full px-3">
                   <label class="block mb-1 text-lg font-medium text-gray-700">Job Description </label>
@@ -145,11 +144,6 @@
                     class="w-full text-gray-700 form-input input-field-outer"
                     placeholder="Write something …"
                   />
-                  <!--quill-editor
-                    v-model="content"
-                    :content="content"
-                    :options="editorOption"
-                  /-->
                 </div>
               </div>
 
@@ -227,7 +221,6 @@ export default {
       extensions: [
         History,
         Blockquote,
-        Link,
         Underline,
         Strike,
         Italic,
@@ -239,7 +232,6 @@ export default {
           },
         }],
         Bold,
-        Code,
         HorizontalRule,
         Paragraph,
         HardBreak,
