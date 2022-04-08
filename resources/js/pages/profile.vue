@@ -256,6 +256,7 @@ export default {
         },
         removeResume() {
             this.user.current_resume_src = "";
+            this.current_resume = '';
             this.current_resume_removed = 1;
         },
         onFileChange(e) {
