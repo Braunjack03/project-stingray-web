@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <div class="max-w-6xl px-4 mx-auto sm:px-6">
       <div class="py-8 md:py-12">
         <!-- Items -->
         <div
@@ -13,13 +13,14 @@
             v-if="articles.length > 0"
             class="companyJobList"
           >
-            <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="max-w-6xl px-4 mx-auto sm:px-6">
               <div class="max-w-3xl mx-auto text-center">
                 <h2
-                  class="h2 mb-4 darkColor text-center pb-8 md:pb-16 sectionTitle"
+                  class="pb-8 mb-4 text-center h2 darkColor md:pb-16 sectionTitle"
                   data-aos="fade-up"
                 >
-                  Refreshing news for developers and designers
+                Stay Ahead of the Curve with News Delivered Fresh to You
+
                 </h2>
               </div>
               <v-row>

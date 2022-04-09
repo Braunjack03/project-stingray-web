@@ -16,12 +16,11 @@
             v-if="data.company_name"
             class="text-subtitle-1"
           >
-            <Link
+            <Link 
               class="jobLocationLink"
-              :href="data.company_slug"
-            >
-              {{ data.company_name }} - <span v-if="data.city"> {{ data.city }} </span><span v-if="data.state">, {{ data.state }}</span>
-            </Link>
+              :href="(currentHref.includes('companies') != true) ? 'companies/'+data.company_slug : data.company_slug">
+              {{ data.company_name }}</Link> - <span>{{data.location}}</span>
+            
           </div>
 
           <!--div
@@ -77,12 +76,17 @@ export default {
   },
   props: {
     data: {
-      type: Array,
+      type: Array && Object,
       default() {
-        return [];
+        return []
       },
     },
   },
+  data: function () {
+      return {
+          currentHref : window.location.toString(),
+        };
+    },
   methods: {
     timeDifference(date) {
       const seconds = Math.floor((new Date() - date) / 1000);

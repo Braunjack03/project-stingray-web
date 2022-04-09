@@ -10,12 +10,15 @@
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
-        "inertiajs/inertia-laravel": "^0.4.3",
+        "inertiajs/inertia-laravel": "^0.5.1",
         "laravel/framework": "^8.40",
         "laravel/legacy-factories": "^1.1",
+        "laravel/spark-stripe": "^1.2.6",
         "laravel/tinker": "^2.5",
         "league/flysystem-aws-s3-v3": "^1.0",
-        "league/flysystem-cached-adapter": "^1.1"
+        "league/flysystem-cached-adapter": "^1.1",
+        "mpociot/vat-calculator": "^2.5",
+        "spatie/yaml-front-matter": "^2.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -61,6 +64,12 @@
         "preferred-install": "dist",
         "sort-packages": true
     },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://spark.laravel.com"
+        }
+    ],
     "minimum-stability": "dev",
     "prefer-stable": true
 }

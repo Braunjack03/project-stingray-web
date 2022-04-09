@@ -29,7 +29,7 @@
                                <p>{{latest.content.substring(0,255) | stripHTML}}</p>
                                <div class="postPersonal--detail">
                                   <img src="/images/news-author-01.jpg" alt="post-images">
-                                  <p><a href="#">{{latest.author_name}} </a> - {{new Date(latest.publish_date).toDateString().slice(4,10)+','+new Date(latest.publish_date).toDateString().slice(10)}} </p>
+                                  <p>{{latest.author_name}} - {{new Date(latest.publish_date).toDateString().slice(4,10)+','+new Date(latest.publish_date).toDateString().slice(10)}} </p>
                                </div>
                            </div>
                         </div>

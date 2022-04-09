@@ -14,6 +14,7 @@ use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Redirect;
 use App\Models\ActivityLog;
+use App\Models\Subscription;
 use App\Models\CompanyProfileCompanyType;
 use Session;
 use Mail; 
@@ -40,7 +41,14 @@ class CompanyProfileController extends Controller
         try{
             $user = Auth::user();
             $industries = CompanyType::pluck('name','id');
-            return Inertia::render('employer/create-company',['industries'=>$industries]);
+            $planId = Subscription::where(['user_id'=>$user->user_id])->first();
+            $job_posts_count = 0;
+            if(!empty($planId)){
+                $getPlanName = getPlanName($planId['stripe_plan'],$planId['ends_at']);
+            }else{
+              $getPlanName = ["name"=>"Free Plan","slot"=>"0"];  
+            }
+            return Inertia::render('employer/create-company',['industries'=>$industries,'plan_name'=>$getPlanName,'job_posts_count' => $job_posts_count]);
         }catch (\Exception $e) {
             $message = $e->getMessage();
             return $this->sendErrorResponse('login',$message);
@@ -74,10 +82,12 @@ class CompanyProfileController extends Controller
         $messages = [
             'max' => 'The company logo must not be greater than 1 MB',
             'name.required' => 'Company name is required',
+            'description.required' => 'Company description is required',
         ]; 
       
         $validator = Validator::make($data, [
             'name' => 'required',
+            'description' => 'required',
             'local_employees' => 'nullable|numeric',
             'global_employees' => 'nullable|numeric',
             'logo_image_url' => 'nullable|mimes:jpeg,png,jpg,gif|max:1000',
@@ -153,17 +163,36 @@ class CompanyProfileController extends Controller
         try{
             $user = CompanyProfile::with('company_types')->where('uuid',$request->all()['id'])->first();
             if($user)
-            {
+            {   
+                //get plan id
+                $planId = Subscription::where(['user_id'=>$user->user_id])->first();
+                $job_posts_count = JobPost::where('company_profile_id', $user['id'])->count();
+                if(!empty($planId)){
+                    $getPlanName = getPlanName($planId['stripe_plan'],$planId['ends_at']);
+                    $total = $job_posts_count - $getPlanName['slot'];
+                    if($total > 0){
+                        for($i = 0;$i<$total;$i++){
+                            JobPost::where(["company_profile_id"=>$user['id']])->orderBy("id","ASC")->limit(1)->delete();
+                        }
+                        $job_posts_count = $job_posts_count - $total;
+                    }
+                }else{
+                  $getPlanName = ["name"=>"Free Plan","slot"=>"0"];  
+                }
+               
                 if(isset($user) && isset($user->company_types)){
                     $collection = $user->company_types;    
                     $names = $collection->pluck("id")->toArray(); 
                 } 
+                
                 $user->logo_image_src = ($user->logo_image_url) ? getBucketImageUrl($request->all()['id'],$user->logo_image_url,'company') : '';
                 $user->featured_image_src = ($user->featured_image_url) ? getBucketImageUrl($request->all()['id'],$user->featured_image_url,'company') : '';
 
+            }else{
+                redirect('/employer/create-company');
             }
             $industries = CompanyType::pluck('name','id');
-            $data = ['user'=>$user,'industries'=>$industries,'industryTest'=>$names];
+            $data = ['user'=>$user,'industries'=>$industries,'plan_name'=>$getPlanName,'job_posts_count' => $job_posts_count,'industryTest'=>$names];
             return $this->sendResponseWithData('employer/edit-company','',$data);
         }catch (\Exception $e) {
             $message = $e->getMessage();
@@ -215,13 +244,16 @@ class CompanyProfileController extends Controller
         $messages = [
             'max' => 'The company logo must not be greater than 1 MB',
             'name.required' => 'Company name is required',
+            'description.required' => 'Company description is required',
         ]; 
        
         $validator = Validator::make($data, [
             'name' => 'required',
+            'description' => 'required',
             'local_employees' => 'nullable|numeric',
             'global_employees' => 'nullable|numeric',
             'logo_image_url' => 'mimes:jpeg,png,jpg,gif|max:1000|nullable'
+            
         ],$messages);
         
         if ($validator->fails()){
@@ -251,6 +283,13 @@ class CompanyProfileController extends Controller
                     $featured_image = Storage::disk('s3Company')->putFileAs('company/'.$user_uuid, $headerimage,$headerimage_name);
                 }
                 
+                if(isset($user) && $user->name != $data['name']){
+                    $updated_slug = $this->createCompanySlug($data['name']);
+                }else{
+                    $updated_slug = $user->slug;
+                }
+
+                
                 $profile_data = [
                     "name"=>$data['name'],
                     'user_id' => $data['user_id'],
@@ -270,7 +309,7 @@ class CompanyProfileController extends Controller
                     'instagram_user' => $data['instagram_user'],
                     'logo_image_url' => $image_name,
                     'featured_image_url' => $headerimage_name,
-                    'slug' => $this->createCompanySlug($data['name']),
+                    'slug' => $updated_slug,
                 ];
                 
               
@@ -300,7 +339,48 @@ class CompanyProfileController extends Controller
                 }
 
                 ActivityLog::addToLog(__('activitylogs.company_profile_updated'),'company updated');
-                return redirect()->route('employer.profile')->with(['message' => __('messages.company_profile_updated')]);
+
+                $user = CompanyProfile::with('company_types')->where('uuid',$requested_data['id'])->first();
+                if($user)
+                {   
+                    //get plan id
+                    $planId = Subscription::where(['user_id'=>$user->user_id])->first();
+                    $job_posts_count = JobPost::where('company_profile_id', $user['id'])->count();
+                    if(!empty($planId)){
+                        $getPlanName = getPlanName($planId['stripe_plan'],$planId['ends_at']);
+                        $total = $job_posts_count - $getPlanName['slot'];
+                        if($total > 0){
+                            for($i = 0;$i<$total;$i++){
+                                JobPost::where(["company_profile_id"=>$user['id']])->orderBy("id","ASC")->limit(1)->delete();
+                            }
+                            $job_posts_count = $job_posts_count - $total;
+                        }
+                    }else{
+                    $getPlanName = ["name"=>"Free Plan","slot"=>"2"];  
+                    }
+                
+                    if(isset($user) && isset($user->company_types)){
+                        $collection = $user->company_types;    
+                        $names = $collection->pluck("id")->toArray(); 
+                    } 
+                    
+                    $user->logo_image_src = ($user->logo_image_url) ? getBucketImageUrl($requested_data['id'],$user->logo_image_url,'company') : '';
+                    $user->featured_image_src = ($user->featured_image_url) ? getBucketImageUrl($requested_data['id'],$user->featured_image_url,'company') : '';
+
+                }
+
+                $industries = CompanyType::pluck('name','id');
+                $data = [
+                    'success'=>['status' => $this->successStatus,'message' => __('messages.company_profile_updated'),'responseCode'=> $this->successResponse],
+                    'user'=>$user,
+                    'industries'=>$industries,
+                    'plan_name'=>$getPlanName,
+                    'job_posts_count' => $job_posts_count,
+                    'industryTest'=>$names
+                ];
+                //return $this->sendResponseWithData('employer/edit-company',__('messages.company_profile_updated'),$data);
+                return redirect('employer/edit-company?id=' . $user->uuid)->with(['message' => __('messages.company_profile_updated')." <a class='toster-anchor' href=/companies/".$user->slug.">View Profile</a>"]);
+            //return redirect()->route('edit.company',['id'=>$requested_data['id']])->with(['message' => __('messages.company_profile_updated')]);
      
             }catch (\Exception $e) {
                 $message = $e->getMessage();
@@ -338,30 +418,12 @@ class CompanyProfileController extends Controller
     {
 
         try {
-            $company = CompanyProfile::leftjoin('locations', 'company_profiles.location_id', 'locations.id')
-                ->leftjoin('users','company_profiles.user_id','=','users.id')
-                ->select(
+            $company = CompanyProfile::select(
                     'company_profiles.id',
-                    //'company_profiles.user_id',
                     'company_profiles.name',
-                    'company_profiles.mission',
-                    'company_profiles.name',
-                    'locations.name as location',
-                    'company_profiles.local_employees',
-                    'company_profiles.global_employees',
-                    'company_profiles.year_founded',
-                    'company_profiles.website_url',
-                    'company_profiles.created_at',
-                    'company_profiles.industry_ids',
                     'company_profiles.logo_image_url',
-                    'company_profiles.street_addr_1',
-                    'company_profiles.state_abbr as state',
-                    'company_profiles.city',
                     'company_profiles.uuid',
-                    'company_profiles.unclaimed',
                     'company_profiles.slug',
-                    'company_profiles.description',
-                    //'users.role',
                 )
                 ->withCount('job_posts')
                 ->with(['company_types:name'])
@@ -445,14 +507,21 @@ class CompanyProfileController extends Controller
             }
             $job_posts_query = JobPost::select('job_posts.name','job_posts.apply_url as apply_url','job_posts.created_at','job_posts.slug as job_slug','locations.name as location','company_profiles.name as company_name','company_profiles.slug as company_slug','company_profiles.state_abbr as state','company_profiles.city')
             ->leftjoin('company_profiles','job_posts.company_profile_id','company_profiles.id')
-            ->leftjoin('locations','company_profiles.location_id','locations.id')
+            ->leftjoin('locations','job_posts.location_id','locations.id')
             ->where('company_profile_id',$company['id'])->orderBy('job_posts.created_at','DESC');
 
             $job_posts_count = $job_posts_query->count();
 
             $job_posts = $job_posts_query->paginate(5)->onEachSide(0);
-
-            return Inertia::render('single-company',['data'=>$company,'articles'=>$company->articles,'job_posts_count'=>$job_posts_count,'job_posts'=>$job_posts]);
+            /* if company belong to loggedin user */
+            $is_company_belong_to = 0;
+            if(Auth::user() != null){
+                $is_user_company = CompanyProfile::where(['user_id' => Auth::user()->id,'slug' => $slug])->first();
+                if($is_user_company != null){
+                    $is_company_belong_to = 1;
+                }
+            }
+            return Inertia::render('single-company',['data'=>$company,'articles'=>$company->articles,'job_posts_count'=>$job_posts_count,'job_posts'=>$job_posts,'is_company_belong_to' => $is_company_belong_to]);
 
         }catch (\Exception $e) {
             $message = $e->getMessage();

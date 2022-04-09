@@ -37,7 +37,8 @@ class DatabaseSeeder extends Seeder
         // Seed article / company_profiles many to many relationship and company types
         $this->call([
             ArticleCompanyProfile::class,
-            CompanyProfileCompanyType::class
+            CompanyProfileCompanyType::class,
+            CompanyProfileBenefitCat::class
         ]);
     }
 }

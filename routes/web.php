@@ -26,12 +26,15 @@ use App\Http\Controllers\ArticleController;
 |
 */
 
-
 Route::get('terms', [HomeController::class, 'terms']);
 
 Route::get('contact', [HomeController::class, 'contact']);
 
 Route::get('privacy', [HomeController::class, 'privacy']);
+
+Route::get('for_employers', [HomeController::class, 'for_employers']);
+
+Route::get('about_us', [HomeController::class, 'about_us']);
 
 Route::get('pricing', [HomeController::class, 'pricing']);
 
@@ -105,7 +108,6 @@ Route::group(['prefix' => 'employer', 'middleware' => ['auth','employer']], func
 
     Route::post('edit-company',[CompanyProfileController::class,'update'])->name('update.company');
 
-
     Route::get('jobs', [JobPostController::class, 'index'])->name('employer.jobs');
 
     Route::get('create-job', [JobPostController::class, 'create'])->name('jobs.create');
@@ -117,7 +119,6 @@ Route::group(['prefix' => 'employer', 'middleware' => ['auth','employer']], func
     Route::post('edit-job', [JobPostController::class, 'update'])->name('jobs.update');
 
     Route::get('delete-job', [JobPostController::class, 'destroy'])->name('jobs.delete');
-
 
 });
 

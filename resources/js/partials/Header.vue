@@ -1,9 +1,9 @@
 <template>
   <header
-    class="absolute w-full z-30"
+    class="absolute z-30 w-full"
     :class="(currentUrl == '/') ? 'homePage' : '' "
   >
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <div class="max-w-6xl px-4 mx-auto sm:px-6">
       <div class="flex items-center justify-between h-20">
         <!-- Site branding -->
         <div class="flex-shrink-0 mr-4">
@@ -14,7 +14,7 @@
             aria-label="Cruip"
           >
             <img
-              src="/images/made_in_tampa_logo.png"
+              src="/images/made_in_tampa_logo.svg"
               width="200"
             >
           </Link>
@@ -23,18 +23,18 @@
         <!-- Desktop navigation -->
         <nav class="hidden lg:flex lg:flex-grow">
           <!-- Desktop menu links -->
-          <!-- <ul class="flex flex-grow justify-end flex-wrap items-center">
+          <!-- <ul class="flex flex-wrap items-center justify-end flex-grow">
             <li>
-              <Link href="#"  class="btn-sm text-white bg-purple-600 hover:bg-purple-700 ml-3">Post a Job</Link>
+              <Link href="#"  class="ml-3 text-white bg-purple-600 btn-sm hover:bg-purple-700">Post a Job</Link>
             </li>
           </ul> -->
 
           <!-- Desktop sign in links -->
-          <ul class="flex flex-grow justify-end flex-wrap items-center">
+          <ul class="flex flex-wrap items-center justify-end flex-grow">
             <li>
               <Link
                 href="/jobs"
-                class="font-bold text-gray-300 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out"
+                class="flex items-center px-4 py-2 font-bold text-gray-300 transition duration-150 ease-in-out hover:text-purple-600"
               >
                 Jobs
               </Link>
@@ -42,7 +42,7 @@
             <li>
               <Link
                 href="/companies"
-                class="font-bold text-gray-300 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out"
+                class="flex items-center px-4 py-2 font-bold text-gray-300 transition duration-150 ease-in-out hover:text-purple-600"
               >
                 Companies
               </Link>
@@ -50,23 +50,23 @@
             <li>
               <Link
                 href="/articles"
-                class="font-bold text-gray-300 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out"
+                class="flex items-center px-4 py-2 font-bold text-gray-300 transition duration-150 ease-in-out hover:text-purple-600"
               >
                 News
               </Link>
             </li>
             <li>
               <Link
-                href="#"
-                class="btn-sm text-white bg-purple-600 hover:bg-purple-700 mx-4"
+                href="/pricing"
+                class="mx-4 text-white bg-purple-600 btn-sm hover:bg-purple-700"
               >
-                Employers
+                For Employers
               </Link>
             </li>
             <li v-if="!isLoggedIn">
               <Link
                 href="/register"
-                class="font-bold text-gray-300 hover:text-purple-600 px-4 py-3 flex items-center transition duration-150 ease-in-out"
+                class="flex items-center px-4 py-3 font-bold text-gray-300 transition duration-150 ease-in-out hover:text-purple-600"
               >
                 Join
               </Link>
@@ -74,7 +74,7 @@
             <li v-if="!isLoggedIn">
               <Link
                 href="/login"
-                class="font-bold text-gray-300 hover:text-purple-600 pl-4 py-3 flex items-center transition duration-150 ease-in-out"
+                class="flex items-center py-3 pl-4 font-bold text-gray-300 transition duration-150 ease-in-out hover:text-purple-600"
               >
                 Sign In
               </Link>
@@ -85,7 +85,7 @@
                   <Link
                     v-if="isLoggedIn && isLoggedIn.role == 2"
                     href="/profile"
-                    class="text-gray-700 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out"
+                    class="flex items-center px-4 py-2 text-gray-700 transition duration-150 ease-in-out hover:text-purple-600"
                   >
                     Profile
                   </Link>
@@ -94,7 +94,7 @@
                   <Link
                     v-if="isLoggedIn && isLoggedIn.role == 1"
                     href="/employer/profile"
-                    class="text-gray-700 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out"
+                    class="flex items-center px-4 py-2 text-gray-700 transition duration-150 ease-in-out hover:text-purple-600"
                   >
                     Profile
                   </Link>
@@ -102,7 +102,7 @@
                 <li class="">
                   <Link
                     href="/logout"
-                    class="text-gray-700 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out"
+                    class="flex items-center px-4 py-2 text-gray-700 transition duration-150 ease-in-out hover:text-purple-600"
                     @click="logout"
                   >
                     Sign Out
@@ -112,22 +112,22 @@
             </li>
           </ul>
 
-          <!-- <ul class="flex flex-grow justify-end flex-wrap items-center text-gray-500 dropMain" v-if="isLoggedIn">
+          <!-- <ul class="flex flex-wrap items-center justify-end flex-grow text-gray-500 dropMain" v-if="isLoggedIn">
              <Dropdown :title="getUserEmail()" >
               li>
-              <Link v-if="isLoggedIn && isLoggedIn.role == 2" href="/dashboard" class="text-gray-700 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Dashboard</Link>
+              <Link v-if="isLoggedIn && isLoggedIn.role == 2" href="/dashboard" class="flex items-center px-4 py-2 text-gray-700 transition duration-150 ease-in-out hover:text-purple-600">Dashboard</Link>
               </li>
               <li>
-                <Link v-if="isLoggedIn && isLoggedIn.role == 1" href="/employer/dashboard" class="text-gray-700 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Dashboard</Link>
+                <Link v-if="isLoggedIn && isLoggedIn.role == 1" href="/employer/dashboard" class="flex items-center px-4 py-2 text-gray-700 transition duration-150 ease-in-out hover:text-purple-600">Dashboard</Link>
               </li
               <li>
-                <Link v-if="isLoggedIn && isLoggedIn.role == 2" href="/profile" class="text-gray-700 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Profile</Link>
+                <Link v-if="isLoggedIn && isLoggedIn.role == 2" href="/profile" class="flex items-center px-4 py-2 text-gray-700 transition duration-150 ease-in-out hover:text-purple-600">Profile</Link>
               </li>
               <li>
-                <Link v-if="isLoggedIn && isLoggedIn.role == 1" href="/employer/profile" class="text-gray-700 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Profile</Link>
+                <Link v-if="isLoggedIn && isLoggedIn.role == 1" href="/employer/profile" class="flex items-center px-4 py-2 text-gray-700 transition duration-150 ease-in-out hover:text-purple-600">Profile</Link>
               </li>
               <li class="">
-                <Link v-on:click="logout" href="/logout" class="text-gray-700 hover:text-purple-600 px-4 py-2 flex items-center transition duration-150 ease-in-out">Sign Out</Link>
+                <Link v-on:click="logout" href="/logout" class="flex items-center px-4 py-2 text-gray-700 transition duration-150 ease-in-out hover:text-purple-600">Sign Out</Link>
               </li>
             </Dropdown>
           </ul> -->
@@ -146,7 +146,7 @@
           >
             <span class="sr-only">Menu</span>
             <svg
-              class="w-6 h-6 fill-current text-gray-300 hover:text-purple-600 transition duration-150 ease-in-out"
+              class="w-6 h-6 text-gray-300 transition duration-150 ease-in-out fill-current hover:text-purple-600"
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -175,14 +175,14 @@
           <nav
             id="mobile-nav"
             ref="mobileNav"
-            class="absolute top-full z-20 left-0 w-full px-4 sm:px-6 overflow-hidden transition-all duration-300 ease-in-out"
+            class="absolute left-0 z-20 w-full px-4 overflow-hidden transition-all duration-300 ease-in-out top-full sm:px-6"
             :style="[ mobileNavOpen ? { maxHeight: $refs.mobileNav.scrollHeight + 'px', opacity: 1 } : { maxHeight: 0, opacity: .8 } ]"
           >
-            <ul class="bg-gray-800 px-4 py-2">
+            <ul class="px-4 py-2 bg-gray-800">
               <li>
                 <Link
                   href="/jobs"
-                  class="flex text-gray-300 font-medium hover:text-purple-600 py-2"
+                  class="flex py-2 font-medium text-gray-300 hover:text-purple-600"
                 >
                   Jobs
                 </Link>
@@ -190,7 +190,7 @@
               <li>
                 <Link
                   href="/companies"
-                  class="flex text-gray-300 font-medium hover:text-purple-600 py-2"
+                  class="flex py-2 font-medium text-gray-300 hover:text-purple-600"
                 >
                   Companies
                 </Link>
@@ -198,23 +198,23 @@
               <li>
                 <Link
                   href="/articles"
-                  class="flex text-gray-300 font-medium hover:text-purple-600 py-2"
+                  class="flex py-2 font-medium text-gray-300 hover:text-purple-600"
                 >
                   News
                 </Link>
               </li>
 
               <!--li>
-                <Link v-if="isLoggedIn && isLoggedIn.role == 2" href="/dashboard" class="flex text-gray-300 font-medium hover:text-purple-600 py-2">Dashboard</Link>
+                <Link v-if="isLoggedIn && isLoggedIn.role == 2" href="/dashboard" class="flex py-2 font-medium text-gray-300 hover:text-purple-600">Dashboard</Link>
               </li>
               <li>
-                <Link v-if="isLoggedIn && isLoggedIn.role == 1" href="/employer/dashboard" class="flex text-gray-300 font-medium hover:text-purple-600 py-2">Dashboard</Link>
+                <Link v-if="isLoggedIn && isLoggedIn.role == 1" href="/employer/dashboard" class="flex py-2 font-medium text-gray-300 hover:text-purple-600">Dashboard</Link>
               </li-->
               <li>
                 <Link
                   v-if="isLoggedIn && isLoggedIn.role == 2"
                   href="/profile"
-                  class="flex text-gray-300 font-medium hover:text-purple-600 py-2"
+                  class="flex py-2 font-medium text-gray-300 hover:text-purple-600"
                 >
                   Profile ({{ getUserEmail() }})
                 </Link>
@@ -223,7 +223,7 @@
                 <Link
                   v-if="isLoggedIn && isLoggedIn.role == 1"
                   href="/employer/profile"
-                  class="flex text-gray-300 font-medium hover:text-purple-600 py-2"
+                  class="flex py-2 font-medium text-gray-300 hover:text-purple-600"
                 >
                   Profile ({{ getUserEmail() }})
                 </Link>
@@ -232,7 +232,7 @@
                 <Link
                   v-if="!isLoggedIn"
                   href="/register"
-                  class="flex text-gray-300 font-medium w-full hover:text-purple-600 py-2 justify-center"
+                  class="flex justify-center w-full py-2 font-medium text-gray-300 hover:text-purple-600"
                 >
                   Join
                 </Link>
@@ -241,7 +241,7 @@
                 <Link
                   v-if="!isLoggedIn"
                   href="/login"
-                  class="flex text-gray-300 font-medium w-full  hover:text-purple-600 py-2 justify-center"
+                  class="flex justify-center w-full py-2 font-medium text-gray-300 hover:text-purple-600"
                 >
                   Sign In
                 </Link>
@@ -250,7 +250,7 @@
                 <Link
                   v-if="!isLoggedIn"
                   href="#"
-                  class="font-medium w-full inline-flex items-center justify-center border border-transparent px-4 py-2 my-2 rounded-sm text-gray-300 bg-purple-600 hover:bg-purple-700 transition duration-150 ease-in-out"
+                  class="inline-flex items-center justify-center w-full px-4 py-2 my-2 font-medium text-gray-300 transition duration-150 ease-in-out bg-purple-600 border border-transparent rounded-sm hover:bg-purple-700"
                 >
                   Employers
                 </Link>
@@ -259,7 +259,7 @@
                 <Link
                   v-if="isLoggedIn"
                   href="/logout"
-                  class="font-medium w-full inline-flex items-center justify-center border border-transparent px-4 py-2 my-2 rounded-sm text-gray-300 bg-purple-600 hover:bg-purple-700 transition duration-150 ease-in-out"
+                  class="inline-flex items-center justify-center w-full px-4 py-2 my-2 font-medium text-gray-300 transition duration-150 ease-in-out bg-purple-600 border border-transparent rounded-sm hover:bg-purple-700"
                   @click="logout"
                 >
                   Sign Out

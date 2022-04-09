@@ -1,9 +1,9 @@
 <template>
   <footer class="footerBg">
     <div class="py-10 md:py-14">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="max-w-6xl px-4 mx-auto sm:px-6">
         <!-- Top area: Blocks -->
-        <div class="grid md:grid-cols-12 gap-8 lg:gap-20 mb-8 md:mb-12">
+        <div class="grid gap-8 mb-8 md:grid-cols-12 lg:gap-20 md:mb-12">
           <!-- 1st block -->
           <div class="md:col-span-4 lg:col-span-5">
             <div class="mb-2">
@@ -19,23 +19,25 @@
                 >
               </Link>
             </div>
-            <div class="text-gray-400">
-              Celebrating Tampa Bay's booming technology scene. Jobs, news articles, company profiles, and more.
+            <div class="text-gray-400">Connecting top talent to innovative tech
+companies and startups across Tampa Bay.
+Find jobs, news, company profiles, and
+more. 
             </div>
           </div>
 
           <!-- 2nd, 3rd and 4th blocks -->
-          <div class="md:col-span-8 lg:col-span-7 grid sm:grid-cols-3 gap-8">
+          <div class="grid gap-8 md:col-span-8 lg:col-span-7 sm:grid-cols-3">
             <!-- 2nd block -->
             <div class="text-sm">
-              <h6 class="text-white font-medium mb-1">
+              <h6 class="mb-1 font-medium text-white">
                 About
               </h6>
               <ul>
                 <li class="mb-1">
                   <Link
-                    href="#"
-                    class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out"
+                    href="/about_us"
+                    class="text-gray-400 transition duration-150 ease-in-out hover:text-gray-100"
                   >
                     About Us
                   </Link>
@@ -43,7 +45,7 @@
                 <li class="mb-1">
                   <Link
                     href="/contact"
-                    class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out"
+                    class="text-gray-400 transition duration-150 ease-in-out hover:text-gray-100"
                   >
                     Contact Us
                   </Link>
@@ -51,7 +53,7 @@
                 <li class="mb-1">
                   <Link
                     href="/privacy"
-                    class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out"
+                    class="text-gray-400 transition duration-150 ease-in-out hover:text-gray-100"
                   >
                     Privacy Policy
                   </Link>
@@ -59,7 +61,7 @@
                 <li class="mb-1">
                   <Link
                     href="/terms"
-                    class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out"
+                    class="text-gray-400 transition duration-150 ease-in-out hover:text-gray-100"
                   >
                     Terms of use
                   </Link>
@@ -69,14 +71,14 @@
 
             <!-- 3rd block -->
             <div class="text-sm">
-              <h6 class="text-white font-medium mb-1">
+              <h6 class="mb-1 font-medium text-white">
                 Resources
               </h6>
               <ul>
                 <li class="mb-1">
                   <Link
                     href="/contact"
-                    class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out"
+                    class="text-gray-400 transition duration-150 ease-in-out hover:text-gray-100"
                   >
                     Provide Feedback
                   </Link>
@@ -84,7 +86,7 @@
                 <li class="mb-1">
                   <Link
                     href="/contact"
-                    class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out"
+                    class="text-gray-400 transition duration-150 ease-in-out hover:text-gray-100"
                   >
                     Report a Concern
                   </Link>
@@ -92,7 +94,7 @@
                 <li class="mb-1">
                   <Link
                     href="/articles"
-                    class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out"
+                    class="text-gray-400 transition duration-150 ease-in-out hover:text-gray-100"
                   >
                     Browse Articles
                   </Link>
@@ -100,7 +102,7 @@
                 <li class="mb-1">
                   <Link
                     href="/jobs"
-                    class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out"
+                    class="text-gray-400 transition duration-150 ease-in-out hover:text-gray-100"
                   >
                     Browse Jobs
                   </Link>
@@ -110,30 +112,30 @@
 
             <!-- 4th block -->
             <div class="text-sm">
-              <h6 class="text-white font-medium mb-1">
+              <h6 class="mb-1 font-medium text-white">
                 Get Involved
               </h6>
               <ul>
                 <li class="mb-1">
                   <Link
                     href="/pricing"
-                    class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out"
+                    class="text-gray-400 transition duration-150 ease-in-out hover:text-gray-100"
                   >
                     Pricing
                   </Link>
                 </li>
                 <li class="mb-1">
                   <Link
-                    href="#"
-                    class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out"
+                    href="/for_employers"
+                    class="text-gray-400 transition duration-150 ease-in-out hover:text-gray-100"
                   >
-                    Employers
+                    For Employers
                   </Link>
                 </li>
                 <li class="mb-1">
                   <Link
-                    href="#"
-                    class="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out"
+                    href="/contact"
+                    class="text-gray-400 transition duration-150 ease-in-out hover:text-gray-100"
                   >
                     Partnerships
                   </Link>
@@ -147,10 +149,11 @@
         <div class="md:flex md:items-center md:justify-between">
           <!-- Social links -->
           <ul class="flex mb-4 md:order-1 md:ml-4 md:mb-0 md:justify-end">
+              <!---
             <li>
               <Link
                 href="#"
-                class="flex justify-center items-center text-purple-600 footerIcon--bg hover:text-gray-100 hover:bg-purple-600 rounded-full transition duration-150 ease-in-out"
+                class="flex items-center justify-center text-purple-600 transition duration-150 ease-in-out rounded-full footerIcon--bg hover:text-gray-100 hover:bg-purple-600"
                 aria-label="Twitter"
               >
                 <svg
@@ -165,7 +168,7 @@
             <li class="ml-4">
               <Link
                 href="#"
-                class="flex justify-center items-center text-purple-600 footerIcon--bg hover:text-gray-100 hover:bg-purple-600 rounded-full transition duration-150 ease-in-out"
+                class="flex items-center justify-center text-purple-600 transition duration-150 ease-in-out rounded-full footerIcon--bg hover:text-gray-100 hover:bg-purple-600"
                 aria-label="Github"
               >
                 <svg
@@ -177,11 +180,11 @@
                 </svg>
               </Link>
             </li>
-
+        --->
             <li class="ml-4">
               <Link
-                href="#"
-                class="flex justify-center items-center text-purple-600 footerIcon--bg hover:text-gray-100 hover:bg-purple-600 rounded-full transition duration-150 ease-in-out"
+                href="https://linkedin.com/company/made-in-tampa"
+                class="flex items-center justify-center text-purple-600 transition duration-150 ease-in-out rounded-full footerIcon--bg hover:text-gray-100 hover:bg-purple-600"
                 aria-label="Linkedin"
               >
                 <svg
@@ -196,8 +199,8 @@
           </ul>
 
           <!-- Copyrights note -->
-          <div class="text-gray-400 text-sm mr-4">
-            &copy; 2021 Water Street Technologies. All rights reserved.
+          <div class="mr-4 text-sm text-gray-400">
+            &copy; {{ new Date().getFullYear() }} Water Street Technologies. All rights reserved.
           </div>
         </div>
       </div>

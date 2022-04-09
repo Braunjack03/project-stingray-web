@@ -23,7 +23,7 @@
               <v-form class="register-form form-outer-wrapper" @submit.prevent="submit" >
                 <div class="flex flex-wrap -mx-3 mb-3">
                   <div class="w-full px-3">
-                    <label class="block text-gray-700 text-lg font-medium mb-1" for="email">Work Email <span class="text-red-600">*</span></label>
+                    <label class="block text-gray-700 text-lg font-medium mb-1" for="email">Email <span class="text-red-600">*</span></label>
                     <v-text-field v-model="email" :class="{ 'error--text': $v.email.$error }"  @input="$v.email.$touch()" @blur="$v.email.$touch()" class="form-input input-field-outer w-full text-gray-700" placeholder="you@yourcompany.com" autocomplete required ></v-text-field>
 
                     <div v-if="$v.email.$error && !$v.email.required"  class="text-red-500 text-lg">Email is required</div>

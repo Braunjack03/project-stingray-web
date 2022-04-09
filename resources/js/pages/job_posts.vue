@@ -1,19 +1,19 @@
 <template>
    <Layout>
-      <Head title="Job Listing" />
-    
               <section data-app>
-               <div class="max-w-6xl mx-auto px-4 sm:px-6 py-10 md:py-20 relative">
-                  <div class="pt-10 pb-6 md:pb-12">
+               <div class="relative max-w-6xl px-4 py-10 mx-auto sm:px-6 md:py-20">
 
-                     <div class="mx-auto text-center pt-10 pb-3">
+                   <div class="pt-16 pb-6 md:pb-12 jobpost-page-title">
+                    <h1 class="text-center text-gray-700 h1">Jobs in the Tampa Bay Area</h1>
+
+                     <div class="pt-10 pb-3 mx-auto text-center">
                         <div class="flex filter-outer jobsFilter">
                            <span class="searc-show-title">
                               Total Number of jobs: {{job_posts_count}}
                            </span>
-                           <div class="filter-opt relative">
-                           <input type="text" name="table_search" :class="{ 'error--text': $v.term.$error }" class="form-control float-right" placeholder="Search" v-model="term" @keydown.enter="submit">
-                           <div v-if="$v.term.$error && !$v.term.required"  class="text-red-500 text-lg jobserach-error">Search is required</div>
+                           <div class="relative filter-opt">
+                           <input type="text" name="table_search" :class="{ 'error--text': $v.term.$error }" class="float-right form-control" placeholder="Search" v-model="term" @keydown.enter="submit">
+                           <div v-if="$v.term.$error && !$v.term.required"  class="text-lg text-red-500 jobserach-error">Search is required</div>
                            <v-select
                            v-model="location_id"
                            item-text="name"
@@ -25,11 +25,7 @@
                            ></v-select>
                           
 
-                              <v-btn class="
-                                 btn
-                                 text-white
-                                 bg-purple-600
-                                 hover:bg-purple-700 ml-3 jobsearchBtn" 
+                              <v-btn class="ml-3 text-white bg-purple-600 btn hover:bg-purple-700 jobsearchBtn" 
                               @click="submit">
                                  Search
                               </v-btn>
@@ -47,7 +43,7 @@
                   </div>  
                   <div v-else >
                       <v-row >
-                        <v-col cols="12" class="mt-5 text-center text-gray-700 text-lg">
+                        <v-col cols="12" class="mt-5 text-lg text-center text-gray-700">
                              No Job Found 
                         </v-col>
                       </v-row>  
@@ -58,6 +54,7 @@
 </template>
 
 <script>
+//import Card from '../components/Card.vue';
 import JobPost from '../components/JobPost.vue';
 import Layout from './Layout';
 import { Head,Link } from '@inertiajs/inertia-vue';
@@ -71,6 +68,13 @@ export default {
      validations: {
       term: { required },
     },
+    metaInfo: {
+      title: "Job Posts",
+      titleTemplate: "%s - Made in Tampa",
+      meta: [
+         { name: 'description', content: 'Jobs in the Tampa Bay' },
+      ]
+   },
    components: {
       Head,
       Layout,

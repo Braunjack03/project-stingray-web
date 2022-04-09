@@ -6,7 +6,10 @@ import Vuelidate from 'vuelidate';
 import vuetify from './vuetify';
 import VueMeta from 'vue-meta'
 
+import VueSweetalert2 from 'vue-sweetalert2';
 
+// If you don't need the styles, do not connect
+import 'sweetalert2/dist/sweetalert2.min.css';
 import '../css/style.scss';
 import '../css/additional-styles/theme.scss';
 import '../css/additional-styles/utility-patterns.scss';
@@ -18,6 +21,8 @@ import '@mdi/font/css/materialdesignicons.css';
 import 'tiptap-vuetify/dist/main.css';
 
 Vue.use(Vuelidate);
+
+Vue.use(VueSweetalert2);
 
 createInertiaApp({
   resolve: (name) => require(`./pages/${name}`),
