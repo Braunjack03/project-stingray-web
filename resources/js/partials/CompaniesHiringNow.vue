@@ -5,7 +5,7 @@
         <!-- Section header -->
         <div class="max-w-3xl pb-6 mx-auto text-center md:pb-10">
           <h2 class="mb-4 h2 darkColor sectionTitle">
-              Get the Inside Scoop on Tampa Bay's Tech and Start-up Scene
+              Your Source for Tampa Bay Technolgy News and Jobs
           </h2>
         </div>
 
