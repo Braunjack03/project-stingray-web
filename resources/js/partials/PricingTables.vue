@@ -5,7 +5,7 @@
         <!-- Section header -->
         <div class="max-w-3xl pb-12 mx-auto text-center">
           <h1 class="mb-4 text-gray-700 h1" data-aos="fade-up">
-            Attract the Best Candidates
+            Make Attracting the Best Candidates Easier
           </h1>
           <p
             class="pt-2 text-xl textColor"
@@ -65,7 +65,7 @@
                     priceOutput.plan1[value][2]
                   }}</span>
                 </div>
-                <div class="text-gray-400">Ideal plan for starting small.</div>
+                <div class="text-gray-400">Ideal for starting small</div>
               </div>
               <div class="mb-3 font-medium">Features include:</div>
               <ul class="flex-grow -mb-3 text-gray-400">
@@ -79,7 +79,7 @@
                       d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
                     />
                   </svg>
-                  <span>50 Placeholder text commonly</span>
+                  <span>2 Job Slots</span>
                 </li>
                 <li class="flex items-center mb-3">
                   <svg
@@ -91,33 +91,11 @@
                       d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
                     />
                   </svg>
-                  <span>Consectetur adipiscing elit</span>
+                  <span>Create Free Company Profile</span>
                 </li>
-                <li class="flex items-center mb-3">
-                  <svg
-                    class="flex-shrink-0 w-3 h-3 mr-3 text-green-500 fill-current "
-                    viewBox="0 0 12 12"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
-                    />
-                  </svg>
-                  <span>Excepteur sint occaecat cupidatat</span>
-                </li>
-                <li class="flex items-center mb-3">
-                  <svg
-                    class="flex-shrink-0 w-3 h-3 mr-3 text-green-500 fill-current "
-                    viewBox="0 0 12 12"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
-                    />
-                  </svg>
-                  <span>Officia deserunt mollit anim</span>
-                </li>
-              </ul>
+
+             </ul>
+
               <div class="p-3 mt-6 border border-gray-700">
                 <span v-if="!isLoggedIn">
                   <a
@@ -162,7 +140,7 @@
                   }}</span>
                 </div>
                 <div class="text-gray-400">
-                  Accelerated hiring for companies of any size.
+                  Accelerated hiring for companies of any size
                 </div>
               </div>
               <div class="mb-3 font-medium">Features:</div>
@@ -177,7 +155,7 @@
                       d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
                     />
                   </svg>
-                  <span>100 placeholder text commonly</span>
+                  <span>5 Job Slots</span>
                 </li>
                 <li class="flex items-center mb-3">
                   <svg
@@ -189,7 +167,7 @@
                       d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
                     />
                   </svg>
-                  <span>Consectetur adipiscing elit</span>
+                  <span>Create Free Company Profile</span>
                 </li>
                 <li class="flex items-center mb-3">
                   <svg
@@ -201,33 +179,9 @@
                       d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
                     />
                   </svg>
-                  <span>Excepteur sint occaecat cupidatat</span>
+                  <span>Company Spotlight Article (annual plan)</span>
                 </li>
-                <li class="flex items-center mb-3">
-                  <svg
-                    class="flex-shrink-0 w-3 h-3 mr-3 text-green-500 fill-current "
-                    viewBox="0 0 12 12"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
-                    />
-                  </svg>
-                  <span>Officia deserunt mollit anim</span>
-                </li>
-                <li class="flex items-center mb-3">
-                  <svg
-                    class="flex-shrink-0 w-3 h-3 mr-3 text-green-500 fill-current "
-                    viewBox="0 0 12 12"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
-                    />
-                  </svg>
-                  <span>Placeholder text commonly used</span>
-                </li>
-              </ul>
+             </ul>
               <div class="p-3 mt-6 border border-gray-700">
                 <span v-if="!isLoggedIn">
                   <a
@@ -280,7 +234,7 @@
                       d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
                     />
                   </svg>
-                  <span>200 placeholder text commonly</span>
+                  <span>10 Job Slots</span>
                 </li>
                 <li class="flex items-center mb-3">
                   <svg
@@ -292,7 +246,7 @@
                       d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
                     />
                   </svg>
-                  <span>Consectetur adipiscing elit</span>
+                  <span>Create Free Company Profile</span>
                 </li>
                 <li class="flex items-center mb-3">
                   <svg
@@ -304,7 +258,7 @@
                       d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
                     />
                   </svg>
-                  <span>Excepteur sint occaecat cupidatat</span>
+                  <span>Company Spotlight Article (annual plan)</span>
                 </li>
                 <li class="flex items-center mb-3">
                   <svg
@@ -316,33 +270,9 @@
                       d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
                     />
                   </svg>
-                  <span>Officia deserunt mollit anim</span>
+                  <span>Custom Editoral Content (annual plan)</span>
                 </li>
-                <li class="flex items-center mb-3">
-                  <svg
-                    class="flex-shrink-0 w-3 h-3 mr-3 text-green-500 fill-current "
-                    viewBox="0 0 12 12"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
-                    />
-                  </svg>
-                  <span>Voluptate velit esse cillum</span>
-                </li>
-                <li class="flex items-center mb-3">
-                  <svg
-                    class="flex-shrink-0 w-3 h-3 mr-3 text-green-500 fill-current "
-                    viewBox="0 0 12 12"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
-                    />
-                  </svg>
-                  <span>Placeholder text commonly used</span>
-                </li>
-              </ul>
+             </ul>
               <div class="p-3 mt-6 border border-gray-700">
                 <span v-if="!isLoggedIn">
                   <a
@@ -369,7 +299,7 @@
             <div
               class="mb-4 text-lg font-medium text-center text-gray-700 lg:text-left lg:mb-0"
             >
-              Expecting more than 1000 Active End Users?
+                Want to discuss custom packages or features?
             </div>
             <div>
               <a
@@ -398,7 +328,7 @@ export default {
       value: false,
       priceOutput: {
         plan1: {
-          false: ["$", "19.95", "/mo"],
+          false: ["$", "19", "/mo"],
           true: ["$", "167", "/yr"],
         },
         plan2: {

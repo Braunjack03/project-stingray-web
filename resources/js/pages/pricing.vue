@@ -2,9 +2,11 @@
   <Layout class="pricingPage">
     <!-- Page sections -->
     <PricingTables />
+    <!---
     <Faqs />
     <Testimonials />
     <Cta />
+    --->
   </Layout>
 </template>
 

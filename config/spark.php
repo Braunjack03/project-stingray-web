@@ -95,12 +95,12 @@ return [
 
                 [
                     'name' => 'Seed Plan',
-                    'short_description' => 'This is the start-up plan.',
+                    'short_description' => 'Ideal for starting small',
                     'monthly_id' => env('SEED_MTH'),
                     'yearly_id' => env('SEED_YR'),
                     'features' => [
                         '2 Job Slots',
-                        'Create a company profile',
+                        'Create a free company profile',
                     ],
                     'archived' => false,
                 ],
@@ -109,25 +109,27 @@ return [
 
                 [
                     'name' => 'Start-up Plan',
-                    'short_description' => 'This is the start-up plan.',
+                    'short_description' => 'Accelerated hiring for companies of any size',
                     'monthly_id' => env('STARTUP_MTH'),
                     'yearly_id' => env('STARTUP_YR'),
                     'features' => [
                         '5 Job Slots',
-                        'Create a company profile',
+                        'Create a free company profile',
+                        'Company Spotlight Article (annual plan)'
                     ],
                     'archived' => false,
                 ],
 
                 [
                     'name' => 'Growth Plan',
-                    'short_description' => 'This is the growth plan.',
+                    'short_description' => 'Perfect for fast growing companies',
                     'monthly_id' => env('GROWTH_MTH'),
                     'yearly_id' => env('GROWTH_YR'),
                     'features' => [
                         '10 Job Slots',
-                        'Create a company profile',
-                        'Early access to new features'
+                        'Create a free company profile',
+                        'Company Spotlight Article (annual plan)',
+                        'Custom Editoral Content (annual plan)'
                     ],
                     'archived' => false,
                 ],

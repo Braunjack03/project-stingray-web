@@ -19,7 +19,7 @@
                   class="pb-8 mb-4 text-center h2 darkColor md:pb-16 sectionTitle"
                   data-aos="fade-up"
                 >
-                Tampa Bay Tech News Delivered Fresh to You
+                Stay Ahead of the Curve with News Delivered Fresh to You
 
                 </h2>
               </div>
