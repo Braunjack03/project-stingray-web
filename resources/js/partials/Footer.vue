@@ -149,6 +149,7 @@ more.
         <div class="md:flex md:items-center md:justify-between">
           <!-- Social links -->
           <ul class="flex mb-4 md:order-1 md:ml-4 md:mb-0 md:justify-end">
+              <!---
             <li>
               <Link
                 href="#"
@@ -179,7 +180,7 @@ more.
                 </svg>
               </Link>
             </li>
-
+        --->
             <li class="ml-4">
               <Link
                 href="https://linkedin.com/company/made-in-tampa"
