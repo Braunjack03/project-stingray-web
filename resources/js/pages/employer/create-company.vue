@@ -348,6 +348,25 @@
                     </div>
                   </div>
 
+                   <div class="flex flex-wrap mb-3">
+                      <div class="w-full px-3">
+                          <label class="block mb-1 text-lg font-medium text-gray-700">Company Benefit (select up to 10)</label>
+                          <ul class="industries-list companyIndustry__list">
+                              <li v-for="(benefitItem, benefitItemIndex) in benefitCats" :key="benefitItemIndex">
+                                  <label>
+                                    <input
+                                      v-model="benefit"
+                                      type="checkbox"
+                                      :value="benefitItemIndex"
+                                      :disabled="benefit.length > 9 && benefit.indexOf(benefitItemIndex) === -1"
+                                      number
+                                    > {{ benefitItem }}
+                                  </label>
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+
                   <h3 class="mt-2 mb-1 ml-3 text-2xl text-gray-700">
                     Local Address
                   </h3>
@@ -625,6 +644,7 @@ export default {
     user: Object,
     success: Object,
     industries: Object,
+    benefitCats: Object,
     job_posts_count: Number,
     plan_name: Array && Object,
   },
@@ -635,6 +655,7 @@ export default {
       logo_image_removed: 0,
       description: this.user.description,
       industry: [],
+      benefit: [],
       items: [
         "Alabama",
         "Alaska",
@@ -724,6 +745,7 @@ export default {
           mission: this.user.mission,
           description: this.description,
           industry: this.industry,
+          benefit: this.benefit,
           street_addr_1: this.user.street_addr_1,
           street_addr_2: this.user.street_addr_2,
           city: this.user.city,
