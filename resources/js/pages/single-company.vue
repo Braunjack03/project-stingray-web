@@ -186,6 +186,18 @@
               />
             </div>
           </v-col>
+
+          <v-col v-if="companyProfileBenefits.length > 0" cols="12" md="12" class="pa-3 d-flex flex-column py-10">
+            <h2 class="mb-4 h2 darkColor sectionTitle text-center">
+             Company Benefits
+          </h2>
+            <ul class="list-disc banefitsLsits">
+              <li v-for="data in companyProfileBenefits"
+                :key="data.id" >{{data.benefit_cats.name}}</li>
+              
+            </ul>
+          </v-col>
+         
         </v-row>
       </div>
 
@@ -343,6 +355,7 @@ export default {
     success: Object,
     data: Object,
     job_posts: Object,
+    companyProfileBenefits: Object,
     articles: Array || Object,
     selected: String,
     job_posts_count: Number,

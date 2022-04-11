@@ -16,6 +16,8 @@ use Redirect;
 use App\Models\ActivityLog;
 use App\Models\Subscription;
 use App\Models\CompanyProfileCompanyType;
+use App\Models\BenefitCat;
+use App\Models\CompanyProfileBenefitCat;
 use Session;
 use Mail; 
 
@@ -48,7 +50,8 @@ class CompanyProfileController extends Controller
             }else{
               $getPlanName = ["name"=>"Free Plan","slot"=>"0"];  
             }
-            return Inertia::render('employer/create-company',['industries'=>$industries,'plan_name'=>$getPlanName,'job_posts_count' => $job_posts_count]);
+            $benefitCats = BenefitCat::pluck('name','id');
+            return Inertia::render('employer/create-company',['industries'=>$industries,'plan_name'=>$getPlanName,'job_posts_count' => $job_posts_count,'benefitCats'=>$benefitCats]);
         }catch (\Exception $e) {
             $message = $e->getMessage();
             return $this->sendErrorResponse('login',$message);
@@ -149,6 +152,14 @@ class CompanyProfileController extends Controller
                     CompanyProfileCompanyType::insert($industries);
                 }
                 
+                if(count($data['benefit']) > 0){
+                    foreach($data['benefit'] as $val){
+                        CompanyProfileBenefitCat::create([
+                            'company_profile_id' => $company_profile_id->id,
+                            'benefit_cat_id' => $val,
+                        ]);
+                    }
+                }
                 ActivityLog::addToLog(__('activitylogs.company_profile_created'),'company created');
                 return Redirect::route('employer.profile')->with( ['message' => __('messages.company_profile_created')] );
                  
@@ -190,15 +201,17 @@ class CompanyProfileController extends Controller
                     $collection = $user->company_types;    
                     $names = $collection->pluck("id")->toArray(); 
                 } 
-                
+               
                 $user->logo_image_src = ($user->logo_image_url) ? getBucketImageUrl($request->all()['id'],$user->logo_image_url,'company') : '';
                 $user->featured_image_src = ($user->featured_image_url) ? getBucketImageUrl($request->all()['id'],$user->featured_image_url,'company') : '';
 
             }else{
                 redirect('/employer/create-company');
             }
+            $benefitCats = BenefitCat::pluck('name','id');
+            $companyProfileBenefitTag = CompanyProfileBenefitCat::where('company_profile_id',$user->id)->pluck('benefit_cat_id');
             $industries = CompanyType::pluck('name','id');
-            $data = ['user'=>$user,'industries'=>$industries,'plan_name'=>$getPlanName,'job_posts_count' => $job_posts_count,'industryTest'=>$names];
+            $data = ['user'=>$user,'industries'=>$industries,'plan_name'=>$getPlanName,'job_posts_count' => $job_posts_count,'industryTest'=>$names,'benefitCats'=>$benefitCats,'companyProfileBenefitTag' => $companyProfileBenefitTag];
             return $this->sendResponseWithData('employer/edit-company','',$data);
         }catch (\Exception $e) {
             $message = $e->getMessage();
@@ -245,6 +258,7 @@ class CompanyProfileController extends Controller
             'instagram_user' => isset($requested_data['instagram_user']) ? $requested_data['instagram_user'] : '',
             'logo_image_removed' => isset($requested_data['logo_image_removed']) ? $requested_data['logo_image_removed'] : '',
             'featured_image_removed' => isset($requested_data['featured_image_removed']) ? $requested_data['featured_image_removed'] : '',
+            'benefit' => isset($requested_data['benefit']) ? $requested_data['benefit'] : '',
         ];
 
         $messages = [
@@ -275,6 +289,7 @@ class CompanyProfileController extends Controller
             return $this->sendCustomValidationErrorsWithData($redirect_page,$validator->errors(),$user_data);
         }else{
             try{
+                //dd(count($data['benefit']));
                 $profile_image = '';
                 $image_name = '';
                 $headerimage_name = '';
@@ -377,6 +392,15 @@ class CompanyProfileController extends Controller
                     
                     $user->logo_image_src = ($user->logo_image_url) ? getBucketImageUrl($requested_data['id'],$user->logo_image_url,'company') : '';
                     $user->featured_image_src = ($user->featured_image_url) ? getBucketImageUrl($requested_data['id'],$user->featured_image_url,'company') : '';
+                    CompanyProfileBenefitCat::where('company_profile_id',$user->id)->delete();
+                    if(count($data['benefit']) > 0){
+                        foreach($data['benefit'] as $val){
+                            CompanyProfileBenefitCat::create([
+                                'company_profile_id' => $user->id,
+                                'benefit_cat_id' => $val,
+                            ]);
+                        }
+                    }
 
                 }
 
@@ -389,6 +413,7 @@ class CompanyProfileController extends Controller
                     'job_posts_count' => $job_posts_count,
                     'industryTest'=>$names
                 ];
+                
                 //return $this->sendResponseWithData('employer/edit-company',__('messages.company_profile_updated'),$data);
                 return redirect('employer/edit-company?id=' . $user->uuid)->with(['message' => __('messages.company_profile_updated')." <a class='toster-anchor' href=/companies/".$user->slug.">View Profile</a>"]);
             //return redirect()->route('edit.company',['id'=>$requested_data['id']])->with(['message' => __('messages.company_profile_updated')]);
@@ -532,7 +557,10 @@ class CompanyProfileController extends Controller
                     $is_company_belong_to = 1;
                 }
             }
-            return Inertia::render('single-company',['data'=>$company,'articles'=>$company->articles,'job_posts_count'=>$job_posts_count,'job_posts'=>$job_posts,'is_company_belong_to' => $is_company_belong_to]);
+          
+            $companyProfileBenefits = CompanyProfileBenefitCat::with('benefit_cats')->where('company_profile_id',$company->id)->get();
+            //dd($companyProfileBenefits);
+            return Inertia::render('single-company',['data'=>$company,'articles'=>$company->articles,'job_posts_count'=>$job_posts_count,'job_posts'=>$job_posts,'is_company_belong_to' => $is_company_belong_to,'companyProfileBenefits' => $companyProfileBenefits]);
 
         }catch (\Exception $e) {
             $message = $e->getMessage();
