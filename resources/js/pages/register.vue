@@ -17,8 +17,8 @@
                 <div class="border-t border-gray-700 border-dotted flex-grow ml-3" aria-hidden="true"></div>
               </div>
 
-              <Message :message="errors.message" :hide="0" :type="'error'" />
-              <Message :message="success.message" :hide="0" :type="'success'" />
+              <Message :message="errors.message" v-on:hide="hideMessage" :hide="hide" :type="'error'" />
+              <Message :message="success.message" v-on:hide="hideMessage" :hide="hide" :type="'success'" />
 
               <v-form class="register-form form-outer-wrapper" @submit.prevent="submit" >
                 <div class="flex flex-wrap -mx-3 mb-3">
@@ -107,6 +107,7 @@ export default {
         password:'',
         user_type:'',
         message: '',
+        hide:0, 
     }),
     methods: {
       submit() {
@@ -116,6 +117,9 @@ export default {
              this.$inertia.post('/register', form);
           }
        },
+       hideMessage() {
+            this.hide = 1;
+      }
     },
   }
 
