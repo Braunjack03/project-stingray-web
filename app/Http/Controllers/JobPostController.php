@@ -172,7 +172,7 @@ class JobPostController extends Controller
                 JobPost::create($data);
                 $slug = $data['slug'];
   
-                $company_data = CompanyProfile::select('slug')->where('id', $company_id)->first();
+                $company_data = CompanyProfile::select('slug')->where('uuid', $company_id)->first();
                 if($company_data){
                     $company_slug = $company_data['slug'];
                 }else{
