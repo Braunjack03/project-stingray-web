@@ -15,7 +15,7 @@ use Auth;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Str;
 use Mail; 
-
+use Session;
 
 
 class AuthController extends Controller
@@ -28,6 +28,9 @@ class AuthController extends Controller
 
     public function showLoginForm()
     {
+        if(Str::contains(url()->previous(), url('jobs/')) == true){
+            session()->put('url.intended', url()->previous());
+        }
         return Inertia::render('login'); 
     }
 
@@ -61,7 +64,13 @@ class AuthController extends Controller
                         
                         if(Auth::user()->role == 1)
                         {
-                            return redirect()->intended('/employer/profile');
+                            if(session()->has('url.intended')){
+                                return redirect(session()->pull('url.intended'));
+                            }else{
+                                return redirect()->intended('/employer/profile');
+
+                            }
+
                         }else if(Auth::user()->role == 3)
                         {
                             return redirect()->intended('/admin/dashboard');
