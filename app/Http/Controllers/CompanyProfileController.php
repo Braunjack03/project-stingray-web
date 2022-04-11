@@ -130,7 +130,13 @@ class CompanyProfileController extends Controller
                 }
 
                 $data['slug'] = $this->createCompanySlug($data['name']);
-                
+                /* to add 'https://' website url if not exists */
+                if(isset($data['website_url']) && $data['website_url'] != null && $data['website_url'] != ''){
+                    $httpsContains = Str::contains($data['website_url'], ['https://', 'http://']);
+                    if($httpsContains == false){
+                        $data['website_url'] = 'https://'.$data['website_url'];
+                    }
+                }
                 $company_profile_id = CompanyProfile::create($data);
 
                 if(isset($data['industry']))
@@ -288,8 +294,13 @@ class CompanyProfileController extends Controller
                 }else{
                     $updated_slug = $user->slug;
                 }
-
-                
+                /* to add 'https://' website url if not exists */
+                if(isset($data['website_url']) && $data['website_url'] != null && $data['website_url'] != ''){
+                    $httpsContains = Str::contains($data['website_url'], ['https://', 'http://']);
+                    if($httpsContains == false){
+                        $data['website_url'] = 'https://'.$data['website_url'];
+                    }
+                }
                 $profile_data = [
                     "name"=>$data['name'],
                     'user_id' => $data['user_id'],

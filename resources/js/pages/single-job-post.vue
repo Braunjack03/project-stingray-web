@@ -34,6 +34,13 @@
                         </v-btn>
                       </div>
                   </v-col>
+                  <v-col cols="12" sm="12" lg="4" v-else>
+                      <div class="text-subtitle-1 text-center xl:text-right applyBtn" :class="(scrollPosition > 100) ? 'btnSticky' : ''">
+                        <v-btn  href="/login" class="newBtn bg-purple-600 hover:bg-purple-700 rounded-none " >
+                          Please Login
+                        </v-btn>
+                      </div>
+                  </v-col>
                 </v-row>  
             </div>
         </div>

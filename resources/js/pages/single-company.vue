@@ -60,7 +60,7 @@
             </div>
             <div class="conpanymainDetail">
               <v-row class="mt-0">
-                <v-col
+                <v-col v-if="data.state && data.city"
                   cols="12"
                   sm="6"
                   md="4"
