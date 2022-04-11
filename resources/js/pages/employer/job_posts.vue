@@ -14,7 +14,7 @@
                                 <h1 class="mb-4 text-gray-700 h1" data-aos="fade-up">Job Posts</h1>
                             </div>
                             <div class="testJobs">
-                                <Link  :href="'/employer/create-job?c_id=' + company_details.uuid" color="text" class="mb-3 text-lg text-white bg-purple-600 btn hover:bg-purple-700">Add New Job Post</Link>
+                                <Link v-if="companies_count > 0 && job_posts_count < plan_name.slot" :href="'/employer/create-job?c_id=' + company_details.uuid" color="text" class="mb-3 text-lg text-white bg-purple-600 btn hover:bg-purple-700">Add New Job Post</Link>
     
                                 <br /><br /><br />
                                 <h3 class="text-gray-700 h3">Current Job Posts</h3>

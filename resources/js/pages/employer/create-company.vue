@@ -320,7 +320,7 @@
                     <div class="w-full px-3">
                       <label
                         class="block mb-3 text-lg font-medium text-gray-700"
-                        >Company Industry (select up to 3)</label
+                        >Company Industry (select up to 3)<span class="text-red-600">*</span></label
                       >
                       <ul class="industries-list companyIndustry__list">
                         <li v-for="(item, index) in industries" :key="index">
