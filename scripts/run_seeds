@@ -1,5 +1,5 @@
 echo "Seeding Benefits"
-php artisan db:seed --class=BenefitSeeder --force
+php artisan db:seed --class=BenefitCatsSeeder --force
 echo "Job Categories"
 php artisan db:seed --class=JobCatSeeder --force
 echo "Location Seeder"
