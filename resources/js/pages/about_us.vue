@@ -1,6 +1,9 @@
 <template>
   <Layout>
-    <Head title="About Us" />
+    <Head>
+    <title>About Us - Made In Tampa</title>
+    <meta head-key="description" name="description" content="Companies Hiring in the Tampa Bay" />
+  </Head>
     <section data-app>
       <div class="relative max-w-6xl px-4 mx-auto sm:px-6">
         <div class="pb-12 pt-36 md:pt-40 md:pb-20">
@@ -83,14 +86,6 @@ import { Head, Link } from "@inertiajs/inertia-vue";
 import Footer from "../partials/Footer.vue";
 
 export default {
-  metaInfo: {
-    title: "About Us",
-    titleTemplate: "%s - Made in Tampa",
-    meta: [
-      { name: "description", content: "Companies Hiring in the Tampa Bay" },
-    ],
-  },
-
   components: {
     Head,
     Layout,
