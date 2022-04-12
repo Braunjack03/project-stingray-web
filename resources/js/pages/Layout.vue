@@ -8,7 +8,6 @@
             <div class="relative max-w-6xl mx-auto h-0 pointer-events-none" aria-hidden="true">
               <PageIllustration />
             </div>
-              {{this.$page.props.success.message.length}}
                  <div class="verifyEmailText verifyEmailLength" v-if="currentHref && currentHref.includes('contact') != true  && currentHref.includes('privacy') != true  && currentHref.includes('pricing') != true && currentHref.includes('thankyou') != true  && currentHref.includes('login') != true && currentHref.includes('register') != true && currentHref.includes('companies') != true && currentHref.includes('articles') == false && currentUrl != '/' && currentHref.includes('jobs') == false">
                     <div v-if="isLoggedIn && isLoggedIn.is_email_verified == 0 && hide == 0 && (this.$page.props.success.message == 0 || this.$page.props.errors.message == 0)" class="bg-yellow-100 border border-yellow-400 text-yellow-700 pl-4 pr-8 py-3 rounded relative" role="alert">
                         <span class="block sm:inline text-lg">Please verify your email address : {{isLoggedIn.email}}.</span>
