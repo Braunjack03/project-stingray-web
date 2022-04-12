@@ -127,12 +127,12 @@
                   >
                     Job Application URL is required
                   </div>
-                   <div
+                   <!-- <div
                     v-if="$v.apply_url.$error && !$v.apply_url.url"
                     class="text-lg text-red-500"
                   >
                     Please Enter a valid Job Application URL
-                  </div>
+                  </div> -->
                 </div>
               </div>
               <div class="flex flex-wrap mb-3 textEditor">
@@ -199,7 +199,7 @@ export default {
     name: { required },
     location_id: { required },
     job_cat_id: { required },
-    apply_url: { required,url },
+    apply_url: { required },
   },
   props: {
     errors: Object,

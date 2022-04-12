@@ -168,7 +168,13 @@ class JobPostController extends Controller
             try {
                 unset($data['c_id']);
                 $data['slug'] = $this->createJobPostSlug($data['name']);
-                
+                /* to add 'https://' website url if not exists */
+                if(isset($data['apply_url']) && $data['apply_url'] != null && $data['apply_url'] != ''){
+                    $httpsContains = Str::contains($data['apply_url'], ['https://', 'http://']);
+                    if($httpsContains == false){
+                        $data['apply_url'] = 'https://'.$data['apply_url'];
+                    }
+                }
                 JobPost::create($data);
                 $slug = $data['slug'];
   
@@ -282,7 +288,13 @@ class JobPostController extends Controller
                 }else{
                     $data['slug'] = $jobData->slug;
                 }
-
+                /* to add 'https://' website url if not exists */
+                if(isset($data['apply_url']) && $data['apply_url'] != null && $data['apply_url'] != ''){
+                    $httpsContains = Str::contains($data['apply_url'], ['https://', 'http://']);
+                    if($httpsContains == false){
+                        $data['apply_url'] = 'https://'.$data['apply_url'];
+                    }
+                }
                 $slug = $data['slug'];
                 $job->update($data);
                 $job_data = JobPost::where('uuid', $job_uuid)->first();
