@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\TestMail;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\ActivityLog;
@@ -15,6 +16,7 @@ use Auth;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Str;
 use Mail; 
+
 
 
 
@@ -158,6 +160,10 @@ class AuthController extends Controller
                             $message->to($user->email);
                             $message->subject(__('messages.welcome_email'));
                         });    
+
+                        Mail::to("jason@citystory.com")->send(
+                            new TestMail($user, $token)
+                        );
 
                         return Redirect::route('thankyou');
                 }catch (ModelNotFoundException $e){
