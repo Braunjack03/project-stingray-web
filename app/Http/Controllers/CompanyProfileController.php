@@ -225,7 +225,6 @@ class CompanyProfileController extends Controller
      * @return \Illuminate\View\View
      */
     public function update(Request $request){        
-          
         if(!Auth::check())
         {
             return $this->sendErrorResponse('login',__('messages.unauthorized'));
@@ -299,10 +298,10 @@ class CompanyProfileController extends Controller
                     $profile_image = Storage::disk('s3Company')->putFileAs('company/'.$user_uuid, $image,$image_name);
                 }
 
-                if ($headerimage = $request->file('featured_image_url')) {
-                    $headerimage_name = time() . '_' . $headerimage->getClientOriginalName();
-                    $featured_image = Storage::disk('s3Company')->putFileAs('company/'.$user_uuid, $headerimage,$headerimage_name);
-                }
+                // if ($headerimage = $request->file('featured_image_url')) {
+                //     $headerimage_name = time() . '_' . $headerimage->getClientOriginalName();
+                //     $featured_image = Storage::disk('s3Company')->putFileAs('company/'.$user_uuid, $headerimage,$headerimage_name);
+                // }
                 
                 if(isset($user) && $user->name != $data['name']){
                     $updated_slug = $this->createCompanySlug($data['name']);
@@ -334,7 +333,7 @@ class CompanyProfileController extends Controller
                     'twitter_user' => $data['twitter_user'],
                     'instagram_user' => $data['instagram_user'],
                     'logo_image_url' => $image_name,
-                    'featured_image_url' => $headerimage_name,
+                    // 'featured_image_url' => $headerimage_name,
                     'slug' => $updated_slug,
                 ];
                 
