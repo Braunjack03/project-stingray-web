@@ -17,6 +17,7 @@
         "laravel/tinker": "^2.5",
         "league/flysystem-aws-s3-v3": "^1.0",
         "league/flysystem-cached-adapter": "^1.1",
+        "mailerlite/mailerlite-api-v2-php-sdk": "^0.3.2",
         "mpociot/vat-calculator": "^2.5",
         "spatie/yaml-front-matter": "^2.0"
     },

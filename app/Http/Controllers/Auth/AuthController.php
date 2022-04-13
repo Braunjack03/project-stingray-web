@@ -16,10 +16,9 @@ use Hash;
 use Auth;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Str;
-use Mail; 
 use Session;
-
-
+use Mail;
+use App\Jobs\SubscribeToMailingList;
 
 class AuthController extends Controller
 {
@@ -170,6 +169,8 @@ class AuthController extends Controller
                         Mail::to($user->email)->send(
                             new EmailVerification($user, $token)
                         );
+
+                        SubscribeToMailingList::dispatch($user);
 
                         return Redirect::route('thankyou');
                 }catch (ModelNotFoundException $e){
