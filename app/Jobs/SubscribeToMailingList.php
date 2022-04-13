@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use MailerLiteApi\MailerLite;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -9,7 +10,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Models\User;
-use MailerLiteApi\MailerLite;
+use Config;
 
 class SubscribeToMailingList implements ShouldQueue
 {
@@ -24,6 +25,7 @@ class SubscribeToMailingList implements ShouldQueue
     public function __construct(User $user)
     {
         $this->user = $user;
+
     }
 
     /**
@@ -33,8 +35,13 @@ class SubscribeToMailingList implements ShouldQueue
      */
     public function handle()
     {
-        $groupsApi = (new \MailerLiteApi\MailerLite('your-api-key'))->groups();
-        $subscribers = $groupsApi->addSubscriber($groupId, $subscriberData[]);
+        $subscriber = [
+            'email' => $this->user->email,
+        ];
+
+        $groupsApi = (new Mailerlite(Config('mailerlite.api_key')))->groups();
+        $response = $groupsApi->addSubscriber(Config('mailerlite.group_id'), $subscriber);
+        return $response;
 
 
         //
