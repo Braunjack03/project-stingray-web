@@ -16,13 +16,14 @@
                 </h1>
               </div>
               <div class="max-w-2xl">
-                <Message :message="errors.message" :hide="0" :type="'error'" />
+                <Message :message="errors.message" v-on:hide="hideMessage" :hide="hide" :type="'error'" />
 
                 <Message :message="success.message" v-on:hide="hideMessage" :hide="hide" :type="'success'" />
 
                 <Message
                   :message="$page.props.flash.message"
-                  :hide="0"
+                  v-on:hide="hideMessage"
+                 :hide="hide"
                   :type="'success'"
                 />
 
@@ -262,11 +263,13 @@ export default {
           profile_image_removed: this.profile_image_removed,
         };
         this.hide = 0;
+        this.error = 1;
         this.$inertia.post("/employer/profile", form);
       }
     },
     hideMessage() {
         this.hide = 1;
+        console.log('hide');
     },
     removeImage() {
       this.user.profile_image_src = "";

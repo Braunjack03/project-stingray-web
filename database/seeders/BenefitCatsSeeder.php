@@ -10,7 +10,7 @@ use App\Models\JobPost;
 use App\Models\CompanyProfile;
 use Illuminate\Support\Str;
 
-class BenefitSeeder extends Seeder
+class BenefitCatsSeeder extends Seeder
 {
     /**
      * Seed the application's database.

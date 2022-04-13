@@ -60,9 +60,9 @@
                                             <label class="block text-gray-700 text-lg font-medium mb-1"> Job Application URL <span class="text-red-600">*</span></label>
                                             <v-text-field v-model="apply_url" :class="{ 'error--text': $v.apply_url.$error }" class="form-input input-field-outer w-full text-gray-700" placeholder="https://example.com" required></v-text-field>
                                             <div v-if="$v.apply_url.$error && !$v.apply_url.required" class="text-red-500 text-lg">Job Application URL is required</div>
-                                            <div v-if="$v.apply_url.$error && !$v.apply_url.url" class="text-lg text-red-500">
+                                            <!-- <div v-if="$v.apply_url.$error && !$v.apply_url.url" class="text-lg text-red-500">
                                                 Please Enter a valid Job Application URL
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
     
@@ -112,7 +112,7 @@ export default {
         name: { required },
         location_id: { required },
         job_cat_id: { required },
-        apply_url: { required, url },
+        apply_url: { required },
         content: { required }
     },
     components: {
