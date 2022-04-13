@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Mail\TestMail;
+use App\Mail\EmailVerification;
+use App\Mail\WelcomeMessage;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\ActivityLog;
@@ -151,18 +152,14 @@ class AuthController extends Controller
                         $roleName = $this->getRoleName($data['user_type']);    
                         ActivityLog::addUnAuthorizeLogs(__('activitylogs.record_created', ['name' => 'User','role'=>$roleName]),$user->id,'create');
 
-                        Mail::send('emails.emailVerificationEmail', ['token' => $token], function($message) use($user){
-                                $message->to($user->email);
-                                $message->subject(__('messages.verification_email'));
-                            });
+                        $when = now()->addMinutes(3);
 
-                        Mail::send('emails.welcomeEmail', ['email' => $user->email], function($message) use($user){
-                            $message->to($user->email);
-                            $message->subject(__('messages.welcome_email'));
-                        });    
+                        Mail::to($user->email)->later($when,
+                            new WelcomeMessage($user)
+                        );
 
-                        Mail::to("jason@citystory.com")->send(
-                            new TestMail($user, $token)
+                        Mail::to($user->email)->send(
+                            new EmailVerification($user, $token)
                         );
 
                         return Redirect::route('thankyou');

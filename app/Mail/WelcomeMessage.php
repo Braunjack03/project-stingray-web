@@ -8,22 +8,21 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use App\Models\User;
 
-class TestMail extends Mailable
+class WelcomeMessage extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
     public $user;
-    public $token;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(User $user, $token)
+    public function __construct(User $user)
     {
-        $this->user = $user;
-        $this->token = $token;
         //
+        $this->user = $user;
     }
 
     /**
@@ -33,7 +32,6 @@ class TestMail extends Mailable
      */
     public function build()
     {
-        return $this->subject("TEST MEAIL")->
-        view('emails.testEmail');
+        return $this->subject("Welcome to Made in Tampa")->view('emails.welcomeMessage');
     }
 }
