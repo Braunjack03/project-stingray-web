@@ -58,13 +58,13 @@ import { required} from 'vuelidate/lib/validators'
 
 export default {
    name: "ArticleItems",
-   metaInfo: {
-      title: "News",
-      titleTemplate: "%s - Made in Tampa",
-      meta: [
-         { name: 'description', content: 'Made in Tampa News' },
-      ]
-   },
+   // metaInfo: {
+   //    title: "News",
+   //    titleTemplate: "%s - Made in Tampa",
+   //    meta: [
+   //       { name: 'description', content: 'Made in Tampa News' },
+   //    ]
+   // },
      mixins: [validationMixin],
      validations: {
       term: { required },

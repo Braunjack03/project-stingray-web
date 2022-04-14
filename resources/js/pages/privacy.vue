@@ -564,13 +564,13 @@ import { Head, Link } from "@inertiajs/inertia-vue";
 import Footer from "../partials/Footer.vue";
 
 export default {
-  metaInfo: {
-    title: "Privacy Policy",
-    titleTemplate: "%s - Made in Tampa",
-    meta: [
-      { name: "description", content: "Companies Hiring in the Tampa Bay" },
-    ],
-  },
+  // metaInfo: {
+  //   title: "Privacy Policy",
+  //   titleTemplate: "%s - Made in Tampa",
+  //   meta: [
+  //     { name: "description", content: "Companies Hiring in the Tampa Bay" },
+  //   ],
+  // },
 
   components: {
     Head,

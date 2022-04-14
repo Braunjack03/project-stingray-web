@@ -87,7 +87,7 @@ class EmployerProfileController extends Controller
                 'companies' => json_decode(json_encode($company_profiles), true),
             ];
             
-            return $this->sendResponseWithData('employer/profile','',$respones_array);
+            return $this->sendResponseWithData('employer/profile','',$respones_array)->withViewData(['meta' => 1,"metaTitle" => "Employer Profile | Made in Tampa","metaDescription" => ""]);
 
         }catch (\Exception $e) {
             $message = $e->getMessage();

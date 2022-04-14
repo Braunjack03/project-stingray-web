@@ -55,13 +55,13 @@ import { required } from 'vuelidate/lib/validators'
 
 export default {
     name: 'Home',
-    metaInfo: {
-      title: "Home",
-      titleTemplate: "%s - Made in Tampa",
-      meta: [
-         { name: 'description', content: 'Companies Hiring in the Tampa Bay' },
-      ]
-   },
+//     metaInfo: {
+//       title: "Home",
+//       titleTemplate: "%s - Made in Tampa",
+//       meta: [
+//          { name: 'description', content: 'Companies Hiring in the Tampa Bay' },
+//       ]
+//    },
 
     mixins: [validationMixin],
     validations: {
