@@ -2,7 +2,7 @@
 	<!-- Primary Meta Tags -->
 	<title>{{ $metaTitle }}</title> 
 	<meta name="title" content="{{ $metaTitle }}">
-	@if(isset($metaDescription))<meta name="description" content="{{ $metaDescription }}">@endif
+	<meta name="description" content="{{ $metaDescription }}">
 	@if(isset($metaArticle))
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website">
