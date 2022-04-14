@@ -215,10 +215,10 @@ import Sidebar from "../../partials/Sidebar.vue";
 
 export default {
     name: 'EmployerProfile',
-    metaInfo: {
-        title: 'Employer Profile',
-        titleTemplate: '%s | Made in Tampa'
-    },
+    // metaInfo: {
+    //     title: 'Employer Profile',
+    //     titleTemplate: '%s | Made in Tampa'
+    // },
   mixins: [validationMixin],
   validations: {
     name: { required },

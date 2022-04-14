@@ -51,7 +51,7 @@ class CompanyProfileController extends Controller
               $getPlanName = ["name"=>"Free Plan","slot"=>"0"];  
             }
             $benefitCats = BenefitCat::pluck('name','id');
-            return Inertia::render('employer/create-company',['industries'=>$industries,'plan_name'=>$getPlanName,'job_posts_count' => $job_posts_count,'benefitCats'=>$benefitCats]);
+            return Inertia::render('employer/create-company',['industries'=>$industries,'plan_name'=>$getPlanName,'job_posts_count' => $job_posts_count,'benefitCats'=>$benefitCats])->withViewData(['meta' => 1,"metaTitle" => "Create Company | Made in Tampa","metaDescription" => ""]);
         }catch (\Exception $e) {
             $message = $e->getMessage();
             return $this->sendErrorResponse('login',$message);
@@ -478,7 +478,7 @@ class CompanyProfileController extends Controller
                 }    
             }
             $data = $company;
-            return Inertia::render('companies', ['data' => $data]);
+            return Inertia::render('companies', ['data' => $data])->withViewData(['meta' => 1,"metaTitle" => "Companies - Made in Tampa","metaDescription" => "Companies Hiring in the Tampa Bay"]);
         } catch (\Exception $e) {
             $message = $e->getMessage();
             return $this->sendErrorResponse('login', $message);
@@ -556,10 +556,18 @@ class CompanyProfileController extends Controller
                     $is_company_belong_to = 1;
                 }
             }
-          
             $companyProfileBenefits = CompanyProfileBenefitCat::with('benefit_cats')->where('company_profile_id',$company->id)->get();
-            //dd($companyProfileBenefits);
-            return Inertia::render('single-company',['data'=>$company,'articles'=>$company->articles,'job_posts_count'=>$job_posts_count,'job_posts'=>$job_posts,'is_company_belong_to' => $is_company_belong_to,'companyProfileBenefits' => $companyProfileBenefits]);
+            $meta = [
+                'meta' => 1,
+                "metaTitle" => "Made in Tampa Companies - Companies",
+                "metaDescription" => "",
+                "metaArticle" => 1,
+                "metaArticleURL" => url('companies/'.$company->slug),
+                "metaArticleTitle" => $company->name,
+                "metaArticleDescription" => substr(strip_tags($company->description), 0, 128),
+                "metaArticleImageURL" => ($company->logo_image_url)?$company->logo_image_url:url('/images/default-company-logo.svg'),
+            ];
+            return Inertia::render('single-company',['data'=>$company,'articles'=>$company->articles,'job_posts_count'=>$job_posts_count,'job_posts'=>$job_posts,'is_company_belong_to' => $is_company_belong_to,'companyProfileBenefits' => $companyProfileBenefits])->withViewData($meta);
 
         }catch (\Exception $e) {
             $message = $e->getMessage();
