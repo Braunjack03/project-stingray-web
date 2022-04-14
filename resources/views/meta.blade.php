@@ -3,6 +3,7 @@
 	<title>{{ $metaTitle }}</title> 
 	<meta name="title" content="{{ $metaTitle }}">
 	<meta name="description" content="{{ $metaDescription }}">
+	
 	@if(isset($metaArticle))
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website">
