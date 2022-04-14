@@ -83,10 +83,10 @@ import { required, email, minLength } from 'vuelidate/lib/validators'
 import Message from '../partials/Messages.vue';
 
 export default {
-    // metaInfo: {
-    //     title: 'SignUp',
-    //     titleTemplate: '%s | Made in Tampa'
-    // },
+    metaInfo: {
+        title: 'SignUp',
+        titleTemplate: '%s | Made in Tampa'
+    },
     mixins: [validationMixin],
      validations: {
       email: { required, email },

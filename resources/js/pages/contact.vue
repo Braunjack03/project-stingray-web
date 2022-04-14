@@ -157,13 +157,13 @@ import { required, email } from "vuelidate/lib/validators";
 import Message from "../partials/Messages.vue";
 
 export default {
-  // metaInfo: {
-  //   title: "Contact Us",
-  //   titleTemplate: "%s - Made in Tampa",
-  //   meta: [
-  //     { name: "description", content: "Companies Hiring in the Tampa Bay" },
-  //   ],
-  // },
+  metaInfo: {
+    title: "Contact Us",
+    titleTemplate: "%s - Made in Tampa",
+    meta: [
+      { name: "description", content: "Companies Hiring in the Tampa Bay" },
+    ],
+  },
 
   mixins: [validationMixin],
   validations: {
