@@ -340,10 +340,10 @@ import Layout from './Layout.vue';
 
 export default {
   name: "Company",
-   metaInfo: {
-    title: "Companies",
-    titleTemplate: "Made in Tampa Companies - %s",
-  },
+  //  metaInfo: {
+  //   title: "Companies",
+  //   titleTemplate: "Made in Tampa Companies - %s",
+  // },
   // child
   metaInfo() {
     return {

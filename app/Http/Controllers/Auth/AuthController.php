@@ -33,7 +33,7 @@ class AuthController extends Controller
         if(Str::contains(url()->previous(), url('jobs/')) == true){
             session()->put('url.intended', url()->previous());
         }
-        return Inertia::render('login'); 
+        return Inertia::render('login')->withViewData(['meta' => 1,"metaTitle" => "Login | Made in Tampa","metaDescription" => ""]); 
     }
 
      /**
@@ -109,7 +109,7 @@ class AuthController extends Controller
      */
 
     public function showRegistrationForm(){
-        return Inertia::render('register');
+        return Inertia::render('register')->withViewData(['meta' => 1,"metaTitle" => "SignUp | Made in Tampa","metaDescription" => ""]);
     }
 
     /**

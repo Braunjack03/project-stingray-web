@@ -36,13 +36,13 @@ import { required } from "vuelidate/lib/validators";
 
 export default {
   name: "Companies",
-   metaInfo: {
-      title: "Companies",
-      titleTemplate: "%s - Made in Tampa",
-      meta: [
-         { name: 'description', content: 'Companies Hiring in the Tampa Bay' },
-      ]
-   },
+  //  metaInfo: {
+  //     title: "Companies",
+  //     titleTemplate: "%s - Made in Tampa",
+  //     meta: [
+  //        { name: 'description', content: 'Companies Hiring in the Tampa Bay' },
+  //     ]
+  //  },
   mixins: [validationMixin],
   validations: {
     term: { required },
