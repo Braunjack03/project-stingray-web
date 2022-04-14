@@ -560,7 +560,6 @@ class CompanyProfileController extends Controller
             $meta = [
                 'meta' => 1,
                 "metaTitle" => "Made in Tampa Companies - Companies",
-                "metaDescription" => "",
                 "metaArticle" => 1,
                 "metaArticleURL" => url('companies/'.$company->slug),
                 "metaArticleTitle" => $company->name,
