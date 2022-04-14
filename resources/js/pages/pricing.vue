@@ -19,13 +19,13 @@ import Testimonials from "../partials/Testimonials.vue";
 import Cta from "../partials/Cta.vue";
 export default {
   name: "Pricing",
-  // metaInfo: {
-  //   title: "Pricing",
-  //   titleTemplate: "%s - Made in Tampa",
-  //   meta: [
-  //     { name: "description", content: "Companies Hiring in the Tampa Bay" },
-  //   ],
-  // },
+  metaInfo: {
+    title: "Pricing",
+    titleTemplate: "%s - Made in Tampa",
+    meta: [
+      { name: "description", content: "Companies Hiring in the Tampa Bay" },
+    ],
+  },
 
   components: {
     PageIllustration,

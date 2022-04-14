@@ -78,10 +78,10 @@ import Message from '../partials/Messages.vue';
 
 export default {
     name: 'Login',
-    // metaInfo: {
-    //     title: 'Login',
-    //     titleTemplate: '%s | Made in Tampa'
-    // },
+    metaInfo: {
+        title: 'Login',
+        titleTemplate: '%s | Made in Tampa'
+    },
     mixins: [validationMixin],
     validations: {
         email: { required, email },

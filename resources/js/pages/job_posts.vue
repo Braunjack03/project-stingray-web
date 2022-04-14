@@ -68,13 +68,13 @@ export default {
      validations: {
       term: { required },
     },
-   //  metaInfo: {
-   //    title: "Job Posts",
-   //    titleTemplate: "%s - Made in Tampa",
-   //    meta: [
-   //       { name: 'description', content: 'Jobs in the Tampa Bay' },
-   //    ]
-   // },
+    metaInfo: {
+      title: "Job Posts",
+      titleTemplate: "%s - Made in Tampa",
+      meta: [
+         { name: 'description', content: 'Jobs in the Tampa Bay' },
+      ]
+   },
    components: {
       Head,
       Layout,
