@@ -220,10 +220,12 @@ class AuthController extends Controller
                     $message = __('messages.email_verified');
                 } else {
                     $message = __('messages.email_already_verified');
+                    
                 }
+                return $this->sendSuccessResponse($redirect_page,$message);
             }
-
             return $this->sendErrorResponse($redirect_page,$message);
+            
 
         }catch (\Exception $e) {
             $message = $e->getMessage();

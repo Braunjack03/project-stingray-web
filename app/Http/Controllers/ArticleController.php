@@ -60,7 +60,6 @@ class ArticleController extends Controller
             $meta = [
                 'meta' => 1,
                 "metaTitle" => "Made in Tampa - Article",
-                "metaDescription" => "",
                 "metaArticle" => 1,
                 "metaArticleURL" => url('articles/'.$data->slug),
                 "metaArticleTitle" => $data->title,
