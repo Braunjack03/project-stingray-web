@@ -560,11 +560,12 @@ class CompanyProfileController extends Controller
             $meta = [
                 'meta' => 1,
                 "metaTitle" => "Made in Tampa Companies - Companies",
+                "metaDescription" => substr(strip_tags($company->description), 0, 128),
                 "metaArticle" => 1,
                 "metaArticleURL" => url('companies/'.$company->slug),
                 "metaArticleTitle" => $company->name,
                 "metaArticleDescription" => substr(strip_tags($company->description), 0, 128),
-                "metaArticleImageURL" => ($company->logo_image_url)?$company->logo_image_url:url('/images/default-company-logo.svg'),
+                "metaArticleImageURL" => ($company->logo_image_url)?$company->logo_image_url:url('/images/default-company-logo.svg')
             ];
             return Inertia::render('single-company',['data'=>$company,'articles'=>$company->articles,'job_posts_count'=>$job_posts_count,'job_posts'=>$job_posts,'is_company_belong_to' => $is_company_belong_to,'companyProfileBenefits' => $companyProfileBenefits])->withViewData($meta);
 
