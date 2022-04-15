@@ -69,6 +69,11 @@ import Message from '../../partials/Messages.vue';
 import Sidebar from '../../partials/Sidebar.vue';
 
 export default {
+     metaInfo() {
+      return {
+          title: `Job Posts`,
+      }
+    },
     components: {
         Head,
         Layout,
