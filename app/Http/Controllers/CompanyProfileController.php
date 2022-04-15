@@ -18,6 +18,7 @@ use App\Models\Subscription;
 use App\Models\CompanyProfileCompanyType;
 use App\Models\BenefitCat;
 use App\Models\CompanyProfileBenefitCat;
+use App\Models\CompanyProfileGallery;
 use Session;
 use Mail; 
 
@@ -70,7 +71,7 @@ class CompanyProfileController extends Controller
             return $this->sendErrorResponse('login',__('messages.unauthorized'));
         }
 
-        $data = $request->except(['logo_image_src','featured_image_url']);
+        $data = $request->except(['logo_image_src','featured_image_url','multi_image_url']);
         $user_id = Auth::id();
        
         $data['user_id'] = $user_id;
@@ -98,7 +99,8 @@ class CompanyProfileController extends Controller
         
         if ($validator->fails()){
             $industries = CompanyType::pluck('name','id');
-            $data = ['user'=>$data,'industries'=>$industries];
+            $benefitCats = BenefitCat::pluck('name','id');
+            $data = ['user'=>$data,'industries'=>$industries,'benefitCats'=>$benefitCats];
             return $this->sendCustomValidationErrorsWithData($redirect_page,$validator->errors(),$data);
         }else{
             try{
@@ -117,7 +119,8 @@ class CompanyProfileController extends Controller
                     $headerimage_name = time() . '_' . $headerimage->getClientOriginalName();
                     $featured_image = Storage::disk('s3Company')->putFileAs('company/'.$user_uuid, $headerimage,$headerimage_name);
                 }
-              
+
+                
                 $data['uuid'] = $user_uuid;    
                 $data['logo_image_url'] = $image_name;
                 $data['featured_image_url'] = $headerimage_name;
@@ -151,6 +154,19 @@ class CompanyProfileController extends Controller
                     }
                     CompanyProfileCompanyType::insert($industries);
                 }
+
+                if($request->hasfile('multi_image_url')){
+                    $files = $request->file('multi_image_url');
+                    $gallery_images = [];
+                    foreach($files as $key => $imgfile) {
+                        $originalFileName = time() . '_' .$imgfile->getClientOriginalName();
+                        \Storage::disk('s3Company')->putFileAs('company/'.$user_uuid, $imgfile,$originalFileName);
+                        $gallery_images[$key]['company_profile_id'] = $company_profile_id->id;
+                        $gallery_images[$key]['image'] = $originalFileName;
+                    }
+                    CompanyProfileGallery::insert($gallery_images);
+                }
+                //die();
                 
                 if(count($data['benefit']) > 0){
                     foreach($data['benefit'] as $val){
@@ -201,8 +217,14 @@ class CompanyProfileController extends Controller
                     $collection = $user->company_types;    
                     $names = $collection->pluck("id")->toArray(); 
                 } 
-               
+
+                $gallery_images = CompanyProfileGallery::where('company_profile_id',$user['id'])->pluck('image','id');
+                $gal_images = [];
+                foreach($gallery_images as $key => $image){
+                    $gal_images[] = getBucketImageUrl($request->all()['id'],$image,'company');
+                }
                 $user->logo_image_src = ($user->logo_image_url) ? getBucketImageUrl($request->all()['id'],$user->logo_image_url,'company') : '';
+                
                 $user->featured_image_src = ($user->featured_image_url) ? getBucketImageUrl($request->all()['id'],$user->featured_image_url,'company') : '';
 
             }else{
@@ -211,7 +233,7 @@ class CompanyProfileController extends Controller
             $benefitCats = BenefitCat::pluck('name','id');
             $companyProfileBenefitTag = CompanyProfileBenefitCat::where('company_profile_id',$user->id)->pluck('benefit_cat_id');
             $industries = CompanyType::pluck('name','id');
-            $data = ['user'=>$user,'industries'=>$industries,'plan_name'=>$getPlanName,'job_posts_count' => $job_posts_count,'industryTest'=>$names,'benefitCats'=>$benefitCats,'companyProfileBenefitTag' => $companyProfileBenefitTag];
+            $data = ['user'=>$user,'industries'=>$industries,'fileUrls'=>$gal_images,'plan_name'=>$getPlanName,'job_posts_count' => $job_posts_count,'industryTest'=>$names,'benefitCats'=>$benefitCats,'companyProfileBenefitTag' => $companyProfileBenefitTag];
             return $this->sendResponseWithData('employer/edit-company','',$data);
         }catch (\Exception $e) {
             $message = $e->getMessage();
@@ -230,8 +252,8 @@ class CompanyProfileController extends Controller
             return $this->sendErrorResponse('login',__('messages.unauthorized'));
         }
 
-        $requested_data = $request->except(['logo_image_src','featured_image_url','industry']);
-    
+        $requested_data = $request->except(['logo_image_src','featured_image_url','industry','multi_image_url']);
+        //dd($request->file('multi_image_url'));
         $user = CompanyProfile::with('company_types')->where('uuid',$request->all()['id'])->first();
         $user_uuid = $request->all()['id'];
         $redirect_page = $request->path();
@@ -349,6 +371,8 @@ class CompanyProfileController extends Controller
                     unset($data['featured_image_url']);
                 }
 
+               
+
                 $company = CompanyProfile::where('uuid',$requested_data['id']);
                 $company->update($profile_data);
                 $companyDetails = $company->first();
@@ -361,6 +385,24 @@ class CompanyProfileController extends Controller
                     }
                     CompanyProfileCompanyType::where('company_profile_id',$companyDetails->id)->delete();
                     CompanyProfileCompanyType::insert($industries);
+                }
+
+                if($request->hasfile('multi_image_url')){
+                    $files = $request->file('multi_image_url');
+                    $gallery_images = [];
+                    foreach($files as $key => $imgfile) {
+                        $originalFileName = time() . '_' .$imgfile->getClientOriginalName();
+                        \Storage::disk('s3Company')->putFileAs('company/'.$user_uuid, $imgfile,$originalFileName);
+                        $gallery_images[$key]['company_profile_id'] = $companyDetails->id;
+                        $gallery_images[$key]['image'] = $originalFileName;
+                    }
+                    $old_images = CompanyProfileGallery::select('image')->where('company_profile_id',$companyDetails->id);
+                    foreach($old_images->get() as $image)
+                    {
+                        \Storage::disk('s3')->delete('company/'.$user_uuid.'/'. $image);
+                    }
+                    $old_images->delete();
+                    CompanyProfileGallery::insert($gallery_images);
                 }
 
                 ActivityLog::addToLog(__('activitylogs.company_profile_updated'),'company updated');
@@ -486,7 +528,6 @@ class CompanyProfileController extends Controller
     }
 
     public function showCompany(Request $request,$slug = ''){
-
         try{
             $company = CompanyProfile::leftjoin('locations','company_profiles.location_id','locations.id')
             ->leftjoin('users','company_profiles.user_id','=','users.id')
@@ -527,6 +568,15 @@ class CompanyProfileController extends Controller
                     $company->unclaimed = 0;
                 }
             }*/
+            if(isset($company)){
+                $gal_images = [];
+                $gallery_images = CompanyProfileGallery::where('company_profile_id',$company->id)->pluck('image','id');
+                foreach($gallery_images as $key => $image){
+                    $gal_images[] = getBucketImageUrl($company->uuid,$image,'company');
+                }
+                $company['gallery'] = $gal_images;
+                
+            }
             if(isset($company) && isset($company->company_types)){
                 $collection = $company->company_types;    
                 $names = $collection->pluck("name")->toArray(); 

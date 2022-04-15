@@ -27,6 +27,11 @@ class CompanyProfile extends Model
         return $this->belongsToMany(CompanyType::class)->withTimestamps();
     }
 
+    public function company_galleries()
+    {
+        return $this->hasMany(CompanyProfileGallery::class,'company_profile_id')->withTimestamps();
+    }
+
     public function articles()
     {
         return $this->belongsToMany(Article::class)->withTimestamps();
