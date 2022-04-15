@@ -79,13 +79,10 @@ import Layout from "./Layout.vue";
 
 export default {
   name: "ArticleItem",
-   metaInfo: {
-    title: "Article",
-    titleTemplate: "Made in Tampa - %s",
-  },
   // child
   metaInfo() {
     return {
+      title: `Made in Tampa - Article`,
       meta: [
         {  
           name: 'description',
