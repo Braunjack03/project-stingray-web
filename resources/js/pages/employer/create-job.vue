@@ -187,6 +187,11 @@ import Message from '../../partials/Messages.vue';
 import Sidebar from '../../partials/Sidebar.vue';
 
 export default {
+  metaInfo() {
+      return {
+          title: `Create Job`,
+      }
+    },
   components: {
     Head,
     Layout,
