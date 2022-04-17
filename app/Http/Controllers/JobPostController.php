@@ -424,7 +424,7 @@ class JobPostController extends Controller
             }
             $locations = Location::select('id','name')->get();
             
-            return Inertia::render('job_posts', ['job_posts' => $job_posts, 'job_posts_count' => $job_posts_count, 'loc_id' => $request->loc, 'location_id' => $request->loc, 'term' => $term_u, 'locations' => $locations]);
+            return Inertia::render('job_posts', ['job_posts' => $job_posts, 'job_posts_count' => $job_posts_count, 'loc_id' => $request->loc, 'location_id' => $request->loc, 'term' => $term_u, 'locations' => $locations])->withViewData(['meta' => 1,"metaTitle" => "Job Posts - Made in Tampa","metaDescription" => "Jobs in the Tampa Bay"]);
         } catch (\Exception $e) {
             $message = $e->getMessage();
             return $this->sendErrorResponse('login', $message);

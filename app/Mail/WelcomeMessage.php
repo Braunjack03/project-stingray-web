@@ -32,6 +32,6 @@ class WelcomeMessage extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->subject("Welcome to Made in Tampa")->view('emails.welcomeMessage');
+        return $this->subject("Welcome to Made in Tampa")->markdown('emails.welcomeMessage');
     }
 }

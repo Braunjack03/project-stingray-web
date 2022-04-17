@@ -1,4 +1,12 @@
-<h1>Thanks for Registering</h1>
+@component('mail::message')
+# Verify Your Email Address
   
-Please verify your email with below link: 
-<a href="{{ route('user.verify', $token) }}">Verify Email</a>
+As an extra security measure, please verify this is the correct email address for your Made in Tampa account.
+
+@component('mail::button', ['url' => url("account/verify/{$token}")])
+Confirm Email
+@endcomponent
+ 
+
+
+@endcomponent

@@ -107,6 +107,11 @@ import Sidebar from "../../partials/Sidebar.vue";
 
 
 export default {
+    metaInfo() {
+      return {
+          title: `Edit Job`,
+      }
+    },
     mixins: [validationMixin],
     validations: {
         name: { required },

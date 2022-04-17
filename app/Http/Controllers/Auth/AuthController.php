@@ -33,7 +33,7 @@ class AuthController extends Controller
         if(Str::contains(url()->previous(), url('jobs/')) == true){
             session()->put('url.intended', url()->previous());
         }
-        return Inertia::render('login'); 
+        return Inertia::render('login')->withViewData(['meta' => 1,"metaTitle" => "Login | Made in Tampa","metaDescription" => ""]); 
     }
 
      /**
@@ -109,7 +109,7 @@ class AuthController extends Controller
      */
 
     public function showRegistrationForm(){
-        return Inertia::render('register');
+        return Inertia::render('register')->withViewData(['meta' => 1,"metaTitle" => "SignUp | Made in Tampa","metaDescription" => ""]);
     }
 
     /**
@@ -220,10 +220,12 @@ class AuthController extends Controller
                     $message = __('messages.email_verified');
                 } else {
                     $message = __('messages.email_already_verified');
+                    
                 }
+                return $this->sendSuccessResponse($redirect_page,$message);
             }
-
             return $this->sendErrorResponse($redirect_page,$message);
+            
 
         }catch (\Exception $e) {
             $message = $e->getMessage();

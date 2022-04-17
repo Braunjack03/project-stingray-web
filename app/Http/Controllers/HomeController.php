@@ -59,12 +59,12 @@ class HomeController extends Controller
         ->with('tags')
         ->orderBy('articles.publish_date','DESC')->limit(3)->get();
         
-        return Inertia::render('home', ['articles'=>$latestarticles,'count_job_posts' => $job_posts, 'locations' => $locations, 'companytypes' => $companytypes]);
+        return Inertia::render('home', ['articles'=>$latestarticles,'count_job_posts' => $job_posts, 'locations' => $locations, 'companytypes' => $companytypes])->withViewData(['meta' => 1,"metaTitle" => "Home - Made in Tampa","metaDescription" => "Companies Hiring in the Tampa Bay"]);
     }
     
     public function contact()
     {
-        return $this->static_page('contact');
+        return $this->static_page('contact')->withViewData(['meta' => 1,"metaTitle" => "Contact Us - Made in Tampa","metaDescription" => "Companies Hiring in the Tampa Bay"]);
     }
 
     public function about_us(){
@@ -72,19 +72,19 @@ class HomeController extends Controller
     }
 
     public function privacy(){
-        return $this->static_page('privacy');
+        return $this->static_page('privacy')->withViewData(['meta' => 1,"metaTitle" => "Privacy Policy - Made in Tampa","metaDescription" => "Companies Hiring in the Tampa Bay"]);
     }
 
     public function for_employers(){
-        return $this->static_page('for_employers');
+        return $this->static_page('for_employers')->withViewData(['meta' => 1,"metaTitle" => "For Employers - Made in Tampa","metaDescription" => "Companies Hiring in the Tampa Bay"]);
     }
 
     public function pricing(){
-        return $this->static_page('pricing');
+        return $this->static_page('pricing')->withViewData(['meta' => 1,"metaTitle" => "Pricing - Made in Tampa","metaDescription" => "Companies Hiring in the Tampa Bay"]);
     }
 
     public function terms(){
-        return $this->static_page('terms');
+        return $this->static_page('terms')->withViewData(['meta' => 1,"metaTitle" => "Terms and Conditions - Made in Tampa","metaDescription" => "Companies Hiring in the Tampa Bay"]);
     }
 
     private function static_page($name){

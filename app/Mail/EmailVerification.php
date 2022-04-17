@@ -33,7 +33,7 @@ class EmailVerification extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->subject("Please verify your email address")->
-        view('emails.emailVerification');
+        return $this->subject("Confirm your email address")->
+        markdown('emails.emailVerification');
     }
 }

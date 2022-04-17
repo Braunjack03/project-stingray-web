@@ -30,7 +30,7 @@ class ArticleController extends Controller
             ->with('tags')
             ->orderBy('articles.publish_date','DESC')->paginate(9)->onEachSide(0);
             
-            return Inertia::render('article',['latest'=>$article,'articles'=>$latestarticles]);
+            return Inertia::render('article',['latest'=>$article,'articles'=>$latestarticles])->withViewData(['meta' => 1,"metaTitle" => "News - Made in Tampa","metaDescription" => "Made in Tampa News"]);
 
         }catch (\Exception $e) {
             $message = $e->getMessage();
@@ -57,8 +57,17 @@ class ArticleController extends Controller
                 }
             }
             $companies_data = $companies;
-            
-            return Inertia::render('single-article',['data'=>$data,'articles'=>$companies_data]);
+            $meta = [
+                'meta' => 1,
+                "metaTitle" => "Made in Tampa - Article",
+                "metaDescription" => substr(strip_tags($data->content), 0, 128),
+                "metaArticle" => 1,
+                "metaArticleURL" => url('articles/'.$data->slug),
+                "metaArticleTitle" => $data->title,
+                "metaArticleDescription" => substr(strip_tags($data->content), 0, 128),
+                "metaArticleImageURL" => ($data->header_image)?$data->header_image:url('/images/news-author-01.png')
+            ];
+            return Inertia::render('single-article',['data'=>$data,'articles'=>$companies_data])->withViewData($meta);
 
         }catch (\Exception $e) {
             $message = $e->getMessage();

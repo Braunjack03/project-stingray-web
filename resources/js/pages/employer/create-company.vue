@@ -622,10 +622,11 @@ import Sidebar from "../../partials/Sidebar.vue";
 
 export default {
   name: "CreateCompany",
-  metaInfo: {
-    title: "Create Company",
-    titleTemplate: "%s | Made in Tampa",
-  },
+  metaInfo() {
+      return {
+          title: `Create Company | Made in Tampa`,
+      }
+    },
   components: {
     Head,
     Layout,

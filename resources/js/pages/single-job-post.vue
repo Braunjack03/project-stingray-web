@@ -51,7 +51,14 @@
 import {Link,Head } from '@inertiajs/inertia-vue'
   import Layout from './Layout'
   export default {
-     components: {
+
+    metaInfo() {
+      const data = this.data;
+      return {
+          title: `Job List | ${data.company_name}`
+      }
+    },
+    components: {
         Link,
         Layout,
         Head,
