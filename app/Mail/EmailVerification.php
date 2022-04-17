@@ -23,6 +23,7 @@ class EmailVerification extends Mailable implements ShouldQueue
     {
         $this->user = $user;
         $this->token = $token;
+        $this->url = config('app.url');
         //
     }
 
