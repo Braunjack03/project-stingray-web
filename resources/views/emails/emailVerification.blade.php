@@ -1,12 +1,12 @@
-<h1>Verify Your Email Address</h1>
+@component('mail::message')
+# Verify Your Email Address
   
-<p>As an extra security measure, please verify this is the correct email address for your Made in Tampa account.</p>
-<p>
+As an extra security measure, please verify this is the correct email address for your Made in Tampa account.
 
-@component('mail::button', ['url' => route('user.verify', $token)])
+@component('mail::button', ['url' => url("account/verify/{$token}")])
 Confirm Email
 @endcomponent
  
 
 
-</p>
+@endcomponent
