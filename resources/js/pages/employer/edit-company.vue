@@ -23,13 +23,13 @@
     
                                 <v-form ref="form">
                                     <!-- <div class="flex flex-wrap mb-3">
-                                            <div class="w-full px-3 form-avataar">
-                                                <v-icon v-if="user.logo_image_src" color="gray darken-2" class="ml-auto" @click="removeImage()">
-                                                    mdi-close-circle
-                                                </v-icon>
-                                                <v-img :src="user.logo_image_src" max-height="150" max-width="250" />
-                                            </div>
-                                        </div> -->
+                                                <div class="w-full px-3 form-avataar">
+                                                    <v-icon v-if="user.logo_image_src" color="gray darken-2" class="ml-auto" @click="removeImage()">
+                                                        mdi-close-circle
+                                                    </v-icon>
+                                                    <v-img :src="user.logo_image_src" max-height="150" max-width="250" />
+                                                </div>
+                                            </div> -->
                                     <div class="flex flex-nowrap mb-3">
                                         <div class="w-full px-3 form-file-upload">
                                             <label class="block mb-1 text-lg font-medium text-gray-700">Company Logo (Recommended 500px x 500px) </label>
@@ -45,47 +45,21 @@
     
     
                                     <!-- <div class="flex flex-nowrap mb-3">
-                                            <div class="w-full px-3 form-file-upload">
-                                                <label class="block mb-1 text-lg font-medium text-gray-700">Gallary Pics </label>
-                                                <div class="p-12 bg-gray-100 border border-gray-300" @dragover="dragover" @dragleave="dragleave" @drop="drop">
-                                                    <v-file-input v-model="multi_image_url" multiple  class="w-full text-gray-700 fileUpload form-input input-field-outer" accept="image/*" outlined dense @change="onHeaderFileChange" />
+                                                <div class="w-full px-3 form-file-upload">
+                                                    <label class="block mb-1 text-lg font-medium text-gray-700">Gallary Pics </label>
+                                                    <div class="p-12 bg-gray-100 border border-gray-300" @dragover="dragover" @dragleave="dragleave" @drop="drop">
+                                                        <v-file-input v-model="multi_image_url" multiple  class="w-full text-gray-700 fileUpload form-input input-field-outer" accept="image/*" outlined dense @change="onHeaderFileChange" />
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            
-                                            <div v-if="user.multi_image_url" class="w-full px-3 form-avataar">
-                                                <v-icon v-if="user.multi_image_url" color="gray darken-2" class="ml-auto" @click="removeImage()">
-                                                    mdi-close-circle
-                                                </v-icon>
-                                                <v-img :src="user.multi_image_url" max-height="150" max-width="250" />
-                                            </div>
-                                        </div> -->
-    
-    
-                                    <div class="flex flex-nowrap mb-3">
-                                        <div class="w-full px-3">
-                                            <div class="galleryUpload" @dragover="dragover" @dragleave="dragleave" @drop="drop">
-                                                <input type="file" multiple name="fields[assetsFieldHandle][]" :disabled="filelist.length > 1 && filelist.length < 4" id="assetsFieldHandle" class="w-px h-px opacity-0 overflow-hidden absolute" @change="onChange" ref="file" accept=".gif,.jpg,.jpeg,.png" />
-    
-                                                <label for="assetsFieldHandle" class="block cursor-pointer">
-                                                <div>
-                                                   Drag Files Here to upload
-                                                     <span class="underline">Browse</span>
+                                                
+                                                <div v-if="user.multi_image_url" class="w-full px-3 form-avataar">
+                                                    <v-icon v-if="user.multi_image_url" color="gray darken-2" class="ml-auto" @click="removeImage()">
+                                                        mdi-close-circle
+                                                    </v-icon>
+                                                    <v-img :src="user.multi_image_url" max-height="150" max-width="250" />
                                                 </div>
-                                                </label>
+                                            </div> -->
     
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="flex flex-wrap mb-3">
-                                        <draggable v-model="fileUrls" group="gallery" @start="drag=true" @end="drag=false" :move="checkMove">
-                                            <div class="todo" v-for="(file,i) in this.fileUrls" :key="i">
-                                                <v-icon color="gray darken-2" class="ml-auto" @click="remove(filelist.indexOf(file))">
-                                                    mdi-close-circle
-                                                </v-icon>
-                                                <v-img :src="file" max-height="150" max-width="250" />
-                                            </div>
-                                        </draggable>
-                                    </div>
     
                                     <div class="flex flex-wrap mb-3">
                                         <div class="w-full px-3">
@@ -129,28 +103,28 @@
                                     </div>
     
                                     <!-- <div class="flex flex-wrap mb-3">
-                                            <div class="w-full px-3 form-avataar">
-                                                <v-icon v-if="user.featured_image_src" color="gray darken-2" class="ml-auto" @click="removeHeaderImage()">
-                                                    mdi-close-circle
-                                                </v-icon>
-        
-                                                <v-img :src="user.featured_image_src" max-height="150" max-width="250" />
-                                            </div>
-                                        </div> -->
+                                                <div class="w-full px-3 form-avataar">
+                                                    <v-icon v-if="user.featured_image_src" color="gray darken-2" class="ml-auto" @click="removeHeaderImage()">
+                                                        mdi-close-circle
+                                                    </v-icon>
+            
+                                                    <v-img :src="user.featured_image_src" max-height="150" max-width="250" />
+                                                </div>
+                                            </div> -->
     
                                     <!-- <div class="flex flex-nowrap mb-3">
-                                            <div class="w-full px-3 form-file-upload">
-                                                <label class="block mb-1 text-lg font-medium text-gray-700">Header Image (Recommended 500px x 500px) </label>
-                                                <v-file-input v-model="featured_image_url" class="w-full text-gray-700 fileUpload form-input input-field-outer" accept="image/*" outlined dense @change="onHeaderFileChange" />
-                                            </div>
-                                            <div v-if="user.featured_image_src" class="w-full px-3 form-avataar">
-                                                <v-icon v-if="user.featured_image_src" color="gray darken-2" class="ml-auto" @click="removeHeaderImage()">
-                                                    mdi-close-circle
-                                                </v-icon>
-        
-                                                <v-img :src="user.featured_image_src" max-height="150" max-width="250" />
-                                            </div>
-                                        </div> -->
+                                                <div class="w-full px-3 form-file-upload">
+                                                    <label class="block mb-1 text-lg font-medium text-gray-700">Header Image (Recommended 500px x 500px) </label>
+                                                    <v-file-input v-model="featured_image_url" class="w-full text-gray-700 fileUpload form-input input-field-outer" accept="image/*" outlined dense @change="onHeaderFileChange" />
+                                                </div>
+                                                <div v-if="user.featured_image_src" class="w-full px-3 form-avataar">
+                                                    <v-icon v-if="user.featured_image_src" color="gray darken-2" class="ml-auto" @click="removeHeaderImage()">
+                                                        mdi-close-circle
+                                                    </v-icon>
+            
+                                                    <v-img :src="user.featured_image_src" max-height="150" max-width="250" />
+                                                </div>
+                                            </div> -->
     
                                     <div class="flex flex-wrap mb-3">
                                         <div class="w-full px-3">
@@ -175,14 +149,14 @@
                                             <ul class="industries-list companyIndustry__list">
                                                 <li v-for="(item, index) in industries" :key="index">
                                                     <label>
-                                                          <input
-                                                            v-model="industry"
-                                                            type="checkbox"
-                                                            :value="index"
-                                                            :disabled="industry.length > 2 && industry.indexOf(index) === -1"
-                                                            number
-                                                          > {{ item }}
-                                                        </label>
+                                                              <input
+                                                                v-model="industry"
+                                                                type="checkbox"
+                                                                :value="index"
+                                                                :disabled="industry.length > 2 && industry.indexOf(index) === -1"
+                                                                number
+                                                              > {{ item }}
+                                                            </label>
                                                 </li>
                                             </ul>
                                             <div v-if="$v.industry.$error && !$v.industry.required" class="text-lg text-red-500">
@@ -197,14 +171,14 @@
                                             <ul class="industries-list companyIndustry__list">
                                                 <li v-for="(benefitItem, benefitItemIndex) in benefitCats" :key="benefitItemIndex">
                                                     <label>
-                                                          <input
-                                                            v-model="benefit"
-                                                            type="checkbox"
-                                                            :value="benefitItemIndex"
-                                                           :disabled="benefit.length > 9 && benefit.indexOf(benefitItemIndex) === -1"
-                                                           number
-                                                          > {{ benefitItem }}
-                                                        </label>
+                                                              <input
+                                                                v-model="benefit"
+                                                                type="checkbox"
+                                                                :value="benefitItemIndex"
+                                                               :disabled="benefit.length > 9 && benefit.indexOf(benefitItemIndex) === -1"
+                                                               number
+                                                              > {{ benefitItem }}
+                                                            </label>
                                                 </li>
                                             </ul>
                                         </div>
@@ -402,6 +376,7 @@ export default {
                 };
 
                 form.multi_image_url = this.filelist;
+                form.multi_image_data = this.fileUrls;
                 this.hide = 0;
                 this.$inertia.post(`/employer/edit-company?id=${this.user.uuid}`, form);
             }
@@ -420,50 +395,8 @@ export default {
         },
         onFileChange() {
             this.user.logo_image_src = URL.createObjectURL(this.logo_image_url);
-        },
-        onHeaderFileChange() {
-            this.user.multi_image_url = URL.createObjectURL(this.multi_image_url);
-        },
-        onChange() {
-            this.fileUrls = [];
-            this.filelist = [...this.$refs.file.files];
-            if (this.filelist.length > 0) {
-                this.fileUrls = [];
-                this.filelist.forEach((value, index) => {
-                    this.fileUrls.push(URL.createObjectURL(value));
-                });
-            }
-        },
-        remove(i) {
-            this.filelist.splice(i, 1);
-            this.fileUrls.splice(i, 1);
-        },
-        dragover(event) {
-            event.preventDefault();
-            // Add some visual fluff to show the user can drop its files
-            if (!event.currentTarget.classList.contains('bg-green-300')) {
-                event.currentTarget.classList.remove('bg-gray-100');
-                event.currentTarget.classList.add('bg-green-300');
-            }
-        },
-        dragleave(event) {
-            // Clean up
-            event.currentTarget.classList.add('bg-gray-100');
-            event.currentTarget.classList.remove('bg-green-300');
-        },
-        drop(event) {
-            event.preventDefault();
-            this.$refs.file.files = event.dataTransfer.files;
-            this.onChange(); // Trigger the onChange event manually
-            // Clean up
-            event.currentTarget.classList.add('bg-gray-100');
-            event.currentTarget.classList.remove('bg-green-300');
-        },
-        checkMove: function(evt){
-            console.log('Here',evt.draggedContext.element.name);
-            //return (evt.draggedContext.element.name!=='apple');
         }
-        
+
     },
 };
 </script>

@@ -12,7 +12,7 @@ class CompanyProfileGallery extends Model
     protected $table = 'company_profile_gallery';
 
     protected $fillable = [
-        'company_profile_id','image',
+        'company_profile_id','image','sort',
     ];
     
 
