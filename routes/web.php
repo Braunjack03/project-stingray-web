@@ -106,6 +106,10 @@ Route::group(['prefix' => 'employer', 'middleware' => ['auth','employer']], func
 
     Route::get('edit-company',[CompanyProfileController::class,'edit'])->name('edit.company');
 
+    Route::get('photo-gallery',[CompanyProfileController::class,'photoGallery'])->name('photos.gallery');
+
+    Route::post('photo-gallery',[CompanyProfileController::class,'updatePhotoGallery'])->name('update.gallery');
+
     Route::post('edit-company',[CompanyProfileController::class,'update'])->name('update.company');
 
     Route::get('jobs', [JobPostController::class, 'index'])->name('employer.jobs');

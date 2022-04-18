@@ -23,6 +23,15 @@
                         :class="(currentUrl == '/employer/edit-company') ? 'text-purple-700' : 'text-gray-700'"
                         >Company Profile</Link
                       >
+                      <ul class="subSideBar">
+                          <li>
+                              <Link
+                                :href="'/employer/photo-gallery?id=' + company_uuid"
+                                class="text-lg text-gray-700 no-underline  hover:text-purple-600"
+                                :class="(currentUrl == '/employer/photo-gallery') ? 'text-purple-700' : 'text-gray-700'"
+                                >Photo Gallery</Link>
+                          </li>
+                        </ul>
                     </li>
                     <li v-else>
                       <Link
