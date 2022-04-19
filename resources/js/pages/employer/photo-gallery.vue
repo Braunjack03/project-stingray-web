@@ -24,7 +24,7 @@
                                     <div class="flex flex-nowrap mb-3">
                                         <div class="w-full px-3">
                                             <label class="block mb-1 text-lg font-medium text-gray-700">Up to 4 photos can be uploaded!</label>
-                                            <div class="galleryUpload" @dragover="dragover" @dragleave="dragleave" @drop="drop">
+                                            <div class="galleryUpload" @dragover="dragover1" @dragleave="dragleave1" @drop="drop1">
                                                 <input type="file" multiple name="fields[assetsFieldHandle][]" id="assetsFieldHandle" class="w-px h-px opacity-0 overflow-hidden absolute" @change="onChange" ref="file" accept=".gif,.jpg,.jpeg,.png"
                                                 />
                                                 <label for="assetsFieldHandle" class="block cursor-pointer">
@@ -36,7 +36,7 @@
                                     </div>
                                     <div class="flex flex-wrap mb-3 px-3 gallerUploadedImg">
                                         <label class="gallerUploadedTitle">Drag to reorder</label>
-                                        <draggable v-model="fileUrls" group="gallery" @start="drag=true" @end="drag=false" :move="checkMove">
+                                        <draggable v-model="fileUrls" group="gallery">
                                             
                                             <div class="gallerUploadeBlock" v-for="(file,i) in this.fileUrls" :key="i">
                                                 <span class="handle"><v-img :src="'/images/gallery-handle.svg'" width="40px" /></span>
@@ -159,10 +159,14 @@ export default {
         onHeaderFileChange() {
             this.user.multi_image_url = URL.createObjectURL(this.multi_image_url);
         },
-        onChange() {
-            this.fileUrls = [];
-            this.filelist = [...this.$refs.file.files];
-            if (this.filelist.length >= 5) {
+        onChange(e) {
+            console.log('here',this.fileUrls.length);
+            this.filelist = [];
+            //this.filelist = [...this.$refs.file.files];
+            this.filelist = e.target.files || e.dataTransfer.files;
+            let max_images = this.fileUrls.length + this.filelist.length;
+            console.log('max',max_images);
+            if (this.filelist.length >= 5 || max_images >= 5) {
                 this.$swal.fire({
                     icon: 'error',
                     title: 'Oops...',
@@ -171,7 +175,8 @@ export default {
 
                 return false;
             }else {
-                this.fileUrls = [];
+                console.log('elese',this.filelist.length);
+                //this.fileUrls = [];
                 this.filelist.forEach((value, index) => {
                     this.fileUrls.push({'sort': index, 'image': URL.createObjectURL(value)});
                 });
@@ -188,7 +193,11 @@ export default {
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    this.filelist.splice(i, 1);
+                    console.log('here11',this.filelist.length);
+                    if(this.filelist.length > 0)
+                    {
+                        this.filelist.splice(i, 1);
+                    }
                     this.fileUrls.splice(i, 1);
                 }
 
@@ -196,7 +205,7 @@ export default {
             return false;
 
         },
-        dragover(event) {
+        dragover1(event) {
             event.preventDefault();
             // Add some visual fluff to show the user can drop its files
             if (!event.currentTarget.classList.contains('bg-green-300')) {
@@ -204,22 +213,18 @@ export default {
                 event.currentTarget.classList.add('bg-green-300');
             }
         },
-        dragleave(event) {
+        dragleave1(event) {
             // Clean up
             event.currentTarget.classList.add('bg-gray-100');
             event.currentTarget.classList.remove('bg-green-300');
         },
-        drop(event) {
+        drop1(event) {
             event.preventDefault();
             this.$refs.file.files = event.dataTransfer.files;
             this.onChange(); // Trigger the onChange event manually
             // Clean up
             event.currentTarget.classList.add('bg-gray-100');
             event.currentTarget.classList.remove('bg-green-300');
-        },
-        checkMove: function(evt) {
-            console.log('Here', evt.draggedContext.element.name);
-            //return (evt.draggedContext.element.name!=='apple');
         }
 
     },
