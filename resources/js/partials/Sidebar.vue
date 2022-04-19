@@ -23,7 +23,7 @@
                         :class="(currentUrl == '/employer/edit-company') ? 'text-purple-700' : 'text-gray-700'"
                         >Company Profile</Link
                       >
-                      <ul class="subSideBar">
+                      <ul class="subSideBar" v-if="(currentUrl == '/employer/edit-company' || (currentUrl == '/employer/photo-gallery'))">
                           <li>
                               <Link
                                 :href="'/employer/photo-gallery?id=' + company_uuid"
