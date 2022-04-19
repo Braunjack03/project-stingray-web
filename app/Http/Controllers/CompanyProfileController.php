@@ -493,6 +493,21 @@ class CompanyProfileController extends Controller
             $user = CompanyProfile::with('company_types')->where('uuid',$request->all()['id'])->first();
             if($user)
             {   
+                //get plan id
+                $planId = Subscription::where(['user_id'=>$user->user_id])->first();
+                $job_posts_count = JobPost::where('company_profile_id', $user['id'])->count();
+                if(!empty($planId)){
+                    $getPlanName = getPlanName($planId['stripe_plan'],$planId['ends_at']);
+                    $total = $job_posts_count - $getPlanName['slot'];
+                    if($total > 0){
+                        for($i = 0;$i<$total;$i++){
+                            JobPost::where(["company_profile_id"=>$user['id']])->orderBy("id","ASC")->limit(1)->delete();
+                        }
+                        $job_posts_count = $job_posts_count - $total;
+                    }
+                }else{
+                  $getPlanName = ["name"=>"Free Plan","slot"=>"0"];  
+                }
 
                 $gallery_images = CompanyProfileGallery::select('id','image','sort')->where('company_profile_id',$user['id'])->orderBy('sort','ASC')->get();
                 $gal_images = [];
@@ -500,7 +515,7 @@ class CompanyProfileController extends Controller
                     $gallery_images[$key]['image'] = getBucketImageUrl($request->all()['id'],$image->image,'company');
                 }
               
-                $data = ['user'=>$user,'fileUrls'=>$gallery_images];
+                $data = ['user'=>$user,'fileUrls'=>$gallery_images,'plan_name'=>$getPlanName,'job_posts_count' => $job_posts_count];
                 return $this->sendResponseWithData('employer/photo-gallery','',$data);
             }else{
                 redirect('/employer/create-company');
