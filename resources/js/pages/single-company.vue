@@ -14,7 +14,7 @@
             <h2 class="mb-0 text-gray-700 post-title">
               {{ data.name }}
               <v-btn
-                v-if="data.unclaimed == 1"
+                v-if="data.unclaimed == 1 && is_company_belong_to == 1"
                 class="link-text"
                 text
                 @click="claimProfile(data.uuid)"
