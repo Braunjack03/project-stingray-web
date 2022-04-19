@@ -25,7 +25,7 @@
                                         <div class="w-full px-3">
                                             <label class="block mb-1 text-lg font-medium text-gray-700">Up to 4 photos can be uploaded!</label>
                                             <div class="galleryUpload" @dragover="dragover1" @dragleave="dragleave1" @drop="drop1">
-                                                <input type="file" multiple name="fields[assetsFieldHandle][]" id="assetsFieldHandle" class="w-px h-px opacity-0 overflow-hidden absolute" @change="onChange" ref="file" accept=".gif,.jpg,.jpeg,.png"
+                                                <input type="file" multiple name="fields[assetsFieldHandle][]" id="assetsFieldHandle" class="w-px h-px opacity-0 overflow-hidden absolute" @change="onGalleryImageChange" ref="file" accept=".gif,.jpg,.jpeg,.png"
                                                 />
                                                 <label for="assetsFieldHandle" class="block cursor-pointer">
                                                     Drag Files Here to upload <br>
@@ -36,30 +36,22 @@
                                     </div>
                                     <div class="flex flex-wrap mb-3 px-3 gallerUploadedImg">
                                         <label class="gallerUploadedTitle">Drag to reorder</label>
-                                        <draggable v-model="fileUrls" group="gallery">
+                                        <draggable v-model="fileUrls" group="gallery" @start="drag=true" @end="drag=false">
                                             
                                             <div class="gallerUploadeBlock" v-for="(file,i) in this.fileUrls" :key="i">
                                                 <span class="handle"><v-img :src="'/images/gallery-handle.svg'" width="40px" /></span>
-                                                <v-icon color="gray darken-2" class="ml-auto" @click="remove(i)">
+                                                <v-icon color="gray darken-2" class="ml-auto" @click="removeGalleryImage(i,file.id)">
                                                     mdi-close-circle
                                                 </v-icon>
                                                 <v-img class="galleryImg" :src="file.image" max-height="150" max-width="250" />
                                             </div>
                                         </draggable>
                                     </div>
-                                   
                                     <div class="flex flex-wrap mt-5">
                                         <div class="w-full px-3">
                                             <v-btn class="w-full text-white bg-purple-600 btn hover:bg-purple-700" @click="submit()">
                                                 Update Gallery
                                             </v-btn>
-                                        </div>
-                                    </div>
-                                    <div class="flex flex-wrap mt-5 text-center">
-                                        <div class="w-full px-3">
-                                            <p class="text-lg text-center text-gray-700">
-                                                Please fill the required field(s)
-                                            </p>
                                         </div>
                                     </div>
                                 </v-form>
@@ -131,14 +123,17 @@ export default {
     },
     methods: {
         submit() {
+            console.log('on submit',this.filelist);
+            console.log('on dddd',this.fileUrls);
             //this.$v.$touch();
             //if (!this.$v.$invalid) {
                 const form = {};
-
+                
                 form.multi_image_url = this.filelist;
                 form.multi_image_data = this.fileUrls;
                 this.hide = 0;
                 this.$inertia.post(`/employer/photo-gallery?id=${this.user.uuid}`, form);
+                this.filelist = [];
             //}
             // this.$inertia.post('/employer/edit-company?id=' + this.user.uuid, form);
         },
@@ -159,11 +154,12 @@ export default {
         onHeaderFileChange() {
             this.user.multi_image_url = URL.createObjectURL(this.multi_image_url);
         },
-        onChange(e) {
-            console.log('here',this.fileUrls.length);
+        onGalleryImageChange(e) {
+            console.log('here new',this.fileUrls.length);
             this.filelist = [];
-            //this.filelist = [...this.$refs.file.files];
-            this.filelist = e.target.files || e.dataTransfer.files;
+            this.filelist = [...this.$refs.file.files];
+            console.log('filelist',this.filelist);
+            //this.filelist = e.target.files || e.dataTransfer.files;
             let max_images = this.fileUrls.length + this.filelist.length;
             console.log('max',max_images);
             if (this.filelist.length >= 5 || max_images >= 5) {
@@ -175,14 +171,14 @@ export default {
 
                 return false;
             }else {
-                console.log('elese',this.filelist.length);
-                //this.fileUrls = [];
+                console.log('else',this.filelist.length);
+                //this.filelist = [];
                 this.filelist.forEach((value, index) => {
-                    this.fileUrls.push({'sort': index, 'image': URL.createObjectURL(value)});
+                    this.fileUrls.push({'id':index,'sort': this.fileUrls.length, 'image': URL.createObjectURL(value)});
                 });
             }
         },
-        remove(i) {
+        removeGalleryImage(i,id) {
             this.$swal.fire({
                 title: 'Are you sure?',
                 text: "You want to delete this image?",
@@ -193,12 +189,14 @@ export default {
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    console.log('here11',this.filelist.length);
+                    console.log('here11',this.filelist);
+                    console.log('ddd',i);
+                    this.fileUrls.splice(i, 1);
                     if(this.filelist.length > 0)
                     {
                         this.filelist.splice(i, 1);
+                        this.filelist.splice(id, 1);
                     }
-                    this.fileUrls.splice(i, 1);
                 }
 
             })
@@ -221,7 +219,7 @@ export default {
         drop1(event) {
             event.preventDefault();
             this.$refs.file.files = event.dataTransfer.files;
-            this.onChange(); // Trigger the onChange event manually
+           this.onGalleryImageChange(event);
             // Clean up
             event.currentTarget.classList.add('bg-gray-100');
             event.currentTarget.classList.remove('bg-green-300');
