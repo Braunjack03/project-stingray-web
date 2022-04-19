@@ -40,7 +40,7 @@
                                             
                                             <div class="gallerUploadeBlock" v-for="(file,i) in this.fileUrls" :key="i">
                                                 <span class="handle"><v-img :src="'/images/gallery-handle.svg'" width="40px" /></span>
-                                                <v-icon color="gray darken-2" class="ml-auto" @click="removeGalleryImage(i)">
+                                                <v-icon color="gray darken-2" class="ml-auto" @click="removeGalleryImage(i,file.id)">
                                                     mdi-close-circle
                                                 </v-icon>
                                                 <v-img class="galleryImg" :src="file.image" max-height="150" max-width="250" />
@@ -133,6 +133,7 @@ export default {
                 form.multi_image_data = this.fileUrls;
                 this.hide = 0;
                 this.$inertia.post(`/employer/photo-gallery?id=${this.user.uuid}`, form);
+                this.filelist = [];
             //}
             // this.$inertia.post('/employer/edit-company?id=' + this.user.uuid, form);
         },
@@ -154,11 +155,11 @@ export default {
             this.user.multi_image_url = URL.createObjectURL(this.multi_image_url);
         },
         onGalleryImageChange(e) {
-            console.log('here',this.fileUrls.length);
+            console.log('here new',this.fileUrls.length);
             this.filelist = [];
-            //this.filelist = [...this.$refs.file.files];
+            this.filelist = [...this.$refs.file.files];
             console.log('filelist',this.filelist);
-            this.filelist = e.target.files || e.dataTransfer.files;
+            //this.filelist = e.target.files || e.dataTransfer.files;
             let max_images = this.fileUrls.length + this.filelist.length;
             console.log('max',max_images);
             if (this.filelist.length >= 5 || max_images >= 5) {
@@ -173,11 +174,11 @@ export default {
                 console.log('else',this.filelist.length);
                 //this.filelist = [];
                 this.filelist.forEach((value, index) => {
-                    this.fileUrls.push({'sort': this.fileUrls.length, 'image': URL.createObjectURL(value)});
+                    this.fileUrls.push({'id':index,'sort': this.fileUrls.length, 'image': URL.createObjectURL(value)});
                 });
             }
         },
-        removeGalleryImage(i) {
+        removeGalleryImage(i,id) {
             this.$swal.fire({
                 title: 'Are you sure?',
                 text: "You want to delete this image?",
@@ -189,11 +190,12 @@ export default {
             }).then((result) => {
                 if (result.isConfirmed) {
                     console.log('here11',this.filelist);
+                    console.log('ddd',i);
                     this.fileUrls.splice(i, 1);
                     if(this.filelist.length > 0)
                     {
-                        console.log(i)
                         this.filelist.splice(i, 1);
+                        this.filelist.splice(id, 1);
                     }
                 }
 

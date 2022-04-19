@@ -541,31 +541,38 @@ class CompanyProfileController extends Controller
                     $gallery_images = [];
                     //$sort_order = $request->all()['multi_image_data'];
                     $old_images = CompanyProfileGallery::select('image')->where('company_profile_id',$companyDetails->id);
-                    $sort_order = 0;
-                    if($old_images->first()) {
-                        $sort_order = CompanyProfileGallery::select('sort')->where('company_profile_id',$companyDetails->id)->orderBy('sort','DESC')->first()['sort'];
-                        $sort_order++;
-                    }
-                    foreach($files as $key => $imgfile) {
-                        $originalFileName = time() . '_' .$imgfile->getClientOriginalName();
-                        \Storage::disk('s3Company')->putFileAs('company/'.$user_uuid, $imgfile,$originalFileName);
-                        $gallery_images[$key]['company_profile_id'] = $companyDetails->id;
-                        $gallery_images[$key]['image'] = $originalFileName;
-                        if(count($files) > 1)
-                        {
-                            $gallery_images[$key]['sort'] = $sort_order++;
-                        }else{
-                            $gallery_images[$key]['sort'] = $sort_order;
+                    if($old_images->count() < 5)
+                    {
+                        $sort_order = 0;
+                        if($old_images->first()) {
+                            $sort_order = CompanyProfileGallery::select('sort')->where('company_profile_id',$companyDetails->id)->orderBy('sort','DESC')->first()['sort'];
+                            $sort_order++;
+                        }
+                        foreach($files as $key => $imgfile) {
+                            $originalFileName = time() . '_' .$imgfile->getClientOriginalName();
+                            \Storage::disk('s3Company')->putFileAs('company/'.$user_uuid, $imgfile,$originalFileName);
+                            $gallery_images[$key]['company_profile_id'] = $companyDetails->id;
+                            $gallery_images[$key]['image'] = $originalFileName;
+                            if(count($files) > 1)
+                            {
+                                $gallery_images[$key]['sort'] = $sort_order++;
+                            }else{
+                                $gallery_images[$key]['sort'] = $sort_order;
+                            }
+                            
                         }
                         
+                        foreach($old_images->get() as $image)
+                        {
+                            \Storage::disk('s3')->delete('company/'.$user_uuid.'/'. $image);
+                        }
+                        //$old_images->delete();
+                        CompanyProfileGallery::insert($gallery_images);
+                    } else {
+                        return redirect('employer/photo-gallery?id=' . $companyDetails->uuid)->with(['message' => 'max upload 4 only.']);
+
                     }
-                    
-                    foreach($old_images->get() as $image)
-                    {
-                        \Storage::disk('s3')->delete('company/'.$user_uuid.'/'. $image);
-                    }
-                    //$old_images->delete();
-                    CompanyProfileGallery::insert($gallery_images);
+               
                 }else{
                     $files = $request->all()['multi_image_data'];
                     $old_images = CompanyProfileGallery::select('id','image','sort')->where('company_profile_id',$companyDetails->id);
