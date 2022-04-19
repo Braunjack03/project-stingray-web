@@ -534,36 +534,78 @@ class CompanyProfileController extends Controller
         }
             try{
                 $user_uuid = $request->all()['id'];
+                //dd($request->all());
                 $companyDetails = CompanyProfile::where('uuid',$user_uuid)->first();
                 if($request->hasfile('multi_image_url')){
                     $files = $request->file('multi_image_url');
                     $gallery_images = [];
-                    $sort_order = $request->all()['multi_image_data'];
+                    //$sort_order = $request->all()['multi_image_data'];
+                    $old_images = CompanyProfileGallery::select('image')->where('company_profile_id',$companyDetails->id);
+                    $sort_order = 0;
+                    if($old_images->first()) {
+                        $sort_order = CompanyProfileGallery::select('sort')->where('company_profile_id',$companyDetails->id)->orderBy('sort','DESC')->first()['sort'];
+                        $sort_order++;
+                    }
                     foreach($files as $key => $imgfile) {
                         $originalFileName = time() . '_' .$imgfile->getClientOriginalName();
                         \Storage::disk('s3Company')->putFileAs('company/'.$user_uuid, $imgfile,$originalFileName);
                         $gallery_images[$key]['company_profile_id'] = $companyDetails->id;
                         $gallery_images[$key]['image'] = $originalFileName;
-                        $gallery_images[$key]['sort'] = $sort_order[$key]['sort'];
+                        if(count($files) > 1)
+                        {
+                            $gallery_images[$key]['sort'] = $sort_order++;
+                        }else{
+                            $gallery_images[$key]['sort'] = $sort_order;
+                        }
+                        
                     }
-                    $old_images = CompanyProfileGallery::select('image')->where('company_profile_id',$companyDetails->id);
+                    
                     foreach($old_images->get() as $image)
                     {
                         \Storage::disk('s3')->delete('company/'.$user_uuid.'/'. $image);
                     }
-                    $old_images->delete();
+                    //$old_images->delete();
                     CompanyProfileGallery::insert($gallery_images);
                 }else{
                     $files = $request->all()['multi_image_data'];
+                    $old_images = CompanyProfileGallery::select('id','image','sort')->where('company_profile_id',$companyDetails->id);
+                    $test = $old_images->get()->toArray();
+                    if(count($files) != count($test)) {
+                        if(count($files) > count($test))
+                        {
+                            $array = $files;
+                        }else{
+                            $array = $test;
+                        }
+                        foreach($array as $key => $value)
+                        {
+                            $files[$key]['image'] = pathinfo($value['image'])['basename'];
+                            \Storage::disk('s3')->delete('company/'.$user_uuid.'/'. pathinfo($value['image'])['basename']);
+                            $ret[] = array_diff($test[$key],$files[$key]);
+                        }
+                        foreach($ret as $key => $value)
+                        {
+                            if(!empty($value))
+                            {
+                                $ids[] = $value['id'];
+                            }
+                            
+                        }
+                        if(isset($ids) && count($ids) > 0){
+                            CompanyProfileGallery::whereIn('id',$ids)->delete();
+                        }
+                    }
                     $gallery_images = [];
                     foreach($files as $key => $imgfile) {
                         $gallery_images[$key]['company_profile_id'] = $companyDetails->id;
                         $gallery_images[$key]['image'] = pathinfo($imgfile['image'])['basename'];
                         $gallery_images[$key]['sort'] = $key;
+                        $old_images = CompanyProfileGallery::where('image',pathinfo($imgfile['image'])['basename']);
+                        $old_images->update(['sort'=>$key]);
                     }
-                    $old_images = CompanyProfileGallery::select('image')->where('company_profile_id',$companyDetails->id);
-                    $old_images->delete();
-                    CompanyProfileGallery::insert($gallery_images);
+                    
+                    //dd($gallery_images);
+                    //;
                 }
 
                 ActivityLog::addToLog(__('activitylogs.company_profile_updated'),'company gallery updated');
