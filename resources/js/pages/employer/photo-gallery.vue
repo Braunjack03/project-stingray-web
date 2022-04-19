@@ -91,10 +91,7 @@ export default {
     },
     mixins: [validationMixin],
     validations: {
-        name: { required },
-        local_employees: { required, numeric },
-        industry: { required },
-        description: { required },
+        fields: { required },
     },
     props: {
         errors: Object,
@@ -118,22 +115,21 @@ export default {
             logo_image_removed: 0,
             hide: 0,
             filelist: [],
+            newlist : [],
             fileUrls: (this.fileUrls.length) ? this.fileUrls : [],
         };
     },
     methods: {
         submit() {
-            console.log('on submit',this.filelist);
-            console.log('on dddd',this.fileUrls);
             //this.$v.$touch();
             //if (!this.$v.$invalid) {
                 const form = {};
                 
-                form.multi_image_url = this.filelist;
+                form.multi_image_url = this.newlist;
                 form.multi_image_data = this.fileUrls;
                 this.hide = 0;
                 this.$inertia.post(`/employer/photo-gallery?id=${this.user.uuid}`, form);
-                this.filelist = [];
+                this.newlist = [];
             //}
             // this.$inertia.post('/employer/edit-company?id=' + this.user.uuid, form);
         },
@@ -155,14 +151,15 @@ export default {
             this.user.multi_image_url = URL.createObjectURL(this.multi_image_url);
         },
         onGalleryImageChange(e) {
-            console.log('here new',this.fileUrls.length);
-            this.filelist = [];
+            console.log('here new',this.$refs.file.files);
             this.filelist = [...this.$refs.file.files];
-            console.log('filelist',this.filelist);
+            this.newlist.push(...this.$refs.file.files)
             //this.filelist = e.target.files || e.dataTransfer.files;
-            let max_images = this.fileUrls.length + this.filelist.length;
+
+            console.log('filelist',this.newlist);
+            let max_images = this.fileUrls.length + 1;
             console.log('max',max_images);
-            if (this.filelist.length >= 5 || max_images >= 5) {
+            if (this.newlist.length >= 5 || max_images >= 5) {
                 this.$swal.fire({
                     icon: 'error',
                     title: 'Oops...',
@@ -170,13 +167,17 @@ export default {
                 });
 
                 return false;
-            }else {
-                console.log('else',this.filelist.length);
-                //this.filelist = [];
-                this.filelist.forEach((value, index) => {
-                    this.fileUrls.push({'id':index,'sort': this.fileUrls.length, 'image': URL.createObjectURL(value)});
-                });
             }
+
+            console.log('else',this.newlist.length);
+            //this.fileUrls = [];
+            const uniqueObjects = [...new Map(this.newlist.map(item => [item.id, item])).values()]
+            uniqueObjects.forEach((value, index) => {
+                this.fileUrls.push({'id':index,'sort': this.fileUrls.length, 'image': URL.createObjectURL(value)});
+            });
+            
+        
+            console.log('fileUrls',uniqueObjects);
         },
         removeGalleryImage(i,id) {
             this.$swal.fire({
