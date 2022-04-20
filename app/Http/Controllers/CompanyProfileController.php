@@ -448,7 +448,7 @@ class CompanyProfileController extends Controller
                     $user->logo_image_src = ($user->logo_image_url) ? getBucketImageUrl($requested_data['id'],$user->logo_image_url,'company') : '';
                     $user->featured_image_src = ($user->featured_image_url) ? getBucketImageUrl($requested_data['id'],$user->featured_image_url,'company') : '';
                     CompanyProfileBenefitCat::where('company_profile_id',$user->id)->delete();
-                    if(isset($data['benefit']) && $data['benefit'] == ''){
+                    if(isset($data['benefit']) && $data['benefit'] != ''){
                         if(count($data['benefit']) > 0){
                             foreach($data['benefit'] as $val){
                                 CompanyProfileBenefitCat::create([
