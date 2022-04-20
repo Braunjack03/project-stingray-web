@@ -626,6 +626,10 @@ class CompanyProfileController extends Controller
             $uuid = $request->all()['id'];
             if(isset($p_id)){
                 $company_photo = CompanyProfileGallery::where('id',$p_id);
+                if($company_photo->first())
+                {
+                    \Storage::disk('s3')->delete('company/'.$uuid.'/'. $company_photo->first()->image);
+                }
                 $company_photo->delete();
                 ActivityLog::addToLog(__('activitylogs.company_gallery_image_removed'), 'photo deleted');
             }
