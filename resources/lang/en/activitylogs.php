@@ -15,4 +15,7 @@ return [
     'job_created' => 'Job Post created',
     'job_updated' => 'Job Post Updated',
     'job_deleted' => 'Job Post Deleted',
+    'company_gallery_insert' => 'Images added in gallery.',
+    'company_gallery_order_updated' => 'Image order updated in gallery',
+    'company_gallery_image_removed' => 'Image removed from gallery',
  ];
