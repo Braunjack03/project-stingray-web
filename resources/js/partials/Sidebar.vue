@@ -23,6 +23,15 @@
                         :class="(currentUrl == '/employer/edit-company') ? 'text-purple-700' : 'text-gray-700'"
                         >Company Profile</Link
                       >
+                      <ul class="subSideBar" v-if="(currentUrl == '/employer/edit-company' || (currentUrl == '/employer/photo-gallery'))">
+                          <li>
+                              <Link
+                                :href="'/employer/photo-gallery?id=' + company_uuid"
+                                class="text-lg text-gray-700 no-underline  hover:text-purple-600"
+                                :class="(currentUrl == '/employer/photo-gallery') ? 'text-purple-700' : 'text-gray-700'"
+                                >Photo Gallery</Link>
+                          </li>
+                        </ul>
                     </li>
                     <li v-else>
                       <Link
@@ -31,6 +40,15 @@
                         :class="(currentUrl == '/employer/create-company') ? 'text-purple-700' : 'text-gray-700'"
                         >Company Profile</Link
                       >
+                      <ul class="subSideBar" >
+                          <li>
+                              <Link
+                                @click="showPhotoGalleryPopup()"
+                                class="text-lg text-gray-700 no-underline  hover:text-purple-600"
+                                :class="(currentUrl == '/employer/photo-gallery') ? 'text-purple-700' : 'text-gray-700'"
+                                >Photo Gallery</Link>
+                          </li>
+                        </ul>
                     </li>
                     <li v-if="company_uuid">
                       <Link
@@ -89,6 +107,12 @@ export default {
        showJobPopup(){
           this.$swal.fire({
             text: "Please complete your company profile before posting a job.",
+            icon: 'warning',
+          });
+      },
+      showPhotoGalleryPopup(){
+          this.$swal.fire({
+            text: "Please complete your company profile before adding gallery images.",
             icon: 'warning',
           });
       }

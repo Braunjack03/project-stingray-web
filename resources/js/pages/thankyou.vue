@@ -8,16 +8,16 @@
             <!-- Page header -->
             <div class="max-w-3xl pb-12 mx-auto text-center md:pb-20">
               <h1 class="text-gray-700 h1">
-                Thanks for Joining!  
+                Check Your Inbox 
               </h1>
-              <p class="text-xl text-gray-500 aos-init aos-animate">
-                Click Here to<Link
-                  href="/login"
-                  class="text-purple-600 transition duration-150 ease-in-out hover:text-gray-200"
-                >
-                  Login
-                </Link>
+              <p class="py-10 text-xl text-gray-700">
+                  A verification email is on the way. Confirm your email to start using Made in Tampa.
               </p>
+  <v-btn href="/login" class="text-white bg-purple-600 w-50 btn hover:bg-purple-700" pt-5> Do This Later
+   </v-btn>
+
+
+
             </div>
 
             <!-- Form -->
@@ -28,11 +28,11 @@
   </div>
 </template>
 <script>
-import { Link, Head } from '@inertiajs/inertia-vue';
-import Layout from './Layout.vue';
+import { Link, Head } from "@inertiajs/inertia-vue";
+import Layout from "./Layout.vue";
 
 export default {
-  name: 'ThankYou',
+  name: "ThankYou",
   components: {
     Link,
     Layout,
