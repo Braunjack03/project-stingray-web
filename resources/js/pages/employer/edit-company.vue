@@ -167,7 +167,7 @@
     
                                     <div class="flex flex-wrap mb-3">
                                         <div class="w-full px-3">
-                                            <label class="block mb-1 text-lg font-medium text-gray-700">Company Benefit (select up to 10)</label>
+                                            <label class="block mb-1 text-lg font-medium text-gray-700">Company Benefits (select up to 10)</label>
                                             <ul class="industries-list companyIndustry__list">
                                                 <li v-for="(benefitItem, benefitItemIndex) in benefitCats" :key="benefitItemIndex">
                                                     <label>
