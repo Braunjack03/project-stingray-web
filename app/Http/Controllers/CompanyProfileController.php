@@ -610,7 +610,7 @@ class CompanyProfileController extends Controller
                 ActivityLog::addToLog(__('activitylogs.company_gallery_order_updated'),'company gallery order updated');
             
                 //return $this->sendResponseWithData('employer/edit-company',__('messages.company_profile_updated'),$data);
-                return redirect('employer/photo-gallery?id=' . $user_uuid);
+                return redirect('employer/photo-gallery?id=' . $user_uuid)->with(['message' => __('messages.company_gallery_order_updated')." <a class='toster-anchor' href=/companies/".$companyDetails->slug.">View Profile</a>"]);
                 //return Inertia::render('employer/photo-gallery',['id' => $user_uuid]);
             //return redirect()->route('edit.company',['id'=>$requested_data['id']])->with(['message' => __('messages.company_profile_updated')]);
      
@@ -624,12 +624,17 @@ class CompanyProfileController extends Controller
         try {
             $p_id = $request->all()['p_id'];
             $uuid = $request->all()['id'];
+            $companyDetails = CompanyProfile::where('uuid',$uuid)->first();
             if(isset($p_id)){
                 $company_photo = CompanyProfileGallery::where('id',$p_id);
+                if($company_photo->first())
+                {
+                    \Storage::disk('s3')->delete('company/'.$uuid.'/'. $company_photo->first()->image);
+                }
                 $company_photo->delete();
                 ActivityLog::addToLog(__('activitylogs.company_gallery_image_removed'), 'photo deleted');
             }
-            return redirect('employer/photo-gallery?id=' . $uuid);
+            return redirect('employer/photo-gallery?id=' . $uuid)->with(['message' => __('messages.company_gallery_photo_deleted')." <a class='toster-anchor' href=/companies/".$companyDetails->slug.">View Profile</a>"]);
             //return Inertia::render('employer/photo-gallery?id=' . $uuid);
         } catch (\Exception $e) {
             $message = $e->getMessage();

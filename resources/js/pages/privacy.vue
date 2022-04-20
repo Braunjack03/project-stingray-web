@@ -549,7 +549,7 @@
               contact us:
             </p>
             <ul>
-              <li>By email: privacy@madeintampa.io</li>
+              <li>By email: <a href="mailto:privacy@madeintampa.io">privacy@madeintampa.io</a></li>
             </ul>
           </div>
         </div>

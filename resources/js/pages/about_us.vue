@@ -58,8 +58,8 @@
     
                         </p>
     
-    
-                        <Link href="/register" class="bg-purple-600 rounded-none btn-sm hover:bg-purple-700"> Register Now
+
+                        <Link v-if="is_logged_in == 0" href="/register" class="bg-purple-600 rounded-none btn-sm hover:bg-purple-700"> Register Now
                         </Link>
     
     
@@ -87,5 +87,9 @@ export default {
         Footer,
         Link,
     },
+    props: {
+        is_logged_in: Number, 
+    },
+    
 };
 </script>

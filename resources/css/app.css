@@ -1601,6 +1601,8 @@ blockquote {
     z-index: 0;
     border: 1px solid #ddd;
     border-radius: 10px;
+    height: 150px;
+    width: 250px;
 }
 
 .settingLinks li a.upgrade-link {
@@ -1645,6 +1647,59 @@ blockquote {
     margin-inline-start: 0px !important;
     margin-inline-end: 0px !important;
 }
+
+
+.vueperslides__arrows .vueperslides__arrow {
+    opacity: .9;
+    background: #000;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+}
+
+.vueperslides__arrows .vueperslides__arrow svg {
+    width: 45px;
+    margin: -8px 0 0  0px;
+}
+
+.vueperslides__arrows .vueperslides__arrow.vueperslides__arrow--prev svg {
+    margin-left: -3px;
+}
+
+.loaderTmpa {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    inset: 0;
+    background: rgba(255,255,255,.8);
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loaderInner {
+    width:45px;
+    height:45px;
+    display:inline-block;
+    padding:0px;
+    border-radius:100%;
+    border:5px solid;
+    border-top-color:rgba(93, 93, 255, 1);
+    border-bottom-color:rgba(90,93,255, 0.6);
+    border-left-color:rgba(93, 93, 255, 1);
+    border-right-color:rgba(93,93,255, 0.5);
+    -webkit-animation: loaderTmpa 1s ease-in-out infinite;
+    animation: loaderTmpa 1s ease-in-out infinite;
+ }
+ @keyframes loaderTmpa {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+ }
+ @-webkit-keyframes loaderTmpa {
+    from {-webkit-transform: rotate(0deg);}
+    to {-webkit-transform: rotate(360deg);}
+ }
 
 
 /* add-html-props */

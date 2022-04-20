@@ -2,6 +2,9 @@
     <Layout>
         <Head title="Company Profile" />
         <section class="relative" data-app>
+            <div v-if="loading" class="loaderTmpa">
+                <span class="loaderInner"></span>
+            </div>
             <div class="max-w-6xl px-4 mx-auto sm:px-6">
                 <div class="pt-32 pb-12 md:pt-40 md:pb-20">
                     <v-row>
@@ -25,7 +28,7 @@
                                         <div class="w-full px-3">
                                             <label class="block mb-1 text-lg font-medium text-gray-700">Up to 4 photos can be uploaded!</label>
                                             <div class="galleryUpload" @dragover="dragover1" @dragleave="dragleave1" @drop="drop1">
-                                                <input type="file" multiple name="fields[assetsFieldHandle][]" id="assetsFieldHandle" class="w-px h-px opacity-0 overflow-hidden absolute" @change="onGalleryImageChange" ref="file" accept=".gif,.jpg,.jpeg,.png"
+                                                <input type="file" multiple name="fields[assetsFieldHandle][]" id="assetsFieldHandle" class="w-px h-px opacity-0 overflow-hidden absolute" @change="onGalleryImageChange" ref="file" accept="image/gif,image/jpg,image/jpeg,image/png"
                                                 />
                                                 <label for="assetsFieldHandle" class="block cursor-pointer">
                                                     Drag Files Here to upload <br>
@@ -43,7 +46,7 @@
                                                 <v-icon color="gray darken-2" class="ml-auto" @click="removeGalleryImage(i,file.id)">
                                                     mdi-close-circle
                                                 </v-icon>
-                                                <v-img class="galleryImg" :src="file.image" max-height="150" max-width="250" />
+                                                <v-img class="galleryImg" :src="file.image" />
                                             </div>
                                         </draggable>
                                     </div>
@@ -120,6 +123,7 @@ export default {
             filelist: [],
             newlist : [],
             fileUrlsList: (this.fileUrls.length) ? this.fileUrls : [],
+            loading: false,
         };
     },
     methods: {
@@ -157,7 +161,6 @@ export default {
             this.filelist = [];
             console.log('here new',this.$refs.file.files);
             //this.filelist = [...this.$refs.file.files];
-            //this.newlist.push(...this.$refs.file.files)
             this.filelist = e.target.files || e.dataTransfer.files;
 
             console.log('filelist',this.filelist);
@@ -176,13 +179,6 @@ export default {
 
             //console.log('else',this.test.length);
             this.fileUrls = [];
-           /* if(this.filelist.length > 0)
-            {
-                this.newlist.forEach((value, index) => {
-                    this.fileUrls.push({'id':index,'sort': this.fileUrls.length, 'image': URL.createObjectURL(value)});
-                });
-            }else{*/
-                //const uniqueObjects = [...new Map(this.filelist.map(item => [item.id, item])).values()]
             this.filelist.forEach((value, index) => {
                 this.fileUrls.push({'id':index,'sort': this.fileUrls.length, 'image': URL.createObjectURL(value)});
             });
@@ -192,13 +188,17 @@ export default {
             form.multi_image_url = this.filelist;
             form.multi_image_data = this.fileUrls;
             this.hide = 0;
-            this.$inertia.post(`/employer/photo-gallery?id=${this.user.uuid}`, form);
+            this.loading = true;
+            this.$inertia.post(`/employer/photo-gallery?id=${this.user.uuid}`, form,{ preserveScroll: true ,
+                    onSuccess: () => {
+                        this.loading = false;
+                    }
+                });
 
         },
         removeGalleryImage(i,id) {
             this.$swal.fire({
-                title: 'Are you sure?',
-                text: "You want to delete this image?",
+                title: 'Are you sure you want to delete this photo?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: 'rgba(93, 93, 255, 1)',
@@ -206,7 +206,11 @@ export default {
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    this.$inertia.get(`/employer/delete-gallery-photo/?id=${this.user.uuid}&p_id=` + id);
+                    this.loading = true;
+                    this.$inertia.visit(`/employer/delete-gallery-photo/?id=${this.user.uuid}&p_id=` + id,{ preserveScroll: true ,
+                    onSuccess: () => {
+                        this.loading = false;
+                    }});
                 }
 
             })
@@ -229,6 +233,7 @@ export default {
         drop1(event) {
             event.preventDefault();
             this.$refs.file.files = event.dataTransfer.files;
+            console.log(event.dataTransfer.files);
            this.onGalleryImageChange(event);
             // Clean up
             event.currentTarget.classList.add('bg-gray-100');
@@ -239,8 +244,14 @@ export default {
             console.log('final drag',this.fileUrls);
             const form = {};
             form.multi_image_sort = this.fileUrls;
+            this.loading = true;
               setTimeout(() => 
-                 this.$inertia.post(`/employer/photo-gallery-order?id=${this.user.uuid}`, form) , 1500);
+                 this.$inertia.post(`/employer/photo-gallery-order?id=${this.user.uuid}`, form,{ preserveScroll: true ,
+                    onSuccess: () => {
+                        this.loading = false;
+                    }})
+                  , 1500);
+                 
            
             //return (evt.draggedContext.element.name!=='apple');
         },
