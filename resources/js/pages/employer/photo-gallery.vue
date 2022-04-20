@@ -177,11 +177,11 @@ export default {
             form.multi_image_data = this.fileUrls;
             this.hide = 0;
             this.loading = true;
-            /*this.$inertia.post(`/employer/photo-gallery?id=${this.user.uuid}`, form,{ preserveScroll: true ,
+            this.$inertia.post(`/employer/photo-gallery?id=${this.user.uuid}`, form,{ preserveScroll: true ,
                     onSuccess: () => {
                         this.loading = false;
                     }
-                });*/
+                });
 
         },
         removeGalleryImage(i,id) {
