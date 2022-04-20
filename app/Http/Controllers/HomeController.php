@@ -68,7 +68,12 @@ class HomeController extends Controller
     }
 
     public function about_us(){
-        return $this->static_page('about_us');
+        $is_logged_in = 0;
+        if(Auth::user() != null){
+            $is_logged_in = 1;
+        }
+        return Inertia::render('about_us', ['is_logged_in'=>$is_logged_in]);
+       // return $this->static_page('about_us');
     }
 
     public function privacy(){

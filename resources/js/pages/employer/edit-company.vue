@@ -30,7 +30,7 @@
                                                     <v-img :src="user.logo_image_src" max-height="150" max-width="250" />
                                                 </div>
                                             </div> -->
-                                    <div class="flex flex-nowrap mb-3">
+                                    <div class="flex flex-wrap md:flex-nowrap mb-3">
                                         <div class="w-full px-3 form-file-upload">
                                             <label class="block mb-1 text-lg font-medium text-gray-700">Company Logo (Recommended 500px x 500px) </label>
                                             <v-file-input v-model="logo_image_url" class="w-full text-gray-700 fileUpload form-input input-field-outer" accept="image/*" outlined dense @change="onFileChange" />
@@ -167,7 +167,7 @@
     
                                     <div class="flex flex-wrap mb-3">
                                         <div class="w-full px-3">
-                                            <label class="block mb-1 text-lg font-medium text-gray-700">Company Benefit (select up to 10)</label>
+                                            <label class="block mb-1 text-lg font-medium text-gray-700">Company Benefits (select up to 10)</label>
                                             <ul class="industries-list companyIndustry__list">
                                                 <li v-for="(benefitItem, benefitItemIndex) in benefitCats" :key="benefitItemIndex">
                                                     <label>

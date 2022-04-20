@@ -448,7 +448,7 @@ class CompanyProfileController extends Controller
                     $user->logo_image_src = ($user->logo_image_url) ? getBucketImageUrl($requested_data['id'],$user->logo_image_url,'company') : '';
                     $user->featured_image_src = ($user->featured_image_url) ? getBucketImageUrl($requested_data['id'],$user->featured_image_url,'company') : '';
                     CompanyProfileBenefitCat::where('company_profile_id',$user->id)->delete();
-                    if(isset($data['benefit']) && $data['benefit'] == ''){
+                    if(isset($data['benefit']) && $data['benefit'] != ''){
                         if(count($data['benefit']) > 0){
                             foreach($data['benefit'] as $val){
                                 CompanyProfileBenefitCat::create([
@@ -570,52 +570,10 @@ class CompanyProfileController extends Controller
                         CompanyProfileGallery::insert($gallery_images);
                     } else {
                         return redirect('employer/photo-gallery?id=' . $companyDetails->uuid)->with(['message' => 'max upload 4 only.']);
-
                     }
-               
-                }else{
-                    $files = $request->all()['multi_image_data'];
-                    $old_images = CompanyProfileGallery::select('id','image','sort')->where('company_profile_id',$companyDetails->id);
-                    $test = $old_images->get()->toArray();
-                    if(count($files) != count($test)) {
-                        if(count($files) > count($test))
-                        {
-                            $array = $files;
-                        }else{
-                            $array = $test;
-                        }
-                        foreach($array as $key => $value)
-                        {
-                            $files[$key]['image'] = pathinfo($value['image'])['basename'];
-                            \Storage::disk('s3')->delete('company/'.$user_uuid.'/'. pathinfo($value['image'])['basename']);
-                            $ret[] = array_diff($test[$key],$files[$key]);
-                        }
-                        foreach($ret as $key => $value)
-                        {
-                            if(!empty($value))
-                            {
-                                $ids[] = $value['id'];
-                            }
-                            
-                        }
-                        if(isset($ids) && count($ids) > 0){
-                            CompanyProfileGallery::whereIn('id',$ids)->delete();
-                        }
-                    }
-                    $gallery_images = [];
-                    foreach($files as $key => $imgfile) {
-                        $gallery_images[$key]['company_profile_id'] = $companyDetails->id;
-                        $gallery_images[$key]['image'] = pathinfo($imgfile['image'])['basename'];
-                        $gallery_images[$key]['sort'] = $key;
-                        $old_images = CompanyProfileGallery::where('image',pathinfo($imgfile['image'])['basename']);
-                        $old_images->update(['sort'=>$key]);
-                    }
-                    
-                    //dd($gallery_images);
-                    //;
                 }
 
-                ActivityLog::addToLog(__('activitylogs.company_profile_updated'),'company gallery updated');
+                ActivityLog::addToLog(__('activitylogs.company_gallery_insert'),'company gallery updated');
             
                 //return $this->sendResponseWithData('employer/edit-company',__('messages.company_profile_updated'),$data);
                 return redirect('employer/photo-gallery?id=' . $user_uuid)->with(['message' => __('messages.company_gallery_updated')." <a class='toster-anchor' href=/companies/".$companyDetails->slug.">View Profile</a>"]);
@@ -625,6 +583,63 @@ class CompanyProfileController extends Controller
                 $message = $e->getMessage();
                 return $this->sendErrorResponse('login',$message);
             }
+    }
+
+    public function updatePhotoGalleryOrder(Request $request){
+
+        if(!Auth::check())
+        {
+            return $this->sendErrorResponse('login',__('messages.unauthorized'));
+        }
+            try{
+                $user_uuid = $request->all()['id'];
+                //dd($request->all());
+                $companyDetails = CompanyProfile::where('uuid',$user_uuid)->first();
+        
+                    $files = $request->all()['multi_image_sort'];
+                    $gallery_images = [];
+                    foreach($files as $key => $imgfile) {
+                        $gallery_images[$key]['company_profile_id'] = $companyDetails->id;
+                        $gallery_images[$key]['image'] = pathinfo($imgfile['image'])['basename'];
+                        $gallery_images[$key]['sort'] = $key;
+                        $old_images = CompanyProfileGallery::where('id',$imgfile['id']);
+                        $old_images->update(['sort'=>$key]);
+                    }
+                    
+
+                ActivityLog::addToLog(__('activitylogs.company_gallery_order_updated'),'company gallery order updated');
+            
+                //return $this->sendResponseWithData('employer/edit-company',__('messages.company_profile_updated'),$data);
+                return redirect('employer/photo-gallery?id=' . $user_uuid)->with(['message' => __('messages.company_gallery_order_updated')." <a class='toster-anchor' href=/companies/".$companyDetails->slug.">View Profile</a>"]);
+                //return Inertia::render('employer/photo-gallery',['id' => $user_uuid]);
+            //return redirect()->route('edit.company',['id'=>$requested_data['id']])->with(['message' => __('messages.company_profile_updated')]);
+     
+            }catch (\Exception $e) {
+                $message = $e->getMessage();
+                return $this->sendErrorResponse('login',$message);
+            }
+    }
+
+    public function destroyPhotoGalleryImage(Request $request){
+        try {
+            $p_id = $request->all()['p_id'];
+            $uuid = $request->all()['id'];
+            $companyDetails = CompanyProfile::where('uuid',$uuid)->first();
+            if(isset($p_id)){
+                $company_photo = CompanyProfileGallery::where('id',$p_id);
+                if($company_photo->first())
+                {
+                    \Storage::disk('s3')->delete('company/'.$uuid.'/'. $company_photo->first()->image);
+                }
+                $company_photo->delete();
+                ActivityLog::addToLog(__('activitylogs.company_gallery_image_removed'), 'photo deleted');
+            }
+            return redirect('employer/photo-gallery?id=' . $uuid)->with(['message' => __('messages.company_gallery_photo_deleted')." <a class='toster-anchor' href=/companies/".$companyDetails->slug.">View Profile</a>"]);
+            //return Inertia::render('employer/photo-gallery?id=' . $uuid);
+        } catch (\Exception $e) {
+            $message = $e->getMessage();
+            return $this->sendErrorResponse('login',$message);
+        }
     }
 
     public function createCompanySlug($title)

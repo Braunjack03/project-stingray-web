@@ -19,6 +19,8 @@ return [
     'company_profile_created' => 'Company profile created successfully!',
     'company_profile_updated' => 'Company profile updated successfully!',
     'company_gallery_updated' => 'Company gallery updated successfully!',
+    'company_gallery_order_updated' => 'Company gallery order updated successfully!',
+    'company_gallery_photo_deleted' => 'Company gallery photo deleted successfully!',
     'job_delete' => 'Job Deleted Successfully!',
     'job_created' => 'Job Post Created Successfully!',
     'job_updated' => 'Job Post Updated Successfully!',
