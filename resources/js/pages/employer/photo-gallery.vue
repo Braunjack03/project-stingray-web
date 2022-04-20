@@ -192,7 +192,7 @@ export default {
             form.multi_image_url = this.filelist;
             form.multi_image_data = this.fileUrls;
             this.hide = 0;
-            this.$inertia.post(`/employer/photo-gallery?id=${this.user.uuid}`, form);
+            this.$inertia.post(`/employer/photo-gallery?id=${this.user.uuid}`, form,{ preserveScroll: true });
 
         },
         removeGalleryImage(i,id) {
@@ -206,7 +206,7 @@ export default {
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    this.$inertia.get(`/employer/delete-gallery-photo/?id=${this.user.uuid}&p_id=` + id);
+                    this.$inertia.visit(`/employer/delete-gallery-photo/?id=${this.user.uuid}&p_id=` + id,{ preserveScroll: true });
                 }
 
             })
@@ -239,8 +239,11 @@ export default {
             console.log('final drag',this.fileUrls);
             const form = {};
             form.multi_image_sort = this.fileUrls;
+            
               setTimeout(() => 
-                 this.$inertia.post(`/employer/photo-gallery-order?id=${this.user.uuid}`, form) , 1500);
+                 this.$inertia.post(`/employer/photo-gallery-order?id=${this.user.uuid}`, form,{ preserveScroll: true })
+                  , 1500);
+                 
            
             //return (evt.draggedContext.element.name!=='apple');
         },
