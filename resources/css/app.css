@@ -1672,7 +1672,7 @@ blockquote {
     width: 100%;
     inset: 0;
     background: rgba(255,255,255,.8);
-    z-index: 99;
+    z-index: 9999;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1700,6 +1700,13 @@ blockquote {
     from {-webkit-transform: rotate(0deg);}
     to {-webkit-transform: rotate(360deg);}
  }
+
+.loaderTmpa p {
+    position: absolute;
+    margin-top: 80px;
+    color: #444;
+    font-size: 15px;
+}
 
 
 /* add-html-props */

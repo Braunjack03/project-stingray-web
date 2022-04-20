@@ -4,6 +4,7 @@
         <section class="relative" data-app>
             <div v-if="loading" class="loaderTmpa">
                 <span class="loaderInner"></span>
+                <p>Please Wait...</p>
             </div>
             <div class="max-w-6xl px-4 mx-auto sm:px-6">
                 <div class="pt-32 pb-12 md:pt-40 md:pb-20">
