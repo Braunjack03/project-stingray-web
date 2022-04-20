@@ -38,8 +38,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="flex flex-wrap mb-3 px-3 gallerUploadedImg">
-                                        <label class="gallerUploadedTitle">Drag to reorder</label>
+                                    <div class="flex flex-wrap mb-3 px-3 gallerUploadedImg" v-if="fileUrls.length">
+                                        <label class="gallerUploadedTitle" v-if="fileUrls">Drag to reorder</label>
                                         <draggable :list="fileUrls" group="gallery" @start="drag=true" @end="drag=false" :move="checkMove">
                                             
                                             <div class="gallerUploadeBlock" v-for="(file,i) in this.fileUrls" :key="i">
@@ -128,19 +128,6 @@ export default {
         };
     },
     methods: {
-        submit() {
-            //this.$v.$touch();
-            //if (!this.$v.$invalid) {
-                const form = {};
-                
-                form.multi_image_url = this.newlist;
-                form.multi_image_data = this.fileUrls;
-                this.hide = 0;
-                this.$inertia.post(`/employer/photo-gallery?id=${this.user.uuid}`, form);
-                this.newlist = [];
-            //}
-            // this.$inertia.post('/employer/edit-company?id=' + this.user.uuid, form);
-        },
         hideMessage() {
             this.hide = 1;
         },
@@ -190,11 +177,11 @@ export default {
             form.multi_image_data = this.fileUrls;
             this.hide = 0;
             this.loading = true;
-            this.$inertia.post(`/employer/photo-gallery?id=${this.user.uuid}`, form,{ preserveScroll: true ,
+            /*this.$inertia.post(`/employer/photo-gallery?id=${this.user.uuid}`, form,{ preserveScroll: true ,
                     onSuccess: () => {
                         this.loading = false;
                     }
-                });
+                });*/
 
         },
         removeGalleryImage(i,id) {
