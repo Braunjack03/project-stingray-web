@@ -110,6 +110,10 @@ Route::group(['prefix' => 'employer', 'middleware' => ['auth','employer']], func
 
     Route::post('photo-gallery',[CompanyProfileController::class,'updatePhotoGallery'])->name('update.gallery');
 
+    Route::post('photo-gallery-order',[CompanyProfileController::class,'updatePhotoGalleryOrder'])->name('sort.gallery');
+
+    Route::get('delete-gallery-photo',[CompanyProfileController::class,'destroyPhotoGalleryImage'])->name('delete.photo');
+
     Route::post('edit-company',[CompanyProfileController::class,'update'])->name('update.company');
 
     Route::get('jobs', [JobPostController::class, 'index'])->name('employer.jobs');

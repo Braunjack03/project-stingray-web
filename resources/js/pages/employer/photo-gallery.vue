@@ -36,7 +36,7 @@
                                     </div>
                                     <div class="flex flex-wrap mb-3 px-3 gallerUploadedImg">
                                         <label class="gallerUploadedTitle">Drag to reorder</label>
-                                        <draggable v-model="fileUrls" group="gallery" @start="drag=true" @end="drag=false">
+                                        <draggable :list="fileUrls" group="gallery" @start="drag=true" @end="drag=false" :move="checkMove">
                                             
                                             <div class="gallerUploadeBlock" v-for="(file,i) in this.fileUrls" :key="i">
                                                 <span class="handle"><v-img :src="'/images/gallery-handle.svg'" width="40px" /></span>
@@ -47,13 +47,13 @@
                                             </div>
                                         </draggable>
                                     </div>
-                                    <div class="flex flex-wrap mt-5">
+                                    <!--div class="flex flex-wrap mt-5">
                                         <div class="w-full px-3">
                                             <v-btn class="w-full text-white bg-purple-600 btn hover:bg-purple-700" @click="submit()">
                                                 Update Gallery
                                             </v-btn>
                                         </div>
-                                    </div>
+                                    </div-->
                                 </v-form>
     
                             </div>
@@ -104,7 +104,10 @@ export default {
         job_posts_count: Number,
         plan_name: Array && Object,
         benefitCats: Array && Object,
-        fileUrls: Array || Object,
+        fileUrls : {
+            type :Array,
+            default:[]
+        }
     },
     data() {
         return {
@@ -116,7 +119,7 @@ export default {
             hide: 0,
             filelist: [],
             newlist : [],
-            fileUrls: (this.fileUrls.length) ? this.fileUrls : [],
+            fileUrlsList: (this.fileUrls.length) ? this.fileUrls : [],
         };
     },
     methods: {
@@ -151,15 +154,17 @@ export default {
             this.user.multi_image_url = URL.createObjectURL(this.multi_image_url);
         },
         onGalleryImageChange(e) {
+            this.filelist = [];
             console.log('here new',this.$refs.file.files);
-            this.filelist = [...this.$refs.file.files];
-            this.newlist.push(...this.$refs.file.files)
-            //this.filelist = e.target.files || e.dataTransfer.files;
+            //this.filelist = [...this.$refs.file.files];
+            //this.newlist.push(...this.$refs.file.files)
+            this.filelist = e.target.files || e.dataTransfer.files;
 
-            console.log('filelist',this.newlist);
-            let max_images = this.fileUrls.length + 1;
-            console.log('max',max_images);
-            if (this.newlist.length >= 5 || max_images >= 5) {
+            console.log('filelist',this.filelist);
+            console.log('fileUrls',this.fileUrls.length);
+            let max_images = this.fileUrls.length + this.filelist.length;
+            //console.log('max',max_images);
+            if (this.fileUrls.length >= 4 || max_images >= 5) {
                 this.$swal.fire({
                     icon: 'error',
                     title: 'Oops...',
@@ -169,15 +174,26 @@ export default {
                 return false;
             }
 
-            console.log('else',this.newlist.length);
-            //this.fileUrls = [];
-            const uniqueObjects = [...new Map(this.newlist.map(item => [item.id, item])).values()]
-            uniqueObjects.forEach((value, index) => {
+            //console.log('else',this.test.length);
+            this.fileUrls = [];
+           /* if(this.filelist.length > 0)
+            {
+                this.newlist.forEach((value, index) => {
+                    this.fileUrls.push({'id':index,'sort': this.fileUrls.length, 'image': URL.createObjectURL(value)});
+                });
+            }else{*/
+                //const uniqueObjects = [...new Map(this.filelist.map(item => [item.id, item])).values()]
+            this.filelist.forEach((value, index) => {
                 this.fileUrls.push({'id':index,'sort': this.fileUrls.length, 'image': URL.createObjectURL(value)});
             });
-            
-        
-            console.log('fileUrls',uniqueObjects);
+           // }
+            console.log('final',this.fileUrls);
+            const form = {};
+            form.multi_image_url = this.filelist;
+            form.multi_image_data = this.fileUrls;
+            this.hide = 0;
+            this.$inertia.post(`/employer/photo-gallery?id=${this.user.uuid}`, form);
+
         },
         removeGalleryImage(i,id) {
             this.$swal.fire({
@@ -190,14 +206,7 @@ export default {
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    console.log('here11',this.filelist);
-                    console.log('ddd',i);
-                    this.fileUrls.splice(i, 1);
-                    if(this.filelist.length > 0)
-                    {
-                        this.filelist.splice(i, 1);
-                        this.filelist.splice(id, 1);
-                    }
+                    this.$inertia.get(`/employer/delete-gallery-photo/?id=${this.user.uuid}&p_id=` + id);
                 }
 
             })
@@ -224,7 +233,18 @@ export default {
             // Clean up
             event.currentTarget.classList.add('bg-gray-100');
             event.currentTarget.classList.remove('bg-green-300');
-        }
+        },
+        checkMove: function(evt){
+            console.log(evt.draggedContext);
+            console.log('final drag',this.fileUrls);
+            const form = {};
+            form.multi_image_sort = this.fileUrls;
+              setTimeout(() => 
+                 this.$inertia.post(`/employer/photo-gallery-order?id=${this.user.uuid}`, form) , 1500);
+           
+            //return (evt.draggedContext.element.name!=='apple');
+        },
+       
 
     },
 };
