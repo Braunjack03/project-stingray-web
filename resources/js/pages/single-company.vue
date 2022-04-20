@@ -169,7 +169,7 @@
           >
 
             <div class="aboutImg" v-if="data.gallery.length">
-              <vueper-slides :slide-ratio="1 / 2" fixed-height="380px">
+              <vueper-slides :slide-ratio="1 / 2" fixed-height="380px" :bullets="false">
                 <vueper-slide v-for="(image, i) in data.gallery" :image="image" :key="i" />
               </vueper-slides>
             </div>
