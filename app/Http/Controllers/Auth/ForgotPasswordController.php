@@ -146,7 +146,7 @@ class ForgotPasswordController extends Controller
                 return $this->sendErrorResponse($redirect_page,$e->getMessage());
               }  
 
-            return Redirect::route('login'); 
+            return Redirect::route('login')->with(['message' => __('messages.reset_password')]); 
         }
       }
 }

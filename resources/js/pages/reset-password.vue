@@ -6,18 +6,18 @@
           <div class="pt-36 pb-12 md:pt-40 md:pb-20">
 
                <!-- Page header -->
-                <div class="max-w-3xl mx-auto text-center pb-12 md:pb-20">
+                <div class="max-w-3xl mx-auto text-center pb-12 md:pb-20 text-gray-700">
                 <h1 class="h1 mb-4">Reset Password</h1>
                 </div>
 
                 <div class="max-w-sm mx-auto">
-                    <Message :message="errors.message" :hide="0" :type="'error'" />
-                    <Message :message="success.message" :hide="0" :type="'success'" />
+                    <Message :message="errors.message" :hide="hide" v-on:hide="hideMessage" :type="'error'" />
+                    <Message :message="success.message" :hide="hide" v-on:hide="hideMessage" :type="'success'" />
 
                    <form class="forgot-password">
                         <div class="flex flex-wrap -mx-3 mb-4">
                             <div class="w-full px-3">
-                            <label class="block text-gray-300 text-lg font-medium mb-1" for="password">Password <span class="text-red-600">*</span></label>
+                            <label class="block text-gray-700 text-lg font-medium mb-1" for="password">Password <span class="text-red-600">*</span></label>
 
                                 <input id="password" type="password" v-model="form.password" :rules="form.passwordRules" class="form-input w-full text-gray-300" placeholder="Password" autocomplete required />
 
@@ -26,7 +26,7 @@
                         </div>
                         <div class="flex flex-wrap -mx-3 mb-4">
                             <div class="w-full px-3">
-                            <label class="block text-gray-300 text-lg font-medium mb-1" for="password">Confirm Password <span class="text-red-600">*</span></label>
+                            <label class="block text-gray-700 text-lg font-medium mb-1" for="password">Confirm Password <span class="text-red-600">*</span></label>
 
                                 <input id="password" type="password" v-model="form.password_confirmation" :rules="form.cpasswordRules" class="form-input w-full text-gray-300" placeholder="Password" autocomplete required />
 
@@ -39,6 +39,9 @@
                         </div>
                         </div>
                     </form>
+                     <div class="text-gray-400 text-center mt-6">
+                        <Link href="/login" class="text-lg text-purple-600 hover:text-gray-200 transition duration-150 ease-in-out">Cancel</Link>
+                    </div>
                 </div>
             </div>
           </div>
@@ -64,6 +67,7 @@
     data: () => ({
         message: '',
         valid: true,
+        hide:0,
         form: {
             password: '',
             confirm_password: '',
@@ -79,6 +83,9 @@
       submit() {
             this.$inertia.post('/reset-password/'+this.user.token, this.form );
        },
+        hideMessage (){
+            this.hide = 1;
+        },
     },
   }
 
