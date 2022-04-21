@@ -19,8 +19,10 @@
                         </div>
                         <v-form class="login-form form-outer-wrapper" @submit.prevent="submit">
     
-                            <Message :message="errors.message" :hide="0" :type="'error'" />
-                            <Message :message="success.message" :hide="0" :type="'success'" />
+                            <Message :message="errors.message" :hide="hide" v-on:hide="hideMessage" :type="'error'" />
+                            <Message :message="success.message" :hide="hide" v-on:hide="hideMessage" :type="'success'" />
+
+                            <Message :message="$page.props.flash.message" v-on:hide="hideMessage" :hide="hide" :type="'success'" />
     
                             <div class="flex flex-wrap -mx-3 mb-3">
                                 <div class="w-full px-3">
@@ -106,6 +108,7 @@ export default {
         return {
             email: '',
             password: '',
+            hide:0,
             form: this.$inertia.form({
                 email: null,
                 password: null,
@@ -140,7 +143,10 @@ export default {
                 window.localStorage.setItem("username",this.form.email); 
             }*/
             //this.$refs.form.resetValidation();
-        }
+        },
+        hideMessage (){
+            this.hide = 1;
+        },
     }
 }
 </script>

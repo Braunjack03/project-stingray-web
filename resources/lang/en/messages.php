@@ -12,6 +12,7 @@ return [
     'verification_email' => 'Email Verification Mail',
     'welcome_email' => 'Welcome Mail',
     'reset_password_email' => 'Reset Password',
+    'reset_password' => 'Password updated successfully!',
     'password_reset_link' => 'We have e-mailed your password reset link!',
     'invalid_token' => 'Invalid token!',
     'unauthorized' => 'Unauthorized!',

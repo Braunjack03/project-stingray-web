@@ -1708,7 +1708,9 @@ blockquote {
     font-size: 15px;
 }
 
-
+.forgot-password input {
+    color: rgb(85 89 95) !important;
+}
 /* add-html-props */
 
 .add-html-props h1 {
