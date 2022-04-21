@@ -1649,7 +1649,7 @@ blockquote {
 }
 
 
-.vueperslides__arrows .vueperslides__arrow {
+/*.vueperslides__arrows .vueperslides__arrow {
     opacity: .9;
     background: #000;
     border-radius: 50%;
@@ -1664,7 +1664,7 @@ blockquote {
 
 .vueperslides__arrows .vueperslides__arrow.vueperslides__arrow--prev svg {
     margin-left: -3px;
-}
+}*/
 
 .loaderTmpa {
     position: fixed;
