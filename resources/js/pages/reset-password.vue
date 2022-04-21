@@ -19,7 +19,7 @@
                             <div class="w-full px-3">
                             <label class="block text-gray-700 text-lg font-medium mb-1" for="password">Password <span class="text-red-600">*</span></label>
 
-                                <input id="password" type="password" v-model="form.password" :rules="form.passwordRules" class="form-input w-full text-gray-300" placeholder="Password" autocomplete required />
+                                <input type="password" v-model="form.password" :rules="form.passwordRules" class="form-input w-full text-gray-300" placeholder="Password" autocomplete required />
 
                                 <p v-if="errors.password" class="text-red-500 text-lg mt-2">{{ errors.password }}</p>
                             </div>
@@ -28,7 +28,7 @@
                             <div class="w-full px-3">
                             <label class="block text-gray-700 text-lg font-medium mb-1" for="password">Confirm Password <span class="text-red-600">*</span></label>
 
-                                <input id="password" type="password" v-model="form.password_confirmation" :rules="form.cpasswordRules" class="form-input w-full text-gray-300" placeholder="Password" autocomplete required />
+                                <input type="password" v-model="form.password_confirmation" :rules="form.cpasswordRules" class="form-input w-full text-gray-300" placeholder="Password" autocomplete required />
 
                                 <p v-if="errors.password_confirmation" class="mt-2 error text-lg">{{ errors.password_confirmation }}</p>
                             </div>
@@ -50,13 +50,14 @@
 </template>   
 <script>
   import Layout from './Layout'
-  import { Head } from '@inertiajs/inertia-vue'
+  import { Head,Link } from '@inertiajs/inertia-vue'
   import Message from '../partials/Messages.vue';
 
   export default {
       components: {
       Layout,
       Head,
+      Link,
       Message
     },
     props: {
