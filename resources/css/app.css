@@ -1997,6 +1997,10 @@ blockquote {
     .singlePage--articles .postBlock--content .postBlock--title {
         font-size: 2.5rem;
     }
+
+    .banefitsLsits li {
+        padding-right: 30px;
+    }
 }
 
 @media (max-width:599px) {
@@ -2036,6 +2040,18 @@ blockquote {
     }
     .company-jobs-block {
         text-align: left;
+    }
+
+    .banefitsLsits li {    
+        padding-right: 25px;
+        font-size: 16px;
+    }
+
+    .filter-opt .jobserach-error {
+        font-size: 14px;
+        bottom: auto;
+        top: 41px;
+        background: #fff;
     }
 }
 
@@ -2102,5 +2118,9 @@ blockquote {
     }
     .companyIndustry__list.industries-list li {
         max-width: 100%;
+    }
+
+    .banefitsLsits li{
+        flex-basis:100%;
     }
 }
