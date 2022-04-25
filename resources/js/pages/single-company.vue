@@ -174,7 +174,7 @@
               </vueper-slides>
             </div>
             <div class="aboutImg" v-else>
-                <v-img :src="(data.featured_image_url) ? data.featured_image_url : '/images/aboutImg.jpg'" />
+                <v-img :src="(data.featured_image_url) ? data.featured_image_url : '/images/default_office.png'" />
             </div>
             
           </v-col>
@@ -194,7 +194,7 @@
             </div>
           </v-col>
 
-          <v-col v-if="companyProfileBenefits.length > 0" cols="12" md="12" class="pa-3 d-flex flex-column py-10">
+          <v-col v-if="companyProfileBenefits.length > 0" cols="12" md="12" class="py-10 pa-3 d-flex flex-column">
             <h2 class="mb-4 h2 darkColor sectionTitle">
              Company Benefits
           </h2>
