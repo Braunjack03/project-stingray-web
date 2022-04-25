@@ -12,8 +12,8 @@
                     </div>
     
                     <div class="max-w-sm mx-auto">
-                        <Message :message="errors.message" :hide="0" :type="'error'" />
-                        <Message :message="success.message" :hide="0" :type="'success'" />
+                        <Message :message="errors.message" :hide="hide" v-on:hide="hideMessage" :type="'error'" />
+                        <Message :message="success.message" :hide="hide" v-on:hide="hideMessage" :type="'success'" />
                         <form class="forgot-password">
                             <div class="flex flex-wrap -mx-3 mb-4">
                                 <div class="w-full px-3">
@@ -56,6 +56,7 @@ export default {
     data: () => ({
         message: '',
         valid: true,
+        hide:0,
         form: {
             email: '',
             emailRules: [
@@ -72,7 +73,10 @@ export default {
         submit() {
             this.$inertia.post('/forgot-password', this.form);
             this.form.email = '';
-            this.$refs.form.resetValidation();
+            this.hide = 0;
+        },
+        hideMessage (){
+            this.hide = 1;
         },
     },
 }

@@ -1649,7 +1649,7 @@ blockquote {
 }
 
 
-.vueperslides__arrows .vueperslides__arrow {
+/*.vueperslides__arrows .vueperslides__arrow {
     opacity: .9;
     background: #000;
     border-radius: 50%;
@@ -1664,7 +1664,7 @@ blockquote {
 
 .vueperslides__arrows .vueperslides__arrow.vueperslides__arrow--prev svg {
     margin-left: -3px;
-}
+}*/
 
 .loaderTmpa {
     position: fixed;
@@ -1708,7 +1708,9 @@ blockquote {
     font-size: 15px;
 }
 
-
+.forgot-password input {
+    color: rgb(85 89 95) !important;
+}
 /* add-html-props */
 
 .add-html-props h1 {
@@ -1995,6 +1997,10 @@ blockquote {
     .singlePage--articles .postBlock--content .postBlock--title {
         font-size: 2.5rem;
     }
+
+    .banefitsLsits li {
+        padding-right: 30px;
+    }
 }
 
 @media (max-width:599px) {
@@ -2034,6 +2040,22 @@ blockquote {
     }
     .company-jobs-block {
         text-align: left;
+    }
+
+    .banefitsLsits li {    
+        padding-right: 25px;
+        font-size: 16px;
+    }
+
+    .filter-opt .jobserach-error {
+        font-size: 14px;
+        bottom: auto;
+        top: 41px;
+        background: #fff;
+    }
+
+    .verifyEmailText .gallery-success-msg, .verifyEmailText .gallery-success-msg a {
+        font-size: 16px ;
     }
 }
 
@@ -2100,5 +2122,9 @@ blockquote {
     }
     .companyIndustry__list.industries-list li {
         max-width: 100%;
+    }
+
+    .banefitsLsits li{
+        flex-basis:100%;
     }
 }

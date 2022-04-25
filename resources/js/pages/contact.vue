@@ -16,8 +16,8 @@
           </div>
           <!-- Form -->
           <div class="max-w-xl mx-auto">
-            <Message :message="errors.message" :hide="0" :type="'error'" />
-            <Message :message="success.message" :hide="0" :type="'success'" />
+            <Message :message="errors.message" :hide="hide" v-on:hide="hideMessage" :type="'error'" />
+            <Message :message="success.message" :hide="hide" v-on:hide="hideMessage" :type="'success'" />
             <v-form ref="form" @submit.prevent="submit">
               <div class="flex flex-wrap">
                 <div class="w-full mb-3">
