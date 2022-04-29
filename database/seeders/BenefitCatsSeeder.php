@@ -49,6 +49,14 @@ class BenefitCatsSeeder extends Seeder
         $benefit_cats[] = ["name" => "Pet Friendly Office", "id" => 2016];
         $benefit_cats[] = ["name" => "Work from Home Stipend", "id" => 2017];
         $benefit_cats[] = ["name" => "Tuition Reimbursement", "id" => 2018];
+        $benefit_cats[] = ["name" => "Standing Desks", "id" => 2019];
+        $benefit_cats[] = ["name" => "Wellness Program", "id" => 2020];
+        $benefit_cats[] = ["name" => "Gym/Fitness Center Membership", "id" => 2021];
+        $benefit_cats[] = ["name" => "Vision Insurance", "id" => 2022];
+        $benefit_cats[] = ["name" => "Volunteer Days Off", "id" => 2023];
+        $benefit_cats[] = ["name" => "Flexiable Spending Accounts (FSA)", "id" => 2024];
+        $benefit_cats[] = ["name" => "Paid Maternity & Parental Leave", "id" => 2025];
+        $benefit_cats[] = ["name" => "Child/Dependent Care", "id" => 2026];
 
 
         foreach ($benefit_cats as $cat) {
