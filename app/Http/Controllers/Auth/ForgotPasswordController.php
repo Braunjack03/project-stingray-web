@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth; 
   
 use App\Http\Controllers\Controller;
+use App\Mail\ResetPassword;
 use Illuminate\Http\Request; 
 use DB; 
 use Carbon\Carbon; 
@@ -56,11 +57,25 @@ class ForgotPasswordController extends Controller
             }
             
             try{
+
+
+
+                /*
                 Mail::send('emails.forgetPassword', ['token' => $token], function($message) use($request){
                     $message->to($request->email);
                     $message->subject(__('messages.reset_password_email'));
                 });
+                */
+
+                Mail::to($request->email)->send(
+                    new ResetPassword($token)
+                );
+                
+
                 $user = User::where('email',$request->email)->first();
+
+
+
                 ActivityLog::addUnAuthorizeLogs(__('activitylogs.password_reset_link_sent'),$user->id,'mail sent');
 
                 return $this->sendSuccessResponse($redirect_page,__('messages.password_reset_link'));
