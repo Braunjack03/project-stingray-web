@@ -1,10 +1,10 @@
 @component('mail::message')
 # Forgot your password?
   
-No problem! Click on the button below to reset your password.
+No problem! To reset your password, click on the link or paste it into your browser.
 
-@component('mail::button', ['url' => url("reset-password/{$token}")])
-Reset My Password
+@component('mail::panel')
+[{{url("reset-password/{$token}")}}]({{ url("reset-password/{$token}") }})
 @endcomponent
- 
+
 @endcomponent
