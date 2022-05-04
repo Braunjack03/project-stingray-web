@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use Spark\Features;
 
 return [
 
@@ -65,6 +66,14 @@ return [
     */
     'terms_url' => '/terms',
 
+
+    'features' => [
+        // Features::billingAddressCollection(),
+        // Features::mustAcceptTerms(),
+        // Features::euVatCollection(['home-country' => 'BE']),
+        Features::receiptEmails(['custom-addresses' => true]),
+        Features::paymentNotificationEmails(),
+    ],
 
     /*
     |--------------------------------------------------------------------------
