@@ -57,12 +57,12 @@ class LoadArticle extends Command
 
             try{
             $company_profile = CompanyProfile::where('slug', $c)->first();
+            $name = $company_profile->name;
             } catch(Exception $e) {
                 print("Caught exception" . $e->getMessage() . "\n");
                 dd($c);
 
             }
-            $name = $company_profile->name;
             $com = "{{{$c}}}";
             $body = str_replace($com, "<a class=\"underline\" href=\"/companies/$c\">$name</a>", $body);
         }
