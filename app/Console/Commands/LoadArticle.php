@@ -9,7 +9,7 @@ use App\Models\Article;
 use App\Models\CompanyProfile;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Tag;
-
+use Exception;
 
 class LoadArticle extends Command
 {
@@ -84,7 +84,13 @@ class LoadArticle extends Command
         }
 
         foreach($slugs as $c){
+            try {
             $company_profile = CompanyProfile::where('slug', $c)->first();
+            } catch(Exception $e) {
+                print("Caught exception". $e->getMessage() . "\n");
+                dd($c);
+
+            }
             $post->company_profiles()->syncWithoutDetaching($company_profile);
         }
 
@@ -94,7 +100,7 @@ class LoadArticle extends Command
     }
 
     public function find_keywords($text){
-        $pattern = '/{{[a-zA-Z0-9-]+}}/';
+        $pattern = '/{{[a-zA-Z0-9-_]+}}/';
         if(preg_match_all($pattern, $text, $matches)) {
             print_r($matches);
             return $matches;
