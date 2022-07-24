@@ -48,7 +48,7 @@ class ArticleController extends Controller
             ->where('is_published',1)->where('articles.slug',$slug)->first();
 
             $companies = CompanyProfile::select('company_profiles.name','company_profiles.logo_image_url','company_profiles.uuid','company_profiles.description','company_profiles.slug','company_profiles.city','company_profiles.state_abbr as state')
-            ->leftjoin('article_company_profile','company_profiles.id','=','article_company_profile.company_profile_id')->where('article_company_profile.article_id', $data->id)->withCount('job_posts')->paginate(3);
+            ->leftjoin('article_company_profile','company_profiles.id','=','article_company_profile.company_profile_id')->where('article_company_profile.article_id', $data->id)->withCount('job_posts')->paginate(5);
             
             $companies_data = [];
             foreach ($companies as $key => $comp) {
