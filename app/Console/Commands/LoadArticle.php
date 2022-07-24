@@ -94,7 +94,7 @@ class LoadArticle extends Command
     }
 
     public function find_keywords($text){
-        $pattern = '/{{.*}}/';
+        $pattern = '/{{[a-zA-Z0-9-]+}}/';
         if(preg_match_all($pattern, $text, $matches)) {
             print_r($matches);
             return $matches;
