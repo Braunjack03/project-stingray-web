@@ -30,7 +30,7 @@
                                <div class="postPersonal--detail">
                                   <img src="/images/news-author-01.png" alt="post-images">
                                   <p>{{latest.author_name}} - {{new Date(latest.publish_date).toDateString().slice(4,10)+','+new Date(latest.publish_date).toDateString().slice(10)}} </p>
-                                  <p>Published:   {{setDateFormat(latest.publish_date)}
+                                  <p>Published:   {{setDateFormat(latest.publish_date)} </p>
                                </div>
                            </div>
                         </div>
