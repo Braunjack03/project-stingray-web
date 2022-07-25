@@ -29,7 +29,7 @@
                                <p>{{latest.content.substring(0,255) | stripHTML}}</p>
                                <div class="postPersonal--detail">
                                   <img src="/images/news-author-01.png" alt="post-images">
-                                  <p>{{latest.author_name}}</p>
+                                  <p>By: {{latest.author_name}}</p>
                                </div>
                            </div>
                         </div>

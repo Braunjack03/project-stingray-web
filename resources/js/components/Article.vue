@@ -12,7 +12,7 @@
               <p>{{data.content.substring(0,250) | stripHTML}}</p>
               <div class="postPersonal--detail">
                 <img src="/images/news-author-01.png" :alt="data.title">
-                <p>{{data.author_name}} - {{new Date(data.publish_date).toDateString().slice(4,10)+','+new Date(data.publish_date).toDateString().slice(10)}}</p>
+                <p>By: {{data.author_name}}</p>
               </div>
           </div>
         </div>
