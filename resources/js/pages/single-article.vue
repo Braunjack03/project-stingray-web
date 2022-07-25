@@ -19,12 +19,7 @@
                   <div class="flex items-center">
                     <img src="/images/news-author-01.png" alt="post-images" />
                     <p>
-                      {{ data.author_name }} -
-                      {{
-                        new Date(data.publish_date).toDateString().slice(4, 10) +
-                        "," +
-                        new Date(data.publish_date).toDateString().slice(10)
-                      }}
+                      {{ data.author_name }} 
                     </p>
                   </div>
                   <div class="mt-4 md:mt-0">
