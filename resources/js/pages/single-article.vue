@@ -19,7 +19,7 @@
                   <div class="flex items-center">
                     <img src="/images/news-author-01.png" alt="post-images" />
                     <p>
-                      {{ data.author_name }} 
+                      By: {{ data.author_name }} 
                     </p>
                   </div>
                   <div class="mt-4 md:mt-0">
