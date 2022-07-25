@@ -30,6 +30,7 @@
                                <div class="postPersonal--detail">
                                   <img src="/images/news-author-01.png" alt="post-images">
                                   <p>{{latest.author_name}} - {{new Date(latest.publish_date).toDateString().slice(4,10)+','+new Date(latest.publish_date).toDateString().slice(10)}} </p>
+                                  <p>Published:   {{setDateFormat(latest.publish_date)}
                                </div>
                            </div>
                         </div>
@@ -87,6 +88,22 @@ export default {
       }
     },
      methods: {
+
+       setDateFormat(dateObject) {
+            var d = new Date(dateObject);
+            var day = d.getDate();
+            var month = d.getMonth() + 1;
+            var year = d.getFullYear();
+            if (day < 10) {
+            day = "0" + day;
+            }
+            if (month < 10) {
+            month = "0" + month;
+            }
+            var date = month + "/" + day + "/" + year;
+
+            return date;
+         },
       setDateFomat(date) 
          {
             return date.toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long'})
