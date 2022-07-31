@@ -17,9 +17,9 @@ The application stack is built on:
 - Vueity
 
 ## Getting Started <a name = "getting_started"></a>
-Currently nothing is running in Docker, but it should be easy to get running locally if you have PHP 7+, Composer and NodeJS installed. 
+Instructions assume that you're going to run the server directly on your machine, as opposed to Docker.  Dev environment should be easy to get running locally if you have PHP 8+, Composer and NodeJS installed. 
 
-The preferred development database is MySQL.
+The preferred development database is MySQL. You can run MySQL out of Docker or directly on your local machine. 
 
 Note: All commands are ran from the root of the project.
 1. Clone Repo & Checkout this branch
@@ -41,11 +41,11 @@ Note: All commands are ran from the root of the project.
 - We'll use trunk-based development.
     - Developers will work out of short-lived feature branches
     - After testing, developers will open a pull request to merge their branch into master
-- The master branch will be automatically deployed to (http://dev.madeintampabay.org/) after each merge
-- All features will have written requirements and/or wireframe diagrams
-- Non-functional requirements such as logging and good security must not be ignored
+- The development branch will be automatically deployed to (http://dev.madeintampabay.org/) after each merge
+- All new frontend features will have written requirements and/or wireframe diagrams
+- Non-functional requirements such as logging and good security are important
 - We're using Intertia.js so we don't have to spend time developing an API layer
-- We'll write functional tests for important site features
+- We'll write functional tests for important site features (TODO)
 - We want to build as quickly as possible without compromising quality
 - Minimize code duplication keep things DRY (don't repeat yourself)
 
