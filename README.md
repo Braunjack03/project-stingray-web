@@ -29,11 +29,13 @@ Note: All commands are ran from the root of the project.
     * ```composer install & npm install```
 4. For development build the frontend using 
     * ```npm run watch-poll```
-5. Serve Laravel Project
+5. Initalize the database
+    * ```php artisan migrate```
+6. Serve Laravel Project
     * ```php artisan serve```
-6. Load default seed data for the various categories and types
+7. Load default seed data for the various categories and types
     * ```bash scripts/run_seeds```
-7. For dev and QA load test data for job posts, companies, etc.  This will load approx 2000 jobs.
+8. For dev and QA load test data for job posts, companies, etc.  This will load approx 2000 jobs.
     * ```bash scripts/load_test_data```
 ## Development Process <a name = "dev_process"></a>
 - All work will be managed out of Github issues and Github projects
